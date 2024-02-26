@@ -4,6 +4,7 @@
 class SmallMap
 {
 	Grid* grid;
+	int level;
 
 public:
 	Grid* GetGrid()
@@ -15,6 +16,6 @@ private:
 	void Init(const int _value);
 
 public:
-	SmallMap(const int _value);
+	SmallMap(const int _level, const int _value);
 };
 

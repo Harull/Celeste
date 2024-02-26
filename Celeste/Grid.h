@@ -31,6 +31,20 @@ public:
 
 		return _newTiles;
 	}
+
+	vector<Drawable*> GetDrawablesMap()
+	{
+		vector<Drawable*> _drawables;
+
+		for (vector<Tile*> _tiles : tiles)
+		{
+			for (Tile* _tile : _tiles)
+			{
+				_drawables.push_back(_tile->GetShape());
+			}
+		}
+		return _drawables;
+	}
 	
 	Vector2f GetSpawnPosition()
 	{
@@ -46,6 +60,6 @@ public:
 	Grid(const Vector2i _tilesCount);
 
 public:
-	void InitMap(const int _value);
+	void InitMap(const int _level, const int _value);
 	void InitLevelSelection();
 };

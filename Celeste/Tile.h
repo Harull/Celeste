@@ -1,7 +1,9 @@
 #pragma once
-#include "Entity.h"
-
-
+#include "EntityType.h"
+#include <SFML/Graphics.hpp>
+using namespace sf;
+#include <string>
+using namespace std;
 
 class Tile
 {
