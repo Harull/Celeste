@@ -18,5 +18,3 @@ public:
 public:
 	virtual void Update(const float _deltaTime) {};
 };
-
-
