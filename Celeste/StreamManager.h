@@ -140,25 +140,66 @@ public:
 	}
 
 	/// <summary>
-	/// Load un fichier .TXT dans un vector de vector de string a l'aide d'un path
+	/// Load un fichier .TXT dans un vector de vector de char a l'aide d'un path
 	/// </summary>
 	/// <param name="_array"></param>
 	/// <param name="_path"></param>
 	/// <returns></returns>
-	bool LoadMap(vector<vector<string>>& _array, const string& _path) {
+	bool LoadSmallMap(vector<vector<char>>& _array, const string& _path) {
 
 		ifstream _stream = ifstream(_path);
 		if (!_stream) {
+			cerr << "Erreur => le flux n'a pas ete correctement construit ! : LoadSmallMap" << endl;
+			_array = vector<vector<char>>();
+			return false;
+		}
+		_array.clear();
+		vector<char> _newArray;
+		char _char;
+		while (_stream.get(_char)) {
+
+			_newArray.push_back(_char);
+		}
+		_array.push_back(_newArray);
+		return true;
+	}
+
+
+	/// <summary>
+	/// Load les int qui sont séparer par un '.' d'un fichier .TXT dans un vector de vector de int a l'aide d'un path
+	/// </summary>
+	/// <param name="_array"></param>
+	/// <param name="_path"></param>
+	/// <returns></returns>
+	bool LoadMapLevel(vector<vector<int>>& _array, const string& _path) {
+		ifstream _stream = ifstream(_path);
+		if (!_stream) {
 			cerr << "Erreur => le flux n'a pas ete correctement construit ! : LoadMap" << endl;
-			_array = vector<vector<string>>();
+			_array = vector<vector<int>>();
 			return false;
 		}
 		_array.clear();
 		string _line;
 		int _index = 0;
 		while (getline(_stream, _line)) {
-			_array.push_back(vector<string>{_line});
+			vector<int> _numbersLines;
+
+			size_t _firstPos = 0;
+			size_t _endPos = 0;
+
+			while (_endPos < _line.size()) {
+				_firstPos = _line.find_first_of("0123456789", _endPos);
+				_endPos = _line.find_first_not_of("0123456789", _firstPos);
+
+				if (_firstPos != string::npos) {
+					string numberStr = _line.substr(_firstPos, _endPos - _firstPos);
+					int _number = stoi(numberStr);
+					_numbersLines.push_back(_number);
+				}
+			}
+			_array.push_back(_numbersLines);
 		}
+		_stream.close();
 		return true;
 	}
 };

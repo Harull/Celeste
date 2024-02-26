@@ -13,11 +13,20 @@ void Map::Register()
 
 void Map::Init(const int _value)
 {
-	const int _maxValue = _value * _value;
-	for (int _i = 0; _i < _maxValue; _i++) {
-		for (int _j = 0; _j < _maxValue; _j++) {
-			maps[_i][_j] = (new SmallMap(_value));
+
+	const string _pathSmallMap = "Maps/Level" + to_string(_value) + "/Level" + to_string(_value) + ".txt";
+	vector<vector<int>> _gridForLoad;
+	StreamManager::GetInstance().LoadMapLevel(_gridForLoad, _pathSmallMap);
+
+	int _i = 0;
+	int _j = 0;
+	vector<SmallMap*> _tempMaps;
+	for (vector<int> _vMap : _gridForLoad) {
+		for (int _sMap : _vMap) {
+			_tempMaps.push_back(new SmallMap(_value, _sMap));
 		}
+		maps.push_back(_tempMaps);
 	}
+
 }
 
