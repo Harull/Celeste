@@ -3,7 +3,7 @@
 #include <string>
 #include <functional>
 #include <SFML/Graphics.hpp>
-#include "IManagable.h"
+#include "IManageable.h"
 #include "IManager.h"
 #include "Singleton.h"
 
@@ -58,16 +58,16 @@ struct ActionData
 };
 
 //template <typename RType>
-struct Action : public IManagable<string>
+struct Action : public IManageable<string>
 {
 	ActionData data;
 	string actionMap;
 
-	Action(const ActionData& _data, const string& _actionMap) : IManagable(_data.name)
+	Action(const ActionData& _data, const string& _actionMap) : IManageable(_data.name)
 	{
 		if (!_data)
 		{
-			toBeRemove = true;
+			toRemove = true;
 		}
 		else
 		{
@@ -83,11 +83,11 @@ struct Action : public IManagable<string>
 
 };
 
-struct ActionMap : public IManagable<string>, public IManager<string, Action>
+struct ActionMap : public IManageable<string>, public IManager<string, Action>
 {
 	vector<Action*> actions;
 
-	ActionMap(const string& _name, const vector<ActionData>& _actionsData = vector<ActionData>()) : IManagable(_name)
+	ActionMap(const string& _name, const vector<ActionData>& _actionsData = vector<ActionData>()) : IManageable(_name)
 	{
 		Register();
 

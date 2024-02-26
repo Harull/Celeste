@@ -1,7 +1,7 @@
 #include "TextureData.h"
 #include "TextureManager.h"
 
-TextureData::TextureData(const string& _path) : IManagable(_path)
+TextureData::TextureData(const string& _path) : IManageable(_path)
 {
 	Register();
 }

@@ -1,2 +1,14 @@
+D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\BuildableUI.cpp;D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\x64\Debug\BuildableUI.obj
 D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\Component.cpp;D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\x64\Debug\Component.obj
+D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\Entity.cpp;D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\x64\Debug\Entity.obj
+D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\EntityManager.cpp;D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\x64\Debug\EntityManager.obj
+D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\Game.cpp;D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\x64\Debug\Game.obj
+D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\InputManager.cpp;D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\x64\Debug\InputManager.obj
 D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\Main.cpp;D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\x64\Debug\Main.obj
+D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\Player.cpp;D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\x64\Debug\Player.obj
+D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\TextureData.cpp;D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\x64\Debug\TextureData.obj
+D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\TextureManager.cpp;D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\x64\Debug\TextureManager.obj
+D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\Timer.cpp;D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\x64\Debug\Timer.obj
+D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\TimerManager.cpp;D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\x64\Debug\TimerManager.obj
+D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\UiData.cpp;D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\x64\Debug\UiData.obj
+D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\UiManager.cpp;D:\Projet1Vs\CorrectionBriques\Celeste\Celeste\x64\Debug\UiManager.obj

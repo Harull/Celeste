@@ -9,7 +9,7 @@ void Action::Register()
     }
     if (ActionMap* _garbage = InputManager::GetInstance().Get("Garbage"))
     {
-        toBeRemove = true;
+        toRemove = true;
         _garbage->Add(id, this);
     }
 }

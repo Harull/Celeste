@@ -5,8 +5,8 @@
 #include "Component.h"
 
 
-Entity::Entity(const EntityData& _data, const std::vector<GameState>& _whenDisplayed, const ViewState& _state)
-	: IManagable(_data.name) ,Object(_data.size,_data.position,_data.path, _whenDisplayed)
+Entity::Entity(const EntityData& _data,  const ViewState& _state)
+	: IManageable(_data.name) 
 {
 	state = _state;
 	Register();

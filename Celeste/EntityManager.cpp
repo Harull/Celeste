@@ -11,17 +11,18 @@ void EntityManager::Update()
 
 bool EntityManager::IsAvailable(const Vector2f& _position, const Vector2f& _size)
 {
-	const FloatRect& _rect = FloatRect(_position - _size / 2.0f, _size);
+	/*const FloatRect& _rect = FloatRect(_position - _size / 2.0f, _size);
 	for (auto _pair : allValues)
 	{
 		if (_pair.second->GetShape()->getLocalBounds().intersects(_rect)) return true;
 	}
-	return false;
+	return false;*/
+	return 0;
 }
 
 void EntityManager::DisplayAllEntities() const
 {
-	sf::RenderWindow& _mainWindow = Game::GetWindow();
+	/*sf::RenderWindow& _mainWindow = Game::GetWindow();
 	const GameState& _gameState = Game::GetGameState();
 	const auto& _allValues = GetAllValues();
 
@@ -37,5 +38,5 @@ void EntityManager::DisplayAllEntities() const
 				break;
 			}
 		}
-	}
+	}*/
 }

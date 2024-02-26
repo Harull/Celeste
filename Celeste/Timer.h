@@ -24,7 +24,7 @@ public:
 public:
     template <class Class, typename... Args>
     Timer(const string& _id, Class* _owner, void (Class::* _callback)(Args...), const Time& _time,
-        const bool _startRunning = true, const bool _isLoop = false, const Args&... _args) : IManagable(_id)
+        const bool _startRunning = true, const bool _isLoop = false, const Args&... _args) : IManageable(_id)
     {
         Register();
 
