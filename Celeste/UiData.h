@@ -18,7 +18,6 @@ class UiData : public IManageable<string>
 	bool hasAlreadyBeenExecuted;
 	bool isActive;
 	function<void()> callback;
-	ViewState state;
 
 public:
 	bool IsInteractiveUi() const
@@ -56,10 +55,6 @@ public:
 		isActive = _isActive;
 	}
 
-	ViewState GetState()const
-	{
-		return state;
-	}
 public:
 	UiData(const string& _id, const Vector2f& _size, const Vector2f& _position, const string& _path, function<void()> _callback ,bool _start = true,bool _isLoop = false,bool _isInteractiveUi = false);
 	UiData(const string& _id, const float _radius, const Vector2f& _position, const string& _path, function<void()> _callback,

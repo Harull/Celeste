@@ -5,10 +5,9 @@
 #include "Component.h"
 
 
-Entity::Entity(const EntityData& _data,  const ViewState& _state)
+Entity::Entity(const EntityData& _data)
 	: IManageable(_data.name) 
 {
-	state = _state;
 	Register();
 }
 

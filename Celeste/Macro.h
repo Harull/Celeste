@@ -122,3 +122,9 @@ void DeleteVectorWParamPointer(std::vector<T>& _vect)
 		_vToDelete = nullptr;
 	}
 }
+
+template <typename Type>
+static void SetOriginCentered(Type* _element)
+{
+	_element->setOrigin(_element->getGlobalBounds().getSize() / 2.0f);
+}

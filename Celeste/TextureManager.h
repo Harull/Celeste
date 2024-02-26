@@ -8,5 +8,6 @@ class TextureManager : public Singleton<TextureManager>, public IManager<string,
 
 public:
 	void Load(Shape* _shape, const string& _path, const bool _isRepeated = false, const bool _isSmooth = true);
+	void Load(Sprite* _sprite, const string& _path, const bool _isRepeated = false, const bool _smooth = true);
 };
 
