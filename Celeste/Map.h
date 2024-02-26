@@ -10,6 +10,9 @@ class Map : public IManageable<string>
 	vector<vector<SmallMap*>> maps;
 
 public:
+	vector<vector<SmallMap*>> GetMaps() { return maps; }
+
+public:
 	Map();
 
 public:
