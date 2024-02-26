@@ -1,9 +1,9 @@
 #pragma once
-#include"Entity.h"
+#include"Tile.h"
 
-class Trap : public Entity
+class Trap : public Tile
 {
 public:
-	Trap(const string& _name, const Vector2f& _position, const Vector2f& _size, const string& _path);
+	Trap( const Vector2f& _position, const Vector2f& _size, const string& _path,  const EntityType& _type );
 };
 

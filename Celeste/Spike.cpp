@@ -1,7 +1,7 @@
 #include "Spike.h"
 
-Spike::Spike(const string& _name, const Vector2f& _position, const Vector2f& _size, const string& _path)
-	: Trap(_name, _position, _size, _path)
+Spike::Spike( const Vector2f& _position, const Vector2f& _size, const string& _path, const EntityType& _type)
+	: Trap( _position, _size, _path, _type)
 {
 	//Recuperer le player du game
 	
