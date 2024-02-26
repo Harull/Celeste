@@ -35,6 +35,7 @@ protected:
 	Texture texture;
 	ViewState state;
 	vector<Component*> components;
+	Shape* shape;
 	
 public:
 	template<typename T>
@@ -53,8 +54,18 @@ public:
 	{
 		return state;
 	}
+	Vector2f GetPosition()const
+	{
+		return shape->getPosition();
+	}
+
+	Shape* GetShape()const
+	{
+		return shape;
+	}
+
 public:
-	Entity(const EntityData& _data,  const ViewState& _state);
+	Entity(const EntityData& _data);
 	~Entity();
 
 private:
