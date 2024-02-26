@@ -4,8 +4,8 @@
 #include "Macro.h"
 
 UiData::UiData(const string& _id, const Vector2f& _size, const Vector2f& _position, const string& _path, function<void()> _callback,
-	 bool _start, bool _isLoop, bool _isInteractiveUi)
-	: IManageable(_id)
+	const std::vector<GameState>& _whenDisplayed, bool _start, bool _isLoop, bool _isInteractiveUi, const ViewState& _state)
+	: IManageable(_id), Object(_size, _position, _path, _whenDisplayed)
 {
 	isInteractiveUi = _isInteractiveUi;
 	isLoop = _isLoop;
@@ -13,12 +13,13 @@ UiData::UiData(const string& _id, const Vector2f& _size, const Vector2f& _positi
 	callback = _callback;
 	hasAlreadyBeenExecuted = false;
 	isActive = true;
+	state = _state;
 	Register();
 }
 
 UiData::UiData(const string& _id, const float _radius, const Vector2f& _position, const string& _path, function<void()> _callback,
-	 bool _start, bool _isLoop, bool _isInteractiveUi)
-	: IManageable(_id)
+	const std::vector<GameState>& _whenDisplayed, bool _start, bool _isLoop, bool _isInteractiveUi, const ViewState& _state)
+	: IManageable(_id), Object(_radius, _position, _path, _whenDisplayed)
 {
 	isInteractiveUi = _isInteractiveUi;
 	isLoop = _isLoop;
@@ -26,6 +27,7 @@ UiData::UiData(const string& _id, const float _radius, const Vector2f& _position
 	callback = _callback;
 	hasAlreadyBeenExecuted = false;
 	isActive = true;
+	state = _state;
 	Register();
 }
 

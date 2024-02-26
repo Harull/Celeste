@@ -22,7 +22,7 @@ public:
 		return _interactiveUi;
 	}
 
-	
+
 
 
 public:

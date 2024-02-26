@@ -3,14 +3,14 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <functional>
-
+#include "Object.h"
 
 using namespace std;
 using namespace sf;
 
 enum ViewState;
 
-class UiData : public IManageable<string> 
+class UiData : public IManageable<string>, public Object
 {
 	bool isInteractiveUi;
 	bool isLoop;
@@ -61,9 +61,10 @@ public:
 		return state;
 	}
 public:
-	UiData(const string& _id, const Vector2f& _size, const Vector2f& _position, const string& _path, function<void()> _callback ,bool _start = true,bool _isLoop = false,bool _isInteractiveUi = false);
+	UiData(const string& _id, const Vector2f& _size, const Vector2f& _position, const string& _path, function<void()> _callback,
+		const std::vector<GameState>& _whenDisplayed, bool _start = true, bool _isLoop = false, bool _isInteractiveUi = false, const ViewState& _state = VS_DEFAULT);
 	UiData(const string& _id, const float _radius, const Vector2f& _position, const string& _path, function<void()> _callback,
-		 bool _start = true, bool _isLoop = false, bool _isInteractiveUi = false);
+		const std::vector<GameState>& _whenDisplayed, bool _start = true, bool _isLoop = false, bool _isInteractiveUi = false, const ViewState& _state = VS_DEFAULT);
 
 public:
 
