@@ -2,14 +2,14 @@
 
 void EntityManager::Update()
 {
-	/*for (auto _pair : allValues)
+	for (auto _pair : allValues)
 	{
 		_pair.second->Update();
-	}*/
-	for (Entity* _entity : GetAllValues())
+	}
+	/*for (Entity* _entity : GetAllValues())
 	{
 		_entity->Update();
-	}
+	}*/
 	GarbageValues();
 }
 

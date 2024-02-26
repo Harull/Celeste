@@ -31,7 +31,7 @@ void TextureManager::Load(Sprite* _sprite, const string& _path, const bool _isRe
 	if (!_textureData)
 	{
 		_textureData = new TextureData(_path);
-		if (!_textureData->loadFromFile("Fichier/" + _path))
+		if (!_textureData->loadFromFile( _path))
 		{
 			cerr << "La texture n'a pas été correctement chargée !" << endl;
 		}

@@ -12,7 +12,6 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 	: Entity(EntityData("Character", _position, _size))
 {
 	//TODO envoyer la shape à l'entity
-	components = std::vector<Component*>();
 	isVisible = _isVisible;
 
 	const Vector2f& _sizeA = Vector2f(53.7f, 58.125f);
@@ -36,7 +35,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 	//InitShape();
 	InitComponents();
 
-	Update();
+	//Update();
 
 }
 

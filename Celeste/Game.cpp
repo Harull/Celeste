@@ -78,6 +78,6 @@ void Game::UpdateWindow()
 			}
 		}
 	}
-	window.draw(*player->GetCharacter().GetShape());
+	window.draw(*player->GetShape());
 	window.display();
 }

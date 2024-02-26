@@ -10,12 +10,17 @@ struct PlayerData
 class Player
 {
 	static PlayerData data;
-	Character character;
+	Character* character;
 
 public:
-	Character GetCharacter()
+	Character* GetCharacter()
 	{
 		return character;
+	}
+
+	Shape* GetShape()
+	{
+		return character->GetShape();
 	}
 
 public:

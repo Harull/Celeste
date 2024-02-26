@@ -9,6 +9,8 @@ Entity::Entity(const EntityData& _data)
 	: IManageable(_data.name) 
 {
 	Register();
+	components = vector<Component*>();
+	shape = new sf::RectangleShape();
 }
 
 Entity::~Entity()
