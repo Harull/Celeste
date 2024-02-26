@@ -16,5 +16,5 @@ public:
 	Component(Entity* _owner);
 
 public:
-	virtual void Update(const float _deltaTime) {};
+	virtual void Update(const float _deltaTime) = 0;
 };

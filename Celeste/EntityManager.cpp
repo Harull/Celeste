@@ -2,9 +2,13 @@
 
 void EntityManager::Update()
 {
-	for (auto _pair : allValues)
+	/*for (auto _pair : allValues)
 	{
 		_pair.second->Update();
+	}*/
+	for (Entity* _entity : GetAllValues())
+	{
+		_entity->Update();
 	}
 	GarbageValues();
 }
@@ -39,4 +43,14 @@ void EntityManager::DisplayAllEntities() const
 			}
 		}
 	}*/
+}
+
+vector<Entity*> EntityManager::GetAllEntites()
+{
+	vector<Entity*> _entities;
+	for (auto _pair : allValues)
+	{
+		_entities.push_back(_pair.second);
+	}
+	return _entities;
 }

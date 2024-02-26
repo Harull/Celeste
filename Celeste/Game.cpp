@@ -1,17 +1,18 @@
 #include "Game.h"
 #include "InputManager.h"
 #include "EntityManager.h"
+#include"TimerManager.h"
 
 Game::Game()
 {
 	map = nullptr;
-	//player = nullptr;
+	player = new Player();
 }
 
 Game::~Game()
 {
 	if (map) delete map;
-	//delete player;
+	delete player;
 }
 
 void Game::Launch()
@@ -56,11 +57,14 @@ void Game::Update()
 	{
 		if (!InputManager::GetInstance().UpdateWindow(window))break;
 		EntityManager::GetInstance().Update();
+		TimerManager::GetInstance().Update();
 		UpdateWindow();
-
-
 	}
 }
+
+
+
+
 
 void Game::UpdateWindow()
 {
@@ -74,4 +78,6 @@ void Game::UpdateWindow()
 			}
 		}
 	}
+	window.draw(*player->GetCharacter().GetShape());
+	window.display();
 }

@@ -16,5 +16,6 @@ public:
 	void Update();
 	bool IsAvailable(const Vector2f& _position, const Vector2f& _size);
 	void DisplayAllEntities() const;
+	vector<Entity*> GetAllEntites();
 };
 

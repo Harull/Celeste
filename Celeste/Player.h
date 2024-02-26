@@ -13,6 +13,15 @@ class Player
 	Character character;
 
 public:
+	Character GetCharacter()
+	{
+		return character;
+	}
+
+public:
+	Player();
+
+public:
 	void Update();
 
 	void InitInput();
