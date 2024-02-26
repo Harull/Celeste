@@ -18,6 +18,7 @@ void Grid::InitMap(const int _level, const int _value)
 	StreamManager::GetInstance().LoadSmallMap(_gridForLoad, _pathMap);
 	//
 	Vector2u _windowSize = Game::GetInstance().GetWindowSize();
+	cout << _windowSize.x << " " << _windowSize.y << endl;
 
 	const float _startPosX = _windowSize.x * 0.35f;
 	const float _startPosY = _windowSize.y * 0.1f;
@@ -25,7 +26,7 @@ void Grid::InitMap(const int _level, const int _value)
 	string _path;
 	vector<Tile*> _tiles;
 	vector<string> _test;
-	int _indexRow = -1, _indexColumn = -1;
+	int _indexRow = 0, _indexColumn = 0;
 	EntityType _type;
 
 	for (const vector<char>& _vChar : _gridForLoad) {
@@ -34,12 +35,37 @@ void Grid::InitMap(const int _level, const int _value)
 
 			const float _posX = static_cast<float>(_indexRow * tileSize.x + _startPosX);
 			const float _posY = static_cast<float>(_indexColumn * tileSize.y + _startPosY);
-			if (_char == ' ')
+			
+			if (_char == '1')
 			{
-				_path = " ";
+				_path = "Assets/1.png";
 				_type = ENTITY_TILE;
 			}
-
+			else if (_char == '2')
+			{
+				_path = "Assets/2.png";
+				_type = ENTITY_TILE;
+			}
+			else if (_char == '3')
+			{
+				_path = "Assets/3.png";
+				_type = ENTITY_TILE;
+			}
+			else if (_char == '4')
+			{
+				_path = "Assets/4.png";
+				_type = ENTITY_TILE;
+			}
+			else if (_char == '5')
+			{
+				_path = "Assets/5.png";
+				_type = ENTITY_TILE;
+			}
+			else if (_char == '6')
+			{
+				_path = "Assets/6.png";
+				_type = ENTITY_TILE;
+			}
 			Tile* _tile = new Tile(Vector2f(_posX, _posY), tileSize, _path, _type);
 			_tiles.push_back(_tile);
 			_indexRow++;

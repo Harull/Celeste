@@ -158,7 +158,15 @@ public:
 		char _char;
 		while (_stream.get(_char)) {
 
-			_newArray.push_back(_char);
+			if (_char == '\n')
+			{
+				_array.push_back(_newArray);
+				_newArray.clear();
+			}
+			else
+			{
+				_newArray.push_back(_char);
+			}
 		}
 		_array.push_back(_newArray);
 		return true;

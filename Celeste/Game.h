@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Map.h"
 #include "Player.h"
+#include "Singleton.h"
 
 using namespace sf;
 
@@ -28,13 +29,12 @@ public:
 
 public:
 	void Launch();
-	void InitMap(const int _value);
-
 
 private:
 	void Start();
 	void Stop();
 	void InitWindow();
+	void InitMap(const int _value);
 	void InitPlayer();
 	void Update();
 	void UpdateWindow();
