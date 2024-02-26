@@ -7,6 +7,8 @@
 using namespace std;
 using namespace sf;
 
+#define S_APPEND(name) name + GetUniqueId()
+
 static void Normalize(Vector2f& _vector)
 {
 	// length = x * x + y * y

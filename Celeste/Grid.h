@@ -1,0 +1,51 @@
+#pragma once
+#include <SFML/Graphics.hpp>
+#include <vector>
+
+#include "Tile.h"
+#include "StreamManager.h"
+
+using namespace std;
+using namespace sf;
+
+#define PATH_LEVEL "Save/Map"
+#define PATH_VILLAGE_MAP "Save/village.txt"
+
+class Grid
+{
+	Vector2i tilesCount;
+	Vector2f tileSize;
+	vector<vector<Tile*>> tiles;
+	Vector2f spawnPosition;
+
+public:
+
+	vector<Tile*> GetTilesMap()
+	{
+		vector<Tile*> _newTiles;
+
+		for (vector<Tile*> _tiles : tiles)
+		{
+			_newTiles.insert(_newTiles.end(), _tiles.begin(), _tiles.end());
+		}
+
+		return _newTiles;
+	}
+	
+	Vector2f GetSpawnPosition()
+	{
+		return spawnPosition;
+	}
+
+	const Vector2f& GetTileSize()
+	{
+		return tileSize;
+	}
+
+public:
+	Grid(const Vector2i _tilesCount);
+
+public:
+	void InitMap(const int _value);
+	void InitLevelSelection();
+};

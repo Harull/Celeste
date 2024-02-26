@@ -3,6 +3,7 @@
 #include "IManageable.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "EntityType.h"
 
 
 using namespace std;
