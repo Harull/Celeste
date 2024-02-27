@@ -7,6 +7,8 @@
 using namespace std;
 using namespace sf;
 
+#define S_APPEND(name) name + GetUniqueId()
+
 static void Normalize(Vector2f& _vector)
 {
 	// length = x * x + y * y
@@ -121,4 +123,10 @@ void DeleteVectorWParamPointer(std::vector<T>& _vect)
 		delete _vToDelete;
 		_vToDelete = nullptr;
 	}
+}
+
+template <typename Type>
+static void SetOriginCentered(Type* _element)
+{
+	_element->setOrigin(_element->getGlobalBounds().getSize() / 2.0f);
 }

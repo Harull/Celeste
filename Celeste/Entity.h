@@ -3,6 +3,7 @@
 #include "IManageable.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "EntityType.h"
 
 
 using namespace std;
@@ -32,8 +33,8 @@ class Entity : public IManageable<string>
 {
 protected:
 	Texture texture;
-	ViewState state;
 	vector<Component*> components;
+	Shape* shape;
 	
 public:
 	template<typename T>
@@ -48,12 +49,19 @@ public:
 		}
 		return nullptr;
 	}
-	ViewState GetViewState()const
+	
+	Vector2f GetPosition()const
 	{
-		return state;
+		return shape->getPosition();
 	}
+
+	Shape* GetShape()const
+	{
+		return shape;
+	}
+
 public:
-	Entity(const EntityData& _data,  const ViewState& _state);
+	Entity(const EntityData& _data, std::vector<Component*> _components);
 	~Entity();
 
 private:
