@@ -32,7 +32,6 @@ public:
 		id = _id;
 		toRemove = false;
 	}
-
 public:
 	virtual void Register() = 0;
 };

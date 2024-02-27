@@ -17,6 +17,12 @@ Animation::Animation(const string& _name, AnimationComponent* _owner, Sprite* _s
 	Register();
 }
 
+Animation::~Animation()
+{
+	delete sprite;
+	sprite = nullptr;
+}
+
 
 void Animation::Register()
 {

@@ -75,6 +75,7 @@ public:
 public:
 	Animation(const string& _name, AnimationComponent* _owner, Sprite* _sprite,
 		const AnimationData& _data);
+	~Animation();
 
 private:
 	virtual void Register() override;

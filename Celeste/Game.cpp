@@ -59,12 +59,6 @@ void Game::Update()
 	while (window.isOpen())
 	{
 		UpdateEvents();
-		if (!InputManager::GetInstance().UpdateWindow(window))break;
-		for (Entity* _entity : EntityManager::GetInstance().GetAllEntites())
-		{
-			_entity->Update();
-		}
-
 		EntityManager::GetInstance().Update();
 		TimerManager::GetInstance().Update();
 		UpdateWindow();

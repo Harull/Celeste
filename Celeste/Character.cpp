@@ -15,7 +15,6 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 			new CollisionComponent(this)})
 {
 	isVisible = _isVisible;
-	//shape = new RectangleShape(_size);
 	InitShape();
 	const Vector2f& _sizeA = Vector2f(_size);
 	const ReadDirection& _readDirection = READ_RIGHT;
@@ -34,11 +33,6 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 		}, direction);
 
 	components.push_back(animation);
-
-	//InitComponents();
-
-	//Update();
-
 }
 
 void Character::InitShape()

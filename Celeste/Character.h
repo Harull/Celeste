@@ -20,7 +20,6 @@ public:
 		shape->setScale(_size);
 	}
 
-	//Character();
 
 private:
 	void InitShape();
