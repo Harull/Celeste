@@ -60,6 +60,6 @@ public:
 	Grid(const Vector2i _tilesCount);
 
 public:
-	void InitMap(const int _level, const int _value);
+	void InitMap(const int _level, const int _value, Vector2f _startPos);
 	void InitLevelSelection();
 };

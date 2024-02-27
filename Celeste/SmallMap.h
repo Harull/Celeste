@@ -13,9 +13,9 @@ public:
 	}
 
 private:
-	void Init(const int _value);
+	void Init(const int _value, Vector2f _startPos);
 
 public:
-	SmallMap(const int _level, const int _value);
+	SmallMap(const int _level, const int _value, Vector2f _startPos);
 };
 
