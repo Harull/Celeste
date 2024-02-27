@@ -33,7 +33,6 @@ class Entity : public IManageable<string>
 {
 protected:
 	Texture texture;
-	ViewState state;
 	vector<Component*> components;
 	Shape* shape;
 	
@@ -50,10 +49,7 @@ public:
 		}
 		return nullptr;
 	}
-	ViewState GetViewState()const
-	{
-		return state;
-	}
+	
 	Vector2f GetPosition()const
 	{
 		return shape->getPosition();
@@ -65,7 +61,7 @@ public:
 	}
 
 public:
-	Entity(const EntityData& _data);
+	Entity(const EntityData& _data, std::vector<Component*> _components);
 	~Entity();
 
 private:

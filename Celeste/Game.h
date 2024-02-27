@@ -38,6 +38,7 @@ private:
 	void InitPlayer();
 	void Update();
 	void UpdateWindow();
+	void UpdateEvents();
 
 };
 

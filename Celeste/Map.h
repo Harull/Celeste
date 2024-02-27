@@ -15,11 +15,6 @@ public:
 public:
 	Map();
 
-public:
-	vector<vector<SmallMap*>>& GetMaps()
-	{
-		return maps;
-	}
 private:
 	virtual void Register() override;
 

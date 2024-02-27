@@ -2,28 +2,34 @@
 #include "Game.h"
 #include "EntityManager.h"
 
-MovementComponent::MovementComponent()
+MovementComponent::MovementComponent(Entity* _owner) : Component(_owner)
 {
 	velocity = 0.05f;
 	direction = Vector2f();
 	canMove = true;
 }
 
-MovementComponent::MovementComponent(const float _velocity, const Vector2f _direction, const bool _canMove)
+MovementComponent::MovementComponent(Entity* _owner, const float _velocity,
+	const Vector2f& _direction, const bool _canMove) : Component(_owner)
 {
 	velocity = _velocity;
 	direction = Vector2f(_direction);
 	canMove = _canMove;
 }
 
-void MovementComponent::Move(CollisionComponent* _collision, Entity* _entity)
+void MovementComponent::Update()
+{
+	Move();
+}
+
+void MovementComponent::Move()
 {
 	if (!canMove)return;
 
-	TryToMove(_collision, _entity, direction);
+	TryToMove(owner, direction);
 }
 
-bool MovementComponent::TryToMove(CollisionComponent* _collision, Entity* _entity, const Vector2f& _direction)
+bool MovementComponent::TryToMove(Entity* _entity, const Vector2f& _direction)
 {
 	if (!canMove)return true;
 
@@ -32,12 +38,16 @@ bool MovementComponent::TryToMove(CollisionComponent* _collision, Entity* _entit
 
 	int _collisionSideBinary = COLLIDE_NONE;
 	int _entityBinary = ENTITY_NONE;
-	if (_entityBinary = _collision->CheckCollision(_entity, _collisionSideBinary))
+	if (CollisionComponent* _collision = _entity->GetComponent<CollisionComponent>())
 	{
-		if (_direction.x != 0 && (_collisionSideBinary & COLLIDE_LEFT || _collisionSideBinary & COLLIDE_RIGHT))
-			_entity->GetShape()->move(sf::Vector2f(-_destination.x, 0));
-		
-		return true;
+		if (_entityBinary = _collision->CheckCollision(_collisionSideBinary))
+		{
+			if (_direction.x != 0 && (_collisionSideBinary & COLLIDE_LEFT || _collisionSideBinary & COLLIDE_RIGHT))
+				_entity->GetShape()->move(sf::Vector2f(-_destination.x, 0));
+			if (_direction.y != 0 && (_collisionSideBinary & COLLIDE_UP || _collisionSideBinary & COLLIDE_DOWN))
+				_entity->GetShape()->move(sf::Vector2f(-_destination.x, 0));
+			return true;
+		}
 	}
 	return false;
 

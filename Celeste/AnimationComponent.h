@@ -7,6 +7,7 @@ class AnimationComponent : public Component, public IManager<string, Animation> 
 {
 	int currentIndex;
 	AnimationDirection direction;
+	float deltaTime;
 
 public:
 	void SetDirection(const AnimationDirection& _direction)
@@ -39,5 +40,5 @@ private:
 	void InitAnimations(const string& _path, const vector<AnimationData>& _animationsData);
 
 public:
-	virtual void Update(const float _deltaTime) override;
+	virtual void Update() override;
 };

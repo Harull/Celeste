@@ -1,11 +1,11 @@
 #include "Game.h"
-#include "InputManager.h"
+#include "EventReactionManager.h"
 #include "EntityManager.h"
 
 Game::Game()
 {
 	map = nullptr;
-	//player = nullptr;
+	player = new Player();
 }
 
 Game::~Game()
@@ -54,17 +54,24 @@ void Game::Update()
 {
 	while (window.isOpen())
 	{
-		if (!InputManager::GetInstance().UpdateWindow(window))break;
+		UpdateEvents();
 		EntityManager::GetInstance().Update();
 		UpdateWindow();
-
 
 	}
 }
 
 void Game::UpdateWindow()
 {
-	window.clear();
+	window.clear(sf::Color::Black);
+
+	std::vector<Entity*> _entities = EntityManager::GetInstance().GetAllValues();
+	for (Entity* _entity : _entities)
+	{
+		window.draw(*_entity->GetShape());
+	}
+
+
 	if (map) {
 		for (vector<SmallMap*> _smallMap : map->GetMaps()) {
 			for (SmallMap* _sMap : _smallMap) {
@@ -73,5 +80,19 @@ void Game::UpdateWindow()
 				}
 			}
 		}
+	}
+	window.display();
+}
+
+void Game::UpdateEvents()
+{
+	sf::Event _event;
+	while (window.pollEvent(_event))
+	{
+		if (_event.type == sf::Event::Closed)
+			Stop();
+
+		EventReactionManager::Update(_event);
+
 	}
 }

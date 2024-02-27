@@ -1,14 +1,22 @@
 #include "CollisionComponent.h"
 #include "MapManager.h"
 
-int CollisionComponent::CheckCollision(Entity* _entity, int& _collisionSideBinary)
+CollisionComponent::CollisionComponent(Entity* _owner) : Component(_owner)
 {
-	sf::Shape* _currentShape = _entity->GetShape();
+}
+
+int CollisionComponent::CheckCollision(int& _collisionSideBinary)
+{
+	sf::Shape* _currentShape = owner->GetShape();
 	sf::FloatRect _floatRectBb = _currentShape->getGlobalBounds();
-	std::vector<std::vector<SmallMap*>>& _allSmallMaps = MapManager::GetInstance().GetCurrent()->GetMaps();
 	_collisionSideBinary = COLLIDE_NONE;
 	int _entityTypeBinary = ENTITY_NONE;
 
+
+	Map* _currentMap = MapManager::GetInstance().GetCurrent();
+	if (!_currentMap) return _entityTypeBinary;
+
+	std::vector<std::vector<SmallMap*>> _allSmallMaps = _currentMap->GetMaps();
 	for (auto _smallMapVect : _allSmallMaps)
 	{
 		for (SmallMap* _smallMap : _smallMapVect)

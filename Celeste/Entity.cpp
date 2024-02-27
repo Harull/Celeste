@@ -5,14 +5,20 @@
 #include "Component.h"
 
 
-Entity::Entity(const EntityData& _data)
+Entity::Entity(const EntityData& _data, std::vector<Component*> _components)
 	: IManageable(_data.name) 
 {
+	shape = new sf::RectangleShape(_data.size);
+	shape->setPosition(_data.position);
+	components = _components;
 	Register();
+
 }
 
 Entity::~Entity()
 {
+	delete shape;
+	shape = nullptr;
 	for (Component* _component : components)
 	{
 		delete _component;
@@ -26,9 +32,8 @@ void Entity::Register()
 
 void Entity::Update()
 {
-	const float _deltaTime = TimerManager::GetInstance().GetDeltaTime();
 	for (Component* _component : components)
 	{
-		_component->Update(_deltaTime);
+		_component->Update();
 	}
 }

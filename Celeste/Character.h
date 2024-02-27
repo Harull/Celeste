@@ -6,18 +6,17 @@ class Component;
 
 class Character : public Entity
 {
-	std::vector<Component*> components;
 	bool isVisible;
 
 public:
+	Character() = default;
 	Character(const sf::Vector2f _size, const sf::Vector2f _position, const bool _isVisible = false);
 
 private:
 	void InitShape();
-	void InitComponents();
 
 public:
-	void Move();
+	bool MovingLeftRight(const sf::Event& _event);
 	void Dash();
 
 
