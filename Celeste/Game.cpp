@@ -43,8 +43,8 @@ void Game::Stop()
 
 void Game::InitWindow()
 {
-	//window.create(VideoMode(1280, 720), "Celeste");
-	window.create(VideoMode(1920, 1080), "Celeste", Style::Fullscreen);
+	window.create(VideoMode(1280, 720), "Celeste");
+	//window.create(VideoMode(1920, 1080), "Celeste", Style::Fullscreen);
 }
 
 void Game::InitPlayer()
@@ -53,7 +53,6 @@ void Game::InitPlayer()
 
 void Game::Update()
 {
-
 	while (window.isOpen())
 	{
 		UpdateEvents();
@@ -73,10 +72,12 @@ void Game::UpdateWindow()
 	}
 
 	if (map) {
-		for (Drawable* _drawable : map->GetDrawables()) {
+		vector<Drawable*> _mapDrawables = map->GetDrawables();
+		for (Drawable* _drawable : _mapDrawables) {
 			window.draw(*_drawable);
 		}
 	}
+
 	window.display();
 }
 

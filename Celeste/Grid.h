@@ -8,8 +8,6 @@
 using namespace std;
 using namespace sf;
 
-#define PATH_LEVEL "Save/Map"
-#define PATH_VILLAGE_MAP "Save/village.txt"
 
 class Grid
 {
@@ -40,8 +38,10 @@ public:
 		{
 			for (Tile* _tile : _tiles)
 			{
+				if (!_tile) continue;
 				_drawables.push_back(_tile->GetShape());
 			}
+
 		}
 		return _drawables;
 	}

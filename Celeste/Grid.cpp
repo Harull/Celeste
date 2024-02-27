@@ -31,25 +31,26 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 
 			const float _posX = static_cast<float>(_indexRow * tileSize.x + _startPos.x);
 			const float _posY = static_cast<float>(_indexColumn * tileSize.y + _startPos.y);
-			
-			if (_char == '1')
+
+			switch (_char)
 			{
+			case '1':
 				_path = "Assets/Snow1.png";
 				_type = ENTITY_TILE;
-			}
-			else if (_char == '2')
-			{
+				break;
+			case '2':
 				_path = "Assets/SpikeTop.png";
 				_type = ENTITY_TILE;
-			}
-			else if (_char == 'x')
-			{
+				break;
+			case 'x':
 				_path = "Assets/Avoir.png";
 				_type = ENTITY_TILE;
-			}
-			else {
-				_path = "Assets/Vide.png";
-				_type = ENTITY_NONE;
+				break;
+			default:
+				Tile* _tile = nullptr;
+				_tiles.push_back(_tile);
+				_indexRow++;
+				continue;
 			}
 			
 			Tile* _tile = new Tile(Vector2f(_posX, _posY), tileSize, _path, _type);
