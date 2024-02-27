@@ -1,12 +1,12 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 #include "Entity.h"
+#include "Component.h"
 #include "CollisionComponent.h"
-#include<vector>
-
+#include <vector>
 using namespace sf;
 
-class MovementComponent
+class MovementComponent : public Component
 {
     float velocity;
     Vector2f direction;
@@ -35,11 +35,12 @@ public:
     }
 
 public:
-    MovementComponent();
-    MovementComponent(const float _velocity, const Vector2f _direction, const bool _canMove = true);
+    MovementComponent(Entity* _owner);
+    MovementComponent(Entity* _owner, const float _velocity, const Vector2f& _direction, const bool _canMove = true);
 
 public:
-    void Move(CollisionComponent* _collision, Entity* _entity);
-    bool TryToMove(CollisionComponent* _collision, Entity* _entity, const Vector2f& _direction);
+    void Update()override;
+    void Move();
+    bool TryToMove(Entity* _entity, const Vector2f& _direction);
 
 };

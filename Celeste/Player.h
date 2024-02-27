@@ -10,12 +10,15 @@ struct PlayerData
 class Player
 {
 	static PlayerData data;
-	Character character;
+	Character* character;
+
+public:
+	Player();
+	~Player();
 
 public:
 	void Update();
 
 	void InitInput();
-
 };
 

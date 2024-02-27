@@ -8,8 +8,8 @@ Animation::Animation(const string& _name, AnimationComponent* _owner, Sprite* _s
 	const AnimationData& _data) : IManageable(_name)
 {
 	sprite = _sprite;
-	Vector2i _position = Vector2i(_data.start.x, _data.start.y);
-	Vector2i _size = Vector2i(_data.size.x, _data.size.y);
+	Vector2i _position = Vector2i(static_cast<int>(_data.start.x), static_cast<int>(_data.start.y));
+	Vector2i _size = Vector2i(static_cast<int>(_data.size.x), static_cast<int>(_data.size.y));
 	IntRect _rect = IntRect(_position.x, _position.y, _size.x, _size.y);
 	sprite->setTextureRect(_rect);
 	owner = _owner;

@@ -22,7 +22,7 @@ void AnimationComponent::InitAnimations(const string& _path, const vector<Animat
 }
 
 
-void AnimationComponent::Update(const float _deltaTime)
+void AnimationComponent::Update()
 {
 	for (Animation* _animation : GetAllValues())
 	{

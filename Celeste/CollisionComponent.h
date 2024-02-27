@@ -4,16 +4,19 @@
 #include <vector>
 #include <functional>
 #include "Tile.h"
+#include "Component.h"
 
 enum CollisionSide
 {
 	COLLIDE_NONE = 0, COLLIDE_LEFT = 1 , COLLIDE_RIGHT = 2, COLLIDE_UP = 4, COLLIDE_DOWN = 8
 };
 
-class CollisionComponent
+class CollisionComponent : public Component
 {
 public:
-	int CheckCollision(Entity* _entity, int& _collisionSideBinary);
+	CollisionComponent(Entity* _owner);
+public:
+	int CheckCollision(int& _collisionSideBinary);
 
 private:
 	int ComputeRelativePosition(const sf::Shape* _entityShape, const sf::Shape* _tileShape,
