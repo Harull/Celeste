@@ -33,11 +33,10 @@ void Map::Init(const int _value)
 			_startPosition.x += _tempMaps[_i]->GetGrid()->GetTileSize().x * 40;
 			_i++;
 		}
-		maps.push_back(_tempMaps);
 		_i = 0;
+		maps.push_back(_tempMaps);
 		_startPosition.x = startPosition.x;
 		_startPosition.y += _tempMaps[_i]->GetGrid()->GetTileSize().y * 22;
-
 	}
 
 }
