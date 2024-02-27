@@ -11,6 +11,18 @@ class Player
 {
 	static PlayerData data;
 	Character* character;
+	
+
+public:
+	Character* GetCharacter()
+	{
+		return character;
+	}
+
+	Shape* GetShape()
+	{
+		return character->GetShape();
+	}
 
 public:
 	Player();

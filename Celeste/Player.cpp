@@ -20,3 +20,7 @@ void Player::InitInput()
 	EventReactionManager::BindNewInputReaction(sf::Event::KeyReleased, [&](const sf::Event& _event) {return character->MovingLeftRight(_event); });
 }
 
+void Player::Update()
+{
+	character->Update();
+}

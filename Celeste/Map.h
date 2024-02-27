@@ -10,7 +10,6 @@ class Map : public IManageable<string>
 	vector<vector<SmallMap*>> maps;
 	Vector2f startPosition;
 
-
 public:
 	vector<vector<SmallMap*>>& GetMaps() { return maps; }
 
@@ -27,7 +26,6 @@ public:
 	}
 
 	Vector2f GetStartPosition() { return startPosition; }
-
 public:
 	Map();
 
