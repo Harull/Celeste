@@ -70,10 +70,10 @@ void Game::UpdateWindow()
 {
 	window.clear(sf::Color::Black);
 
-	std::vector<Entity*> _entities = EntityManager::GetInstance().GetAllValues();
-	for (Entity* _entity : _entities)
+	std::vector<Drawable*> _entities = EntityManager::GetInstance().GetDrawables();
+	for (Drawable* _entity : _entities)
 	{
-		window.draw(*_entity->GetShape());
+		window.draw(*_entity);
 	}
 
 	if (map) {
