@@ -10,7 +10,7 @@ class AnimationComponent;
 
 enum AnimationDirection
 {
-	ANIM_DIR_NONE, ANIM_DIR_UP, ANIM_DIR_DOWN, ANIM_DIR_LEFT, ANIM_DIR_RIGHT
+	ANIM_DIR_NONE, ANIM_DIR_JUMP_LEFT, ANIM_DIR_JUMP_RIGHT, ANIM_DIR_LEFT, ANIM_DIR_RIGHT, ANIM_DIR_FALL_LEFT, ANIM_DIR_FALL_RIGHT
 };
 
 enum ReadDirection
@@ -75,6 +75,7 @@ public:
 public:
 	Animation(const string& _name, AnimationComponent* _owner, Sprite* _sprite,
 		const AnimationData& _data);
+	~Animation();
 
 private:
 	virtual void Register() override;

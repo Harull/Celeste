@@ -17,6 +17,12 @@ Animation::Animation(const string& _name, AnimationComponent* _owner, Sprite* _s
 	Register();
 }
 
+Animation::~Animation()
+{
+	delete sprite;
+	sprite = nullptr;
+}
+
 
 void Animation::Register()
 {
@@ -85,13 +91,12 @@ void Animation::Stop()
 
 void Animation::Update()
 {
-	SetOriginCentered(sprite);
-    sprite->setPosition(owner->GetOwner()->GetPosition());
-    Vector2f _spriteSize = sprite->getLocalBounds().getSize();
-    Vector2f _shapeSize = owner->GetOwner()->GetShape()->getLocalBounds().getSize();
-    Vector2f _scale = Vector2f(_shapeSize.x / _spriteSize.x, _shapeSize.y / _spriteSize.y);
-    sprite->setScale(_scale);
-    SetOriginCentered(sprite);
+	Vector2f _spriteSize = sprite->getLocalBounds().getSize();
+	Vector2f _shapeSize = owner->GetOwner()->GetShape()->getLocalBounds().getSize();
+	Vector2f _scale = Vector2f(_shapeSize.x / _spriteSize.x, _shapeSize.y / _spriteSize.y);
+	sprite->setScale(_scale);
+	sprite->setPosition(owner->GetOwner()->GetPosition() + Vector2f(_shapeSize.x * _scale.x, _shapeSize.y / _scale.y));
+
 }
 
 

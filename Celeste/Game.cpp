@@ -45,8 +45,8 @@ void Game::Stop()
 
 void Game::InitWindow()
 {
-	//window.create(VideoMode(1280, 720), "Celeste");
-	window.create(VideoMode(1920, 1080), "Celeste", Style::Fullscreen);
+	window.create(VideoMode(1280, 720), "Celeste");
+	//window.create(VideoMode(1920, 1080), "Celeste", Style::Fullscreen);
 }
 
 void Game::InitPlayer()
@@ -55,16 +55,9 @@ void Game::InitPlayer()
 
 void Game::Update()
 {
-
 	while (window.isOpen())
 	{
 		UpdateEvents();
-		if (!InputManager::GetInstance().UpdateWindow(window))break;
-		for (Entity* _entity : EntityManager::GetInstance().GetAllEntites())
-		{
-			_entity->Update();
-		}
-
 		EntityManager::GetInstance().Update();
 		TimerManager::GetInstance().Update();
 		UpdateWindow();
@@ -76,17 +69,19 @@ void Game::UpdateWindow()
 {
 	window.clear(sf::Color::Black);
 
-	std::vector<Entity*> _entities = EntityManager::GetInstance().GetAllValues();
-	for (Entity* _entity : _entities)
+	std::vector<Drawable*> _entities = EntityManager::GetInstance().GetDrawables();
+	for (Drawable* _entity : _entities)
 	{
-		window.draw(*_entity->GetShape());
+		window.draw(*_entity);
 	}
 
 	if (map) {
-		for (Drawable* _drawable : map->GetDrawables()) {
+		vector<Drawable*> _mapDrawables = map->GetDrawables();
+		for (Drawable* _drawable : _mapDrawables) {
 			window.draw(*_drawable);
 		}
 	}
+
 	window.display();
 }
 

@@ -8,8 +8,7 @@ class Component;
 class Character : public Entity
 {
 	bool isVisible;
-	AnimationComponent* animation;
-	AnimationDirection direction;
+	
 
 public:
 	Character() = default;
@@ -20,7 +19,6 @@ public:
 		shape->setScale(_size);
 	}
 
-	//Character();
 
 private:
 	void InitShape();
