@@ -56,6 +56,10 @@ void Game::Update()
 	while (window.isOpen())
 	{
 		if (!InputManager::GetInstance().UpdateWindow(window))break;
+		for (Entity* _entity : EntityManager::GetInstance().GetAllEntites())
+		{
+			_entity->Update();
+		}
 		EntityManager::GetInstance().Update();
 		TimerManager::GetInstance().Update();
 		UpdateWindow();
@@ -69,7 +73,7 @@ void Game::Update()
 void Game::UpdateWindow()
 {
 	window.clear();
-	if (map) {
+	/*if (map) {
 		for (vector<SmallMap*> _smallMap : map->GetMaps()) {
 			for (SmallMap* _sMap : _smallMap) {
 				for (Drawable* _drawable : _sMap->GetGrid()->GetDrawablesMap()) {
@@ -77,7 +81,11 @@ void Game::UpdateWindow()
 				}
 			}
 		}
+	}*/
+	//window.draw(*player->GetShape());
+	for (Drawable* _drawable : EntityManager::GetInstance().GetDrawables())
+	{
+		window.draw(*_drawable);
 	}
-	window.draw(*player->GetShape());
 	window.display();
 }

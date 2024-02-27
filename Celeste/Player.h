@@ -11,6 +11,7 @@ class Player
 {
 	static PlayerData data;
 	Character* character;
+	
 
 public:
 	Character* GetCharacter()
@@ -25,6 +26,7 @@ public:
 
 public:
 	Player();
+	~Player();
 
 public:
 	void Update();

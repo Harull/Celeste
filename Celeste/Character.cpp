@@ -3,18 +3,19 @@
 
 #define CHARACTER_TEXTURE "Character/Slave.png"
 
-Character::Character()
-	: Entity(EntityData("Character", Vector2f(), Vector2f()))
-{
-}
+//Character::Character()
+//	: Entity(EntityData("Character", Vector2f(), Vector2f()))
+//{
+//}
 
 Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, const bool _isVisible)
 	: Entity(EntityData("Character", _position, _size))
 {
 	//TODO envoyer la shape à l'entity
 	isVisible = _isVisible;
-
-	const Vector2f& _sizeA = Vector2f(53.7f, 58.125f);
+	//shape = new RectangleShape(_size);
+	InitShape();
+	const Vector2f& _sizeA = Vector2f(_size);
 	const ReadDirection& _readDirection = READ_RIGHT;
 	const bool _toRepeat = true;
 	const int _count = 10;
@@ -32,8 +33,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 
 	components.push_back(animation);
 
-	//InitShape();
-	InitComponents();
+	//InitComponents();
 
 	//Update();
 

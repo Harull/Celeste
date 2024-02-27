@@ -12,8 +12,15 @@ class Character : public Entity
 	AnimationDirection direction;
 
 public:
-	Character();
-	Character(const sf::Vector2f _size, const sf::Vector2f _position, const bool _isVisible = false);
+	void SetShape(const Vector2f& _size)
+	{
+		shape->setScale(_size);
+	}
+
+
+public:
+	//Character();
+	Character(const sf::Vector2f _size, const sf::Vector2f _position,const bool _isVisible = false);
 
 private:
 	void InitShape();

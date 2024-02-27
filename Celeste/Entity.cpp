@@ -10,7 +10,7 @@ Entity::Entity(const EntityData& _data)
 {
 	Register();
 	components = vector<Component*>();
-	shape = new sf::RectangleShape();
+	shape = new sf::RectangleShape(Vector2f(_data.size));
 }
 
 Entity::~Entity()

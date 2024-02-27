@@ -3,7 +3,6 @@
 
 int main()
 {
-	Game _game;
-	_game.Launch();
+	Game::GetInstance().Launch();
 
 }
