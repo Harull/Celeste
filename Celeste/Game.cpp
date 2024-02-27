@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "EventReactionManager.h"
 #include "EntityManager.h"
+#include"TimerManager.h"
 
 Game::Game()
 {
@@ -12,6 +13,7 @@ Game::~Game()
 {
 	if (map) delete map;
 	if (player) delete player;
+	
 }
 
 void Game::Launch()
@@ -58,9 +60,11 @@ void Game::Update()
 	{
 		UpdateEvents();
 		EntityManager::GetInstance().Update();
+		TimerManager::GetInstance().Update();
 		UpdateWindow();
 	}
 }
+
 
 void Game::UpdateWindow()
 {
@@ -89,6 +93,5 @@ void Game::UpdateEvents()
 			Stop();
 
 		EventReactionManager::Update(_event);
-
 	}
 }
