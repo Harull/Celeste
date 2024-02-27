@@ -9,6 +9,7 @@ Entity::Entity(const EntityData& _data, std::vector<Component*> _components)
 	: IManageable(_data.name) 
 {
 	shape = new sf::RectangleShape(_data.size);
+	shape->setFillColor(Color::White);
 	shape->setPosition(_data.position);
 	components = _components;
 	Register();

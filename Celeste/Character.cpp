@@ -50,6 +50,7 @@ bool Character::MovingLeftRight(const sf::Event& _event)
 
 
 	if (_event.key.code != _leftKey && _event.key.code != _rightKey)return false;
+	
 	sf::Vector2f _direction = _mvComponent->GetDirection();
 	std::cout << sf::Keyboard::isKeyPressed(_leftKey) << " | " << sf::Keyboard::isKeyPressed(_rightKey) << std::endl;
 
