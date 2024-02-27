@@ -1,4 +1,0 @@
-enum Layers
-{
-	BACKGROUND, MIDLE_GROUND, FOREGROUND
-};
