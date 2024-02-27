@@ -16,23 +16,25 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 {
 	isVisible = _isVisible;
 	InitShape();
-	const Vector2f& _sizeA = Vector2f(_size);
+	const Vector2f& _sizeA = Vector2f(24.4f,45.f);
 	const ReadDirection& _readDirection = READ_RIGHT;
 	const bool _toRepeat = true;
-	const int _count = 10;
-	const int _countStop = 3;
+	const int _count = 8;
+	const int _countStop = 1;
 	const float _speedA = 0.1f;
-	direction = ANIM_DIR_DOWN;
+	AnimationDirection direction = ANIM_DIR_RIGHT;
 
-	animation = new AnimationComponent(this, CHARACTER_TEXTURE, {
-		AnimationData("WalkDown", Vector2f(0.0f, 232.5f), _sizeA, _readDirection, ANIM_DIR_DOWN, _toRepeat, _count, _speedA),
-		AnimationData("WalkLeft", Vector2f(0.0f, 290.5f), _sizeA, _readDirection, ANIM_DIR_LEFT, _toRepeat, _count, _speedA),
-		AnimationData("WalkUp", Vector2f(0.0f, 348.5f), _sizeA, _readDirection, ANIM_DIR_UP, _toRepeat, _count, _speedA),
-		AnimationData("WalkRight", Vector2f(0.0f, 406.5f), _sizeA, _readDirection, ANIM_DIR_RIGHT, _toRepeat, _count, _speedA),
-		AnimationData("NONE", Vector2f(0.0f, 0.0f), _sizeA, _readDirection, ANIM_DIR_NONE, _toRepeat, _countStop, _speedA),
+	AnimationComponent* _animation = new AnimationComponent(this, CHARACTER_TEXTURE, {
+		AnimationData("WalkRight", Vector2f(12.0f, 7.f), _sizeA, _readDirection, ANIM_DIR_RIGHT, _toRepeat, _count, _speedA),
+		AnimationData("WalkLeft", Vector2f(11.f, 53.f), _sizeA, _readDirection, ANIM_DIR_LEFT, _toRepeat, _count, _speedA),
+		AnimationData("JumpRight", Vector2f(12.f, 101.f), _sizeA, _readDirection, ANIM_DIR_JUMP_RIGHT, _toRepeat, _countStop, _speedA),
+		AnimationData("FallRight", Vector2f(36.f, 101.f), _sizeA, _readDirection, ANIM_DIR_FALL_RIGHT, _toRepeat, _countStop, _speedA),
+		AnimationData("JumpLeft", Vector2f(38.f, 153.f), _sizeA, _readDirection, ANIM_DIR_JUMP_LEFT, _toRepeat, _countStop, _speedA),
+		AnimationData("FallLeft", Vector2f(12.f, 153.f), _sizeA, _readDirection, ANIM_DIR_FALL_LEFT, _toRepeat, _countStop, _speedA),
+		AnimationData("None", Vector2f(12.f, 203), _sizeA, _readDirection, ANIM_DIR_NONE, _toRepeat, 1, _speedA),
 		}, direction);
 
-	components.push_back(animation);
+	components.push_back(_animation);
 }
 
 void Character::InitShape()
@@ -62,4 +64,5 @@ bool Character::MovingLeftRight(const sf::Event& _event)
 void Character::Update()
 {
 	Entity::Update();
+	
 }

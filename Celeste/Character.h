@@ -8,8 +8,7 @@ class Component;
 class Character : public Entity
 {
 	bool isVisible;
-	AnimationComponent* animation;
-	AnimationDirection direction;
+	
 
 public:
 	Character() = default;

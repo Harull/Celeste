@@ -18,14 +18,17 @@ public:
 
 		for (Entity* _entity : GetAllValues())
 		{
-			//todo move
+			
 			if (AnimationComponent* _animation = _entity->GetComponent<AnimationComponent>())
 			{
-				_drawables.push_back(_animation->GetCurrentAnimation()->GetSprite());
-				continue;
+				/*_drawables.push_back(_animation->GetCurrentAnimation()->GetSprite());*/
+				_drawables.push_back(_entity->GetShape());
 			}
+			else
+			{
 
 			_drawables.push_back(_entity->GetShape());
+			}
 		}
 
 		return _drawables;
