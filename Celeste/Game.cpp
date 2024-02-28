@@ -11,6 +11,8 @@ Game::Game()
 {
 	map = nullptr;
 	player = new Player();
+	view = View();
+	visibleArea = FloatRect();
 }
 
 Game::~Game()
@@ -50,8 +52,8 @@ void Game::Stop()
 
 void Game::InitWindow()
 {
-	window.create(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Celeste");
-	//window.create(VideoMode(1920, 1080), "Celeste", Style::Fullscreen);
+	//window.create(VideoMode(1280, 720), "Celeste");
+	window.create(VideoMode(1920, 1080), "Celeste", Style::Fullscreen);
 }
 
 void Game::InitPlayer()
@@ -62,6 +64,7 @@ void Game::Update()
 {
 	while (window.isOpen())
 	{
+		UpdateVisibleArea();
 		UpdateEvents();
 		EntityManager::GetInstance().Update();
 		TimerManager::GetInstance().Update();
@@ -71,6 +74,11 @@ void Game::Update()
 	}
 }
 
+void Game::UpdateVisibleArea()
+{
+	
+	visibleArea = FloatRect(Camera::GetInstance().getCenter() - Camera::GetInstance().getSize() / 2.0f, Camera::GetInstance().getSize());
+}
 
 void Game::UpdateWindow()
 {
@@ -79,13 +87,15 @@ void Game::UpdateWindow()
 	std::vector<Drawable*> _entities = EntityManager::GetInstance().GetDrawables();
 	for (Drawable* _entity : _entities)
 	{
-		window.draw(*_entity);
+			window.draw(*_entity);
 	}
 
 	if (map) {
-		vector<Drawable*> _mapDrawables = map->GetDrawables();
-		for (Drawable* _drawable : _mapDrawables) {
-			window.draw(*_drawable);
+		vector<Shape*> _mapShapes = map->GetShapesMap();
+		for (Shape* _shape : _mapShapes) {
+			if (visibleArea.intersects(_shape->getGlobalBounds())) {
+				window.draw(*_shape);
+			}
 		}
 	}
 
