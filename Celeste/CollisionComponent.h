@@ -5,6 +5,7 @@
 #include <functional>
 #include "Tile.h"
 #include "Component.h"
+#include<functional>
 
 enum CollisionSide
 {
@@ -13,13 +14,15 @@ enum CollisionSide
 
 class CollisionComponent : public Component
 {
+	function<void(int _collisionSide)> callback;
 public:
-	CollisionComponent(Entity* _owner);
+	CollisionComponent(Entity* _owner, function<void(int _collisionSide)> _callback= function<void(int _collisionSide)>());
 private:
 	CollisionSide ComputeRelativePosition(const sf::Shape* _entityShape, const sf::Shape* _tileShape,
 		const int initialCollisionSideBinary);
 public:
 	int CheckCollision(int& _collisionSideBinary);
+	void CheckCollisionCharacter(int& _collisionSideBinary);
 	virtual void Update()override;
 
 
