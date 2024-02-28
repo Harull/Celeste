@@ -24,13 +24,13 @@ void Menu::ShowMenu(sf::RenderWindow& window)
         static_cast<float>(window.getSize().y) / backgroundSprite.getLocalBounds().height
     );
 
-    sf::Text _play("Climb", _font, 30);
-    sf::Text _options("Options", _font, 30);
-    sf::Text _exit("Exit", _font, 30);
+    sf::Text _play("Climb", _font, 80);
+    sf::Text _options("Options", _font, 50);
+    sf::Text _exit("Exit", _font, 50);
 
-    _play.setPosition(140, 300);
-    _options.setPosition(140, 350);
-    _exit.setPosition(140, 400);
+    _play.setPosition(180, 400);
+    _options.setPosition(180, 510);
+    _exit.setPosition(180, 575);
 
     while (window.isOpen())
     {
