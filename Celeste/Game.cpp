@@ -36,7 +36,6 @@ void Game::Start()
 	InitWindow();
 	menu->ShowMenu(window);
 	InitMap(1);
-	Camera::GetInstance().Init(Vector2f(100.f, 100.f), Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
 }
 
 void Game::InitMap(const int _value)
@@ -56,7 +55,9 @@ void Game::Stop()
 void Game::InitWindow()
 {
 	//window.create(VideoMode(1280, 720), "Celeste");
-	window.create(VideoMode(1920, 1080), "Celeste", Style::Fullscreen);
+	const int _xWindowSize = 1920, _yWindowSize = 1080;
+	window.create(VideoMode(_xWindowSize, _yWindowSize), "Celeste", Style::Fullscreen);
+	Camera::GetInstance().Init({0,0}, { 1920, 1080 });
 }
 
 void Game::InitPlayer()
@@ -67,31 +68,28 @@ void Game::Update()
 {
 	while (window.isOpen())
 	{
-		UpdateVisibleArea();
 		UpdateEvents();
 		EntityManager::GetInstance().Update();
 		TimerManager::GetInstance().Update();
-		Camera::GetInstance().Update();
+		Camera::GetInstance().Update(this);
 		UpdateWindow();
-		window.setView(Camera::GetInstance());
 	}
 }
 
 void Game::UpdateVisibleArea()
 {
-
 	visibleArea = FloatRect(Camera::GetInstance().getCenter() - Camera::GetInstance().getSize() / 2.0f, Camera::GetInstance().getSize());
 }
 
 void Game::UpdateWindow()
 {
 	window.clear(sf::Color::Black);
+	UpdateVisibleArea();
+	window.setView(Camera::GetInstance());
 
 	std::vector<Drawable*> _entities = EntityManager::GetInstance().GetDrawables(visibleArea);
 	for (Drawable* _entity : _entities)
-	{
-		window.draw(*_entity);
-	}
+			window.draw(*_entity);
 
 	window.display();
 }

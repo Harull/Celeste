@@ -32,19 +32,17 @@ void AnimationComponent::Update()
 	const int _newIndex = GetNextIndex(direction);
 	if (currentIndex == _newIndex) return;
 
-	system("cls");
-
 	if (currentIndex != -1)
 	{
 		Animation* _currentAnimation = GetCurrentAnimation();
 		if (!_currentAnimation) return;
-		cout << "Stop : " << _currentAnimation->GetData().name << endl;
+		//cout << "Stop : " << _currentAnimation->GetData().name << endl;
 		_currentAnimation->Stop();
 		currentIndex = -1;
 	}
 
 	Animation* _animation = GetAllValues()[_newIndex];
-	cout << "Start : " << _animation->GetData().name << endl;
+	//cout << "Start : " << _animation->GetData().name << endl;
 	_animation->Start();
 	currentIndex = _newIndex;
 }
