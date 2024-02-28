@@ -154,8 +154,12 @@
     <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
+    <ClCompile Include="MusicData.cpp" />
+    <ClCompile Include="MusicManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SmallMap.cpp" />
+    <ClCompile Include="SoundData.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Spike.cpp" />
     <ClCompile Include="TextureData.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -191,9 +195,13 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="MultimapManager.h" />
+    <ClInclude Include="MusicData.h" />
+    <ClInclude Include="MusicManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SmallMap.h" />
+    <ClInclude Include="SoundData.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Spike.h" />
     <ClInclude Include="StreamManager.h" />
     <ClInclude Include="TextureData.h" />
