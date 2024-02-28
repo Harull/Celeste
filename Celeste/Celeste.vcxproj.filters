@@ -43,6 +43,12 @@
     <Filter Include="Source Files\Manager\Camera">
       <UniqueIdentifier>{119918e8-41ea-4fdd-b6e4-81e7e3cae6d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Manager\Sound">
+      <UniqueIdentifier>{fe64c3f1-7a43-4686-89e4-b9c48f6783e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Manager\Music">
+      <UniqueIdentifier>{cc7d2ca3-ea2e-41d1-b96a-7f5b2a488fb2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -153,8 +159,20 @@
     <ClCompile Include="EventReaction.cpp">
       <Filter>Source Files\Manager\InputManager</Filter>
     </ClCompile>
+    <ClCompile Include="SoundData.cpp">
+      <Filter>Source Files\Manager\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Source Files\Manager\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="MusicManager.cpp">
+      <Filter>Source Files\Manager\Music</Filter>
+    </ClCompile>
+    <ClCompile Include="MusicData.cpp">
+      <Filter>Source Files\Manager\Music</Filter>
+    </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Manager\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -281,8 +299,20 @@
     <ClInclude Include="MultimapManager.h">
       <Filter>Source Files\Manager\InputManager</Filter>
     </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Source Files\Manager\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundData.h">
+      <Filter>Source Files\Manager\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicManager.h">
+      <Filter>Source Files\Manager\Music</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicData.h">
+      <Filter>Source Files\Manager\Music</Filter>
+    </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\Manager\Camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
