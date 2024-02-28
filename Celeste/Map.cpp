@@ -9,6 +9,7 @@ Map::Map() : IManageable(S_APPEND("Map"))
 	const float _startPosX = 0.0f;
 	const float _startPosY = -48.0f;
 	startPosition = Vector2f(_startPosX, _startPosY);
+	Register();
 }
 
 

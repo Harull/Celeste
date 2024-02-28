@@ -40,6 +40,7 @@ public:
 		{
 			for (Tile* _tile : _tiles)
 			{
+				if (!_tile)continue;
 				_drawables.push_back(_tile->GetShape());
 			}
 		}

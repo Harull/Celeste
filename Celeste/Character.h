@@ -26,6 +26,7 @@ private:
 
 public:
 	bool MovingLeftRight(const sf::Event& _event);
+	bool Jump(const sf::Event& _event);
 	virtual void Update();
 	void Move();
 	void Dash();
