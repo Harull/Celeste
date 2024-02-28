@@ -2,6 +2,10 @@
 #include "EventReactionManager.h"
 #include "EntityManager.h"
 #include"TimerManager.h"
+#include"Camera.h"
+
+#define SCREEN_WIDTH 1280
+#define SCREEN_HEIGHT 720
 
 Game::Game()
 {
@@ -27,6 +31,7 @@ void Game::Start()
 {
 	InitWindow();
 	InitMap(1);
+	Camera::GetInstance().Init(Vector2f(100.f, 100.f), Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
 }
 
 void Game::InitMap(const int _value)
@@ -45,7 +50,7 @@ void Game::Stop()
 
 void Game::InitWindow()
 {
-	window.create(VideoMode(1280, 720), "Celeste");
+	window.create(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Celeste");
 	//window.create(VideoMode(1920, 1080), "Celeste", Style::Fullscreen);
 }
 
@@ -60,7 +65,9 @@ void Game::Update()
 		UpdateEvents();
 		EntityManager::GetInstance().Update();
 		TimerManager::GetInstance().Update();
+		Camera::GetInstance().Update();
 		UpdateWindow();
+		window.setView(Camera::GetInstance());
 	}
 }
 

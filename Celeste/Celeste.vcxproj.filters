@@ -40,6 +40,9 @@
     <Filter Include="Source Files\Manager\InputManager">
       <UniqueIdentifier>{d31b2143-b94e-4cd7-af47-bf800f74468e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Manager\Camera">
+      <UniqueIdentifier>{119918e8-41ea-4fdd-b6e4-81e7e3cae6d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -149,6 +152,9 @@
     </ClCompile>
     <ClCompile Include="EventReaction.cpp">
       <Filter>Source Files\Manager\InputManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -274,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="MultimapManager.h">
       <Filter>Source Files\Manager\InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
