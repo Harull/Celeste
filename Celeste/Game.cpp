@@ -3,6 +3,7 @@
 #include "EntityManager.h"
 #include"TimerManager.h"
 #include"Camera.h"
+#include "Menu.h"
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
@@ -34,6 +35,8 @@ void Game::Start()
 	InitWindow();
 	InitMap(1);
 	Camera::GetInstance().Init(Vector2f(100.f, 100.f), Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
+	Menu _menu;
+	_menu.ShowMenu(window);
 }
 
 void Game::InitMap(const int _value)
@@ -109,7 +112,8 @@ void Game::UpdateEvents()
 	{
 		if (_event.type == sf::Event::Closed)
 			Stop();
-
-		EventReactionManager::Update(_event);
+		else{
+			EventReactionManager::Update(_event);
+		}
 	}
 }
