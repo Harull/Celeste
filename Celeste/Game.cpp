@@ -3,7 +3,7 @@
 #include "EntityManager.h"
 #include"TimerManager.h"
 #include"Camera.h"
-#include "Menu.h"
+
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
@@ -13,12 +13,14 @@ Game::Game()
 	map = nullptr;
 	player = new Player();
 	visibleArea = FloatRect();
+	menu = nullptr;
 }
 
 Game::~Game()
 {
 	if (map) delete map;
 	if (player) delete player;
+	if (menu) delete menu;
 
 }
 
@@ -32,10 +34,9 @@ void Game::Launch()
 void Game::Start()
 {
 	InitWindow();
+	menu->ShowMenu(window);
 	InitMap(1);
 	Camera::GetInstance().Init(Vector2f(100.f, 100.f), Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
-	Menu _menu;
-	_menu.ShowMenu(window);
 }
 
 void Game::InitMap(const int _value)

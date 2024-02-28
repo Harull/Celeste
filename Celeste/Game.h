@@ -3,6 +3,7 @@
 #include "Map.h"
 #include "Player.h"
 #include "Singleton.h"
+#include "Menu.h"
 
 using namespace sf;
 
@@ -12,6 +13,7 @@ class Game : public Singleton<Game>
 	Map* map;
 	Player* player;
 	FloatRect visibleArea;
+	Menu* menu;
 
 public:
 	Vector2u GetWindowSize()

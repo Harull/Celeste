@@ -48,6 +48,7 @@ void Menu::ShowMenu(sf::RenderWindow& window)
 
                     if (_play.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
                     {
+                        window.clear();
                         return;
                     }
                     else if (_options.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
