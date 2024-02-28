@@ -161,6 +161,7 @@
     <ClCompile Include="SoundData.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Spike.cpp" />
+    <ClCompile Include="Strawberry.cpp" />
     <ClCompile Include="TextureData.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Tile.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="SoundData.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Spike.h" />
+    <ClInclude Include="Strawberry.h" />
     <ClInclude Include="StreamManager.h" />
     <ClInclude Include="TextureData.h" />
     <ClInclude Include="TextureManager.h" />
