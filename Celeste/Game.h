@@ -11,6 +11,8 @@ class Game : public Singleton<Game>
 	RenderWindow window;
 	Map* map;
 	Player* player;
+	View view;
+	FloatRect visibleArea;
 
 public:
 	Vector2u GetWindowSize()
@@ -38,6 +40,7 @@ private:
 	void InitPlayer();
 	void Update();
 	void UpdateWindow();
+	void UpdateVisibleArea();
 	void UpdateEvents();
 
 };
