@@ -20,6 +20,7 @@ MovementComponent::MovementComponent(Entity* _owner, const float _velocity,
 void MovementComponent::Update()
 {
 	Move();
+	//std::cout << "x " << owner->GetShape()->getPosition().x << " | y " << owner->GetShape()->getPosition().y << std::endl;
 }
 
 void MovementComponent::Move()
@@ -42,10 +43,17 @@ bool MovementComponent::TryToMove(Entity* _entity, const Vector2f& _direction)
 	{
 		if (_entityBinary = _collision->CheckCollision(_collisionSideBinary))
 		{
+			sf::Vector2f _newPos;
 			if (_direction.x != 0 && (_collisionSideBinary & COLLIDE_LEFT || _collisionSideBinary & COLLIDE_RIGHT))
-				_entity->GetShape()->move(sf::Vector2f(-_destination.x, 0));
-			if (_direction.y != 0 && (_collisionSideBinary & COLLIDE_UP || _collisionSideBinary & COLLIDE_DOWN))
-				_entity->GetShape()->move(sf::Vector2f(-_destination.x, 0));
+				_newPos = { -_destination.x, _newPos.y};
+			if (_direction.y != 0 && _collisionSideBinary & COLLIDE_UP )
+				_newPos = { _newPos.x, -_destination.y };
+			if ((_collisionSideBinary & COLLIDE_DOWN) && _destination.y < 0)
+				_newPos = { _newPos.x, -_destination.y };
+			
+
+			_entity->GetShape()->move(_newPos);
+
 			return true;
 		}
 	}

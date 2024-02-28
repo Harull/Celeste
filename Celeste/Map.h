@@ -15,10 +15,9 @@ public:
 
 	vector<Drawable*> GetDrawables() {
 		vector<Drawable*> _drawables;
-
 		for (vector<SmallMap*> _smallMap : maps) {
 			for (SmallMap* _sMap : _smallMap) {
-				vector<Drawable*> _drawableVect = _sMap->GetGrid()->GetDrawablesMap();
+				std::vector<sf::Drawable*> _drawableVect = _sMap->GetGrid()->GetDrawablesMap();
 				for (Drawable* _drawable : _drawableVect) {
 					_drawables.push_back(_drawable);
 				}

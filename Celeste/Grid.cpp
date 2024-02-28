@@ -13,8 +13,8 @@ Grid::Grid(const Vector2i _tilesCount)
 
 void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 {
-	tileSize = Vector2f(16.0f, 16.0f);
-	//tileSize = Vector2f(48.0f, 48.0f);
+	//tileSize = Vector2f(16.0f, 16.0f);
+	tileSize = Vector2f(48.0f, 48.0f);
 	vector<vector<char>> _gridForLoad;
 	const string _pathMap = "Maps/Level"+ to_string(_level) + "/Map" + to_string(_value) + ".txt";
 	StreamManager::GetInstance().LoadSmallMap(_gridForLoad, _pathMap);
@@ -31,24 +31,24 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 
 			const float _posX = static_cast<float>(_indexRow * tileSize.x + _startPos.x);
 			const float _posY = static_cast<float>(_indexColumn * tileSize.y + _startPos.y);
-
-			switch (_char)
+			
+			if (_char == '1')
 			{
-			case '1':
 				_path = "Assets/Snow1.png";
 				_type = ENTITY_TILE;
-				break;
-			case '2':
+			}
+			else if (_char == '2')
+			{
 				_path = "Assets/SpikeTop.png";
 				_type = ENTITY_TILE;
-				break;
-			case 'x':
+			}
+			else if (_char == 'x')
+			{
 				_path = "Assets/Avoir.png";
 				_type = ENTITY_TILE;
-				break;
-			default:
-				Tile* _tile = nullptr;
-				_tiles.push_back(_tile);
+			}
+			else {
+				_tiles.push_back(nullptr);
 				_indexRow++;
 				continue;
 			}

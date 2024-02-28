@@ -10,8 +10,8 @@
 
 Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, const bool _isVisible)
 	: Entity(EntityData("Character", _position, _size),
-		{ new MovementComponent(this, 0.1f, sf::Vector2f(0,0), true),
-			new GravityComponent(this, 0.0005f),
+		{ new MovementComponent(this, 2.f, sf::Vector2f(0,0), true),
+			new GravityComponent(this, 1.6f),
 			new CollisionComponent(this)})
 {
 	isVisible = _isVisible;
@@ -52,14 +52,25 @@ bool Character::MovingLeftRight(const sf::Event& _event)
 	if (_event.key.code != _leftKey && _event.key.code != _rightKey)return false;
 	
 	sf::Vector2f _direction = _mvComponent->GetDirection();
-	std::cout << sf::Keyboard::isKeyPressed(_leftKey) << " | " << sf::Keyboard::isKeyPressed(_rightKey) << std::endl;
 
 	float _xDirection = -(sf::Keyboard::isKeyPressed(_leftKey) * 1.f) + sf::Keyboard::isKeyPressed(_rightKey) * 1.f;
-	std::cout << _xDirection << std::endl;
 	sf::Vector2f _newDirection(_xDirection, _direction.y);
 
 	_mvComponent->SetDirection(_newDirection);
 	return true;
+}
+
+bool Character::Jump(const sf::Event& _event)
+{
+	MovementComponent* _mvComponent = GetComponent<MovementComponent>();
+	sf::Keyboard::Key _jumpKey = sf::Keyboard::Space;
+
+	if (_event.key.code != _jumpKey)return false;
+	sf::Vector2f _direction = _mvComponent->GetDirection();
+
+	sf::Vector2f _newDirection(_direction.x, -20.f);
+	_mvComponent->SetDirection(_newDirection);
+	return false;
 }
 
 void Character::Update()
