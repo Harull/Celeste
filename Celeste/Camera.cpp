@@ -1,32 +1,38 @@
 #include "Camera.h"
-#include"EntityManager.h"
+#include "Player.h"
+#include "Macro.h"
+#include "Game.h"
 
-
-void Camera::InitPosition()
+void Camera::Init(const Vector2f& _position, const Vector2f& _size)
 {
-	Vector2f _cameraPosition= Vector2f(-0.845f, -0.65f);
-	
-
-	const Vector2f& _cameraSize = Vector2f(2.0f, 2.0f);
-
-	setViewport(FloatRect(_cameraPosition, _cameraSize));
+	previousIndexes = { 0,0 };
+	move(_position);
+	setSize(_size);
+	setCenter(_size/2.f);
 }
 
-void Camera::Init(const Vector2f& _from, const Vector2f& _to)
+void Camera::Update(Game* _game)
 {
-	setCenter(_from);
-	setSize(_to);
-	InitPosition();
-}
+	const sf::Vector2f _playerPosition = _game->GetPlayer()->GetCharacter()->GetPosition();
+	const sf::Vector2f _index(std::floor(_playerPosition.x / 1920), std::floor(_playerPosition.y / 1080));
+	if (previousIndexes.x != _index.x)
+	{
+		const float _sign = _index.x - previousIndexes.x;
+		while (!IsNearlyEqual(getCenter().x, _index.x * 1920.f + 1920.f / 2.f))
+		{
+			_game->UpdateWindow();
+			move(_sign * 0.6f , 0);
+		}
+	}
+	else if (previousIndexes.y != _index.y)
+	{
+		const float _sign = _index.y - previousIndexes.y;
+		while (!IsNearlyEqual(getCenter().y, _index.y * 1080.f + 1080.f / 2.f))
+		{
+			_game->UpdateWindow();
+			move(0, _sign * 0.4f);
+		}
+	}
 
-void Camera::Update()
-{
-	const Vector2f& _currentPosition = getCenter();
-	const Vector2f& _playerPosition = EntityManager::GetInstance().Get("Character")->GetPosition();
-
-	Vector2f _offset = Vector2f(0.0f, 0.0f);
-	_offset.x = _currentPosition.x > _playerPosition.x ? -0.1f : 0.1f;
-	_offset.y = _currentPosition.y > _playerPosition.y ? -0.1f : 0.1f;
-
-	move(_offset);
+	previousIndexes = _index;
 }

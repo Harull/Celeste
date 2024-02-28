@@ -31,6 +31,7 @@ public:
 
 public:
 	void Launch();
+	void UpdateWindow();
 
 private:
 	void Start();
@@ -39,7 +40,6 @@ private:
 	void InitMap(const int _value);
 	void InitPlayer();
 	void Update();
-	void UpdateWindow();
 	void UpdateVisibleArea();
 	void UpdateEvents();
 
