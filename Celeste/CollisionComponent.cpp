@@ -12,7 +12,6 @@ int CollisionComponent::CheckCollision(int& _collisionSideBinary)
 	_collisionSideBinary = COLLIDE_NONE;
 	int _entityTypeBinary = ENTITY_NONE;
 
-
 	Map* _currentMap = MapManager::GetInstance().GetCurrent();
 	if (!_currentMap) return _entityTypeBinary;
 
@@ -26,6 +25,8 @@ int CollisionComponent::CheckCollision(int& _collisionSideBinary)
 			std::vector<Tile*> _tiles = _currentGrid->GetTilesMap();
 			for (Tile* _tile : _tiles)
 			{
+				if (!_tile) continue;
+
 				sf::Shape* _shapeTile = _tile->GetShape();
 
 				// Normalement pas possible
@@ -33,9 +34,8 @@ int CollisionComponent::CheckCollision(int& _collisionSideBinary)
 
 				if (_floatRectBb.intersects(_shapeTile->getGlobalBounds()))
 				{
-					_collisionSideBinary = ComputeRelativePosition(_currentShape, _shapeTile, _collisionSideBinary);
-
-					return _tile->GetType();
+					_collisionSideBinary |= ComputeRelativePosition(_currentShape, _shapeTile, _collisionSideBinary);
+					_entityTypeBinary |= _tile->GetType();
 				}
 			}
 		}
@@ -43,23 +43,64 @@ int CollisionComponent::CheckCollision(int& _collisionSideBinary)
 	return _entityTypeBinary;
 }
 
-int CollisionComponent::ComputeRelativePosition(const sf::Shape* _entityShape, const sf::Shape* _tileShape,
+CollisionSide CollisionComponent::ComputeRelativePosition(const sf::Shape* _entityShape, const sf::Shape* _tileShape,
 	const int initialCollisionSideBinary)
 {
-	int _resultPosition = initialCollisionSideBinary;
-	const float marginOfError = 1.0f;
+	const float _marginOfError = 50.f;
 
-	const sf::FloatRect& _entityGlobalBounds = _entityShape->getGlobalBounds();
+	sf::FloatRect _entityGlobalBounds = _entityShape->getGlobalBounds();
 	const sf::FloatRect& _tileGlobalBounds = _tileShape->getGlobalBounds();
+	
+	float _overlapLeft = _tileGlobalBounds.left + _tileGlobalBounds.width - _entityGlobalBounds.left;
+	_overlapLeft += _marginOfError;
+	float _overlapRight = _entityGlobalBounds.left + _entityGlobalBounds.width - _tileGlobalBounds.left;
+	_overlapRight += _marginOfError;
+	float _overlapTop = _tileGlobalBounds.top + _tileGlobalBounds.height - _entityGlobalBounds.top;
+	float _overlapBottom = _entityGlobalBounds.top + _entityGlobalBounds.height - _tileGlobalBounds.top;
 
-	if (_entityGlobalBounds.top + _entityGlobalBounds.height >= _tileGlobalBounds.top - marginOfError)
-		_resultPosition |= COLLIDE_UP;
-	if (_entityGlobalBounds.top <= _tileGlobalBounds.top + _entityGlobalBounds.height + marginOfError)
-		_resultPosition |= COLLIDE_DOWN;
-	if (_entityGlobalBounds.left + _entityGlobalBounds.width <= _tileGlobalBounds.left + marginOfError)
-		_resultPosition |= COLLIDE_LEFT;
-	if (_entityGlobalBounds.left >= _tileGlobalBounds.left + _tileGlobalBounds.width - marginOfError)
-		_resultPosition |= COLLIDE_RIGHT;
+	float _overlaps[] = { _overlapLeft, _overlapRight, _overlapTop, _overlapBottom };
+	CollisionSide _sides[] = { CollisionSide::COLLIDE_LEFT, CollisionSide::COLLIDE_RIGHT, CollisionSide::COLLIDE_UP, CollisionSide::COLLIDE_DOWN };
+	float _maxOverlap = _overlaps[0];
+	CollisionSide _maxSide = _sides[0]; 
 
-	return _resultPosition;
+	for (int i = 1; i < 4; ++i) {
+		if (_overlaps[i] > _maxOverlap) {
+			_maxOverlap = _overlaps[i];
+			_maxSide = _sides[i];
+		}
+	}
+	return _maxSide;
+
+
+	//TEST 2
+
+	//CollisionSide _sideCollided = COLLIDE_NONE;
+	//// Vérification des collisions avec le mur/sol
+
+	//if (_entityGlobalBounds.intersects(_tileGlobalBounds)) {
+	//	// Collision détectée, ajuster la position du personnage en fonction de la direction de la collision
+
+	//	// Collision par la droite
+	//	if (_entityGlobalBounds.left < _tileGlobalBounds.left && _entityGlobalBounds.left + _entityGlobalBounds.width > _tileGlobalBounds.left) {
+	//		_entityGlobalBounds = sf::FloatRect({ _tileGlobalBounds.left + _tileGlobalBounds.width,_entityShape->getPosition().y }, _entityGlobalBounds.getSize());
+	//		_sideCollided = COLLIDE_RIGHT;
+	//	}
+	//	// Collision par la gauche
+	//	else if (_entityGlobalBounds.left > _tileGlobalBounds.left && _entityGlobalBounds.left < _tileGlobalBounds.left + _tileGlobalBounds.width) {
+	//		_entityGlobalBounds = sf::FloatRect({ _tileGlobalBounds.left + _tileGlobalBounds.width, _entityShape->getPosition().y }, _entityGlobalBounds.getSize());
+	//		_sideCollided = COLLIDE_LEFT;
+	//	}
+	//	// Collision par le bas
+	//	if (_entityGlobalBounds.top < _tileGlobalBounds.top && _entityGlobalBounds.top + _entityGlobalBounds.height > _tileGlobalBounds.top) {
+	//		_sideCollided = COLLIDE_DOWN;
+	//		_entityGlobalBounds = sf::FloatRect({ _entityShape->getPosition().x, _tileGlobalBounds.top - _entityGlobalBounds.height }, _entityGlobalBounds.getSize());
+	//	}
+	//	// Collision par le haut
+	//	else if (_entityGlobalBounds.top > _tileGlobalBounds.top && _entityGlobalBounds.top < _tileGlobalBounds.top + _tileGlobalBounds.height) {
+	//		_sideCollided = COLLIDE_UP;
+	//		_entityGlobalBounds = sf::FloatRect({ _entityShape->getPosition().x, _tileGlobalBounds.top + _tileGlobalBounds.height }, _entityGlobalBounds.getSize());
+	//	}
+	//}
+
+	//return _sideCollided;
 }

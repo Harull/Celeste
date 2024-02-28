@@ -19,7 +19,7 @@ public:
 	int CheckCollision(int& _collisionSideBinary);
 
 private:
-	int ComputeRelativePosition(const sf::Shape* _entityShape, const sf::Shape* _tileShape,
+	CollisionSide ComputeRelativePosition(const sf::Shape* _entityShape, const sf::Shape* _tileShape,
 		const int initialCollisionSideBinary);
 };
 
