@@ -13,8 +13,8 @@ Grid::Grid(const Vector2i _tilesCount)
 
 void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 {
-	//tileSize = Vector2f(16.0f, 16.0f);
-	tileSize = Vector2f(48.0f, 48.0f);
+	tileSize = Vector2f(16.0f, 16.0f);
+	//tileSize = Vector2f(48.0f, 48.0f);
 	vector<vector<char>> _gridForLoad;
 	const string _pathMap = "Maps/Level"+ to_string(_level) + "/Map" + to_string(_value) + ".txt";
 	StreamManager::GetInstance().LoadSmallMap(_gridForLoad, _pathMap);

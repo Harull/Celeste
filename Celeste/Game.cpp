@@ -76,8 +76,8 @@ void Game::Update()
 
 void Game::UpdateVisibleArea()
 {
-	view = window.getView();
-	visibleArea = FloatRect(view.getCenter() - view.getSize() / 2.0f, view.getSize());
+	
+	visibleArea = FloatRect(Camera::GetInstance().getCenter() - Camera::GetInstance().getSize() / 2.0f, Camera::GetInstance().getSize());
 }
 
 void Game::UpdateWindow()
@@ -87,9 +87,7 @@ void Game::UpdateWindow()
 	std::vector<Drawable*> _entities = EntityManager::GetInstance().GetDrawables();
 	for (Drawable* _entity : _entities)
 	{
-		if (visibleArea.intersects(_entity->GetShape()->getGlobalBounds())) {
-			window.draw(*_entity->GetShape());
-		}
+			window.draw(*_entity);
 	}
 
 	if (map) {
