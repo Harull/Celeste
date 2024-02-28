@@ -89,7 +89,10 @@ void Game::UpdateWindow()
 
 	std::vector<Drawable*> _entities = EntityManager::GetInstance().GetDrawables(visibleArea);
 	for (Drawable* _entity : _entities)
+	{
 			window.draw(*_entity);
+
+	}
 
 	window.display();
 }

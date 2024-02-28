@@ -22,6 +22,7 @@ public:
 			if (AnimationComponent* _animation = _entity->GetComponent<AnimationComponent>())
 			{
 				_drawables.push_back(_animation->GetCurrentAnimation()->GetSprite());
+
 			}
 			else
 			{

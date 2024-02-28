@@ -1,8 +1,10 @@
 #include "CollisionComponent.h"
 #include "MapManager.h"
-
-CollisionComponent::CollisionComponent(Entity* _owner) : Component(_owner)
+#include"Character.h"
+#include"EntityManager.h"
+CollisionComponent::CollisionComponent(Entity* _owner, function<void(int _collisionSide)> _callback) : Component(_owner)
 {
+	callback = _callback;
 }
 
 int CollisionComponent::CheckCollision(int& _collisionSideBinary)
@@ -43,9 +45,35 @@ int CollisionComponent::CheckCollision(int& _collisionSideBinary)
 	return _entityTypeBinary;
 }
 
+void CollisionComponent::CheckCollisionCharacter(int& _collisionSideBinary)
+{
+	sf::Shape* _currentShape = owner->GetShape();
+	sf::FloatRect _floatRectBb = _currentShape->getGlobalBounds();
+	_collisionSideBinary = COLLIDE_NONE;
+
+
+	Character* _character =dynamic_cast<Character*>(EntityManager::GetInstance().Get("Character"));
+	Shape* _shape = _character->GetShape();
+
+				if (_floatRectBb.intersects(_shape->getGlobalBounds()))
+				{
+					_collisionSideBinary |= ComputeRelativePosition(_currentShape, _shape, _collisionSideBinary);
+					
+				}
+			
+		
+	
+	return;
+}
+
+
+
 void CollisionComponent::Update()
 {
-	/*CheckCollision();*/
+	if (!callback)return;
+	int _collisionSide;
+	CheckCollisionCharacter(_collisionSide);
+	callback(_collisionSide);
 }
 
 CollisionSide CollisionComponent::ComputeRelativePosition(const sf::Shape* _entityShape, const sf::Shape* _tileShape,

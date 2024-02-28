@@ -146,6 +146,7 @@
     <ClCompile Include="EventReaction.cpp" />
     <ClCompile Include="FontData.cpp" />
     <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="FragileTile.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GravityComponent.cpp" />
     <ClCompile Include="Grid.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="EventReactionManager.h" />
     <ClInclude Include="FontData.h" />
     <ClInclude Include="FontManager.h" />
+    <ClInclude Include="FragileTile.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GravityComponent.h" />
     <ClInclude Include="Grid.h" />

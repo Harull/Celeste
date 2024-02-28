@@ -48,7 +48,7 @@ bool MovementComponent::TryToMove(Entity* _entity, const Vector2f& _direction)
 				_newPos = { -_destination.x, _newPos.y};
 			if (_direction.y != 0 && _collisionSideBinary & COLLIDE_UP )
 				_newPos = { _newPos.x, -_destination.y };
-			if ((_collisionSideBinary & COLLIDE_DOWN) && _destination.y < 0)
+			if (_collisionSideBinary == COLLIDE_DOWN && _destination.y < 0)
 				_newPos = { _newPos.x, -_destination.y };
 			_entity->GetShape()->move(_newPos);
 

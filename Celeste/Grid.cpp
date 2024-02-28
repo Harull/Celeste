@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "MapManager.h"
 #include "Strawberry.h"
+#include"FragileTile.h"
 
 Grid::Grid(const Vector2i _tilesCount)
 {
@@ -58,6 +59,13 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 				_path = "Assets/Vide.png";
 				_type = ENTITY_CHECKPOINT;
 			}
+			else if (_char == 'f')
+			{
+				_path = "Assets/Snow1.png";
+				_type = ENTITY_TILE;
+				new FragileTile(_type, Vector2f(_posX, _posY), tileSize, _path);
+			}
+			
 			else 
 			{
 				_tiles.push_back(nullptr);
