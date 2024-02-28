@@ -34,11 +34,11 @@ public:
             AnimationDirection _adirection;
             if (_direction.x>0)
             {
-                if (_direction.y > 0)
+                /*if (_direction.y > 0)
                 {
                     _adirection = ANIM_DIR_FALL_RIGHT;
-                }
-                else if (_direction.y < 0)
+                }*/
+                 if (_direction.y < 0)
                 {
                     _adirection = ANIM_DIR_JUMP_RIGHT;
                 }
@@ -49,11 +49,11 @@ public:
             }
             else if (_direction.x < 0)
             {
-                if (_direction.y > 0)
+                /*if (_direction.y > 0)
                 {
                     _adirection = ANIM_DIR_FALL_LEFT;
-                }
-                else if (_direction.y < 0)
+                }*/
+                if (_direction.y < 0)
                 {
                     _adirection = ANIM_DIR_JUMP_LEFT;
                 }

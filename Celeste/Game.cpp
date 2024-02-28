@@ -45,8 +45,8 @@ void Game::Stop()
 
 void Game::InitWindow()
 {
-	window.create(VideoMode(1280, 720), "Celeste");
-	//window.create(VideoMode(1920, 1080), "Celeste", Style::Fullscreen);
+	//window.create(VideoMode(1280, 720), "Celeste");
+	window.create(VideoMode(1920, 1080), "Celeste", Style::Fullscreen);
 }
 
 void Game::InitPlayer()

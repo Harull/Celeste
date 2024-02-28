@@ -11,7 +11,7 @@
 Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, const bool _isVisible)
 	: Entity(EntityData("Character", _position, _size),
 		{ new MovementComponent(this, 2.f, sf::Vector2f(0,0), true),
-			new GravityComponent(this, 1.6f),
+			new GravityComponent(this, 0.8f),
 			new CollisionComponent(this)})
 {
 	isVisible = _isVisible;
