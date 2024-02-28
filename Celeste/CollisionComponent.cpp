@@ -43,6 +43,11 @@ int CollisionComponent::CheckCollision(int& _collisionSideBinary)
 	return _entityTypeBinary;
 }
 
+void CollisionComponent::Update()
+{
+	/*CheckCollision();*/
+}
+
 CollisionSide CollisionComponent::ComputeRelativePosition(const sf::Shape* _entityShape, const sf::Shape* _tileShape,
 	const int initialCollisionSideBinary)
 {
