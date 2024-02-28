@@ -19,13 +19,15 @@ struct EntityData
 	Vector2f position;
 	Vector2f size;
 	string path;
+	EntityType type;
 
-	EntityData(const string& _name, const Vector2f& _position, const Vector2f& _size, const string& _path = "") 
+	EntityData(const string& _name, const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path = "")
 	{
 		name = _name;
 		position = _position;
 		size = _size;
 		path = _path;
+		type = _type;
 	}
 };
 
@@ -35,6 +37,7 @@ protected:
 	Texture texture;
 	vector<Component*> components;
 	Shape* shape;
+	EntityType type;
 	
 public:
 	template<typename T>
@@ -61,7 +64,7 @@ public:
 	}
 
 public:
-	Entity(const EntityData& _data, std::vector<Component*> _components);
+	Entity(const EntityData& _data, std::vector<Component*> _components = vector<Component*>());
 	~Entity();
 
 private:

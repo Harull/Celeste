@@ -11,7 +11,6 @@ class Game : public Singleton<Game>
 	RenderWindow window;
 	Map* map;
 	Player* player;
-	View view;
 	FloatRect visibleArea;
 
 public:

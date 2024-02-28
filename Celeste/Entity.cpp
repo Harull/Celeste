@@ -12,6 +12,10 @@ Entity::Entity(const EntityData& _data, std::vector<Component*> _components)
 	shape->setFillColor(Color::White);
 	shape->setPosition(_data.position);
 	components = _components;
+	type = _data.type;
+	if (_data.path != "") {
+		TextureManager::GetInstance().Load(shape, _data.path);
+	}
 	Register();
 
 }
