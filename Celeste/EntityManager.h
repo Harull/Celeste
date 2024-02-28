@@ -18,14 +18,36 @@ public:
 
 		for (Entity* _entity : GetAllValues())
 		{
-			
+
 			if (AnimationComponent* _animation = _entity->GetComponent<AnimationComponent>())
 			{
 				_drawables.push_back(_animation->GetCurrentAnimation()->GetSprite());
 			}
 			else
 			{
+				_drawables.push_back(_entity->GetShape());
+			}
+		}
 
+		return _drawables;
+	}
+
+
+	vector<Drawable*> GetDrawables(FloatRect _visibleArea) const
+	{
+		vector<Drawable*> _drawables;
+
+		for (Entity* _entity : GetAllValues())
+		{
+			if (_visibleArea.intersects(_entity->GetShape()->getGlobalBounds())) {
+				if (AnimationComponent* _animation = _entity->GetComponent<AnimationComponent>())
+				{
+					_drawables.push_back(_animation->GetCurrentAnimation()->GetSprite());
+				}
+				else
+				{
+					_drawables.push_back(_entity->GetShape());
+				}
 			}
 		}
 

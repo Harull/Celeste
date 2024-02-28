@@ -42,6 +42,11 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 				_path = "Assets/SpikeTop.png";
 				_type = ENTITY_TILE;
 			}
+			else if (_char == '3')
+			{
+				_path = "Assets/Fraise.png";
+				_type = ENTITY_STRAWBERRY;
+			}
 			else if (_char == 'x')
 			{
 				_path = "Assets/Avoir.png";
@@ -59,7 +64,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 				continue;
 			}
 			
-			Tile* _tile = new Tile(Vector2f(_posX, _posY), tileSize, _path, _type);
+			Tile* _tile = new Tile(_type, Vector2f(_posX, _posY), tileSize, _path);
 			_tiles.push_back(_tile);
 			_indexRow++;
 
@@ -68,9 +73,4 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 		tiles.push_back(_tiles);
 		_tiles.clear();
 	}
-
-}
-
-void Grid::InitLevelSelection()
-{
 }

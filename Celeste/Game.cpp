@@ -11,7 +11,6 @@ Game::Game()
 {
 	map = nullptr;
 	player = new Player();
-	view = View();
 	visibleArea = FloatRect();
 }
 
@@ -19,7 +18,7 @@ Game::~Game()
 {
 	if (map) delete map;
 	if (player) delete player;
-	
+
 }
 
 void Game::Launch()
@@ -76,7 +75,7 @@ void Game::Update()
 
 void Game::UpdateVisibleArea()
 {
-	
+
 	visibleArea = FloatRect(Camera::GetInstance().getCenter() - Camera::GetInstance().getSize() / 2.0f, Camera::GetInstance().getSize());
 }
 
@@ -84,19 +83,10 @@ void Game::UpdateWindow()
 {
 	window.clear(sf::Color::Black);
 
-	std::vector<Drawable*> _entities = EntityManager::GetInstance().GetDrawables();
+	std::vector<Drawable*> _entities = EntityManager::GetInstance().GetDrawables(visibleArea);
 	for (Drawable* _entity : _entities)
 	{
-			window.draw(*_entity);
-	}
-
-	if (map) {
-		vector<Shape*> _mapShapes = map->GetShapesMap();
-		for (Shape* _shape : _mapShapes) {
-			if (visibleArea.intersects(_shape->getGlobalBounds())) {
-				window.draw(*_shape);
-			}
-		}
+		window.draw(*_entity);
 	}
 
 	window.display();
