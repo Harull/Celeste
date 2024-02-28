@@ -157,6 +157,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SmallMap.cpp" />
     <ClCompile Include="Spike.cpp" />
+    <ClCompile Include="Strawberry.cpp" />
     <ClCompile Include="TextureData.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Tile.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SmallMap.h" />
     <ClInclude Include="Spike.h" />
+    <ClInclude Include="Strawberry.h" />
     <ClInclude Include="StreamManager.h" />
     <ClInclude Include="TextureData.h" />
     <ClInclude Include="TextureManager.h" />
