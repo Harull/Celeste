@@ -27,6 +27,21 @@ public:
 		return _drawables;
 	}
 
+	vector<Shape*> GetShapesMap() {
+		vector<Shape*> _shapeVectToReturn;
+
+		for (vector<SmallMap*> _smallMap : maps) {
+			for (SmallMap* _sMap : _smallMap) {
+				vector<Shape*> _shapeVect = _sMap->GetGrid()->GetShapesMap();
+				for (Shape* _shape : _shapeVect) {
+					_shapeVectToReturn.push_back(_shape);
+				}
+			}
+		}
+		return _shapeVectToReturn;
+	}
+
+
 	Vector2f GetStartPosition() { return startPosition; }
 public:
 	Map();

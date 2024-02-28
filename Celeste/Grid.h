@@ -45,6 +45,21 @@ public:
 		}
 		return _drawables;
 	}
+
+	vector<Shape*> GetShapesMap() {
+		vector<Shape*> _shapes;
+
+		for (vector<Tile*> _tiles : tiles)
+		{
+			for (Tile* _tile : _tiles)
+			{
+				if (!_tile) continue;
+				_shapes.push_back(_tile->GetShape());
+			}
+
+		}
+		return _shapes;
+	}
 	
 	Vector2f GetSpawnPosition()
 	{
