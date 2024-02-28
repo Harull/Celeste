@@ -20,6 +20,7 @@ public:
 	EntityType GetType() const { return type; }
 
 public:
+	Tile() = default;
 	Tile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path);
 
 };

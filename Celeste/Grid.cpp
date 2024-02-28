@@ -1,6 +1,7 @@
 #include "Grid.h"
 #include "Game.h"
 #include "MapManager.h"
+#include "Strawberry.h"
 
 Grid::Grid(const Vector2i _tilesCount)
 {
@@ -13,8 +14,7 @@ Grid::Grid(const Vector2i _tilesCount)
 
 void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 {
-	tileSize = Vector2f(16.0f, 16.0f);
-	//tileSize = Vector2f(48.0f, 48.0f);
+	tileSize = Vector2f(48.0f, 48.0f);
 	vector<vector<char>> _gridForLoad;
 	const string _pathMap = "Maps/Level"+ to_string(_level) + "/Map" + to_string(_value) + ".txt";
 	StreamManager::GetInstance().LoadSmallMap(_gridForLoad, _pathMap);
@@ -44,8 +44,9 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			}
 			else if (_char == '3')
 			{
-				_path = "Assets/Fraise.png";
-				_type = ENTITY_STRAWBERRY;
+				_tiles.push_back(new Strawberry(Vector2f(_posX, _posY), tileSize)); 
+				_indexRow++;
+				continue;
 			}
 			else if (_char == 'x')
 			{
@@ -64,8 +65,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 				continue;
 			}
 			
-			Tile* _tile = new Tile(_type, Vector2f(_posX, _posY), tileSize, _path);
-			_tiles.push_back(_tile);
+			_tiles.push_back(new Tile(_type, Vector2f(_posX, _posY), tileSize, _path));
 			_indexRow++;
 
 		}

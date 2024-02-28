@@ -3,16 +3,15 @@
 #include"Singleton.h"
 
 using namespace sf;
+class Game;
+
+
 class Camera: public View, public Singleton<Camera>
 {
-
-	
-private:
-	
-	void InitPosition();
+	sf::Vector2f previousIndexes;
 public:
-	void Init(const Vector2f& _from, const Vector2f& _to);
-	void Update();
+	void Init(const Vector2f& _position, const Vector2f& _size);
+	void Update(Game* _game);
 	
 };
 

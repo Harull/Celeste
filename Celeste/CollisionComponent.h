@@ -15,11 +15,13 @@ class CollisionComponent : public Component
 {
 public:
 	CollisionComponent(Entity* _owner);
-public:
-	int CheckCollision(int& _collisionSideBinary);
-
 private:
 	CollisionSide ComputeRelativePosition(const sf::Shape* _entityShape, const sf::Shape* _tileShape,
 		const int initialCollisionSideBinary);
+public:
+	int CheckCollision(int& _collisionSideBinary);
+	virtual void Update()override;
+
+
 };
 

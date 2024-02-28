@@ -75,6 +75,11 @@ static bool IsNearlyEqual(const Vector2f& _first, const Vector2f& _second)
 	return abs(_first.x - _second.x) < 0.5f && abs(_first.y - _second.y) < 0.5f;
 }
 
+static bool IsNearlyEqual(const float _first, const float _second)
+{
+	return abs(_first - _second) < 0.5f && abs(_first - _second) < 0.5f;
+}
+
 template<typename Class>
 static vector<Class*> RetrieveAllEnemiesAround(const Vector2f& _position, const float _radiusAction)
 {
