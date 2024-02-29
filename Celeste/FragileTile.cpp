@@ -13,8 +13,8 @@ void FragileTile::GetHit(int _collisionSide, int _collisionSideBinary)
  	Color _color=shape->getFillColor();
 	if (_collisionSide != COLLIDE_UP)return;
 	if (_collisionSideBinary != ENTITY_CHARACTER)return;
-	if (TimerManager::GetInstance().Get("TimerDestroy" + id ))return;
-	if (TimerManager::GetInstance().Get("TimerRespawn" + id ))return;
+	if (TimerManager::GetInstance().GetApproximately("TimerDestroy" + id ))return;
+	if (TimerManager::GetInstance().GetApproximately("TimerRespawn" + id ))return;
 	
 	new Timer("TimerDestroy" + id,
 		[this]() {
