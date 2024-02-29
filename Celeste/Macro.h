@@ -152,3 +152,19 @@ static void SetOriginCentered(Type* _element)
 {
 	_element->setOrigin(_element->getGlobalBounds().getSize() / 2.0f);
 }
+
+
+template <typename Type>
+static void Fade(Type* _value, const unsigned int _alpha)
+{
+	_value->setFillColor(sf::Color(255, 255, 255, _alpha));
+}
+
+template <typename Type>
+static void MultiFade(std::vector<Type*> _values, const unsigned int _alpha)
+{
+	for (auto _value : _values)
+	{
+		_value->setFillColor(sf::Color(255, 255, 255, _alpha));
+	}
+}
