@@ -28,8 +28,8 @@ int CollisionComponent::CheckCollision(int& _collisionSideBinary)
 			std::vector<Tile*> _tiles = _currentGrid->GetTilesMap();
 			for (Tile* _tile : _tiles)
 			{
-				
 				if (!_tile) continue;
+				if (!_tile->GetTangible())continue;
 
 				sf::Shape* _shapeTile = _tile->GetShape();
 

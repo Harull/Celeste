@@ -41,4 +41,5 @@ private:
 
 public:
 	virtual void Update() override;
+	void Finish();
 };

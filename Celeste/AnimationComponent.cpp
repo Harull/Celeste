@@ -46,3 +46,12 @@ void AnimationComponent::Update()
 	_animation->Start();
 	currentIndex = _newIndex;
 }
+
+void AnimationComponent::Finish()
+{
+	for (Animation* _animation : GetAllValues())
+	{
+		_animation->Stop();
+		_animation->GetSprite()->setColor(Color::Transparent);
+	}
+}

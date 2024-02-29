@@ -18,12 +18,12 @@ void FragileTile::GetHit(int _collisionSide, int _collisionSideBinary)
 	
 	new Timer("TimerDestroy" + id,
 		[this]() {shape->setFillColor(Color::Transparent);
-	destroying = true;
+	tangible = false;
 		new Timer("TimerRespawn" + id, [this]() {
 			Color _colorrespawn = Color(255, 255, 255, 255);
 			
 			shape->setFillColor(_colorrespawn);
-			destroying = false; }, seconds(5));
+			tangible = true; }, seconds(5));
 		TextureManager::GetInstance().Load(shape, PATH_FRAGILE_TILE);
 		}, seconds(2));
 

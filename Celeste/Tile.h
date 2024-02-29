@@ -7,8 +7,13 @@ using namespace std;
 
 class Tile : public Entity
 {
-
+protected:
+	bool tangible;
 public:
+	bool GetTangible() const 
+	{
+		return tangible;
+	}
 	Shape* GetShape()
 	{
 		return shape;

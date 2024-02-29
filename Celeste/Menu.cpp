@@ -46,16 +46,16 @@ void Menu::ShowMenu(sf::RenderWindow& window)
                 {
                     sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
-                    if (_play.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+                    if (_play.getGlobalBounds().contains((float)mousePosition.x, (float)mousePosition.y))
                     {
                         window.clear();
                         return;
                     }
-                    else if (_options.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+                    else if (_options.getGlobalBounds().contains((float)mousePosition.x, (float)mousePosition.y))
                     {
     
                     }
-                    else if (_exit.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+                    else if (_exit.getGlobalBounds().contains((float)mousePosition.x, (float)mousePosition.y))
                     {
                         window.close();  
                     }
