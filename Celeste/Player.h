@@ -40,7 +40,6 @@ public:
 
 public:
 	void Update();
-
 	void InitInput();
 };
 

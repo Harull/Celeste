@@ -1,6 +1,7 @@
 #pragma once
 #include<map>
 #include<vector>
+#include <string>
 
 using namespace std;
 
@@ -68,6 +69,25 @@ public:
         if (!Exist(_key))return nullptr;
         return allValues[_key];
 
+    }
+    Value* GetApproximately(const Key& _key)
+    {
+        for (auto _value : allValues)
+        {
+            if (Contain(_value.first, _key))
+            {
+                return _value.second;
+            }
+        }
+        return nullptr;
+    }
+    bool Contain(const std::string& _id, const std::string& _value)
+    {
+        if (_id.find(_value) != std::string::npos)
+        {
+            return true;
+        }
+        return false;
     }
     map<Key, Value*> GetAll() const
     {

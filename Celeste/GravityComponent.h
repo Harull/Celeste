@@ -9,6 +9,11 @@ class GravityComponent : public Component
 
 public:
 	GravityComponent(Entity* _owner, const float _gravity);
+public:
+	float GetGravity() const
+	{
+		return gravity;
+	}
 
 public:
 	void Update() override;
