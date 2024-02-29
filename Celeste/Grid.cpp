@@ -3,6 +3,7 @@
 #include "MapManager.h"
 #include "Strawberry.h"
 #include"FragileTile.h"
+#include "Macro.h"
 
 Grid::Grid(const Vector2i _tilesCount)
 {
@@ -20,12 +21,21 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 	const string _pathMap = "Maps/Level"+ to_string(_level) + "/Map" + to_string(_value) + ".txt";
 	StreamManager::GetInstance().LoadSmallMap(_gridForLoad, _pathMap);
 
+	string _pathBack;
+
+	for (const char& _char : _gridForLoad[0]) {
+		_pathBack += _char;
+	}
+	new Entity({ S_APPEND("0Background"), ENTITY_NONE, _startPos, Vector2f(tileSize.x * 40.0f, tileSize.y * 22.0f), _pathBack });
+
 	string _path;
 	vector<Tile*> _tiles;
 	vector<string> _test;
 	int _indexRow = 0, _indexColumn = 0;
 	EntityType _type;
 
+
+	_gridForLoad.erase(_gridForLoad.begin());
 	for (const vector<char>& _vChar : _gridForLoad) {
 		_indexColumn++;
 		for (const char& _char : _vChar) {
