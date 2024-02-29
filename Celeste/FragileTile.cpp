@@ -10,7 +10,6 @@ FragileTile::FragileTile(const EntityType _type, const Vector2f& _position, cons
 
 void FragileTile::GetHit(int _collisionSide, int _collisionSideBinary)
 {
- 	Color _color=shape->getFillColor();
 	if (_collisionSide != COLLIDE_UP)return;
 	if (_collisionSideBinary != ENTITY_CHARACTER)return;
 	if (TimerManager::GetInstance().GetApproximately("TimerDestroy" + id ))return;
@@ -18,10 +17,11 @@ void FragileTile::GetHit(int _collisionSide, int _collisionSideBinary)
 	
 	new Timer("TimerDestroy" + id,
 		[this]() {
+			
 			TextureManager::GetInstance().Load(shape, " ");
 	tangible = false;
 		new Timer("TimerRespawn" + id, [this]() {
-			
+		
 			tangible = true;
 			TextureManager::GetInstance().Load(shape, PATH_FRAGILE_TILE); 
 			}, seconds(5));

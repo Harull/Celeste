@@ -154,6 +154,7 @@ static void SetOriginCentered(Type* _element)
 }
 
 
+
 template <typename Type>
 static void Fade(Type* _value, const unsigned int _alpha)
 {
@@ -168,3 +169,9 @@ static void MultiFade(std::vector<Type*> _values, const unsigned int _alpha)
 		_value->setFillColor(sf::Color(255, 255, 255, _alpha));
 	}
 }
+
+static float Distance(const Vector2f& _first, const Vector2f& _second)
+{
+	return sqrtf(pow(_second.x - _first.x, 2.0f) + pow(_second.y - _first.y, 2.0f));
+}
+

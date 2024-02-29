@@ -1,14 +1,18 @@
 #include "MovementComponent.h"
 #include "Game.h"
 #include "EntityManager.h"
+
 #include "TimerManager.h"
 #include "Character.h"
 
-MovementComponent::MovementComponent(Entity* _owner) : Component(_owner)
+#include"Macro.h"
+
+
+MovementComponent::MovementComponent(Entity* _owner,bool _canMove) : Component(_owner)
 {
 	velocity = 0.05f;
 	direction = Vector2f();
-	canMove = true;
+	canMove = _canMove;
 }
 
 MovementComponent::MovementComponent(Entity* _owner, const float _velocity,
@@ -124,4 +128,18 @@ bool MovementComponent::TryToMove(Entity* _entity, const Vector2f& _direction)
 	}
 	return false;
 
+}
+
+Vector2f MovementComponent::GetDirectionByPositions(Vector2f _destination)
+{
+	
+		Vector2f _entityPos = owner->GetPosition();
+		if (IsNearlyEqual(_entityPos, _destination)) return Vector2f(0.0f, 0.0f);
+
+		const float _directionX = 0.0f;
+		const float _directionY = 0.0f;
+		Vector2f _direction = _destination - _entityPos;
+		Normalize(_direction);
+	
+		return _direction;
 }

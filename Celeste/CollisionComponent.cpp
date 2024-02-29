@@ -4,10 +4,6 @@
 #include"EntityManager.h"
 #include"FragileTile.h"
 
-CollisionComponent::CollisionComponent(Entity* _owner) : Component(_owner)
-{
-
-}
 
 CollisionInfos CollisionComponent::CheckCollision()
 {

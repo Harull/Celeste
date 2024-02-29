@@ -112,6 +112,9 @@
     <Filter Include="Source Files\Data\Animation">
       <UniqueIdentifier>{340dc393-e76f-4465-9d0e-286533955526}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Entities\Tiles\MovingTile">
+      <UniqueIdentifier>{fdd5f921-db82-415c-ac95-7fc75c04c94e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -245,6 +248,9 @@
     </ClCompile>
     <ClCompile Include="FontManager.cpp">
       <Filter>Source Files\Manager\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingTile.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -394,6 +400,9 @@
     </ClInclude>
     <ClInclude Include="FontManager.h">
       <Filter>Source Files\Manager\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingTile.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

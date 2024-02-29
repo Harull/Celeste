@@ -34,7 +34,6 @@ void Game::Launch()
 void Game::Start()
 {
 	InitWindow();
-	menu = new Menu();
 	menu->ShowMenu(window);
 	menu->ShowLevelSelector(window);
 	InitMap(1);
@@ -75,7 +74,6 @@ void Game::Update()
 		TimerManager::GetInstance().Update();
 		Camera::GetInstance().Update(this);
 		UpdateWindow();
-		//cout << player->GetPlayerData().strawBerrycount;
 	}
 }
 
