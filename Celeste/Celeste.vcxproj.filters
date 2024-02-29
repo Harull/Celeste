@@ -31,9 +31,6 @@
     <Filter Include="Source Files\Entities">
       <UniqueIdentifier>{f30a42f4-321e-45e0-ad3e-62344a2db08e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Tiles">
-      <UniqueIdentifier>{2d1f9a6a-72cd-4467-8665-9d4964de12e0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\MapRelated">
       <UniqueIdentifier>{4f979a13-524c-4b66-a72b-122212ff893c}</UniqueIdentifier>
     </Filter>
@@ -43,55 +40,82 @@
     <Filter Include="Source Files\Manager\Camera">
       <UniqueIdentifier>{119918e8-41ea-4fdd-b6e4-81e7e3cae6d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Entities\Tiles">
+      <UniqueIdentifier>{2d1f9a6a-72cd-4467-8665-9d4964de12e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{8f772689-6e87-48ed-b6e7-e7b53f717da0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Macro">
+      <UniqueIdentifier>{d497b39e-0ddb-4f2b-8acf-a0d90049d289}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Menu">
+      <UniqueIdentifier>{f6f47193-4c3c-4b00-a3b2-9ef3d276c327}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Manager\Music">
+      <UniqueIdentifier>{b880e158-7a83-496b-a5b0-4bb3feab35b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Player">
+      <UniqueIdentifier>{864bced8-6388-4f78-8790-cb7eb83a5d1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Manager\Sound">
+      <UniqueIdentifier>{8c5b3bbd-f97a-4002-b2ba-183cc37a59c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Component\Animation">
+      <UniqueIdentifier>{c3be50b8-6c74-4197-b3b9-12db9eff37d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Component\Collision">
+      <UniqueIdentifier>{bc3d6103-1a9c-410b-9ce2-1edd2932dc58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Component\Gravity">
+      <UniqueIdentifier>{53b5df61-b66b-48e3-ab65-c95213ab3b96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Component\Mouvement">
+      <UniqueIdentifier>{74204386-6e7e-48f5-8f76-48e2287d8218}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Data\Font">
+      <UniqueIdentifier>{d256cdc1-cfa7-444e-a09f-8ca4da1adc19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Data\Texture">
+      <UniqueIdentifier>{ddc0dbaf-d1ea-43ea-b57f-fc1381c7eb0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Data\UiData">
+      <UniqueIdentifier>{3a0ed1e0-5c2b-4eec-b9e0-258bd1386da6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Character">
+      <UniqueIdentifier>{0b232db4-4ec1-4a82-a9cd-71f852b7819a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Manager\Entity">
+      <UniqueIdentifier>{98883191-a5cb-499c-a8ad-86313f5d4800}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Data\Sound">
+      <UniqueIdentifier>{275c100c-85ea-4cc1-88fb-6e83db65b73e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Data\Music">
+      <UniqueIdentifier>{bec94f6a-2f64-42d6-b1fc-dbb2ba5a0fe9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Manager\Font">
+      <UniqueIdentifier>{7959b43d-fd75-4186-bfa7-8a2a798e23d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Manager\Map">
+      <UniqueIdentifier>{ea7a9740-63b0-4af0-a544-019935f69182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Manager\Texture">
+      <UniqueIdentifier>{ada2825b-f246-41c8-8752-39401b234b6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Manager\Timer">
+      <UniqueIdentifier>{e8d57211-df05-4776-b06f-53b85b411465}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Manager\Ui">
+      <UniqueIdentifier>{ad61c1d5-b083-44b3-9e70-64484d1495be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="MovementComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="UiManager.cpp">
-      <Filter>Source Files\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="TimerManager.cpp">
-      <Filter>Source Files\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
-      <Filter>Source Files\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="MapManager.cpp">
-      <Filter>Source Files\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="FontManager.cpp">
-      <Filter>Source Files\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="UiData.cpp">
-      <Filter>Source Files\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureData.cpp">
-      <Filter>Source Files\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="FontData.cpp">
-      <Filter>Source Files\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Source Files\Misc</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>Source Files\Misc</Filter>
@@ -101,12 +125,6 @@
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="EntityManager.cpp">
-      <Filter>Source Files\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>Source Files\MapRelated</Filter>
@@ -121,13 +139,13 @@
       <Filter>Source Files\MapRelated</Filter>
     </ClCompile>
     <ClCompile Include="Spike.cpp">
-      <Filter>Source Files\Tiles</Filter>
+      <Filter>Source Files\Entities\Tiles</Filter>
     </ClCompile>
     <ClCompile Include="Trap.cpp">
-      <Filter>Source Files\Tiles</Filter>
+      <Filter>Source Files\Entities\Tiles</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
-      <Filter>Source Files\Tiles</Filter>
+      <Filter>Source Files\Entities\Tiles</Filter>
     </ClCompile>
     <ClCompile Include="Trap.cpp">
       <Filter>Source Files</Filter>
@@ -147,81 +165,93 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GravityComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EventReaction.cpp">
       <Filter>Source Files\Manager\InputManager</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Strawberry.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MusicData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MusicManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Manager\Camera</Filter>
     </ClCompile>
     <ClCompile Include="FragileTile.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Entities\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MusicManager.cpp">
+      <Filter>Source Files\Manager\Music</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Source Files\Manager\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Strawberry.cpp">
+      <Filter>Source Files\Entities\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationComponent.cpp">
+      <Filter>Source Files\Component\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\Component\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionComponent.cpp">
+      <Filter>Source Files\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="GravityComponent.cpp">
+      <Filter>Source Files\Component\Gravity</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementComponent.cpp">
+      <Filter>Source Files\Component\Mouvement</Filter>
+    </ClCompile>
+    <ClCompile Include="FontData.cpp">
+      <Filter>Source Files\Data\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureData.cpp">
+      <Filter>Source Files\Data\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="UiData.cpp">
+      <Filter>Source Files\Data\UiData</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Source Files\Entities\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>Source Files\Manager\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundData.cpp">
+      <Filter>Source Files\Data\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="MusicData.cpp">
+      <Filter>Source Files\Data\Music</Filter>
+    </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>Source Files\Manager\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="MapManager.cpp">
+      <Filter>Source Files\Manager\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files\Manager\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="TimerManager.cpp">
+      <Filter>Source Files\Manager\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="UiManager.cpp">
+      <Filter>Source Files\Manager\Ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Macro.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationComponent.h">
-      <Filter>Source Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionComponent.h">
-      <Filter>Source Files\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>Source Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="MovementComponent.h">
-      <Filter>Source Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="UiManager.h">
-      <Filter>Source Files\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="TimerManager.h">
-      <Filter>Source Files\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Source Files\Manager</Filter>
     </ClInclude>
     <ClInclude Include="StreamManager.h">
       <Filter>Source Files\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Singleton.h">
-      <Filter>Source Files\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="MapManager.h">
-      <Filter>Source Files\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="FontManager.h">
-      <Filter>Source Files\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityManager.h">
       <Filter>Source Files\Manager</Filter>
     </ClInclude>
     <ClInclude Include="IManageable.h">
@@ -230,25 +260,10 @@
     <ClInclude Include="IManager.h">
       <Filter>Source Files\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="FontData.h">
-      <Filter>Source Files\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureData.h">
-      <Filter>Source Files\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="UiData.h">
-      <Filter>Source Files\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Source Files\Misc</Filter>
-    </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>Source Files\Misc</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
-      <Filter>Source Files\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
       <Filter>Source Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="SmallMap.h">
@@ -264,13 +279,13 @@
       <Filter>Source Files\MapRelated</Filter>
     </ClInclude>
     <ClInclude Include="Trap.h">
-      <Filter>Source Files\Tiles</Filter>
+      <Filter>Source Files\Entities\Tiles</Filter>
     </ClInclude>
     <ClInclude Include="Spike.h">
-      <Filter>Source Files\Tiles</Filter>
+      <Filter>Source Files\Entities\Tiles</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
-      <Filter>Source Files\Tiles</Filter>
+      <Filter>Source Files\Entities\Tiles</Filter>
     </ClInclude>
     <ClInclude Include="Trap.h">
       <Filter>Header Files</Filter>
@@ -290,9 +305,6 @@
     <ClInclude Include="Animation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GravityComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EventReaction.h">
       <Filter>Source Files\Manager\InputManager</Filter>
     </ClInclude>
@@ -303,28 +315,82 @@
       <Filter>Source Files\Manager\InputManager</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Strawberry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MusicData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MusicManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\Manager\Camera</Filter>
     </ClInclude>
     <ClInclude Include="FragileTile.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\Entities\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Macro.h">
+      <Filter>Source Files\Macro</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicManager.h">
+      <Filter>Source Files\Manager\Music</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Source Files\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Source Files\Manager\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Strawberry.h">
+      <Filter>Source Files\Entities\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationComponent.h">
+      <Filter>Source Files\Component\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Source Files\Component\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionComponent.h">
+      <Filter>Source Files\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityComponent.h">
+      <Filter>Source Files\Component\Gravity</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementComponent.h">
+      <Filter>Source Files\Component\Mouvement</Filter>
+    </ClInclude>
+    <ClInclude Include="FontData.h">
+      <Filter>Source Files\Data\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureData.h">
+      <Filter>Source Files\Data\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="UiData.h">
+      <Filter>Source Files\Data\UiData</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Source Files\Entities\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Source Files\Manager\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundData.h">
+      <Filter>Source Files\Data\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicData.h">
+      <Filter>Source Files\Data\Music</Filter>
+    </ClInclude>
+    <ClInclude Include="FontManager.h">
+      <Filter>Source Files\Manager\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="MapManager.h">
+      <Filter>Source Files\Manager\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Source Files\Manager\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="TimerManager.h">
+      <Filter>Source Files\Manager\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="UiManager.h">
+      <Filter>Source Files\Manager\Ui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

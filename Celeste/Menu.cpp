@@ -119,20 +119,20 @@ void Menu::ShowLevelSelector(sf::RenderWindow& window)
                 {
                     sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
-                    if (_level1.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+                    if (_level1.getGlobalBounds().contains((float)mousePosition.x, (float)mousePosition.y))
                     {
                         backgroundSprite.setTexture(backgroundTextures[0]);
                         return;
                     }
-                    else if (_level2.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+                    else if (_level2.getGlobalBounds().contains((float)mousePosition.x, (float)mousePosition.y))
                     {
                         backgroundSprite.setTexture(backgroundTextures[1]);
                     }
-                    else if (_level3.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+                    else if (_level3.getGlobalBounds().contains((float)mousePosition.x, (float)mousePosition.y))
                     {
                         backgroundSprite.setTexture(backgroundTextures[2]);
                     }
-					if (_exit.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+					if (_exit.getGlobalBounds().contains((float)mousePosition.x, (float)mousePosition.y))
 					{
 						window.close();
 					}

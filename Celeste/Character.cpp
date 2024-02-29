@@ -16,7 +16,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 {
 	isVisible = _isVisible;
 	InitShape();
-	const Vector2f& _sizeA = Vector2f(24.4f,45.f);
+	const Vector2f& _sizeA = Vector2f(24.4f,41.f);
 	const ReadDirection& _readDirection = READ_RIGHT;
 	const bool _toRepeat = true;
 	const int _count = 8;
