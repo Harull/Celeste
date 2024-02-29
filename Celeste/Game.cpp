@@ -35,6 +35,7 @@ void Game::Start()
 {
 	InitWindow();
 	menu->ShowMenu(window);
+	menu->ShowLevelSelector(window);
 	InitMap(1);
 }
 
