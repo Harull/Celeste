@@ -74,7 +74,7 @@ void Game::Update()
 		TimerManager::GetInstance().Update();
 		Camera::GetInstance().Update(this);
 		UpdateWindow();
-		cout << player->GetPlayerData().strawBerrycount;
+		//cout << player->GetPlayerData().strawBerrycount;
 	}
 }
 

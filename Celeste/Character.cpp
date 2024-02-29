@@ -71,7 +71,7 @@ bool Character::Jump(const sf::Event& _event)
 	sf::Keyboard::Key _jumpKey = sf::Keyboard::Space;
 	if (_event.key.code != _jumpKey)return false;
 
-	std::cout << GetComponent<CollisionComponent>()->CheckCollision().collisionSideBinary << std::endl;
+	//std::cout << GetComponent<CollisionComponent>()->CheckCollision().collisionSideBinary << std::endl;
 	if (isJumping || !(GetComponent<CollisionComponent>()->CheckCollision().collisionSideBinary & COLLIDE_UP)) return false;
    	isJumping = true;
 	currentJumpTimerIndex = 0;

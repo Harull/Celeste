@@ -64,31 +64,10 @@ CollisionInfos CollisionComponent::CheckCollision()
 	return { _entityTypeBinary, _collisionSideBinary, _minXOverlap, _minYOverlap};
 }
 
-void CollisionComponent::CheckCollisionCharacter(int& _collisionSideBinary)
-{
-	sf::Shape* _currentShape = owner->GetShape();
-	sf::FloatRect _floatRectBb = _currentShape->getGlobalBounds();
-	_collisionSideBinary = COLLIDE_NONE;
-
-
-	Character* _character =dynamic_cast<Character*>(EntityManager::GetInstance().Get("Character"));
-	Shape* _shape = _character->GetShape();
-
-	if (_floatRectBb.intersects(_shape->getGlobalBounds()))
-	{
-		_collisionSideBinary |= ComputeRelativePosition(_currentShape, _shape, _collisionSideBinary);
-	}
-	
-	return;
-}
-
-
 
 void CollisionComponent::Update()
 {
-	if (!callback)return;
-	int _collisionSide;
-	CheckCollisionCharacter(_collisionSide);
+
 }
 
 CollisionSide CollisionComponent::ComputeRelativePosition(const sf::Shape* _entityShape, const sf::Shape* _tileShape,

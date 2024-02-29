@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "EntityManager.h"
 #include "TimerManager.h"
+#include "Character.h"
 
 MovementComponent::MovementComponent(Entity* _owner) : Component(_owner)
 {
@@ -16,6 +17,52 @@ MovementComponent::MovementComponent(Entity* _owner, const float _velocity,
 	velocity = _velocity;
 	direction = Vector2f(_direction);
 	canMove = _canMove;
+}
+
+void MovementComponent::UpdateAnimations()
+{
+	Character* _character = dynamic_cast<Character*>(owner);
+	CollisionInfos _collisionInfos = _character->GetComponent<CollisionComponent>()->CheckCollision();
+	if (_character)
+	{
+		if (AnimationComponent* _anim = owner->GetComponent<AnimationComponent>())
+		{
+			AnimationDirection _adirection;
+			const bool _characterIsJumping = _character->GetIsJumping();
+			if (direction.x > 0)
+			{
+				if (_characterIsJumping)
+					_adirection = ANIM_DIR_JUMP_RIGHT;
+				else if (!(_collisionInfos.collisionSideBinary & COLLIDE_UP) && !_characterIsJumping)
+					_adirection = ANIM_DIR_FALL_RIGHT;
+				else
+					_adirection = ANIM_DIR_RIGHT;
+				
+			}
+			else if (direction.x < 0)
+			{
+				if (_characterIsJumping)
+					_adirection = ANIM_DIR_JUMP_LEFT;
+				else if (!(_collisionInfos.collisionSideBinary & COLLIDE_UP) && !_characterIsJumping)
+					_adirection = ANIM_DIR_FALL_LEFT;
+				else
+					_adirection = ANIM_DIR_LEFT;
+				
+			}
+			else
+			{
+				if (_characterIsJumping)
+					_adirection = ANIM_DIR_JUMP_RIGHT;
+				else if (!(_collisionInfos.collisionSideBinary & COLLIDE_UP) && !_characterIsJumping)
+					_adirection = ANIM_DIR_FALL_RIGHT;
+				else
+					_adirection = ANIM_DIR_NONE;
+			}
+			_anim->SetDirection(_adirection);
+		}
+	}
+
+	
 }
 
 void MovementComponent::Update()

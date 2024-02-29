@@ -5,7 +5,6 @@
 #include <functional>
 #include "Tile.h"
 #include "Component.h"
-#include<functional>
 #include <iostream>
 
 enum CollisionSide
@@ -21,12 +20,12 @@ struct CollisionInfos
 	float smallestYOverlap;
 };
 
-
 class CollisionComponent : public Component
 {
 	function<void(int _collisionSide, int _collisionSideBinary)> callback;
 public:
-	CollisionComponent(Entity* _owner, function<void(int _collisionSide, int _collisionSideBinary)> _callback= function<void(int _collisionSide, int _collisionSideBinary)>());
+	CollisionComponent(Entity* _owner);
+
 private:
 	CollisionSide ComputeRelativePosition(const sf::Shape* _entityShape, const sf::Shape* _tileShape,
 		const int initialCollisionSideBinary);

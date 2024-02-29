@@ -31,6 +31,10 @@ public:
 	{
 		return currentJumpTimerIndex;
 	}
+	bool GetIsJumping() const
+	{
+		return isJumping;
+	}
 
 private:
 	void InitShape();

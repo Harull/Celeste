@@ -44,7 +44,7 @@ void Menu::ShowMenu(sf::RenderWindow& window)
             {
                 if (_event.mouseButton.button == sf::Mouse::Left)
                 {
-                    sf::Vector2i _mousePosition = sf::Mouse::getPosition(window);
+                    sf::Vector2f _mousePosition (sf::Mouse::getPosition(window));
                     if (_play.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
                     {
                         window.clear();
@@ -116,7 +116,7 @@ void Menu::ShowLevelSelector(sf::RenderWindow& window)
             {
                 if (_event.mouseButton.button == sf::Mouse::Left)
                 {
-                    sf::Vector2i _mousePosition = sf::Mouse::getPosition(window);
+                    sf::Vector2f _mousePosition(sf::Mouse::getPosition(window));
 
                     if (_level1.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
                     {
