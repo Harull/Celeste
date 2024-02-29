@@ -121,6 +121,14 @@ T* GetRandomItemInVector(std::vector<T*>& _vectorConcerned)
 }
 
 template<typename T>
+T GetRandomItemInVector(std::vector<T>& _vectorConcerned)
+{
+	if (_vectorConcerned.empty()) return nullptr;
+	const int _arraySize = static_cast<int> (_vectorConcerned.size());
+	return _vectorConcerned[RandomMaxMin(_arraySize - 1)];
+}
+
+template<typename T>
 void DeleteVectorWParamPointer(std::vector<T>& _vect)
 {
 	for (auto _vToDelete : _vect)

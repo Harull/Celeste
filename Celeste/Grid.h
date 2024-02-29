@@ -17,6 +17,7 @@ class Grid
 	Vector2f tileSize;
 	vector<vector<Tile*>> tiles;
 	Vector2f spawnPosition;
+	vector<Vector2f> tilePositionsEmpty;
 
 public:
 
@@ -70,6 +71,10 @@ public:
 	const Vector2f& GetTileSize()
 	{
 		return tileSize;
+	}
+
+	vector<Vector2f> GetPositionsTileEmpty() {
+		return tilePositionsEmpty;
 	}
 
 public:

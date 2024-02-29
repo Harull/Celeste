@@ -75,9 +75,9 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 				_type = ENTITY_TILE;
 				new FragileTile(_type, Vector2f(_posX, _posY), tileSize, _path);
 			}
-			
 			else 
 			{
+				tilePositionsEmpty.push_back(Vector2f(_posX, _posY));
 				_tiles.push_back(nullptr);
 				_indexRow++;
 				continue;
