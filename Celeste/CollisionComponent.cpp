@@ -3,9 +3,9 @@
 #include"Character.h"
 #include"EntityManager.h"
 #include"FragileTile.h"
-CollisionComponent::CollisionComponent(Entity* _owner, function<void(int _collisionSide, int _collisionSideBinary)> _callback) : Component(_owner)
+CollisionComponent::CollisionComponent(Entity* _owner) : Component(_owner)
 {
-	callback = _callback;
+	
 }
 
 int CollisionComponent::CheckCollision(int& _collisionSideBinary)

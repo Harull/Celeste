@@ -9,12 +9,12 @@ Maps\Level1\Background.png
                                        1
                                        1
 1                                      1
-1         ff                           1
+1         ff          m                1
 1                                      1
 1                                      1
 1                                      1
 1                                      1
-1                                      1
+1                     d                1
 1                                      1
 1                                      1
 1                                      1

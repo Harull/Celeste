@@ -5,6 +5,7 @@
 #include "CollisionComponent.h"
 #include"AnimationComponent.h"
 #include <vector>
+#include"Macro.h"
 using namespace sf;
 
 class MovementComponent : public Component
@@ -12,8 +13,13 @@ class MovementComponent : public Component
     float velocity;
     Vector2f direction;
     bool canMove;
+    
 
 public:
+    bool GetCanMove()const
+    {
+        return canMove;
+    }
     Vector2f GetDirection()const
     {
         return direction;
@@ -73,14 +79,19 @@ public:
     {
         velocity += _update;
     }
-
+    bool IsAtLocation(Vector2f _destination) const
+    {
+        return Distance(owner->GetPosition(), _destination) <= 10.0f;
+    }
 public:
-    MovementComponent(Entity* _owner);
+    MovementComponent(Entity* _owner,bool _canMove=true);
     MovementComponent(Entity* _owner, const float _velocity, const Vector2f& _direction, const bool _canMove = true);
 
 public:
     void Update()override;
     void Move();
     bool TryToMove(Entity* _entity, const Vector2f& _direction);
+    Vector2f GetDirectionByPositions(Vector2f _destination);
+    
 
 };

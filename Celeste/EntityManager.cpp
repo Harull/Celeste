@@ -1,12 +1,13 @@
 #include "EntityManager.h"
-
+#include"MovingTile.h"
 void EntityManager::Update()
 {
 	for (auto _pair : allValues)
 	{
+		
 		_pair.second->Update();
 	}
-	/*for (Entity* _entity : GetAllValues())
+	/*for (Entity* _entity : GetAllValues())d
 	{
 		_entity->Update();
 	}*/

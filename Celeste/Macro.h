@@ -143,3 +143,8 @@ static void SetOriginCentered(Type* _element)
 {
 	_element->setOrigin(_element->getGlobalBounds().getSize() / 2.0f);
 }
+
+static float Distance(const Vector2f& _first, const Vector2f& _second)
+{
+	return sqrtf(pow(_second.x - _first.x, 2.0f) + pow(_second.y - _first.y, 2.0f));
+}
