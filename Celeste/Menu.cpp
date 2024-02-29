@@ -136,6 +136,7 @@ void Menu::ShowLevelSelector(sf::RenderWindow& window)
 						{
 							nextPath = _backgroundTextures[0];
 							TransitionFill();
+							return;
 						}
 						else if (_level2.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
 						{
