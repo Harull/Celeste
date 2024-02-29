@@ -4,6 +4,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "EntityType.h"
+#include<functional>
 
 
 using namespace std;
@@ -38,6 +39,7 @@ protected:
 	vector<Component*> components;
 	Shape* shape;
 	EntityType type;
+	function<void(int _collisionSide, int _collisionSideBinary)>collisionReaction;
 	
 public:
 	template<typename T>
@@ -61,6 +63,14 @@ public:
 	Shape* GetShape()const
 	{
 		return shape;
+	}
+	function<void(int _collisionSide, int _collisionSideBinary)> GetCollisionReaction()
+	{
+		return collisionReaction;
+	}
+	EntityType GetType()const
+	{
+		return type;
 	}
 
 public:

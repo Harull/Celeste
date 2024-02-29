@@ -1,25 +1,30 @@
 #include "FragileTile.h"
 #include"CollisionComponent.h"
 #include"TimerManager.h"
+#include "TextureManager.h"
+#define PATH_FRAGILE_TILE "Assets/Snow1.png"
 FragileTile::FragileTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path):Tile(_type,_position,_size,_path)
 {
-	components.push_back(new CollisionComponent(this, [this](int _collisionSide) {GetHit(_collisionSide); }));
+	collisionReaction = [this](int _collisionSide, int _collisionSideBinary) {GetHit(_collisionSide, _collisionSideBinary); };
 }
 
-void FragileTile::GetHit(int _collisionSide)
+void FragileTile::GetHit(int _collisionSide, int _collisionSideBinary)
 {
+ 	Color _color=shape->getFillColor();
 	if (_collisionSide != COLLIDE_UP)return;
-	
-	if (TimerManager::GetInstance().Get("TimerDestroy" + id))return;
+	if (_collisionSideBinary != ENTITY_CHARACTER)return;
+	if (TimerManager::GetInstance().Get("TimerDestroy" + id ))return;
+	if (TimerManager::GetInstance().Get("TimerRespawn" + id ))return;
 	
 	new Timer("TimerDestroy" + id,
 		[this]() {shape->setFillColor(Color::Transparent);
 	destroying = true;
 		new Timer("TimerRespawn" + id, [this]() {
-			Color _color = shape->getFillColor();
-			_color.a = 100;
-			shape->setFillColor(_color);
+			Color _colorrespawn = Color(255, 255, 255, 255);
+			
+			shape->setFillColor(_colorrespawn);
 			destroying = false; }, seconds(5));
+		TextureManager::GetInstance().Load(shape, PATH_FRAGILE_TILE);
 		}, seconds(2));
 
 

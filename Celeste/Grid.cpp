@@ -39,7 +39,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 	for (const vector<char>& _vChar : _gridForLoad) {
 		_indexColumn++;
 		for (const char& _char : _vChar) {
-
+			Tile* _tile;
 			const float _posX = static_cast<float>(_indexRow * tileSize.x + _startPos.x);
 			const float _posY = static_cast<float>(_indexColumn * tileSize.y + _startPos.y);
 			
@@ -47,43 +47,46 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			{
 				_path = "Assets/Snow1.png";
 				_type = ENTITY_TILE;
+				_tile = new Tile(_type, Vector2f(_posX, _posY), tileSize, _path);
 			}
 			else if (_char == '2')
 			{
 				_path = "Assets/SpikeTop.png";
 				_type = ENTITY_TILE;
+				_tile = new Tile(_type, Vector2f(_posX, _posY), tileSize, _path);
 			}
 			else if (_char == '3')
 			{
-				_tiles.push_back(new Strawberry(Vector2f(_posX, _posY), tileSize)); 
-				_indexRow++;
-				continue;
+				_tile = new Strawberry(Vector2f(_posX, _posY), tileSize);
+				/*_tiles.push_back(new Strawberry(Vector2f(_posX, _posY), tileSize)); 
+				_indexRow++;*/
+				//continue;
 			}
 			else if (_char == 'x')
 			{
 				_path = "Assets/Avoir.png";
 				_type = ENTITY_TILE;
+				_tile = new Tile(_type, Vector2f(_posX, _posY), tileSize, _path);
 			}
 			else if (_char == 'c')
 			{
 				_path = "Assets/Vide.png";
 				_type = ENTITY_CHECKPOINT;
+				_tile = new Tile(_type, Vector2f(_posX, _posY), tileSize, _path);
 			}
 			else if (_char == 'f')
 			{
 				_path = "Assets/Snow1.png";
 				_type = ENTITY_TILE;
-				new FragileTile(_type, Vector2f(_posX, _posY), tileSize, _path);
-			}
-			else 
-			{
-				tilePositionsEmpty.push_back(Vector2f(_posX, _posY));
-				_tiles.push_back(nullptr);
-				_indexRow++;
-				continue;
+				_tile = new FragileTile(_type, Vector2f(_posX, _posY), tileSize, _path);
 			}
 			
-			_tiles.push_back(new Tile(_type, Vector2f(_posX, _posY), tileSize, _path));
+			else 
+			{
+				_tile = nullptr;
+			}
+			
+			_tiles.push_back(_tile);
 			_indexRow++;
 
 		}
