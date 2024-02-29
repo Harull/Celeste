@@ -2,6 +2,9 @@
 #include "MovementComponent.h"
 #include "EventReactionManager.h"
 
+
+
+
 Player::Player()
 {
 	character = new Character({ 1920.f / 40.f * 1.25f, 1080.f / 22.5f * 2.5f}, { 200.f, 50.f }, true);

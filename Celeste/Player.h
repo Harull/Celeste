@@ -3,13 +3,19 @@
 
 struct PlayerData
 {
+	int strawBerrycount;
 	int BerryCount;
 	int deathCount;
+
+	void IncreaseStrawBerry()
+	{
+		strawBerrycount++;
+	}
 };
 
 class Player
 {
-	static PlayerData data;
+	 PlayerData data;
 	Character* character;
 	
 
@@ -22,6 +28,10 @@ public:
 	Shape* GetShape()
 	{
 		return character->GetShape();
+	}
+	 PlayerData& GetPlayerData()
+	{
+		return data;
 	}
 
 public:
