@@ -2,7 +2,8 @@
 #include "MapManager.h"
 #include"Character.h"
 #include"EntityManager.h"
-CollisionComponent::CollisionComponent(Entity* _owner, function<void(int _collisionSide)> _callback) : Component(_owner)
+#include"FragileTile.h"
+CollisionComponent::CollisionComponent(Entity* _owner, function<void(int _collisionSide, int _collisionSideBinary)> _callback) : Component(_owner)
 {
 	callback = _callback;
 }
@@ -27,6 +28,7 @@ int CollisionComponent::CheckCollision(int& _collisionSideBinary)
 			std::vector<Tile*> _tiles = _currentGrid->GetTilesMap();
 			for (Tile* _tile : _tiles)
 			{
+				
 				if (!_tile) continue;
 
 				sf::Shape* _shapeTile = _tile->GetShape();
@@ -38,6 +40,10 @@ int CollisionComponent::CheckCollision(int& _collisionSideBinary)
 				{
 					_collisionSideBinary |= ComputeRelativePosition(_currentShape, _shapeTile, _collisionSideBinary);
 					_entityTypeBinary |= _tile->GetType();
+					if (function<void(int _collisionSide, int _collisionSideBinary)>_collisionReaction =_tile->GetCollisionReaction())
+					{
+						_collisionReaction(_collisionSideBinary, owner->GetType());
+					}
 				}
 			}
 		}
@@ -73,7 +79,6 @@ void CollisionComponent::Update()
 	if (!callback)return;
 	int _collisionSide;
 	CheckCollisionCharacter(_collisionSide);
-	callback(_collisionSide);
 }
 
 CollisionSide CollisionComponent::ComputeRelativePosition(const sf::Shape* _entityShape, const sf::Shape* _tileShape,

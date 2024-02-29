@@ -16,6 +16,7 @@ Entity::Entity(const EntityData& _data, std::vector<Component*> _components)
 	if (_data.path != "") {
 		TextureManager::GetInstance().Load(shape, _data.path);
 	}
+	collisionReaction = nullptr;
 	Register();
 
 }

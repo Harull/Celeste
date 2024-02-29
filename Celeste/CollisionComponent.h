@@ -14,9 +14,9 @@ enum CollisionSide
 
 class CollisionComponent : public Component
 {
-	function<void(int _collisionSide)> callback;
+	function<void(int _collisionSide, int _collisionSideBinary)> callback;
 public:
-	CollisionComponent(Entity* _owner, function<void(int _collisionSide)> _callback= function<void(int _collisionSide)>());
+	CollisionComponent(Entity* _owner, function<void(int _collisionSide, int _collisionSideBinary)> _callback= function<void(int _collisionSide, int _collisionSideBinary)>());
 private:
 	CollisionSide ComputeRelativePosition(const sf::Shape* _entityShape, const sf::Shape* _tileShape,
 		const int initialCollisionSideBinary);
