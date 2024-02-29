@@ -44,7 +44,7 @@ void Menu::ShowMenu(sf::RenderWindow& window)
             {
                 if (event.mouseButton.button == sf::Mouse::Left)
                 {
-                    sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+                    sf::Vector2f mousePosition(sf::Mouse::getPosition(window));
 
                     if (_play.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
                     {

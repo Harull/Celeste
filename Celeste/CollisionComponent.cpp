@@ -1,19 +1,20 @@
 #include "CollisionComponent.h"
 #include "MapManager.h"
-
 CollisionComponent::CollisionComponent(Entity* _owner) : Component(_owner)
 {
 }
 
-int CollisionComponent::CheckCollision(int& _collisionSideBinary)
+
+CollisionInfos CollisionComponent::CheckCollision()
 {
 	sf::Shape* _currentShape = owner->GetShape();
 	sf::FloatRect _floatRectBb = _currentShape->getGlobalBounds();
-	_collisionSideBinary = COLLIDE_NONE;
+	int _collisionSideBinary = COLLIDE_NONE;
 	int _entityTypeBinary = ENTITY_NONE;
+	float _minYOverlap = INFINITY, _minXOverlap = INFINITY;
 
 	Map* _currentMap = MapManager::GetInstance().GetCurrent();
-	if (!_currentMap) return _entityTypeBinary;
+	if (!_currentMap) return { _entityTypeBinary, _collisionSideBinary };
 
 	std::vector<std::vector<SmallMap*>> _allSmallMaps = _currentMap->GetMaps();
 	for (auto _smallMapVect : _allSmallMaps)
@@ -34,13 +35,24 @@ int CollisionComponent::CheckCollision(int& _collisionSideBinary)
 
 				if (_floatRectBb.intersects(_shapeTile->getGlobalBounds()))
 				{
-					_collisionSideBinary |= ComputeRelativePosition(_currentShape, _shapeTile, _collisionSideBinary);
+					CollisionSide _currentSide = ComputeRelativePosition(_currentShape, _shapeTile, _collisionSideBinary);
+					_collisionSideBinary |= _currentSide;
 					_entityTypeBinary |= _tile->GetType();
+					if (_currentSide & COLLIDE_UP)
+					{
+						float _yCurrentOverlap = ComputeYOverlap(_currentShape, _shapeTile);
+						_minYOverlap = _minYOverlap > _yCurrentOverlap ? _yCurrentOverlap : _minYOverlap;
+					}
+					else
+					{
+						float _xCurrentOverlap = ComputeXOverlap(_currentShape, _shapeTile);
+						_minXOverlap = _minXOverlap > _xCurrentOverlap ? _xCurrentOverlap : _minXOverlap;
+					}
 				}
 			}
 		}
 	}
-	return _entityTypeBinary;
+	return { _entityTypeBinary, _collisionSideBinary, _minXOverlap, _minYOverlap};
 }
 
 void CollisionComponent::Update()
@@ -109,3 +121,31 @@ CollisionSide CollisionComponent::ComputeRelativePosition(const sf::Shape* _enti
 
 	//return _sideCollided;
 }
+
+
+float CollisionComponent::ComputeYOverlap(const sf::Shape* _entityShape, const sf::Shape* _tileShape)
+{
+	const sf::FloatRect& _entityGlobalBounds = _entityShape->getGlobalBounds();
+	const sf::FloatRect& _tileGlobalBounds = _tileShape->getGlobalBounds();
+
+	CollisionSide _side = _entityGlobalBounds.top < _tileGlobalBounds.top ? COLLIDE_DOWN : COLLIDE_UP;
+
+	if (_side & COLLIDE_DOWN)
+		return _entityGlobalBounds.top + _entityGlobalBounds.height - _tileGlobalBounds.top;
+
+	return _tileGlobalBounds.top + _tileGlobalBounds.height - _entityGlobalBounds.top;
+}
+
+float CollisionComponent::ComputeXOverlap(const sf::Shape* _entityShape, const sf::Shape* _tileShape)
+{
+	const sf::FloatRect& _entityGlobalBounds = _entityShape->getGlobalBounds();
+	const sf::FloatRect& _tileGlobalBounds = _tileShape->getGlobalBounds();
+
+	CollisionSide _side = _entityGlobalBounds.left < _tileGlobalBounds.left ? COLLIDE_LEFT : COLLIDE_RIGHT;
+
+	if (_side & COLLIDE_LEFT)
+		return  _entityGlobalBounds.left + _entityGlobalBounds.width - _tileGlobalBounds.left;
+
+	return _tileGlobalBounds.left + _tileGlobalBounds.width - _entityGlobalBounds.left;
+}
+

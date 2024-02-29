@@ -4,17 +4,23 @@
 #include "GravityComponent.h"
 #include "AnimationComponent.h"
 #include "CollisionComponent.h"
+#include "Timer.h"
 
 #define CHARACTER_TEXTURE "Character/Slave.png"
 
 
-Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, const bool _isVisible)
+Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, const int _maxYVelocity, const bool _isVisible)
 	: Entity(EntityData("Character", ENTITY_CHARACTER, _position, _size),
-		{ new MovementComponent(this, 2.f, sf::Vector2f(0,0), true),
-			new GravityComponent(this, 0.8f),
+		{ new MovementComponent(this, 0.5f, sf::Vector2f(0,0), true),
+			new GravityComponent(this, 0.7f),
 			new CollisionComponent(this)})
 {
 	isVisible = _isVisible;
+	isJumping = false;
+	maxYVelocity = _maxYVelocity;
+	currentYVelocity = 0;
+	currentJumpTimerIndex = 0;
+
 	InitShape();
 	const Vector2f& _sizeA = Vector2f(24.4f,45.f);
 	const ReadDirection& _readDirection = READ_RIGHT;
@@ -62,15 +68,37 @@ bool Character::MovingLeftRight(const sf::Event& _event)
 
 bool Character::Jump(const sf::Event& _event)
 {
-	MovementComponent* _mvComponent = GetComponent<MovementComponent>();
 	sf::Keyboard::Key _jumpKey = sf::Keyboard::Space;
-
 	if (_event.key.code != _jumpKey)return false;
-	sf::Vector2f _direction = _mvComponent->GetDirection();
 
-	sf::Vector2f _newDirection(_direction.x, -20.f);
-	_mvComponent->SetDirection(_newDirection);
+	std::cout << GetComponent<CollisionComponent>()->CheckCollision().collisionSideBinary << std::endl;
+	if (isJumping || !(GetComponent<CollisionComponent>()->CheckCollision().collisionSideBinary & COLLIDE_UP)) return false;
+   	isJumping = true;
+	currentJumpTimerIndex = 0;
+
+	Timer* _jumpTimer = new Timer("JumpTimer", [&]() {
+		MovementComponent* _mvComponent = GetComponent<MovementComponent>();
+		sf::Vector2f _direction = _mvComponent->GetDirection();
+
+		if (currentJumpTimerIndex == 0)
+ 			currentYVelocity = maxYVelocity;
+		else
+			currentYVelocity = maxYVelocity / ((currentJumpTimerIndex / 12) + 1);
+
+		sf::Vector2f _newDirection(_direction.x, -currentYVelocity * 1.f);
+		if (_direction.y > _newDirection.y)
+			_mvComponent->SetDirection(_newDirection);
+
+		currentJumpTimerIndex++;
+		}, sf::seconds(0.01f), true, true);
+	
 	return false;
+}
+
+void Character::ResetJumpValues()
+{
+	isJumping = true;
+	currentJumpTimerIndex = 0;
 }
 
 void Character::Update()
