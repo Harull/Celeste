@@ -10,18 +10,18 @@ void Menu::ShowMenu(sf::RenderWindow& window)
 {
     sf::Font _font;
     if (!_font.loadFromFile("Assets/Fonts/Renogare.otf")) {
-        cout << "ERROR - Font non chargé" << endl;
+        cout << "ERROR - Font non chargï¿½" << endl;
     }
 
-    sf::Texture backgroundTexture;
-    if (!backgroundTexture.loadFromFile("Assets/Background/celeste_background.png")) {
-        std::cout << "ERROR - Texture du fond d'écran non chargée" << std::endl;
+    sf::Texture _backgroundTexture;
+    if (!_backgroundTexture.loadFromFile("Assets/Background/celeste_background.png")) {
+        std::cout << "ERROR - Texture du fond d'ï¿½cran non chargï¿½e" << std::endl;
     }
 
-    sf::Sprite backgroundSprite(backgroundTexture);
-    backgroundSprite.setScale(
-        static_cast<float>(window.getSize().x) / backgroundSprite.getLocalBounds().width,
-        static_cast<float>(window.getSize().y) / backgroundSprite.getLocalBounds().height
+    sf::Sprite _backgroundSprite(_backgroundTexture);
+    _backgroundSprite.setScale(
+        static_cast<float>(window.getSize().x) / _backgroundSprite.getLocalBounds().width,
+        static_cast<float>(window.getSize().y) / _backgroundSprite.getLocalBounds().height
     );
 
     sf::Text _play("Climb", _font, 80);
@@ -34,28 +34,27 @@ void Menu::ShowMenu(sf::RenderWindow& window)
 
     while (window.isOpen())
     {
-        sf::Event event;
-        while (window.pollEvent(event))
+        sf::Event _event;
+        while (window.pollEvent(_event))
         {
-            if (event.type == sf::Event::Closed)
+            if (_event.type == sf::Event::Closed)
                 window.close();
 
-            if (event.type == sf::Event::MouseButtonPressed)
+            if (_event.type == sf::Event::MouseButtonPressed)
             {
-                if (event.mouseButton.button == sf::Mouse::Left)
+                if (_event.mouseButton.button == sf::Mouse::Left)
                 {
-                    sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-
-                    if (_play.getGlobalBounds().contains((float)mousePosition.x, (float)mousePosition.y))
+                    sf::Vector2i _mousePosition = sf::Mouse::getPosition(window);
+                    if (_play.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
                     {
                         window.clear();
                         return;
                     }
-                    else if (_options.getGlobalBounds().contains((float)mousePosition.x, (float)mousePosition.y))
+                    else if (_options.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
                     {
     
                     }
-                    else if (_exit.getGlobalBounds().contains((float)mousePosition.x, (float)mousePosition.y))
+                    else if (_exit.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
                     {
                         window.close();  
                     }
@@ -64,7 +63,7 @@ void Menu::ShowMenu(sf::RenderWindow& window)
         }
 
         window.clear();
-        window.draw(backgroundSprite);
+        window.draw(_backgroundSprite);
         window.draw(_play);
         window.draw(_options);
         window.draw(_exit);
@@ -77,22 +76,22 @@ void Menu::ShowLevelSelector(sf::RenderWindow& window)
 {
     sf::Font _font;
     if (!_font.loadFromFile("Assets/Fonts/Renogare.otf")) {
-        cout << "ERROR - Font non chargé" << endl;
+        cout << "ERROR - Font non chargï¿½" << endl;
     }
 
-    sf::Texture backgroundTextures[3];
-    for (int i = 0; i < 3; ++i)
+    sf::Texture _backgroundTextures[3];
+    for (int _i = 0; _i < 3; ++_i)
     {
-        if (!backgroundTextures[i].loadFromFile("Assets/Background/game_selector_background" + std::to_string(i + 1) + ".png"))
+        if (!_backgroundTextures[_i].loadFromFile("Assets/Background/game_selector_background" + std::to_string(_i + 1) + ".png"))
         {
-            std::cout << "ERROR - Texture du fond d'écran level " << i + 1 << " non chargée" << std::endl;
+            std::cout << "ERROR - Texture du fond d'ï¿½cran level " << _i + 1 << " non chargï¿½e" << std::endl;
         }
     }
 
-    sf::Sprite backgroundSprite(backgroundTextures[0]);
-    backgroundSprite.setScale(
-        static_cast<float>(window.getSize().x) / backgroundSprite.getLocalBounds().width,
-        static_cast<float>(window.getSize().y) / backgroundSprite.getLocalBounds().height
+    sf::Sprite _backgroundSprite(_backgroundTextures[0]);
+    _backgroundSprite.setScale(
+        static_cast<float>(window.getSize().x) / _backgroundSprite.getLocalBounds().width,
+        static_cast<float>(window.getSize().y) / _backgroundSprite.getLocalBounds().height
     );
 
     sf::Text _level1("Level 1", _font, 80);
@@ -107,32 +106,32 @@ void Menu::ShowLevelSelector(sf::RenderWindow& window)
 
     while (window.isOpen())
     {
-        sf::Event event;
-        while (window.pollEvent(event))
+        sf::Event _event;
+        while (window.pollEvent(_event))
         {
-            if (event.type == sf::Event::Closed)
+            if (_event.type == sf::Event::Closed)
                 window.close();
 
-            if (event.type == sf::Event::MouseButtonPressed)
+            if (_event.type == sf::Event::MouseButtonPressed)
             {
-                if (event.mouseButton.button == sf::Mouse::Left)
+                if (_event.mouseButton.button == sf::Mouse::Left)
                 {
-                    sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+                    sf::Vector2i _mousePosition = sf::Mouse::getPosition(window);
 
-                    if (_level1.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+                    if (_level1.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
                     {
-                        backgroundSprite.setTexture(backgroundTextures[0]);
+                        _backgroundSprite.setTexture(_backgroundTextures[0]);
                         return;
                     }
-                    else if (_level2.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+                    else if (_level2.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
                     {
-                        backgroundSprite.setTexture(backgroundTextures[1]);
+                        _backgroundSprite.setTexture(_backgroundTextures[1]);
                     }
-                    else if (_level3.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+                    else if (_level3.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
                     {
-                        backgroundSprite.setTexture(backgroundTextures[2]);
+                        _backgroundSprite.setTexture(_backgroundTextures[2]);
                     }
-					if (_exit.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+					if (_exit.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
 					{
 						window.close();
 					}
@@ -141,7 +140,7 @@ void Menu::ShowLevelSelector(sf::RenderWindow& window)
         }
 
         window.clear();
-        window.draw(backgroundSprite);
+        window.draw(_backgroundSprite);
         window.draw(_level1);
         window.draw(_level2);
         window.draw(_level3);
