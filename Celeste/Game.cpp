@@ -35,6 +35,7 @@ bool Game::Start()
 {
 	InitWindow();
 
+	MusicManager::GetInstance().Play("Celeste_OST.mp3");
 	menu = new Menu();
 	int _level = 1;
 	do
@@ -50,6 +51,7 @@ bool Game::Start()
 	InitMap(_level);
 
 	return true;
+
 }
 
 void Game::InitMap(const int _value)
@@ -107,7 +109,6 @@ void Game::UpdateWindow()
 			window.draw(*_entity);
 
 	}
-
 	window.display();
 }
 
@@ -123,3 +124,4 @@ void Game::UpdateEvents()
 		}
 	}
 }
+

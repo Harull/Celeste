@@ -5,7 +5,7 @@ void MusicManager::Play(const string& _path)
 
 	if (_path == "") return;
 
-	MusicData* _musicData = Get(_path);
+	_musicData = Get(_path);
 
 	if (!_musicData)
 	{
@@ -19,6 +19,42 @@ void MusicManager::Play(const string& _path)
 	if (_musicData)
 	{
 		_musicData->play();
-		_musicData->setVolume(25);
+		_musicData->setVolume(100);
+	}
+}
+
+void MusicManager::IncreaseVolume()
+{
+	if (_musicData)
+	{
+		float currentVolume = _musicData->getVolume();
+		if (currentVolume < 110)
+		{
+			currentVolume += 10; 
+			_musicData->setVolume(currentVolume);
+			cout << "Volume augmenté. Volume actuel: " << currentVolume << endl;
+		}
+		else
+		{
+			cout << "le son est deja a fond." << endl;
+		}
+	}
+}
+
+void MusicManager::DecreaseVolume()
+{
+	if (_musicData)
+	{
+		float currentVolume = _musicData->getVolume();
+		if (currentVolume > 0)
+		{
+			currentVolume -= 10; 
+			_musicData->setVolume(currentVolume);
+			cout << "Volume diminué. Volume actuel: " << currentVolume << endl;
+		}
+		else
+		{
+			cout << "le son est deja coupé." << endl;
+		}
 	}
 }

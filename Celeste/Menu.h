@@ -1,7 +1,9 @@
-// Menu.h
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "MusicManager.h"
+#include "TextureManager.h"
+
 
 class Timer;
 
@@ -18,16 +20,14 @@ class Menu
     string nextPath;
 	int currentLevel;
 	vector<sf::Text*> levelTexts;
-
-
-
-
+    MusicManager* musicManager;
 
 public:
     Menu();
     ~Menu();
     bool ShowMenu(sf::RenderWindow& window);
     int ShowLevelSelector(sf::RenderWindow& window);
+    void ShowOptions(sf::RenderWindow& window);
 
     void TransitionFill();
     void TransitionUnFill();

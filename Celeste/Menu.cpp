@@ -93,7 +93,7 @@ int Menu::ShowLevelSelector(sf::RenderWindow& _window)
 {
 	sf::Font _font;
 	if (!_font.loadFromFile("Assets/Fonts/Renogare.otf")) {
-		cerr << "ERROR - Font non charg�" << endl;
+		cerr << "ERROR - Font non chargï¿½" << endl;
 	}
 
 	vector<string> _backgroundTextures;
@@ -127,7 +127,7 @@ int Menu::ShowLevelSelector(sf::RenderWindow& _window)
 		sf::Event _event;
 		while (_window.pollEvent(_event))
 		{
-			
+
 			if (_event.type == sf::Event::Closed)
 				_window.close();
 			if (canClick) {
@@ -137,7 +137,7 @@ int Menu::ShowLevelSelector(sf::RenderWindow& _window)
 					}
 					if (_event.key.code == sf::Keyboard::X) {
 						return -1;
-						
+
 					}
 				}
 
@@ -145,8 +145,8 @@ int Menu::ShowLevelSelector(sf::RenderWindow& _window)
 				{
 					if (_event.mouseButton.button == sf::Mouse::Left)
 					{
-
 						sf::Vector2i _mousePosition = sf::Mouse::getPosition(_window);
+
 						if (levelTexts[0]->getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
 						{
 							nextPath = _backgroundTextures[0];
@@ -218,4 +218,90 @@ void Menu::TransitionUnFill()
 			canClick = true;
 		}};
 	timer = new Timer("FadeTimer2", _callback2, sf::seconds(0.01f), true, true);
+}
+
+void Menu::ShowOptions(sf::RenderWindow& window)
+{
+
+    sf::Font _font;
+    if (!_font.loadFromFile("Assets/Fonts/Renogare.otf")) {
+        cerr << "ERROR - Font not loaded" << endl;
+        return;
+    }
+
+    sf::Texture _backgroundTexture;
+    if (!_backgroundTexture.loadFromFile("Assets/Background/options_background.png")) {
+        std::cout << "ERROR - Texture du fond d'écran non chargée" << std::endl;
+    }
+
+    sf::Sprite _backgroundSprite(_backgroundTexture);
+    _backgroundSprite.setScale(
+        static_cast<float>(window.getSize().x) / _backgroundSprite.getLocalBounds().width,
+        static_cast<float>(window.getSize().y) / _backgroundSprite.getLocalBounds().height
+    );
+
+    sf::Text _title("Options", _font, 80);
+    _title.setPosition(180, 100);
+
+    sf::Text _musicVolumeLabel("Musique volume: ", _font, 50);
+    _musicVolumeLabel.setPosition(700, 400);
+
+    sf::Text _volumeLevel("10", _font, 50);
+    _volumeLevel.setPosition(1200, 400);
+
+    sf::Text _decreaseVolume("<", _font, 50);
+    _decreaseVolume.setPosition(1160, 400);
+
+    sf::Text _increaseVolume(">", _font, 50);
+    _increaseVolume.setPosition(1275, 400);
+
+    sf::Text _back("Back", _font, 50);
+    _back.setPosition(1700, 950);
+
+    while (window.isOpen())
+    {
+        sf::Event _event;
+        while (window.pollEvent(_event))
+        {
+            if (_event.type == sf::Event::Closed)
+                window.close();
+
+            if (_event.type == sf::Event::MouseButtonPressed)
+            {
+                if (_event.mouseButton.button == sf::Mouse::Left)
+                {
+                    sf::Vector2i _mousePosition = sf::Mouse::getPosition(window);
+
+                    if (_decreaseVolume.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
+                    {
+                        int _currentVolume = std::stoi(_volumeLevel.getString().toAnsiString());
+                        if (_currentVolume > 0)
+                            _volumeLevel.setString(std::to_string(_currentVolume - 1));
+                        MusicManager::GetInstance().DecreaseVolume();
+                    }
+                    else if (_increaseVolume.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
+                    {
+                        int _currentVolume = std::stoi(_volumeLevel.getString().toAnsiString());
+                        if (_currentVolume < 10)
+                            _volumeLevel.setString(std::to_string(_currentVolume + 1));
+                        MusicManager::GetInstance().IncreaseVolume(); 
+                    }
+                    else if (_back.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
+                    {
+                        return;
+                    }
+                }
+            }
+        }
+
+        window.clear();
+        window.draw(_backgroundSprite);
+        window.draw(_title);
+        window.draw(_back);
+        window.draw(_musicVolumeLabel);
+        window.draw(_decreaseVolume);
+        window.draw(_volumeLevel);
+        window.draw(_increaseVolume);
+        window.display();
+    }
 }

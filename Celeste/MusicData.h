@@ -10,7 +10,6 @@ using namespace std;
 
 class MusicData : public Music, public IManageable<string>
 {
-
 public:
 	MusicData(const string& _path);
 
