@@ -26,18 +26,30 @@ Game::~Game()
 
 void Game::Launch()
 {
-	Start();
+	if (!Start()) return;
 	Update();
 	Stop();
 }
 
-void Game::Start()
+bool Game::Start()
 {
 	InitWindow();
+
 	menu = new Menu();
-	menu->ShowMenu(window);
-	menu->ShowLevelSelector(window);
-	InitMap(1);
+	int _level = 1;
+	do
+	{
+		if (!menu->ShowMenu(window)) return false;
+		_level = menu->ShowLevelSelector(window);
+		cout << _level << endl;
+	} while (_level == -1);
+	
+	delete menu;
+	menu = nullptr;
+
+	InitMap(_level);
+
+	return true;
 }
 
 void Game::InitMap(const int _value)
