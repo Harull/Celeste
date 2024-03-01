@@ -8,19 +8,21 @@
 #include"Macro.h"
 
 
-MovementComponent::MovementComponent(Entity* _owner,bool _canMove) : Component(_owner)
+MovementComponent::MovementComponent(Entity* _owner,bool _canMove,bool _freeMovement) : Component(_owner)
 {
-	velocity = 0.05f;
+	velocity = 0.1f;
 	direction = Vector2f();
 	canMove = _canMove;
+	freeMovement = _freeMovement;
 }
 
 MovementComponent::MovementComponent(Entity* _owner, const float _velocity,
-	const Vector2f& _direction, const bool _canMove) : Component(_owner)
+	const Vector2f& _direction, const bool _canMove, bool _freeMovement) : Component(_owner)
 {
 	velocity = _velocity;
 	direction = Vector2f(_direction);
 	canMove = _canMove;
+	freeMovement = _freeMovement;
 }
 
 void MovementComponent::UpdateAnimations()
@@ -86,7 +88,7 @@ bool MovementComponent::TryToMove(Entity* _entity, const Vector2f& _direction)
 {
 	if (!canMove)return true;
 
-	const Vector2f& _destination = { _direction.x * velocity, _direction.y };
+	const Vector2f& _destination =freeMovement ? Vector2f(_direction.x * velocity, _direction.y*velocity): Vector2f(_direction.x * velocity, _direction.y);
 	_entity->GetShape()->move(_destination);
 
 	if (CollisionComponent* _collision = _entity->GetComponent<CollisionComponent>())
@@ -136,8 +138,7 @@ Vector2f MovementComponent::GetDirectionByPositions(Vector2f _destination)
 		Vector2f _entityPos = owner->GetPosition();
 		if (IsNearlyEqual(_entityPos, _destination)) return Vector2f(0.0f, 0.0f);
 
-		const float _directionX = 0.0f;
-		const float _directionY = 0.0f;
+		
 		Vector2f _direction = _destination - _entityPos;
 		Normalize(_direction);
 	

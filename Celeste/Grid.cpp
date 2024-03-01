@@ -94,6 +94,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 				{
 					for (Tile* _tileu:_tilem)
 					{
+
 					if (MovingTile* _moveTile=dynamic_cast<MovingTile*>(_tileu))
 					{
 						_positionmouv = Vector2f(_posX, _posY);
@@ -104,7 +105,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 					}
 
 				}
-				continue;
+				_tile = nullptr;
 			}
 			
 			else 
