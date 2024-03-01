@@ -35,7 +35,7 @@ public:
 	void UpdateWindow();
 
 private:
-	void Start();
+	bool Start();
 	void Stop();
 	void InitWindow();
 	void InitMap(const int _value);

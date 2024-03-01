@@ -16,15 +16,19 @@ class Menu
 	sf::Shape* nextShape;
 	Timer* timer;
     string nextPath;
+	int currentLevel;
+	vector<sf::Text*> levelTexts;
+
+
 
 
 
 public:
     Menu();
     ~Menu();
-    void ShowMenu(sf::RenderWindow& window);
-    void ShowLevelSelector(sf::RenderWindow& window);
+    bool ShowMenu(sf::RenderWindow& window);
+    int ShowLevelSelector(sf::RenderWindow& window);
+
     void TransitionFill();
     void TransitionUnFill();
-    void InitFadeTimer();
 };

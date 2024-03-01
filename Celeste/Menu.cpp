@@ -4,6 +4,7 @@
 #include "TimerManager.h"
 #include "TextureManager.h"
 #include "Macro.h"
+#include "EventReactionManager.h"
 
 Menu::Menu()
 {
@@ -12,6 +13,7 @@ Menu::Menu()
 	canClick = true;
 	backgroundShape = nullptr;
 	timer = nullptr;
+	currentLevel = 1;
 }
 
 Menu::~Menu() {
@@ -22,7 +24,7 @@ Menu::~Menu() {
 }
 
 
-void Menu::ShowMenu(sf::RenderWindow& window)
+bool Menu::ShowMenu(sf::RenderWindow& _window)
 {
 	sf::Font _font;
 	if (!_font.loadFromFile("Assets/Fonts/Renogare.otf")) {
@@ -36,8 +38,8 @@ void Menu::ShowMenu(sf::RenderWindow& window)
 
 	sf::Sprite _backgroundSprite(_backgroundTexture);
 	_backgroundSprite.setScale(
-		static_cast<float>(window.getSize().x) / _backgroundSprite.getLocalBounds().width,
-		static_cast<float>(window.getSize().y) / _backgroundSprite.getLocalBounds().height
+		static_cast<float>(_window.getSize().x) / _backgroundSprite.getLocalBounds().width,
+		static_cast<float>(_window.getSize().y) / _backgroundSprite.getLocalBounds().height
 	);
 
 	sf::Text _play("Climb", _font, 80);
@@ -48,21 +50,20 @@ void Menu::ShowMenu(sf::RenderWindow& window)
 	_options.setPosition(180, 510);
 	_exit.setPosition(180, 575);
 
-	while (window.isOpen())
+	while (_window.isOpen())
 	{
 		sf::Event _event;
-		while (window.pollEvent(_event))
+		while (_window.pollEvent(_event))
 		{
-			if (_event.type == sf::Event::Closed) window.close();
+			if (_event.type == sf::Event::Closed) _window.close();
 			if (_event.type == sf::Event::MouseButtonPressed)
 			{
 				if (_event.mouseButton.button == sf::Mouse::Left)
 				{
-					sf::Vector2i _mousePosition = sf::Mouse::getPosition(window);
+					sf::Vector2i _mousePosition = sf::Mouse::getPosition(_window);
 					if (_play.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
 					{
-						window.clear();
-						return;
+						return true;
 					}
 					else if (_options.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
 					{
@@ -70,23 +71,25 @@ void Menu::ShowMenu(sf::RenderWindow& window)
 					}
 					else if (_exit.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
 					{
-						window.close();
+						_window.close();
+						return false;
 					}
 				}
 			}
 		}
 
-		window.clear();
-		window.draw(_backgroundSprite);
-		window.draw(_play);
-		window.draw(_options);
-		window.draw(_exit);
-		window.display();
+		_window.clear();
+		_window.draw(_backgroundSprite);
+		_window.draw(_play);
+		_window.draw(_options);
+		_window.draw(_exit);
+		_window.display();
 
 	}
+	return false;
 }
 
-void Menu::ShowLevelSelector(sf::RenderWindow& window)
+int Menu::ShowLevelSelector(sf::RenderWindow& _window)
 {
 	sf::Font _font;
 	if (!_font.loadFromFile("Assets/Fonts/Renogare.otf")) {
@@ -104,76 +107,87 @@ void Menu::ShowLevelSelector(sf::RenderWindow& window)
 
 	TextureManager::GetInstance().Load(backgroundShape, _backgroundTextures[0]);
 
+	levelTexts.clear();
+	levelTexts.push_back(new Text("Level 1", _font, 80));
+	levelTexts.push_back(new Text("Level 2", _font, 80));
+	levelTexts.push_back(new Text("Level 3", _font, 80));
 
-	sf::Text _level1("Level 1", _font, 80);
-	sf::Text _level2("Level 2", _font, 80);
-	sf::Text _level3("Level 3", _font, 80);
-	sf::Text _exit("Retour", _font, 50);
+	Vector2f _startPosition = Vector2f(0, 400);
 
-	_level1.setPosition(0, 400);
-	_level2.setPosition(0, 500);
-	_level3.setPosition(0, 600);
-	_exit.setPosition(0, 0);
+	for (Text* _text : levelTexts)
+	{
+		_text->setPosition(_startPosition);
+		_startPosition.y += 100;
+	}
 
-	while (window.isOpen())
+	while (_window.isOpen())
 	{
 		TimerManager::GetInstance().Update();
 
 		sf::Event _event;
-		while (window.pollEvent(_event))
+		while (_window.pollEvent(_event))
 		{
 			
 			if (_event.type == sf::Event::Closed)
-				window.close();
+				_window.close();
 			if (canClick) {
+				if (_event.type == sf::Event::KeyPressed) {
+					if (_event.key.code == sf::Keyboard::C) {
+						return currentLevel;
+					}
+					if (_event.key.code == sf::Keyboard::X) {
+						return -1;
+						
+					}
+				}
+
 				if (_event.type == sf::Event::MouseButtonPressed)
 				{
 					if (_event.mouseButton.button == sf::Mouse::Left)
 					{
-						sf::Vector2i _mousePosition = sf::Mouse::getPosition(window);
+						sf::Vector2i _mousePosition = sf::Mouse::getPosition(_window);
 
-						if (_level1.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
+						if (levelTexts[0]->getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
 						{
 							nextPath = _backgroundTextures[0];
 							TransitionFill();
-							return;
+							currentLevel = 1;
 						}
-						else if (_level2.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
+						else if (levelTexts[1]->getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
 						{
 							nextPath = _backgroundTextures[1];
 							TransitionFill();
+							currentLevel = 2;
 
 						}
-						else if (_level3.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
+						else if (levelTexts[2]->getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
 						{
 							nextPath = _backgroundTextures[2];
 							TransitionFill();
+							currentLevel = 3;
 
-						}
-						if (_exit.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
-						{
-							window.close();
 						}
 					}
 				}
 			}
 		}
 
-		window.clear();
-		window.draw(*backgroundShape);
-		window.draw(_level1);
-		window.draw(_level2);
-		window.draw(_level3);
-		window.draw(_exit);
-		window.display();
+		_window.clear();
+		_window.draw(*backgroundShape);
+		for (Text* _text : levelTexts)
+		{
+			_window.draw(*_text);
+		}
+		_window.display();
 	}
+	return 0;
 }
-
 
 void Menu::TransitionFill() {
 	canClick = false;
 	const std::function<void()>& _callback = [&]() {
 		Fade(backgroundShape, currentAlpha);
+		MultiFade(levelTexts, currentAlpha);
 
 		currentAlpha -= alphaFactor;
 		if (currentAlpha <= 0 || currentAlpha >= 255)
@@ -193,6 +207,7 @@ void Menu::TransitionUnFill()
 {
 	const std::function<void()>& _callback2 = [&]() {
 		Fade(backgroundShape, currentAlpha);
+		MultiFade(levelTexts, currentAlpha);
 
 		currentAlpha += alphaFactor;
 		if (currentAlpha <= 0 || currentAlpha >= 255)
