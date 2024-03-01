@@ -8,7 +8,7 @@ Maps\Level1\Background.png
                                        1
                                        1
                                        1
-1                                      1
+1       c                              1
 1    fffffff    m                      1
 1                                      1
 1                                      1
