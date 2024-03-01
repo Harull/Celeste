@@ -67,7 +67,7 @@ bool Menu::ShowMenu(sf::RenderWindow& _window)
 					}
 					else if (_options.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
 					{
-
+						ShowOptions(_window);
 					}
 					else if (_exit.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
 					{
