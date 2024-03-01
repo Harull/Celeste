@@ -3,6 +3,7 @@
 #include "IManageable.h"
 #include "SmallMap.h"
 #include <vector>
+
 using namespace std;
 
 class Map : public IManageable<string>

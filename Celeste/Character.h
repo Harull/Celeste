@@ -19,6 +19,11 @@ public:
 		shape->setScale(_size);
 	}
 
+	void SetPosition(const sf::Vector2f& _position)
+	{
+		shape->setPosition(_position);
+	}
+
 
 private:
 	void InitShape();
@@ -29,7 +34,6 @@ public:
 	virtual void Update();
 	void Move();
 	void Dash();
-
 
 };
 

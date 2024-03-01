@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Singleton.h"
 #include "Menu.h"
+#include "MusicManager.h"
 
 using namespace sf;
 
@@ -14,6 +15,7 @@ class Game : public Singleton<Game>
 	Player* player;
 	FloatRect visibleArea;
 	Menu* menu;
+	MusicManager* musicManager;
 
 public:
 	Vector2u GetWindowSize()

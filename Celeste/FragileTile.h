@@ -11,3 +11,4 @@ public:
 	void GetHit(int _collisionSide, int _collisionSideBinary);
 };
 
+

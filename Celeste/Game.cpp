@@ -34,6 +34,7 @@ void Game::Launch()
 void Game::Start()
 {
 	InitWindow();
+	MusicManager::GetInstance().Play("Celeste_OST.mp3");
 	menu->ShowMenu(window);
 	menu->ShowLevelSelector(window);
 	InitMap(1);
@@ -94,7 +95,6 @@ void Game::UpdateWindow()
 			window.draw(*_entity);
 
 	}
-
 	window.display();
 }
 
@@ -110,3 +110,4 @@ void Game::UpdateEvents()
 		}
 	}
 }
+

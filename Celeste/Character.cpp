@@ -78,3 +78,4 @@ void Character::Update()
 	Entity::Update();
 	
 }
+
