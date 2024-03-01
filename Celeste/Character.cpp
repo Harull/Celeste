@@ -20,6 +20,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 	maxYVelocity = _maxYVelocity;
 	currentYVelocity = 0;
 	currentJumpTimerIndex = 0;
+	checkPoint = Vector2f(0.f, 0.f);
 
 	InitShape();
 	const Vector2f& _sizeA = Vector2f(24.4f,41.f);
