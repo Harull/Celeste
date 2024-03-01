@@ -92,6 +92,7 @@ public:
     void Move();
     bool TryToMove(Entity* _entity, const Vector2f& _direction);
     Vector2f GetDirectionByPositions(Vector2f _destination);
+    void UpdateAnimations();
     
 
 };

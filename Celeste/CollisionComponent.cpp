@@ -66,6 +66,11 @@ void CollisionComponent::Update()
 
 }
 
+CollisionComponent::CollisionComponent(Entity* _owner):Component(_owner)
+{
+
+}
+
 CollisionSide CollisionComponent::ComputeRelativePosition(const sf::Shape* _entityShape, const sf::Shape* _tileShape,
 	const int initialCollisionSideBinary)
 {
