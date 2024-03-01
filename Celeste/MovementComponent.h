@@ -35,45 +35,7 @@ public:
     void SetDirection(const Vector2f& _direction)
     {
         direction = _direction;
-        if (AnimationComponent* _anim = owner->GetComponent<AnimationComponent>())
-        {
-            AnimationDirection _adirection;
-            if (_direction.x>0)
-            {
-                /*if (_direction.y > 0)
-                {
-                    _adirection = ANIM_DIR_FALL_RIGHT;
-                }*/
-                 if (_direction.y < 0)
-                {
-                    _adirection = ANIM_DIR_JUMP_RIGHT;
-                }
-                else
-                {
-                    _adirection = ANIM_DIR_RIGHT;
-                }
-            }
-            else if (_direction.x < 0)
-            {
-                /*if (_direction.y > 0)
-                {
-                    _adirection = ANIM_DIR_FALL_LEFT;
-                }*/
-                if (_direction.y < 0)
-                {
-                    _adirection = ANIM_DIR_JUMP_LEFT;
-                }
-                else
-                {
-                    _adirection = ANIM_DIR_LEFT;
-                }
-            }
-            else
-            {
-                _adirection = ANIM_DIR_NONE;
-            }
-            _anim->SetDirection(_adirection);
-        }
+        UpdateAnimations();
     }
     void UpdateVelocity(const float _update)
     {

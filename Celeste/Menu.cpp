@@ -58,7 +58,7 @@ void Menu::ShowMenu(sf::RenderWindow& window)
 			{
 				if (_event.mouseButton.button == sf::Mouse::Left)
 				{
-					sf::Vector2i _mousePosition = sf::Mouse::getPosition(window);
+					sf::Vector2f _mousePosition(sf::Mouse::getPosition(window));
 					if (_play.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
 					{
 						window.clear();
@@ -130,7 +130,7 @@ void Menu::ShowLevelSelector(sf::RenderWindow& window)
 				{
 					if (_event.mouseButton.button == sf::Mouse::Left)
 					{
-						sf::Vector2i _mousePosition = sf::Mouse::getPosition(window);
+						sf::Vector2f _mousePosition(sf::Mouse::getPosition(window));
 
 						if (_level1.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
 						{
@@ -173,7 +173,7 @@ void Menu::ShowLevelSelector(sf::RenderWindow& window)
 void Menu::TransitionFill() {
 	canClick = false;
 	const std::function<void()>& _callback = [&]() {
-		Fade(backgroundShape, currentAlpha);
+		Fade(backgroundShape, static_cast<unsigned>(currentAlpha));
 
 		currentAlpha -= alphaFactor;
 		if (currentAlpha <= 0 || currentAlpha >= 255)
@@ -192,7 +192,7 @@ void Menu::TransitionFill() {
 void Menu::TransitionUnFill()
 {
 	const std::function<void()>& _callback2 = [&]() {
-		Fade(backgroundShape, currentAlpha);
+		Fade(backgroundShape, static_cast<unsigned>(currentAlpha));
 
 		currentAlpha += alphaFactor;
 		if (currentAlpha <= 0 || currentAlpha >= 255)
