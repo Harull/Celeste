@@ -61,15 +61,15 @@ bool Menu::ShowMenu(sf::RenderWindow& _window)
 				if (_event.mouseButton.button == sf::Mouse::Left)
 				{
 					sf::Vector2i _mousePosition = sf::Mouse::getPosition(_window);
-					if (_play.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
+					if (_play.getGlobalBounds().contains((float)_mousePosition.x, (float)_mousePosition.y))
 					{
 						return true;
 					}
-					else if (_options.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
+					else if (_options.getGlobalBounds().contains((float)_mousePosition.x, (float)_mousePosition.y))
 					{
 						ShowOptions(_window);
 					}
-					else if (_exit.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
+					else if (_exit.getGlobalBounds().contains((float)_mousePosition.x, (float)_mousePosition.y))
 					{
 						_window.close();
 						return false;
@@ -147,20 +147,20 @@ int Menu::ShowLevelSelector(sf::RenderWindow& _window)
 					{
 						sf::Vector2i _mousePosition = sf::Mouse::getPosition(_window);
 
-						if (levelTexts[0]->getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
+						if (levelTexts[0]->getGlobalBounds().contains((float)_mousePosition.x, (float)_mousePosition.y))
 						{
 							nextPath = _backgroundTextures[0];
 							TransitionFill();
 							currentLevel = 1;
 						}
-						else if (levelTexts[1]->getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
+						else if (levelTexts[1]->getGlobalBounds().contains((float)_mousePosition.x, (float)_mousePosition.y))
 						{
 							nextPath = _backgroundTextures[1];
 							TransitionFill();
 							currentLevel = 2;
 
 						}
-						else if (levelTexts[2]->getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
+						else if (levelTexts[2]->getGlobalBounds().contains((float)_mousePosition.x, (float)_mousePosition.y))
 						{
 							nextPath = _backgroundTextures[2];
 							TransitionFill();
@@ -187,8 +187,8 @@ void Menu::TransitionFill() {
 	canClick = false;
 	const std::function<void()>& _callback = [&]() {
 
-		Fade(backgroundShape, currentAlpha);
-		MultiFade(levelTexts, currentAlpha);
+		Fade(backgroundShape, (unsigned int)currentAlpha);
+		MultiFade(levelTexts,( unsigned int) currentAlpha);
 
 		currentAlpha -= alphaFactor;
 		if (currentAlpha <= 0 || currentAlpha >= 255)
@@ -207,8 +207,8 @@ void Menu::TransitionFill() {
 void Menu::TransitionUnFill()
 {
 	const std::function<void()>& _callback2 = [&]() {
-		Fade(backgroundShape, currentAlpha);
-		MultiFade(levelTexts, currentAlpha);
+		Fade(backgroundShape, (unsigned int)currentAlpha);
+		MultiFade(levelTexts, (unsigned int)currentAlpha);
 
 		currentAlpha += alphaFactor;
 		if (currentAlpha <= 0 || currentAlpha >= 255)
@@ -272,21 +272,21 @@ void Menu::ShowOptions(sf::RenderWindow& window)
                 {
                     sf::Vector2i _mousePosition = sf::Mouse::getPosition(window);
 
-                    if (_decreaseVolume.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
+                    if (_decreaseVolume.getGlobalBounds().contains((float)_mousePosition.x, (float)_mousePosition.y))
                     {
                         int _currentVolume = std::stoi(_volumeLevel.getString().toAnsiString());
                         if (_currentVolume > 0)
                             _volumeLevel.setString(std::to_string(_currentVolume - 1));
                         MusicManager::GetInstance().DecreaseVolume();
                     }
-                    else if (_increaseVolume.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
+                    else if (_increaseVolume.getGlobalBounds().contains((float)_mousePosition.x, (float)_mousePosition.y))
                     {
                         int _currentVolume = std::stoi(_volumeLevel.getString().toAnsiString());
                         if (_currentVolume < 10)
                             _volumeLevel.setString(std::to_string(_currentVolume + 1));
                         MusicManager::GetInstance().IncreaseVolume(); 
                     }
-                    else if (_back.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
+                    else if (_back.getGlobalBounds().contains((float)_mousePosition.x, (float)_mousePosition.y))
                     {
                         return;
                     }
