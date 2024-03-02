@@ -35,7 +35,6 @@ public:
     void SetDirection(const Vector2f& _direction)
     {
         direction = _direction;
-        UpdateAnimations();
     }
     void UpdateVelocity(const float _update)
     {
@@ -51,7 +50,7 @@ public:
 
 public:
     void Update()override;
-    void Move();
+    void Move(const sf::Vector2f& _direction = sf::Vector2f());
     bool TryToMove(Entity* _entity, const Vector2f& _direction);
     Vector2f GetDirectionByPositions(Vector2f _destination);
     void UpdateAnimations();
