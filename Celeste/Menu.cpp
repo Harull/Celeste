@@ -1,4 +1,3 @@
-// Menu.cpp
 #include "Menu.h"
 #include "Timer.h"
 #include "TimerManager.h"
@@ -222,6 +221,8 @@ void Menu::TransitionUnFill()
 
 void Menu::ShowOptions(sf::RenderWindow& window)
 {
+	bool isSoundMuted = false;
+	int _currentVolume;
 
     sf::Font _font;
     if (!_font.loadFromFile("Assets/Fonts/Renogare.otf")) {
@@ -240,10 +241,16 @@ void Menu::ShowOptions(sf::RenderWindow& window)
         static_cast<float>(window.getSize().y) / _backgroundSprite.getLocalBounds().height
     );
 
+	sf::Text _muteSound("Mute Sound :", _font, 50);
+	_muteSound.setPosition(700, 500);
+
+	sf::RectangleShape _checkbox(sf::Vector2f(40, 40));
+	_checkbox.setPosition(1080, 510);
+
     sf::Text _title("Options", _font, 80);
     _title.setPosition(180, 100);
 
-    sf::Text _musicVolumeLabel("Musique volume: ", _font, 50);
+    sf::Text _musicVolumeLabel("Music volume : ", _font, 50);
     _musicVolumeLabel.setPosition(700, 400);
 
     sf::Text _volumeLevel("10", _font, 50);
@@ -257,6 +264,8 @@ void Menu::ShowOptions(sf::RenderWindow& window)
 
     sf::Text _back("Back", _font, 50);
     _back.setPosition(1700, 950);
+
+
 
     while (window.isOpen())
     {
@@ -274,14 +283,14 @@ void Menu::ShowOptions(sf::RenderWindow& window)
 
                     if (_decreaseVolume.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
                     {
-                        int _currentVolume = std::stoi(_volumeLevel.getString().toAnsiString());
-                        if (_currentVolume > 0)
+                        _currentVolume = std::stoi(_volumeLevel.getString().toAnsiString());
+                        if (_currentVolume > 1)
                             _volumeLevel.setString(std::to_string(_currentVolume - 1));
                         MusicManager::GetInstance().DecreaseVolume();
                     }
                     else if (_increaseVolume.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
                     {
-                        int _currentVolume = std::stoi(_volumeLevel.getString().toAnsiString());
+                        _currentVolume = std::stoi(_volumeLevel.getString().toAnsiString());
                         if (_currentVolume < 10)
                             _volumeLevel.setString(std::to_string(_currentVolume + 1));
                         MusicManager::GetInstance().IncreaseVolume(); 
@@ -290,6 +299,20 @@ void Menu::ShowOptions(sf::RenderWindow& window)
                     {
                         return;
                     }
+					else if (_checkbox.getGlobalBounds().contains(_mousePosition.x, _mousePosition.y))
+					{
+						isSoundMuted = !isSoundMuted; 
+
+						if (isSoundMuted)
+						{
+							MusicManager::GetInstance().MuteVolume();
+						}
+						else
+						{
+							_currentVolume = std::stoi(_volumeLevel.getString().toAnsiString());
+							MusicManager::GetInstance().UnmuteVolume(_currentVolume);
+						}
+					}
                 }
             }
         }
@@ -299,9 +322,13 @@ void Menu::ShowOptions(sf::RenderWindow& window)
         window.draw(_title);
         window.draw(_back);
         window.draw(_musicVolumeLabel);
+		window.draw(_muteSound);
+		window.draw(_checkbox);
         window.draw(_decreaseVolume);
         window.draw(_volumeLevel);
         window.draw(_increaseVolume);
         window.display();
     }
 }
+
+

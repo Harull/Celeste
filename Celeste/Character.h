@@ -35,6 +35,10 @@ public:
 	{
 		return isJumping;
 	}
+	void SetPosition(const sf::Vector2f _position)
+	{
+		shape->setPosition(_position);
+	}
 
 private:
 	void InitShape();
