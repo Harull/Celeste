@@ -11,7 +11,7 @@ class Character : public Entity
 	int maxYVelocity;
 	int currentYVelocity;
 	int currentJumpTimerIndex;
-
+	Vector2f checkPoint;
 	bool isJumping;
 
 public:
@@ -33,6 +33,10 @@ public:
 	bool GetIsJumping() const
 	{
 		return isJumping;
+	}
+	void SetCheckPoint(Vector2f _checkPoint)
+	{
+		checkPoint = _checkPoint;
 	}
 
 private:
