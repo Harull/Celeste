@@ -11,11 +11,10 @@
 
 Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, const int _maxYVelocity, const bool _isVisible)
 	: Entity(EntityData("Character", ENTITY_CHARACTER, _position, _size),
-		{ new MovementComponent(this, 0.5f, sf::Vector2f(0,0), true),
-			new GravityComponent(this, 0.7f),
+		{ new MovementComponent(this, 1.5f, sf::Vector2f(0,0), true),
+			new GravityComponent(this, 1.6f),
 			new CollisionComponent(this)})
 {
-	isVisible = _isVisible;
 	isJumping = false;
 	maxYVelocity = _maxYVelocity;
 	currentYVelocity = 0;
@@ -85,12 +84,16 @@ bool Character::Jump(const sf::Event& _event)
 		else
 			currentYVelocity = maxYVelocity / ((currentJumpTimerIndex / 12) + 1);
 
-		sf::Vector2f _newDirection(_direction.x, -currentYVelocity * 1.f);
+		if (currentYVelocity < 2) return;
+		
+
+		_mvComponent->Move({ 0, -currentYVelocity * 1.f });
+		/*sf::Vector2f _newDirection(_direction.x, -currentYVelocity * 1.f);
 		if (_direction.y > _newDirection.y)
-			_mvComponent->SetDirection(_newDirection);
+			_mvComponent->SetDirection(_newDirection);*/
 
 		currentJumpTimerIndex++;
-		}, sf::seconds(0.01f), true, true);
+		}, sf::seconds(0), true, true);
 	
 	return false;
 }

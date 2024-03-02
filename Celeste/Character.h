@@ -7,12 +7,11 @@ class Component;
 
 class Character : public Entity
 {
-	// On aurait pu faire un jump component
+	// J'avais fait un jump component mais je l'ai laissé à l'école donc rip
 	int maxYVelocity;
 	int currentYVelocity;
 	int currentJumpTimerIndex;
 
-	bool isVisible;
 	bool isJumping;
 
 public:

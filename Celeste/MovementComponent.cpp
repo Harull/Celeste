@@ -75,12 +75,13 @@ void MovementComponent::Update()
 	//std::cout << "x " << owner->GetShape()->getPosition().x << " | y " << owner->GetShape()->getPosition().y << std::endl;
 }
 
-void MovementComponent::Move()
+void MovementComponent::Move(const sf::Vector2f& _direction)
 {
 	if (!canMove)return;
-
-	TryToMove(owner, direction);
+	UpdateAnimations();
+	TryToMove(owner, _direction == sf::Vector2f() ? direction : _direction);
 }
+
 
 bool MovementComponent::TryToMove(Entity* _entity, const Vector2f& _direction)
 {
