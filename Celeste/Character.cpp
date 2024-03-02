@@ -34,10 +34,10 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 	AnimationComponent* _animation = new AnimationComponent(this, CHARACTER_TEXTURE, {
 		AnimationData("WalkRight", Vector2f(12.0f, 7.f), _sizeA, _readDirection, ANIM_DIR_RIGHT, _toRepeat, _count, _speedA),
 		AnimationData("WalkLeft", Vector2f(11.f, 53.f), _sizeA, _readDirection, ANIM_DIR_LEFT, _toRepeat, _count, _speedA),
-		AnimationData("JumpRight", Vector2f(12.f, 101.f), _sizeA, _readDirection, ANIM_DIR_JUMP_RIGHT, _toRepeat, _countStop, _speedA),
-		AnimationData("FallRight", Vector2f(36.f, 101.f), _sizeA, _readDirection, ANIM_DIR_FALL_RIGHT, _toRepeat, _countStop, _speedA),
-		AnimationData("JumpLeft", Vector2f(38.f, 153.f), _sizeA, _readDirection, ANIM_DIR_JUMP_LEFT, _toRepeat, _countStop, _speedA),
-		AnimationData("FallLeft", Vector2f(12.f, 153.f), _sizeA, _readDirection, ANIM_DIR_FALL_LEFT, _toRepeat, _countStop, _speedA),
+		AnimationData("JumpRight", Vector2f(12.f, 100.f), Vector2f(22.f,47.f), _readDirection, ANIM_DIR_JUMP_RIGHT, _toRepeat, _countStop, _speedA),
+		AnimationData("FallRight", Vector2f(38.f, 102.f), Vector2f(23.f,44.f), _readDirection, ANIM_DIR_FALL_RIGHT, _toRepeat, _countStop, _speedA),
+		AnimationData("JumpLeft", Vector2f(38.f, 151.f), Vector2f(23.f,47.f), _readDirection, ANIM_DIR_JUMP_LEFT, _toRepeat, _countStop, _speedA),
+		AnimationData("FallLeft", Vector2f(13.f, 153), Vector2f(23.f,45.f), _readDirection, ANIM_DIR_FALL_LEFT, _toRepeat, _countStop, _speedA),
 		AnimationData("None", Vector2f(12.f, 203), _sizeA, _readDirection, ANIM_DIR_NONE, _toRepeat, 1, _speedA),
 		}, direction);
 
