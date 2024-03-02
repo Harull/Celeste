@@ -3,16 +3,40 @@
   "WorkspaceRootPath": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\MovingTile.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|solutionrelative:Celeste\\MovingTile.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\Character.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|solutionrelative:Celeste\\Character.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\Character.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|solutionrelative:Celeste\\Character.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\CollisionComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|solutionrelative:Celeste\\CollisionComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\CollisionComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|solutionrelative:Celeste\\CollisionComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\GravityComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|solutionrelative:Celeste\\GravityComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\CheckPoint.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|solutionrelative:Celeste\\CheckPoint.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|solutionrelative:Celeste\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|solutionrelative:Celeste\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\MovingTile.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|solutionrelative:Celeste\\MovingTile.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1308CC4A-A113-46D8-9954-299DB09035F7}|Celeste\\Celeste.vcxproj|D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\TimerManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -34,7 +58,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,7 +70,80 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CollisionComponent.h",
+              "DocumentMoniker": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\CollisionComponent.h",
+              "RelativeDocumentMoniker": "Celeste\\CollisionComponent.h",
+              "ToolTip": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\CollisionComponent.h",
+              "RelativeToolTip": "Celeste\\CollisionComponent.h",
+              "ViewState": "AQIAABIAAAAAAAAAAAAqwCgAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-03-02T22:04:01.906Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "GravityComponent.cpp",
+              "DocumentMoniker": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\GravityComponent.cpp",
+              "RelativeDocumentMoniker": "Celeste\\GravityComponent.cpp",
+              "ToolTip": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\GravityComponent.cpp",
+              "RelativeToolTip": "Celeste\\GravityComponent.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-03-02T21:37:37.038Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Character.h",
+              "DocumentMoniker": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\Character.h",
+              "RelativeDocumentMoniker": "Celeste\\Character.h",
+              "ToolTip": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\Character.h",
+              "RelativeToolTip": "Celeste\\Character.h",
+              "ViewState": "AQIAABsAAAAAAAAAAAAAADQAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-03-02T20:52:27.736Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Player.cpp",
+              "DocumentMoniker": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\Player.cpp",
+              "RelativeDocumentMoniker": "Celeste\\Player.cpp",
+              "ToolTip": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\Player.cpp",
+              "RelativeToolTip": "Celeste\\Player.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAB0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-03-02T20:50:44.585Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Player.h",
+              "DocumentMoniker": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\Player.h",
+              "RelativeDocumentMoniker": "Celeste\\Player.h",
+              "ToolTip": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\Player.h",
+              "RelativeToolTip": "Celeste\\Player.h",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAACoAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-03-02T20:50:07.07Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CheckPoint.cpp",
+              "DocumentMoniker": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\CheckPoint.cpp",
+              "RelativeDocumentMoniker": "Celeste\\CheckPoint.cpp",
+              "ToolTip": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\CheckPoint.cpp",
+              "RelativeToolTip": "Celeste\\CheckPoint.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-03-02T20:46:54.587Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "MovingTile.h",
               "DocumentMoniker": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\MovingTile.h",
               "RelativeDocumentMoniker": "Celeste\\MovingTile.h",
@@ -54,12 +151,11 @@
               "RelativeToolTip": "Celeste\\MovingTile.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-02T20:22:41.105Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-02T20:22:41.105Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "Game.cpp",
               "DocumentMoniker": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\Game.cpp",
               "RelativeDocumentMoniker": "Celeste\\Game.cpp",
@@ -67,8 +163,7 @@
               "RelativeToolTip": "Celeste\\Game.cpp",
               "ViewState": "AQIAAEIAAAAAAAAAAAAAAFgAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-02T20:17:15.994Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-02T20:17:15.994Z"
             },
             {
               "$type": "Document",
@@ -78,40 +173,38 @@
               "RelativeDocumentMoniker": "Celeste\\CollisionComponent.cpp",
               "ToolTip": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\CollisionComponent.cpp",
               "RelativeToolTip": "Celeste\\CollisionComponent.cpp",
-              "ViewState": "AQIAABYAAAAAAAAAAAAiwCwAAAAAAAAA",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAACwAAABBAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-02T20:13:40.763Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-02T20:13:40.763Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Character.cpp",
               "DocumentMoniker": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\Character.cpp",
               "RelativeDocumentMoniker": "Celeste\\Character.cpp",
               "ToolTip": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\Character.cpp",
               "RelativeToolTip": "Celeste\\Character.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAOAAAA",
+              "ViewState": "AQIAAF0AAAAAAAAAAAAAwH4AAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-02T20:09:42.634Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 8,
               "Title": "MovingTile.cpp",
               "DocumentMoniker": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\MovingTile.cpp",
               "RelativeDocumentMoniker": "Celeste\\MovingTile.cpp",
               "ToolTip": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\MovingTile.cpp",
               "RelativeToolTip": "Celeste\\MovingTile.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAApAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-02T20:07:27.649Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-02T20:07:27.649Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "TimerManager.cpp",
               "DocumentMoniker": "D:\\Users\\loicg\\OneDrive\\Documents\\GitHub\\Celeste\\Celeste\\TimerManager.cpp",
               "RelativeDocumentMoniker": "Celeste\\TimerManager.cpp",
@@ -119,8 +212,7 @@
               "RelativeToolTip": "Celeste\\TimerManager.cpp",
               "ViewState": "AQIAAAYAAAAAAAAAAAAAABUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-02T20:18:23.899Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-02T20:18:23.899Z"
             }
           ]
         }

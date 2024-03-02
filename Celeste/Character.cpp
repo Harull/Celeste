@@ -4,7 +4,7 @@
 #include "GravityComponent.h"
 #include "AnimationComponent.h"
 #include "CollisionComponent.h"
-#include "Timer.h"
+#include "TimerManager.h"
 
 #define CHARACTER_TEXTURE "Character/Slave.png"
 
@@ -13,7 +13,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 	: Entity(EntityData("Character", ENTITY_CHARACTER, _position, _size),
 		{ new MovementComponent(this, 1.5f, sf::Vector2f(0,0), true),
 			new GravityComponent(this, 1.6f),
-			new CollisionComponent(this)})
+			new CollisionComponent(this) })
 {
 	isJumping = false;
 	maxYVelocity = _maxYVelocity;
@@ -22,7 +22,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 	checkPoint = Vector2f(0.f, 0.f);
 
 	InitShape();
-	const Vector2f& _sizeA = Vector2f(24.4f,41.f);
+	const Vector2f& _sizeA = Vector2f(24.4f, 41.f);
 	const ReadDirection& _readDirection = READ_RIGHT;
 	const bool _toRepeat = true;
 	const int _count = 8;
@@ -50,12 +50,16 @@ void Character::InitShape()
 
 bool Character::MovingLeftRight(const sf::Event& _event)
 {
-	MovementComponent* _mvComponent = GetComponent<MovementComponent>();
 	sf::Keyboard::Key _leftKey = sf::Keyboard::Q;
 	sf::Keyboard::Key _rightKey = sf::Keyboard::D;
-
-
 	if (_event.key.code != _leftKey && _event.key.code != _rightKey)return false;
+
+	MovementComponent* _mvComponent = GetComponent<MovementComponent>();
+	if (isClimbing)
+	{
+		_mvComponent->SetDirection({0,0});
+		return false;
+	}
 	
 	sf::Vector2f _direction = _mvComponent->GetDirection();
 
@@ -73,7 +77,7 @@ bool Character::Jump(const sf::Event& _event)
 
 	//std::cout << GetComponent<CollisionComponent>()->CheckCollision().collisionSideBinary << std::endl;
 	if (isJumping || !(GetComponent<CollisionComponent>()->CheckCollision().collisionSideBinary & COLLIDE_UP)) return false;
-   	isJumping = true;
+	isJumping = true;
 	currentJumpTimerIndex = 0;
 
 	Timer* _jumpTimer = new Timer("JumpTimer", [&]() {
@@ -81,12 +85,12 @@ bool Character::Jump(const sf::Event& _event)
 		sf::Vector2f _direction = _mvComponent->GetDirection();
 
 		if (currentJumpTimerIndex == 0)
- 			currentYVelocity = maxYVelocity;
+			currentYVelocity = maxYVelocity;
 		else
 			currentYVelocity = maxYVelocity / ((currentJumpTimerIndex / 12) + 1);
 
 		if (currentYVelocity < 2) return;
-		
+
 
 		_mvComponent->Move({ 0, -currentYVelocity * 1.f });
 		/*sf::Vector2f _newDirection(_direction.x, -currentYVelocity * 1.f);
@@ -95,8 +99,50 @@ bool Character::Jump(const sf::Event& _event)
 
 		currentJumpTimerIndex++;
 		}, sf::seconds(0), true, true);
-	
+
 	return false;
+}
+
+bool Character::Climb(const sf::Event& _event)
+{
+	sf::Keyboard::Key _climbKey = sf::Keyboard::V;
+	sf::Keyboard::Key _upKey = sf::Keyboard::Z;
+	sf::Keyboard::Key _downKey = sf::Keyboard::S;
+
+	const CollisionInfos& _collisionInfo = GetComponent<CollisionComponent>()->CheckCollision(true);
+	if (!(_collisionInfo.entityTypeBinary & ENTITY_TILE) || (!(_collisionInfo.collisionSideBinary & COLLIDE_RIGHT) && !(_collisionInfo.collisionSideBinary & COLLIDE_LEFT)))
+	{
+		isClimbing = false;
+		return false;
+	}
+
+	if (_event.key.code == _climbKey)
+	{
+		if (_event.type == sf::Event::KeyPressed)
+		{
+			isClimbing = true;
+			if (Timer* _jumpTimer = TimerManager::GetInstance().GetApproximately("JumpTimer"))
+			{
+				_jumpTimer->Stop();
+				isJumping = false;
+			}
+		}
+		else
+			isClimbing = false;
+	}
+
+	if (!isClimbing) return false;
+
+
+	MovementComponent* _mvComponent = GetComponent<MovementComponent>();
+	sf::Vector2f _direction = _mvComponent->GetDirection();
+
+	float _yDirection = -(sf::Keyboard::isKeyPressed(_upKey) * 1.f) + sf::Keyboard::isKeyPressed(_downKey) * 1.f;
+	sf::Vector2f _newDirection(_direction.x, _yDirection);
+
+	_mvComponent->SetDirection(_newDirection);
+
+	return true;
 }
 
 void Character::ResetJumpValues()
@@ -108,5 +154,5 @@ void Character::ResetJumpValues()
 void Character::Update()
 {
 	Entity::Update();
-	
+
 }

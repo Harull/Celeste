@@ -15,7 +15,7 @@ struct PlayerData
 
 class Player
 {
-	 PlayerData data;
+	PlayerData data;
 	Character* character;
 	
 

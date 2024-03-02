@@ -13,6 +13,7 @@ class Character : public Entity
 	int currentJumpTimerIndex;
 	Vector2f checkPoint;
 	bool isJumping;
+	bool isClimbing;
 
 public:
 	Character() = default;
@@ -34,6 +35,10 @@ public:
 	{
 		return isJumping;
 	}
+	bool GetIsClimbing() const
+	{
+		return isClimbing;
+	}
 	void SetCheckPoint(Vector2f _checkPoint)
 	{
 		checkPoint = _checkPoint;
@@ -45,6 +50,7 @@ private:
 public:
 	bool MovingLeftRight(const sf::Event& _event);
 	bool Jump(const sf::Event& _event);
+	bool Climb(const sf::Event& _event);
 	void ResetJumpValues();
 	virtual void Update();
 	void Move();

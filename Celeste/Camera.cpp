@@ -47,7 +47,6 @@ void Camera::Update(Game* _game)
 		}
 		if (_sign <= 0)
 		{
-			Timer* _jumpTimer = TimerManager::GetInstance().GetApproximately("JumpTimer");
 			if (_jumpTimer)
 			{
 				_game->GetPlayer()->GetCharacter()->ResetJumpValues();

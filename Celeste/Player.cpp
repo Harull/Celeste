@@ -21,6 +21,8 @@ void Player::InitInput()
 {
 	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const sf::Event& _event) {return character->MovingLeftRight(_event); });
 	EventReactionManager::BindNewInputReaction(sf::Event::KeyReleased, [&](const sf::Event& _event) {return character->MovingLeftRight(_event); });
+	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const sf::Event& _event) {return character->Climb(_event); });
+	EventReactionManager::BindNewInputReaction(sf::Event::KeyReleased, [&](const sf::Event& _event) {return character->Climb(_event); });
 	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const sf::Event& _event) {return character->Jump(_event); });
 }
 
