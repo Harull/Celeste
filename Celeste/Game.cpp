@@ -7,6 +7,7 @@
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
+#define FPS(x) sf::sleep(sf::seconds(1.f / x) - _clock.getElapsedTime())
 
 Game::Game()
 {
@@ -82,13 +83,18 @@ void Game::InitPlayer()
 
 void Game::Update()
 {
+	sf::Clock _clock;
 	while (window.isOpen())
 	{
+		_clock.restart();
+		
 		UpdateEvents();
 		EntityManager::GetInstance().Update();
 		TimerManager::GetInstance().Update();
 		Camera::GetInstance().Update(this);
 		UpdateWindow();
+
+		FPS(120);
 	}
 }
 

@@ -279,7 +279,7 @@ void Menu::ShowOptions(sf::RenderWindow& window)
             {
                 if (_event.mouseButton.button == sf::Mouse::Left)
                 {
-                    sf::Vector2i _mousePosition = sf::Mouse::getPosition(window);
+                    sf::Vector2f _mousePosition(sf::Mouse::getPosition(window));
 
                     if (_decreaseVolume.getGlobalBounds().contains((float)_mousePosition.x, (float)_mousePosition.y))
                     {

@@ -11,8 +11,8 @@
 
 Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, const int _maxYVelocity, const bool _isVisible)
 	: Entity(EntityData("Character", ENTITY_CHARACTER, _position, _size),
-		{ new MovementComponent(this, 1.5f, sf::Vector2f(0,0), true),
-			new GravityComponent(this, 1.6f),
+		{ new MovementComponent(this, 2.5f, sf::Vector2f(0,0), true),
+			new GravityComponent(this, 4.5f),
 			new CollisionComponent(this) })
 {
 	isJumping = false;
@@ -52,7 +52,9 @@ bool Character::MovingLeftRight(const sf::Event& _event)
 {
 	sf::Keyboard::Key _leftKey = sf::Keyboard::Q;
 	sf::Keyboard::Key _rightKey = sf::Keyboard::D;
-	if (_event.key.code != _leftKey && _event.key.code != _rightKey)return false;
+
+	if (_event.type != sf::Event::JoystickMoved)
+		if (_event.key.code != _leftKey && _event.key.code != _rightKey)return false;
 
 	MovementComponent* _mvComponent = GetComponent<MovementComponent>();
 	if (isClimbing)
@@ -63,9 +65,17 @@ bool Character::MovingLeftRight(const sf::Event& _event)
 	
 	sf::Vector2f _direction = _mvComponent->GetDirection();
 
-	float _xDirection = -(sf::Keyboard::isKeyPressed(_leftKey) * 1.f) + sf::Keyboard::isKeyPressed(_rightKey) * 1.f;
-	sf::Vector2f _newDirection(_xDirection, _direction.y);
 
+	float _xDirection;
+	if (sf::Joystick::isConnected(0) && _event.type == sf::Event::JoystickMoved)
+	{
+		float _axisXPosition = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+		_xDirection = (_axisXPosition <= -50.f) ? -1.f : _axisXPosition >= 50.f ? 1.f : 0.f;
+	}
+	else
+		_xDirection = -(sf::Keyboard::isKeyPressed(_leftKey) * 1.f) + sf::Keyboard::isKeyPressed(_rightKey) * 1.f;
+
+	sf::Vector2f _newDirection(_xDirection, _direction.y);
 	_mvComponent->SetDirection(_newDirection);
 	return true;
 }
@@ -128,7 +138,10 @@ bool Character::Climb(const sf::Event& _event)
 			}
 		}
 		else
+		{
 			isClimbing = false;
+			GetComponent<MovementComponent>()->SetDirection({0,0});
+		}
 	}
 
 	if (!isClimbing) return false;
@@ -154,5 +167,4 @@ void Character::ResetJumpValues()
 void Character::Update()
 {
 	Entity::Update();
-
 }
