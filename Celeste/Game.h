@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Singleton.h"
 #include "Menu.h"
+#include "FirstMenu.h"
 #include "MusicManager.h"
 
 using namespace sf;
@@ -14,8 +15,7 @@ class Game : public Singleton<Game>
 	Map* map;
 	Player* player;
 	FloatRect visibleArea;
-	Menu* menu;
-	MusicManager* musicManager;
+
 
 public:
 	Vector2u GetWindowSize()
@@ -26,6 +26,9 @@ public:
 	{
 		return player;
 	}
+	RenderWindow& GetWindow() {
+		return window;
+	}
 
 
 public:
@@ -35,11 +38,14 @@ public:
 public:
 	void Launch();
 	void UpdateWindow();
+	void SelectLevel(const int _value);
+	void Resume();
 
 private:
-	bool Start();
+	void Start();
 	void Stop();
 	void InitWindow();
+	void InitMenu();
 	void InitMap(const int _value);
 	void InitInput();
 	bool ShowOptionsInGame(const Event& _event);
@@ -47,6 +53,7 @@ private:
 	void Update();
 	void UpdateVisibleArea();
 	void UpdateEvents();
+
 
 };
 

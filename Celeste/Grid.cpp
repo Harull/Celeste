@@ -20,7 +20,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 {
 	tileSize = Vector2f(48.0f, 48.0f);
 	vector<vector<char>> _gridForLoad;
-	const string _pathMap = "Maps/Level"+ to_string(_level) + "/Map" + to_string(_value) + ".txt";
+	const string _pathMap = "Maps/Level" + to_string(_level) + "/Map" + to_string(_value) + ".txt";
 	StreamManager::GetInstance().LoadSmallMap(_gridForLoad, _pathMap);
 
 	string _pathBack;
@@ -45,7 +45,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			const float _posX = static_cast<float>(_indexRow * tileSize.x + _startPos.x);
 			const float _posY = static_cast<float>(_indexColumn * tileSize.y + _startPos.y);
 			Vector2f _positionmouv;
-			
+
 			if (_char == '1')
 			{
 				_path = "Assets/Snow1.png";
@@ -61,7 +61,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			else if (_char == '3')
 			{
 				_tile = new Strawberry(Vector2f(_posX, _posY), tileSize);
-				/*_tiles.push_back(new Strawberry(Vector2f(_posX, _posY), tileSize)); 
+				/*_tiles.push_back(new Strawberry(Vector2f(_posX, _posY), tileSize));
 				_indexRow++;*/
 				//continue;
 			}
@@ -91,29 +91,29 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			}
 			else if (_char == 'd')
 			{
-				for (vector<Tile*> _tilem: tiles)
+				for (vector<Tile*> _tilem : tiles)
 				{
-					for (Tile* _tileu:_tilem)
+					for (Tile* _tileu : _tilem)
 					{
 
-					if (MovingTile* _moveTile=dynamic_cast<MovingTile*>(_tileu))
-					{
-						_positionmouv = Vector2f(_posX, _posY);
-						_moveTile->AddDestination(_positionmouv);
+						if (MovingTile* _moveTile = dynamic_cast<MovingTile*>(_tileu))
+						{
+							_positionmouv = Vector2f(_posX, _posY);
+							_moveTile->AddDestination(_positionmouv);
 
-					}
+						}
 
 					}
 
 				}
 				_tile = nullptr;
 			}
-			
-			else 
+
+			else
 			{
 				_tile = nullptr;
 			}
-			
+
 			_tiles.push_back(_tile);
 			_indexRow++;
 

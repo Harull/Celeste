@@ -1,36 +1,17 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "MusicManager.h"
-#include "TextureManager.h"
+#include "Timer.h"
+#include "Singleton.h"
 
-
-class Timer;
 
 using namespace std;
 
 class Menu
 {
-    float currentAlpha;
-    float alphaFactor;
-    bool canClick;
-	sf::Shape* backgroundShape;
-	sf::Shape* nextShape;
-	Timer* timer;
-    string nextPath;
-	int currentLevel;
-	vector<sf::Text*> levelTexts;
-    MusicManager* musicManager;
+
 
 public:
-    Menu();
-    ~Menu();
-    bool ShowMenu(sf::RenderWindow& window);
-    int ShowLevelSelector(sf::RenderWindow& window);
-    void ShowOptions(sf::RenderWindow& window);
 
-    void ShowMenuOptions(sf::RenderWindow& window);
-
-    void TransitionFill();
-    void TransitionUnFill();
+	 virtual bool Show() = 0;
 };
