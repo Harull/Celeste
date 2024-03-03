@@ -118,6 +118,9 @@
     <Filter Include="Source Files\Entities\Tiles\CheckPoint">
       <UniqueIdentifier>{22d970e6-0f92-4e65-8eb8-5b152d81b258}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Snow">
+      <UniqueIdentifier>{69d859e9-8462-4df8-81a9-86367144eed1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -256,6 +259,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CheckPoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Snow.cpp">
+      <Filter>Source Files\Snow</Filter>
+    </ClCompile>
+    <ClCompile Include="Snowflake.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -411,6 +420,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CheckPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Snow.h">
+      <Filter>Source Files\Snow</Filter>
+    </ClInclude>
+    <ClInclude Include="Snowflake.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
