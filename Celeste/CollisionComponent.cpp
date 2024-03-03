@@ -34,7 +34,8 @@ CollisionInfos CollisionComponent::CheckCollision()
 				// Normalement pas possible
 				if (_shapeTile == _currentShape)continue;
 
-				if (_floatRectBb.intersects(_shapeTile->getGlobalBounds()))
+				const sf::FloatRect& _tileGbb = _shapeTile->getGlobalBounds();
+				if (_floatRectBb.intersects(sf::FloatRect({ _tileGbb.left + 1, _tileGbb.top}, { _tileGbb.width - 2, _tileGbb.height})))
 				{
 					CollisionSide _currentSide = ComputeRelativePosition(_currentShape, _shapeTile, _collisionSideBinary);
 					_collisionSideBinary |= _currentSide;

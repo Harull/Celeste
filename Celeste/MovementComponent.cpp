@@ -27,10 +27,9 @@ MovementComponent::MovementComponent(Entity* _owner, const float _velocity,
 
 void MovementComponent::UpdateAnimations()
 {
-	Character* _character = dynamic_cast<Character*>(owner);
-	CollisionInfos _collisionInfos = _character->GetComponent<CollisionComponent>()->CheckCollision();
-	if (_character)
+	if (Character* _character = dynamic_cast<Character*>(owner))
 	{
+		CollisionInfos _collisionInfos = _character->GetComponent<CollisionComponent>()->CheckCollision();
 		if (AnimationComponent* _anim = owner->GetComponent<AnimationComponent>())
 		{
 			AnimationDirection _adirection;
@@ -43,7 +42,6 @@ void MovementComponent::UpdateAnimations()
 					_adirection = ANIM_DIR_FALL_RIGHT;
 				else
 					_adirection = ANIM_DIR_RIGHT;
-				
 			}
 			else if (direction.x < 0)
 			{
@@ -53,7 +51,6 @@ void MovementComponent::UpdateAnimations()
 					_adirection = ANIM_DIR_FALL_LEFT;
 				else
 					_adirection = ANIM_DIR_LEFT;
-				
 			}
 			else
 			{
@@ -68,7 +65,7 @@ void MovementComponent::UpdateAnimations()
 		}
 	}
 
-	
+
 }
 
 void MovementComponent::Update()
@@ -77,12 +74,13 @@ void MovementComponent::Update()
 	//std::cout << "x " << owner->GetShape()->getPosition().x << " | y " << owner->GetShape()->getPosition().y << std::endl;
 }
 
-void MovementComponent::Move()
+void MovementComponent::Move(const sf::Vector2f& _direction)
 {
 	if (!canMove)return;
-
-	TryToMove(owner, direction);
+	UpdateAnimations();
+	TryToMove(owner, _direction == sf::Vector2f() ? direction : _direction);
 }
+
 
 bool MovementComponent::TryToMove(Entity* _entity, const Vector2f& _direction)
 {

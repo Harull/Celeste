@@ -10,11 +10,13 @@ Strawberry::Strawberry(const Vector2f& _position, const Vector2f& _size, const s
 		ANIM_DIR_NONE
 	));
 	collisionReaction = [this](int _collisionSide, int _collisionSideBinary) {GetHit(_collisionSideBinary); };
+	use = false;
 }
 
 void Strawberry::GetHit(int _collisionSideBinary)
 {
 	if (_collisionSideBinary != ENTITY_CHARACTER)return;
+	if (use)return;
 	tangible = false;
 	shape->setFillColor(Color::Transparent);
 	GetComponent<AnimationComponent>()->Finish();

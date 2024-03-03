@@ -115,6 +115,9 @@
     <Filter Include="Source Files\Entities\Tiles\MovingTile">
       <UniqueIdentifier>{fdd5f921-db82-415c-ac95-7fc75c04c94e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Entities\Tiles\CheckPoint">
+      <UniqueIdentifier>{22d970e6-0f92-4e65-8eb8-5b152d81b258}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -250,6 +253,9 @@
       <Filter>Source Files\Manager\Font</Filter>
     </ClCompile>
     <ClCompile Include="MovingTile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckPoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -402,6 +408,9 @@
       <Filter>Source Files\Manager\Font</Filter>
     </ClInclude>
     <ClInclude Include="MovingTile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckPoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

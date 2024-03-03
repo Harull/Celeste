@@ -11,15 +11,15 @@
 
 Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, const int _maxYVelocity, const bool _isVisible)
 	: Entity(EntityData("Character", ENTITY_CHARACTER, _position, _size),
-		{ new MovementComponent(this, 0.5f, sf::Vector2f(0,0), true,false),
-			new GravityComponent(this, 0.7f),
+		{ new MovementComponent(this, 1.5f, sf::Vector2f(0,0), true),
+			new GravityComponent(this, 1.6f),
 			new CollisionComponent(this)})
 {
-	isVisible = _isVisible;
 	isJumping = false;
 	maxYVelocity = _maxYVelocity;
 	currentYVelocity = 0;
 	currentJumpTimerIndex = 0;
+	checkPoint = Vector2f(0.f, 0.f);
 
 	InitShape();
 	const Vector2f& _sizeA = Vector2f(24.4f,41.f);
@@ -33,10 +33,10 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 	AnimationComponent* _animation = new AnimationComponent(this, CHARACTER_TEXTURE, {
 		AnimationData("WalkRight", Vector2f(12.0f, 7.f), _sizeA, _readDirection, ANIM_DIR_RIGHT, _toRepeat, _count, _speedA),
 		AnimationData("WalkLeft", Vector2f(11.f, 53.f), _sizeA, _readDirection, ANIM_DIR_LEFT, _toRepeat, _count, _speedA),
-		AnimationData("JumpRight", Vector2f(12.f, 101.f), _sizeA, _readDirection, ANIM_DIR_JUMP_RIGHT, _toRepeat, _countStop, _speedA),
-		AnimationData("FallRight", Vector2f(36.f, 101.f), _sizeA, _readDirection, ANIM_DIR_FALL_RIGHT, _toRepeat, _countStop, _speedA),
-		AnimationData("JumpLeft", Vector2f(38.f, 153.f), _sizeA, _readDirection, ANIM_DIR_JUMP_LEFT, _toRepeat, _countStop, _speedA),
-		AnimationData("FallLeft", Vector2f(12.f, 153.f), _sizeA, _readDirection, ANIM_DIR_FALL_LEFT, _toRepeat, _countStop, _speedA),
+		AnimationData("JumpRight", Vector2f(12.f, 100.f), Vector2f(22.f,47.f), _readDirection, ANIM_DIR_JUMP_RIGHT, _toRepeat, _countStop, _speedA),
+		AnimationData("FallRight", Vector2f(38.f, 102.f), Vector2f(23.f,44.f), _readDirection, ANIM_DIR_FALL_RIGHT, _toRepeat, _countStop, _speedA),
+		AnimationData("JumpLeft", Vector2f(38.f, 151.f), Vector2f(23.f,47.f), _readDirection, ANIM_DIR_JUMP_LEFT, _toRepeat, _countStop, _speedA),
+		AnimationData("FallLeft", Vector2f(13.f, 153), Vector2f(23.f,45.f), _readDirection, ANIM_DIR_FALL_LEFT, _toRepeat, _countStop, _speedA),
 		AnimationData("None", Vector2f(12.f, 203), _sizeA, _readDirection, ANIM_DIR_NONE, _toRepeat, 1, _speedA),
 		}, direction);
 
@@ -85,12 +85,16 @@ bool Character::Jump(const sf::Event& _event)
 		else
 			currentYVelocity = maxYVelocity / ((currentJumpTimerIndex / 12) + 1);
 
-		sf::Vector2f _newDirection(_direction.x, -currentYVelocity * 1.f);
+		if (currentYVelocity < 2) return;
+		
+
+		_mvComponent->Move({ 0, -currentYVelocity * 1.f });
+		/*sf::Vector2f _newDirection(_direction.x, -currentYVelocity * 1.f);
 		if (_direction.y > _newDirection.y)
-			_mvComponent->SetDirection(_newDirection);
+			_mvComponent->SetDirection(_newDirection);*/
 
 		currentJumpTimerIndex++;
-		}, sf::seconds(0.01f), true, true);
+		}, sf::seconds(0), true, true);
 	
 	return false;
 }
@@ -106,4 +110,3 @@ void Character::Update()
 	Entity::Update();
 	
 }
-

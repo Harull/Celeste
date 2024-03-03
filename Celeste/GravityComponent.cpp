@@ -12,6 +12,6 @@ void GravityComponent::Update()
 	if (MovementComponent* _movementComp = owner->GetComponent<MovementComponent>())
 	{
 		sf::Vector2f _dir = _movementComp->GetDirection();
-		_movementComp->SetDirection({ _dir.x, _dir.y + gravity >= gravity ? gravity : _dir.y + gravity });
+		_movementComp->Move({ 0, gravity});
 	}
 }
