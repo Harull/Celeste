@@ -261,10 +261,19 @@
     <ClCompile Include="CheckPoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Snow.cpp">
-      <Filter>Source Files\Snow</Filter>
+    <ClCompile Include="FirstMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelSelectorMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuOption.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Snowflake.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Snow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -422,11 +431,20 @@
     <ClInclude Include="CheckPoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Snow.h">
-      <Filter>Source Files\Snow</Filter>
+    <ClInclude Include="FirstMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelSelectorMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuOption.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Snowflake.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Snow.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

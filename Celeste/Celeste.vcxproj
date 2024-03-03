@@ -164,6 +164,8 @@
     <ClCompile Include="MusicManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SmallMap.cpp" />
+    <ClCompile Include="Snow.cpp" />
+    <ClCompile Include="Snowflake.cpp" />
     <ClCompile Include="SoundData.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Spike.cpp" />
@@ -213,6 +215,8 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SmallMap.h" />
+    <ClInclude Include="Snow.h" />
+    <ClInclude Include="Snowflake.h" />
     <ClInclude Include="SoundData.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Spike.h" />
