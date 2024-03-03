@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "MovementComponent.h"
 
+
 MovingTile::MovingTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path):Tile(_type, _position, _size, _path)
 {
 	destination.push_back(_position);
