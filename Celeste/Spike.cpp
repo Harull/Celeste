@@ -9,6 +9,6 @@ Spike::Spike( const Vector2f& _position, const Vector2f& _size, const string& _p
 	//{
 	//	player->SetPosition(/*Checkpoint*/);
 	//}
-}
 
+}
 

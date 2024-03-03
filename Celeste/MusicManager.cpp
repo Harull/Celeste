@@ -58,3 +58,14 @@ void MusicManager::DecreaseVolume()
 		}
 	}
 }
+
+void MusicManager::MuteVolume()
+{
+	_musicData->setVolume(0);
+}
+
+void MusicManager::UnmuteVolume(int _sound)
+{
+	_musicData->setVolume(_sound);
+}
+
