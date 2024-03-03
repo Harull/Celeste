@@ -8,12 +8,13 @@
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 
-Game::Game()
+Game::Game() 
 {
 	map = nullptr;
 	player = new Player();
 	visibleArea = FloatRect();
 	menu = nullptr;
+	snow = new Snow(100.0f, 50.0f, 100.0f);
 }
 
 Game::~Game()
@@ -103,12 +104,18 @@ void Game::UpdateWindow()
 	UpdateVisibleArea();
 	window.setView(Camera::GetInstance());
 
+
 	std::vector<Drawable*> _entities = EntityManager::GetInstance().GetDrawables(visibleArea);
 	for (Drawable* _entity : _entities)
 	{
 			window.draw(*_entity);
 
 	}
+
+	dt = 0.f;
+	dt = clock.restart().asSeconds();
+	snow->update(dt);
+	snow->draw(window);
 	window.display();
 }
 

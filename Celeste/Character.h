@@ -38,6 +38,10 @@ public:
 	{
 		checkPoint = _checkPoint;
 	}
+	Vector2f GetCheckPoint()
+	{
+		return checkPoint;
+	}
 
 private:
 	void InitShape();
@@ -47,6 +51,7 @@ public:
 	bool Jump(const sf::Event& _event);
 	void ResetJumpValues();
 	virtual void Update();
+	void SetPosition(const sf::Vector2f& newPosition);
 	void Move();
 	void Dash();
 

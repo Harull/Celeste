@@ -21,10 +21,13 @@ class Menu
 	int currentLevel;
 	vector<sf::Text*> levelTexts;
     MusicManager* musicManager;
+    
 
 public:
     Menu();
     ~Menu();
+
+public:
     bool ShowMenu(sf::RenderWindow& window);
     int ShowLevelSelector(sf::RenderWindow& window);
     void ShowOptions(sf::RenderWindow& window);

@@ -8,7 +8,6 @@
 
 #define CHARACTER_TEXTURE "Character/Slave.png"
 
-
 Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, const int _maxYVelocity, const bool _isVisible)
 	: Entity(EntityData("Character", ENTITY_CHARACTER, _position, _size),
 		{ new MovementComponent(this, 1.5f, sf::Vector2f(0,0), true),
@@ -50,19 +49,26 @@ void Character::InitShape()
 
 bool Character::MovingLeftRight(const sf::Event& _event)
 {
-	MovementComponent* _mvComponent = GetComponent<MovementComponent>();
-	sf::Keyboard::Key _leftKey = sf::Keyboard::Q;
-	sf::Keyboard::Key _rightKey = sf::Keyboard::D;
+	//// Check for gamepad connection
+	//bool isControllerActive = sf::Joystick::isConnected(0);
+	//if (!isControllerActive) return false;
 
+	//// Get X axis value and apply dead zone (optional)
+	//float xAxis = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+	//const float deadZone = 0.1f;
+	//if (std::abs(xAxis) < deadZone) xAxis = 0.f;
 
-	if (_event.key.code != _leftKey && _event.key.code != _rightKey)return false;
-	
-	sf::Vector2f _direction = _mvComponent->GetDirection();
+	//// Set movement direction based on X axis
+	//MovementComponent* mvComponent = GetComponent<MovementComponent>();
+	//sf::Vector2f direction(xAxis, mvComponent->GetDirection().y);
+	//mvComponent->SetDirection(direction);
 
-	float _xDirection = -(sf::Keyboard::isKeyPressed(_leftKey) * 1.f) + sf::Keyboard::isKeyPressed(_rightKey) * 1.f;
-	sf::Vector2f _newDirection(_xDirection, _direction.y);
+	//// Check if the direction changed and update the movement state
+	//bool isMoving = (xAxis != 0.f);
+	//if (isMoving != mvComponent->IsMoving()) {
+	//	mvComponent->SetMoving(isMoving);
+	//}
 
-	_mvComponent->SetDirection(_newDirection);
 	return true;
 }
 
@@ -109,4 +115,8 @@ void Character::Update()
 {
 	Entity::Update();
 	
+}
+
+void Character::SetPosition(const sf::Vector2f& newPosition) {
+	Entity::SetPosition(newPosition);
 }
