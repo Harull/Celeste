@@ -11,11 +11,6 @@ Player::Player()
 	InitInput();
 }
 
-Player::~Player()
-{
-	delete character;
-	character = nullptr;
-}
 
 void Player::InitInput()
 {

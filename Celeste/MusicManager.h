@@ -17,5 +17,6 @@ public:
 	void DecreaseVolume();
 	void MuteVolume();
 	void UnmuteVolume(int _sound);
+	void SetVolume(int _volume);
 };
 

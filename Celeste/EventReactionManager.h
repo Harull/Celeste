@@ -46,5 +46,8 @@ public:
 			_reaction->ExecuteCallbacks(_event);
 		}
 	}
+	static void Clear() {
+		GetInstance().InternClear();
+	}
 };
 
