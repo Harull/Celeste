@@ -41,6 +41,8 @@ private:
 	void Stop();
 	void InitWindow();
 	void InitMap(const int _value);
+	void InitInput();
+	bool ShowOptionsInGame(const Event& _event);
 	void InitPlayer();
 	void Update();
 	void UpdateVisibleArea();

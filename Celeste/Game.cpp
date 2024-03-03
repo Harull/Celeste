@@ -61,6 +61,24 @@ void Game::InitMap(const int _value)
 		map = new Map();
 	}
 	map->Init(_value);
+	InitInput();
+}
+
+void Game::InitInput()
+{
+	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const Event& _event) {return ShowOptionsInGame(_event); });
+}
+
+bool Game::ShowOptionsInGame(const Event& _event) {
+	
+	if (_event.key.code == sf::Keyboard::Escape) {
+		menu = new Menu();
+		menu->ShowMenuOptions(window);
+		delete menu;
+		menu = nullptr;
+		return true;
+	}
+	return false;
 }
 
 void Game::Stop()

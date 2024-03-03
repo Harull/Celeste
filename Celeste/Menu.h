@@ -29,6 +29,8 @@ public:
     int ShowLevelSelector(sf::RenderWindow& window);
     void ShowOptions(sf::RenderWindow& window);
 
+    void ShowMenuOptions(sf::RenderWindow& window);
+
     void TransitionFill();
     void TransitionUnFill();
 };
