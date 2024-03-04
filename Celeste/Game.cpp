@@ -23,6 +23,7 @@ Game::Game()
 	visibleArea = FloatRect();
 	menu = nullptr;
 	snow = new Snow(100, 50, 100);
+	senseOfGravity = GRAVITY_NORMAL;
 }
 
 Game::~Game()
@@ -77,6 +78,14 @@ void Game::InitInput()
 	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const Event& _event) {
 		if (_event.key.code == sf::Keyboard::Escape) 
 			return MenuOption::GetInstance().Show();
+		return false;
+		});
+	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const Event& _event){
+		if (_event.key.code == sf::Keyboard::M)
+		{
+			ToggleSenseOfGravity();
+			return true;
+		}
 		return false;
 		});
 }

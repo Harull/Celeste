@@ -1,8 +1,7 @@
 #include "Animation.h"
 #include "AnimationComponent.h"
 #include "Timer.h"
-
-#include"Macro.h"
+#include "Macro.h"
 
 Animation::Animation(const string& _name, AnimationComponent* _owner, Sprite* _sprite,
 	const AnimationData& _data) : IManageable(_name)
@@ -10,8 +9,9 @@ Animation::Animation(const string& _name, AnimationComponent* _owner, Sprite* _s
 	sprite = _sprite;
 	Vector2i _position = Vector2i(static_cast<int>(_data.start.x), static_cast<int>(_data.start.y));
 	Vector2i _size = Vector2i(static_cast<int>(_data.size.x), static_cast<int>(_data.size.y));
-	IntRect _rect = IntRect(_position.x, _position.y, _size.x, _size.y);
+	IntRect _rect = IntRect(_position.x + (_size.x/2), _position.y + (_size.y/2), _size.x, _size.y);
 	sprite->setTextureRect(_rect);
+	SetOriginAtMiddle(_sprite);
 	owner = _owner;
 	data = _data;
 	Register();

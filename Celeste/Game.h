@@ -7,8 +7,14 @@
 #include "FirstMenu.h"
 #include "MusicManager.h"
 #include "Snow.h"
+#include "Macro.h"
 
 using namespace sf;
+
+enum SenseOfGravity
+{
+	GRAVITY_INVERTED = -1, GRAVITY_NORMAL = 1
+};
 
 class Game : public Singleton<Game>
 {
@@ -18,9 +24,12 @@ class Game : public Singleton<Game>
 	FloatRect visibleArea;
 	Menu* menu;
 	MusicManager* musicManager;
+
 	Snow* snow;
-    sf::Clock clock;
+	sf::Clock clock;
 	float dt;
+
+	SenseOfGravity senseOfGravity;
 
 public:
 	Vector2u GetWindowSize()
@@ -34,7 +43,21 @@ public:
 	RenderWindow& GetWindow() {
 		return window;
 	}
-
+	SenseOfGravity GetSenseOfGravity()const
+	{
+		return senseOfGravity;
+	}
+	void ToggleSenseOfGravity()
+	{
+		senseOfGravity = static_cast<SenseOfGravity>(static_cast<int>(senseOfGravity) * -1);
+		std::vector<Animation*> _vectorOfAnims = player->GetCharacter()->GetComponent<AnimationComponent>()->GetAllValues();
+		for (Animation* _anims : _vectorOfAnims)
+		{
+			sf::Sprite* _sprite = _anims->GetSprite();
+			SetOriginAtMiddle(_sprite);
+			_sprite->setRotation(180);
+		}
+	}
 
 public:
 	Game();
