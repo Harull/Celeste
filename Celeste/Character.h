@@ -81,7 +81,7 @@ public:
 	{
 		isDie = _isDie;
 	}
-	bool GetIsDie()
+	bool IsDie()
 	{
 		return isDie;
 	}
@@ -101,6 +101,7 @@ public:
 	void Move();
 	void Dash();
 	void Die();
+	void Respawn();
 
 };
 

@@ -285,7 +285,13 @@ void Character::Die()
 		ResetDashValues();
 		
 	}
-	shape->setPosition(checkPoint); 
+	
 	isDie = true;
 
+}
+
+void Character::Respawn()
+{
+	shape->setPosition(checkPoint);
+	isDie = false();
 }

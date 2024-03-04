@@ -54,10 +54,10 @@ CollisionInfos CollisionComponent::CheckCollision(const bool _isSpecificCheckOnW
 						float _xCurrentOverlap = ComputeXOverlap(_currentShape, _shapeTile);
 						_minXOverlap = _minXOverlap > _xCurrentOverlap ? _xCurrentOverlap : _minXOverlap;
 					}
-					Character* _hero = dynamic_cast<Character*>(EntityManager::GetInstance().Get("Character"));
-					if (_hero->GetIsDie())
+					Character* _hero = Game::GetInstance().GetPlayer()->GetCharacter();
+					if (_hero->IsDie())
 					{
-						_hero->SetDie(false);
+						_hero->Respawn();
 						return CollisionInfos();
 					}
 				}

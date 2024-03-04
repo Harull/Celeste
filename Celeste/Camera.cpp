@@ -38,7 +38,7 @@ void Camera::Update(Game* _game)
 		if (_jumpTimer)
 			_jumpTimer->Start();
 	}
-	else if (previousIndexes.y != _index.y)
+	 if (previousIndexes.y != _index.y)
 	{
 		const float _sign = _index.y - previousIndexes.y;
 		while (!IsNearlyEqual(getCenter().y, _index.y * 1080.f + 1080.f / 2.f))

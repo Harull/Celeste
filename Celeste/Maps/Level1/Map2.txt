@@ -9,7 +9,7 @@ Maps\Level1\Loic_le_raciste.png
                                        1
                                        1
 1       c                              1
-1    fffffff    m                      1
+1    fffffff1   m                      1
 1                                      1
 1                                      1
 1                                      1
