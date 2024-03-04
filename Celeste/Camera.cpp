@@ -30,8 +30,9 @@ void Camera::Update(Game* _game)
 
 		while (!IsNearlyEqual(getCenter().x, _index.x * 1920.f + 1920.f / 2.f))
 		{
+			_game->UpdateSnow();
 			_game->UpdateWindow();
-			move(_sign * 0.6f , 0);
+			move(_sign * 0.8f , 0);
 		}
 
 		if (_jumpTimer)
@@ -42,12 +43,12 @@ void Camera::Update(Game* _game)
 		const float _sign = _index.y - previousIndexes.y;
 		while (!IsNearlyEqual(getCenter().y, _index.y * 1080.f + 1080.f / 2.f))
 		{
+			_game->UpdateSnow();
 			_game->UpdateWindow();
-			move(0, _sign * 0.4f);
+			move(0, _sign * 0.5f);
 		}
 		if (_sign <= 0)
 		{
-			Timer* _jumpTimer = TimerManager::GetInstance().GetApproximately("JumpTimer");
 			if (_jumpTimer)
 			{
 				_game->GetPlayer()->GetCharacter()->ResetJumpValues();
@@ -60,8 +61,6 @@ void Camera::Update(Game* _game)
 			_game->GetPlayer()->GetCharacter()->GetComponent<MovementComponent>()->Move();
 		}
 	}
-
-	
 
 	previousIndexes = _index;
 }

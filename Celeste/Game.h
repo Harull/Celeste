@@ -6,6 +6,7 @@
 #include "Menu.h"
 #include "FirstMenu.h"
 #include "MusicManager.h"
+#include "Snow.h"
 
 using namespace sf;
 
@@ -15,7 +16,11 @@ class Game : public Singleton<Game>
 	Map* map;
 	Player* player;
 	FloatRect visibleArea;
-
+	Menu* menu;
+	MusicManager* musicManager;
+	Snow* snow;
+    sf::Clock clock;
+	float dt;
 
 public:
 	Vector2u GetWindowSize()
@@ -54,6 +59,7 @@ private:
 	void UpdateVisibleArea();
 	void UpdateEvents();
 
-
+public:
+	void UpdateSnow();
 };
 

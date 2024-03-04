@@ -10,23 +10,23 @@
 #include "AnimationComponent.h"
 #include "MenuSoundBoard.h"
 
-
-
-
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
+#define FPS(x) sf::sleep(sf::seconds(1.f / x) - _clock.getElapsedTime())
 
-Game::Game()
+Game::Game() 
 {
 	map = nullptr;
 	player = nullptr;
 	visibleArea = FloatRect();
+	menu = nullptr;
+	snow = new Snow(100, 50, 100);
 }
 
 Game::~Game()
 {
 	delete player;
-
+	delete snow;
 }
 
 void Game::Launch()
@@ -39,7 +39,6 @@ void Game::Start()
 {
 	InitWindow();
 	InitMenu();
-
 	MusicManager::GetInstance().Play("Celeste_OST.mp3");
 	MusicManager::GetInstance().SetVolume(20.f);
 
@@ -74,9 +73,9 @@ void Game::InitMap(const int _value)
 void Game::InitInput()
 {
 	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const Event& _event) {
-		if (_event.key.code == sf::Keyboard::Escape) {
+		if (_event.key.code == sf::Keyboard::Escape) 
 			return MenuOption::GetInstance().Show();
-		}
+		return false;
 		});
 }
 
@@ -99,7 +98,8 @@ void Game::InitWindow()
 {
 	//window.create(VideoMode(1280, 720), "Celeste");
 	const int _xWindowSize = 1920, _yWindowSize = 1080;
-	window.create(VideoMode(_xWindowSize, _yWindowSize), "Celeste", Style::Fullscreen);
+	window.create(VideoMode(_xWindowSize, _yWindowSize), "Celeste", Style::Resize);
+
 	Camera::GetInstance().Init({ 0,0 }, { 1920, 1080 });
 }
 
@@ -111,13 +111,19 @@ void Game::InitPlayer()
 
 void Game::Update()
 {
+	sf::Clock _clock;
 	while (window.isOpen())
 	{
+		_clock.restart();
+		
 		UpdateEvents();
 		EntityManager::GetInstance().Update();
 		TimerManager::GetInstance().Update();
 		Camera::GetInstance().Update(this);
 		UpdateWindow();
+		UpdateSnow();
+
+		FPS(144);
 	}
 }
 
@@ -136,8 +142,10 @@ void Game::UpdateWindow()
 	for (Drawable* _entity : _entities)
 	{
 		window.draw(*_entity);
-
 	}
+
+	window.setView(window.getDefaultView());
+	snow->draw(window);
 	window.display();
 }
 
@@ -163,6 +171,13 @@ void Game::UpdateEvents()
 			EventReactionManager::Update(_event);
 		}
 	}
+}
+
+void Game::UpdateSnow()
+{
+	dt = 0.f;
+	dt = clock.restart().asSeconds();
+	snow->update(dt);
 }
 
 

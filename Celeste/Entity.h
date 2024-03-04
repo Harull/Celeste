@@ -60,10 +60,15 @@ public:
 		return shape->getPosition();
 	}
 
+	void SetPosition(const Vector2f& newPosition) {
+		shape->setPosition(newPosition);
+	}
+
 	Shape* GetShape()const
 	{
 		return shape;
 	}
+
 	function<void(int _collisionSide, int _collisionSideBinary)> GetCollisionReaction()
 	{
 		return collisionReaction;

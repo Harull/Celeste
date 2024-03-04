@@ -1,6 +1,6 @@
 #include "GravityComponent.h"
 #include "MovementComponent.h"
-
+#include "Character.h"
 
 GravityComponent::GravityComponent(Entity* _owner, const float _gravity) : Component(_owner)
 {
@@ -9,6 +9,10 @@ GravityComponent::GravityComponent(Entity* _owner, const float _gravity) : Compo
 
 void GravityComponent::Update()
 {
+	if (Character* _character = dynamic_cast<Character*>(owner))
+		if (_character->GetIsClimbing())
+			return;
+
 	if (MovementComponent* _movementComp = owner->GetComponent<MovementComponent>())
 	{
 		sf::Vector2f _dir = _movementComp->GetDirection();

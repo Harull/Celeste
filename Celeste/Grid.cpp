@@ -1,11 +1,13 @@
 #include "Grid.h"
 #include "Game.h"
 #include "MapManager.h"
+#include "Spike.h"
 #include "Strawberry.h"
 #include"FragileTile.h"
 #include "Macro.h"
 #include "MovingTile.h"
 #include"CheckPoint.h"
+#include "EasterEgg.h"
 
 Grid::Grid(const Vector2i _tilesCount)
 {
@@ -56,11 +58,18 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			{
 				_path = "Assets/SpikeTop.png";
 				_type = ENTITY_TILE;
-				_tile = new Tile(_type, Vector2f(_posX, _posY), tileSize, _path);
+				_tile = new Spike(Vector2f(_posX, _posY), tileSize, _path, ENTITY_TILE);
 			}
 			else if (_char == '3')
 			{
 				_tile = new Strawberry(Vector2f(_posX, _posY), tileSize);
+				/*_tiles.push_back(new Strawberry(Vector2f(_posX, _posY), tileSize));
+				_indexRow++;*/
+				//continue;
+			}
+			else if (_char == '4')
+			{
+				_tile = new EasterEgg(Vector2f(_posX, _posY), tileSize);
 				/*_tiles.push_back(new Strawberry(Vector2f(_posX, _posY), tileSize));
 				_indexRow++;*/
 				//continue;
@@ -73,7 +82,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			}
 			else if (_char == 'c')
 			{
-				_path = "Assets/Vide.png";
+				_path = " ";
 				_type = ENTITY_CHECKPOINT;
 				_tile = new CheckPoint(_type, Vector2f(_posX, _posY), tileSize, _path);
 			}
@@ -96,11 +105,10 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 					for (Tile* _tileu : _tilem)
 					{
 
-						if (MovingTile* _moveTile = dynamic_cast<MovingTile*>(_tileu))
+						if (MovingTile* _moveTile=dynamic_cast<MovingTile*>(_tileu))
 						{
 							_positionmouv = Vector2f(_posX, _posY);
 							_moveTile->AddDestination(_positionmouv);
-
 						}
 
 					}

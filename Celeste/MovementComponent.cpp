@@ -25,6 +25,7 @@ MovementComponent::MovementComponent(Entity* _owner, const float _velocity,
 	freeMovement = _freeMovement;
 }
 
+//TODO le bouger de là, le mettre dans character
 void MovementComponent::UpdateAnimations()
 {
 	if (Character* _character = dynamic_cast<Character*>(owner))
@@ -34,30 +35,47 @@ void MovementComponent::UpdateAnimations()
 		{
 			AnimationDirection _adirection;
 			const bool _characterIsJumping = _character->GetIsJumping();
-			if (direction.x > 0)
+			const bool _characterIsClimbing = _character->GetIsClimbing();
+			const bool _characterIsDashing = _character->GetIsDashing();
+
+			if (_characterIsClimbing)
 			{
-				if (_characterIsJumping)
+				CollisionInfos _collisionInfosOnWalls = _character->GetComponent<CollisionComponent>()->CheckCollision(true);
+
+				if (direction.y > 0 || direction.y < 0)
+					_adirection = _collisionInfosOnWalls.collisionSideBinary & COLLIDE_RIGHT ? ANIM_DIR_CLIMB_LEFT : ANIM_DIR_CLIMB_RIGHT;
+				else
+					_adirection = _collisionInfosOnWalls.collisionSideBinary & COLLIDE_RIGHT ? ANIM_DIR_GRAB_LEFT : ANIM_DIR_GRAB_RIGHT;
+			}
+			else if (direction.x > 0)
+			{
+				if (_characterIsDashing)
+					_adirection = ANIM_DIR_DASH_RIGHT;
+				else if (_characterIsJumping)
 					_adirection = ANIM_DIR_JUMP_RIGHT;
-				else if (!(_collisionInfos.collisionSideBinary & COLLIDE_UP) && !_characterIsJumping)
+				else if (!(_collisionInfos.collisionSideBinary == COLLIDE_UP) && !_characterIsJumping)
 					_adirection = ANIM_DIR_FALL_RIGHT;
 				else
 					_adirection = ANIM_DIR_RIGHT;
 			}
 			else if (direction.x < 0)
 			{
-				if (_characterIsJumping)
+				if (_characterIsDashing)
+					_adirection = ANIM_DIR_DASH_LEFT;
+				else if (_characterIsJumping)
 					_adirection = ANIM_DIR_JUMP_LEFT;
-				else if (!(_collisionInfos.collisionSideBinary & COLLIDE_UP) && !_characterIsJumping)
+				else if (!(_collisionInfos.collisionSideBinary == COLLIDE_UP) && !_characterIsJumping)
 					_adirection = ANIM_DIR_FALL_LEFT;
 				else
 					_adirection = ANIM_DIR_LEFT;
 			}
 			else
 			{
-				if (_characterIsJumping)
+				if (_characterIsDashing)
+					_adirection = ANIM_DIR_DASH_RIGHT;
+				else if (_characterIsJumping)
 					_adirection = ANIM_DIR_JUMP_RIGHT;
-				else if (!(_collisionInfos.collisionSideBinary & COLLIDE_UP) && !_characterIsJumping)
-					_adirection = ANIM_DIR_FALL_RIGHT;
+				
 				else
 					_adirection = ANIM_DIR_NONE;
 			}
@@ -74,19 +92,28 @@ void MovementComponent::Update()
 	//std::cout << "x " << owner->GetShape()->getPosition().x << " | y " << owner->GetShape()->getPosition().y << std::endl;
 }
 
-void MovementComponent::Move(const sf::Vector2f& _direction)
+void MovementComponent::Move(const sf::Vector2f& _direction, const bool _applyVelocity)
+{
+	if (!canMove)return;
+	TryToMove(owner, _direction, _applyVelocity);
+	UpdateAnimations();
+}
+
+void MovementComponent::Move(const bool _applyVelocity)
 {
 	if (!canMove)return;
 	UpdateAnimations();
-	TryToMove(owner, _direction == sf::Vector2f() ? direction : _direction);
+	TryToMove(owner, direction, _applyVelocity);
 }
 
 
-bool MovementComponent::TryToMove(Entity* _entity, const Vector2f& _direction)
+bool MovementComponent::TryToMove(Entity* _entity, const Vector2f& _direction, const bool _applyVelocity)
 {
 	if (!canMove)return true;
 
-	const Vector2f& _destination =freeMovement ? Vector2f(_direction.x * velocity, _direction.y*velocity): Vector2f(_direction.x * velocity, _direction.y);
+	Vector2f _destination = freeMovement ? Vector2f(_direction.x * velocity, _direction.y * velocity) : Vector2f(_direction.x * velocity, _direction.y);
+	if (!_applyVelocity)
+		_destination = _direction;
 	_entity->GetShape()->move(_destination);
 
 	if (CollisionComponent* _collision = _entity->GetComponent<CollisionComponent>())
@@ -107,15 +134,32 @@ bool MovementComponent::TryToMove(Entity* _entity, const Vector2f& _direction)
 				_newPos = { _newPos.x, -_collisionInfos.smallestYOverlap + 0.1f };
 				if (Character* _character = dynamic_cast<Character*>(_entity))
 				{
-					try
+					if (_character->GetCurrentJumpTimerIndex() > 1)
 					{
-						if (_character->GetCurrentJumpTimerIndex() < 1) throw exception();
 						_character->SetIsJumping(false);
-						Timer* _jumpTimer = TimerManager::GetInstance().GetApproximately("JumpTimer");
-						if (_jumpTimer)
+						if (Timer* _jumpTimer = TimerManager::GetInstance().GetApproximately("JumpTimer"))
 							_jumpTimer->Stop();
 					}
-					catch (const std::exception&){}
+				}
+			}
+
+			if (Character* _character = dynamic_cast<Character*>(_entity))
+			{
+				Timer* _dashTimer = TimerManager::GetInstance().GetApproximately("DashTimer");
+				if (_character->GetCurrentDashTimerIndex() > 10)
+				{
+					if (_dashTimer)
+						_dashTimer->Stop();	
+					_character->ResetDashValues();
+					if (_collisionSideBinary & COLLIDE_UP)
+						_character->SetDashCount(_character->GetMaxDashCount());
+
+				}
+				else if (!_dashTimer)
+				{
+					_character->ResetDashValues();
+					if (_collisionSideBinary & COLLIDE_UP)
+						_character->SetDashCount(_character->GetMaxDashCount());
 				}
 			}
 

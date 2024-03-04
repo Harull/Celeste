@@ -2,7 +2,9 @@
 #include"CollisionComponent.h"
 #include"TimerManager.h"
 #include "TextureManager.h"
+
 #define PATH_FRAGILE_TILE "Assets/Snow1.png"
+
 FragileTile::FragileTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path):Tile(_type,_position,_size,_path)
 {
 	collisionReaction = [this](int _collisionSide, int _collisionSideBinary) {GetHit(_collisionSide, _collisionSideBinary); };
@@ -18,7 +20,7 @@ void FragileTile::GetHit(int _collisionSide, int _collisionSideBinary)
 	new Timer("TimerDestroy" + id,
 		[this]() {
 			
-			TextureManager::GetInstance().Load(shape, " ");
+			TextureManager::GetInstance().Load(shape, "Assets/Snow1_erase.png");
 	tangible = false;
 		new Timer("TimerRespawn" + id, [this]() {
 		
@@ -28,7 +30,4 @@ void FragileTile::GetHit(int _collisionSide, int _collisionSideBinary)
 	
 		}, seconds(2));
 
-
-
-	
 }

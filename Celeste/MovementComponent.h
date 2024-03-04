@@ -50,8 +50,9 @@ public:
 
 public:
     void Update()override;
-    void Move(const sf::Vector2f& _direction = sf::Vector2f());
-    bool TryToMove(Entity* _entity, const Vector2f& _direction);
+    void Move(const sf::Vector2f& _direction, const bool _applyVelocity = true);
+    void Move(const bool _applyVelocity = true);
+    bool TryToMove(Entity* _entity, const Vector2f& _direction, const bool _applyVelocity);
     Vector2f GetDirectionByPositions(Vector2f _destination);
     void UpdateAnimations();
     

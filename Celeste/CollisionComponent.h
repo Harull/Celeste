@@ -38,7 +38,7 @@ public:
 	/// <returns>Retourne:
 	/// [- les types avec lequel il a collide]
 	/// [- la façon dont il a collide les objets qui ont une collision] [autre chose]</returns>
-	CollisionInfos CheckCollision();
+	CollisionInfos CheckCollision(const bool _isSpecificCheckOnWalls = false);
 
 	virtual void Update()override;
 

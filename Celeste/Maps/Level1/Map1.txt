@@ -1,7 +1,7 @@
-Maps\Level1\Background.png
+Maps\Level1\Loic_le_raciste.png
 1111111111111111111111111111111111111111
 1                                      1
-1                                      1
+1   c                                  1
 1                                      1
 xxxxx                                  1
 11111                           3      1

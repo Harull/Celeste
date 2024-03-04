@@ -5,7 +5,7 @@
 #include"FragileTile.h"
 
 
-CollisionInfos CollisionComponent::CheckCollision()
+CollisionInfos CollisionComponent::CheckCollision(const bool _isSpecificCheckOnWalls)
 {
 	sf::Shape* _currentShape = owner->GetShape();
 	sf::FloatRect _floatRectBb = _currentShape->getGlobalBounds();
@@ -35,7 +35,7 @@ CollisionInfos CollisionComponent::CheckCollision()
 				if (_shapeTile == _currentShape)continue;
 
 				const sf::FloatRect& _tileGbb = _shapeTile->getGlobalBounds();
-				if (_floatRectBb.intersects(sf::FloatRect({ _tileGbb.left + 1, _tileGbb.top}, { _tileGbb.width - 2, _tileGbb.height})))
+				if (_floatRectBb.intersects(_isSpecificCheckOnWalls ? _tileGbb : sf::FloatRect({ _tileGbb.left + 1, _tileGbb.top}, { _tileGbb.width - 2, _tileGbb.height})))
 				{
 					CollisionSide _currentSide = ComputeRelativePosition(_currentShape, _shapeTile, _collisionSideBinary);
 					_collisionSideBinary |= _currentSide;
@@ -53,6 +53,12 @@ CollisionInfos CollisionComponent::CheckCollision()
 					{
 						float _xCurrentOverlap = ComputeXOverlap(_currentShape, _shapeTile);
 						_minXOverlap = _minXOverlap > _xCurrentOverlap ? _xCurrentOverlap : _minXOverlap;
+					}
+					Character* _hero = dynamic_cast<Character*>(EntityManager::GetInstance().Get("Character"));
+					if (_hero->GetIsDie())
+					{
+						_hero->SetDie(false);
+						return CollisionInfos();
 					}
 				}
 			}

@@ -104,12 +104,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\SFML-2.6.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\SFML-2.6.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\SFML-2.6.1\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\SFML-2.6.1\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -141,6 +141,7 @@
     <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="EasterEgg.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="EntityType.h" />
@@ -163,8 +164,11 @@
     <ClCompile Include="MovingTile.cpp" />
     <ClCompile Include="MusicData.cpp" />
     <ClCompile Include="MusicManager.cpp" />
+    <ClCompile Include="OtherWindow.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SmallMap.cpp" />
+    <ClCompile Include="Snow.cpp" />
+    <ClCompile Include="Snowflake.cpp" />
     <ClCompile Include="SoundData.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Spike.cpp" />
@@ -187,6 +191,7 @@
     <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="EasterEgg.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="EventReaction.h" />
@@ -212,9 +217,12 @@
     <ClInclude Include="MultimapManager.h" />
     <ClInclude Include="MusicData.h" />
     <ClInclude Include="MusicManager.h" />
+    <ClInclude Include="OtherWindow.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SmallMap.h" />
+    <ClInclude Include="Snow.h" />
+    <ClInclude Include="Snowflake.h" />
     <ClInclude Include="SoundData.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Spike.h" />
