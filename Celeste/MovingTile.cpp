@@ -39,8 +39,8 @@ void MovingTile::Move(int _collisionSide, int _collisionSideBinary)
 
 void MovingTile::Update()
 {
-	Entity::Update();
 	CarryCharacter();
+	Entity::Update();
 	MovementComponent* _move = GetComponent<MovementComponent>();
 	if(!_move->IsAtLocation(currentDestination))return;
 	if (indexDestination == 0)

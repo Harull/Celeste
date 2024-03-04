@@ -66,6 +66,9 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 
 
 	components.push_back(_animation);
+	shape->setOutlineThickness(2);
+	shape->setOutlineColor(sf::Color::Red);
+	shape->setFillColor(sf::Color::Transparent);
 }
 
 void Character::InitShape()

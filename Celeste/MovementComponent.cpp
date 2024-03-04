@@ -10,7 +10,7 @@
 
 MovementComponent::MovementComponent(Entity* _owner,bool _canMove,bool _freeMovement) : Component(_owner)
 {
-	velocity = 0.1f;
+	velocity = 0.5f;
 	direction = Vector2f();
 	canMove = _canMove;
 	freeMovement = _freeMovement;

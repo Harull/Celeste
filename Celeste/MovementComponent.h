@@ -45,7 +45,7 @@ public:
         return Distance(owner->GetPosition(), _destination) <= 10.0f;
     }
 public:
-    MovementComponent(Entity* _owner,bool _canMove=true,bool _freeMovement=false);
+    MovementComponent(Entity* _owner,bool _canMove = true,bool _freeMovement = false);
     MovementComponent(Entity* _owner, const float _velocity, const Vector2f& _direction, const bool _canMove = true, bool _freeMovement = false);
 
 public:

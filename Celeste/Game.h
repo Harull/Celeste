@@ -54,8 +54,7 @@ public:
 		for (Animation* _anims : _vectorOfAnims)
 		{
 			sf::Sprite* _sprite = _anims->GetSprite();
-			SetOriginAtMiddle(_sprite);
-			_sprite->setRotation(180);
+			_sprite->rotate(180);
 		}
 	}
 

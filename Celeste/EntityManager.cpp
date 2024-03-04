@@ -4,7 +4,6 @@ void EntityManager::Update()
 {
 	for (auto _pair : allValues)
 	{
-		
 		_pair.second->Update();
 	}
 	/*for (Entity* _entity : GetAllValues())d

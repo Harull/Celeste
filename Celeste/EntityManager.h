@@ -18,11 +18,10 @@ public:
 
 		for (Entity* _entity : GetAllValues())
 		{
-
 			if (AnimationComponent* _animation = _entity->GetComponent<AnimationComponent>())
 			{
+				_drawables.push_back(_entity->GetShape());
 				_drawables.push_back(_animation->GetCurrentAnimation()->GetSprite());
-
 			}
 			else
 			{
@@ -43,6 +42,7 @@ public:
 			if (_visibleArea.intersects(_entity->GetShape()->getGlobalBounds())) {
 				if (AnimationComponent* _animation = _entity->GetComponent<AnimationComponent>())
 				{
+					_drawables.push_back(_entity->GetShape());
 					_drawables.push_back(_animation->GetCurrentAnimation()->GetSprite());
 				}
 				else
