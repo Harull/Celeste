@@ -35,7 +35,7 @@ void AnimationComponent::Update()
 	if (currentIndex != -1)
 	{
 		Animation* _currentAnimation = GetCurrentAnimation();
-		if (!_currentAnimation) return;
+	if (!_currentAnimation) return;
 		
 		//cout << "Stop : " << _currentAnimation->GetData().name << endl;
 		_currentAnimation->Stop();

@@ -279,8 +279,13 @@ void Character::Update()
 
 void Character::Die()
 {
-	shape->setPosition(checkPoint);
-	GetComponent<CollisionComponent>()->CheckCollision();
+	if (Timer* _dashTimer = TimerManager::GetInstance().GetApproximately("DashTimer"))
+	{
+		_dashTimer->Stop();
+		ResetDashValues();
+		
+	}
+	shape->setPosition(checkPoint); 
 	isDie = true;
 
 }

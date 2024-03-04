@@ -49,32 +49,33 @@ void MovementComponent::UpdateAnimations()
 			}
 			else if (direction.x > 0)
 			{
-				if (_characterIsJumping)
-					_adirection = ANIM_DIR_JUMP_RIGHT;
 				if (_characterIsDashing)
 					_adirection = ANIM_DIR_DASH_RIGHT;
-				else if (!(_collisionInfos.collisionSideBinary & COLLIDE_UP) && !_characterIsJumping)
+				else if (_characterIsJumping)
+					_adirection = ANIM_DIR_JUMP_RIGHT;
+				else if (!(_collisionInfos.collisionSideBinary == COLLIDE_UP) && !_characterIsJumping)
 					_adirection = ANIM_DIR_FALL_RIGHT;
 				else
 					_adirection = ANIM_DIR_RIGHT;
 			}
 			else if (direction.x < 0)
 			{
-				if (_characterIsJumping)
-					_adirection = ANIM_DIR_JUMP_LEFT;
 				if (_characterIsDashing)
 					_adirection = ANIM_DIR_DASH_LEFT;
-				else if (!(_collisionInfos.collisionSideBinary & COLLIDE_UP) && !_characterIsJumping)
+				else if (_characterIsJumping)
+					_adirection = ANIM_DIR_JUMP_LEFT;
+				else if (!(_collisionInfos.collisionSideBinary == COLLIDE_UP) && !_characterIsJumping)
 					_adirection = ANIM_DIR_FALL_LEFT;
 				else
 					_adirection = ANIM_DIR_LEFT;
 			}
 			else
 			{
-				if (_characterIsJumping)
+				if (_characterIsDashing)
+					_adirection = ANIM_DIR_DASH_RIGHT;
+				else if (_characterIsJumping)
 					_adirection = ANIM_DIR_JUMP_RIGHT;
-				else if (!(_collisionInfos.collisionSideBinary & COLLIDE_UP) && !_characterIsJumping)
-					_adirection = ANIM_DIR_FALL_RIGHT;
+				
 				else
 					_adirection = ANIM_DIR_NONE;
 			}
@@ -94,8 +95,8 @@ void MovementComponent::Update()
 void MovementComponent::Move(const sf::Vector2f& _direction, const bool _applyVelocity)
 {
 	if (!canMove)return;
-	UpdateAnimations();
 	TryToMove(owner, _direction, _applyVelocity);
+	UpdateAnimations();
 }
 
 void MovementComponent::Move(const bool _applyVelocity)
