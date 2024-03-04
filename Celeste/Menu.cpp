@@ -232,7 +232,7 @@ void Menu::ShowOptions(sf::RenderWindow& window)
 
     sf::Texture _backgroundTexture;
     if (!_backgroundTexture.loadFromFile("Assets/Background/options_background.png")) {
-        std::cout << "ERROR - Texture du fond d'écran non chargée" << std::endl;
+        std::cerr << "ERROR - Texture du fond d'écran non chargée" << std::endl;
     }
 
     sf::Sprite _backgroundSprite(_backgroundTexture);

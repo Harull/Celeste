@@ -60,7 +60,5 @@ void Camera::Update(Game* _game)
 		}
 	}
 
-	
-
 	previousIndexes = _index;
 }
