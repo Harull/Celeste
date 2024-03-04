@@ -168,3 +168,8 @@ void Character::Update()
 {
 	Entity::Update();
 }
+
+void Character::SetPosition(const sf::Vector2f& newPosition)
+{
+	shape->setPosition(newPosition);
+}

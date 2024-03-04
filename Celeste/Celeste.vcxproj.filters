@@ -262,7 +262,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Snow.cpp">
-      <Filter>Source Files\Snow</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Snowflake.cpp">
       <Filter>Source Files</Filter>
@@ -420,12 +420,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CheckPoint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Snow.h">
-      <Filter>Source Files\Snow</Filter>
-    </ClInclude>
-    <ClInclude Include="Snowflake.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
