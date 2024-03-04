@@ -6,9 +6,9 @@ Maps\Level1\Loic_le_raciste.png
 1                                      1
 1                                      1
                                        1
-                                       1
-                                       1
-1       c                              1
+c                                      1
+         c                             1
+1                                      1
 1    fffffff    m                      1
 1                                      1
 1                                      1
@@ -19,5 +19,5 @@ Maps\Level1\Loic_le_raciste.png
 1                                      1
 1                                      1
 1                                      1
-1                                      1
+1        22                            1
 1111111111111111111111111111111111111111

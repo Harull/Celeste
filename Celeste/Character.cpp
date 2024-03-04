@@ -276,3 +276,11 @@ void Character::Update()
 {
 	Entity::Update();
 }
+
+void Character::Die()
+{
+	shape->setPosition(checkPoint);
+	GetComponent<CollisionComponent>()->CheckCollision();
+	isDie = true;
+
+}

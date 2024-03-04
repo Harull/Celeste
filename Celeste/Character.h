@@ -17,6 +17,7 @@ class Character : public Entity
 	bool isJumping;
 	bool isClimbing;
 	bool isDashing;
+	bool isDie;
 
 	int dashCount;
 	int maxDashCount;
@@ -76,6 +77,14 @@ public:
 	{
 		return maxDashCount;
 	}
+	void SetDie(bool _isDie)
+	{
+		isDie = _isDie;
+	}
+	bool GetIsDie()
+	{
+		return isDie;
+	}
 
 private:
 	void InitShape();
@@ -91,6 +100,7 @@ public:
 	void SetPosition(const sf::Vector2f& newPosition);
 	void Move();
 	void Dash();
+	void Die();
 
 };
 

@@ -3,6 +3,7 @@
 CheckPoint::CheckPoint(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path):Tile(  _type,   _position,   _size,   _path)
 {
 	collisionReaction=[this](int _collisionSide, int _collisionSideBinary) {GetHit(_collisionSide, _collisionSideBinary); };
+	/*shape->setFillColor(Color::Transparent);*/
 }
 
 void CheckPoint::GetHit(int _collisionSide, int _collisionSideBinary)

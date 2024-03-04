@@ -2,6 +2,7 @@
 #include"CollisionComponent.h"
 #include "TextureManager.h"
 #include"TimerManager.h"
+#include"EntityManager.h"
 
 #define PATH_FRAGILE_TILE "Assets/Snow1.png"
 
@@ -13,6 +14,8 @@ Spike::Spike( const Vector2f& _position, const Vector2f& _size, const string& _p
 }
 
 void Spike::GetHit(int _collisionSide, int _collisionSideBinary) {
-    std::cout << "Le spike te tue" << endl; 
+	Character* _hero = dynamic_cast<Character*>(EntityManager::GetInstance().Get("Character"));
+	_hero->Die();
+	cout << "Die"<<endl;
 }
 
