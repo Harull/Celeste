@@ -440,9 +440,6 @@
     <ClInclude Include="CheckPoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FirstMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MenuSoundBoard.h">
       <Filter>Source Files\Menu</Filter>
     </ClInclude>
@@ -463,6 +460,9 @@
     </ClInclude>
     <ClInclude Include="EasterEgg.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstMenu.h">
+      <Filter>Source Files\Menu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

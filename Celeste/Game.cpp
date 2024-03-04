@@ -72,8 +72,8 @@ void Game::InitMap(const int _value)
 
 void Game::InitInput()
 {
-	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const Event& _event) {
-		if (_event.key.code == sf::Keyboard::Escape) 
+	EventReactionManager::BindNewInputReaction(sf::Event::JoystickButtonPressed, [&](const Event& _event) {
+		if (_event.joystickButton.button == 7)
 			return MenuOption::GetInstance().Show();
 		return false;
 		});

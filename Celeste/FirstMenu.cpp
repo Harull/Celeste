@@ -15,6 +15,9 @@ FirstMenu::FirstMenu()
 	background = new Sprite();
 	font = new Font();
 
+	canClick = true;
+	currentText = new TextData();
+
 	index = 0;
 	maxIndex = 0;
 }
@@ -30,6 +33,8 @@ FirstMenu::~FirstMenu()
 	delete background;
 	delete font;
 }
+
+
 
 void FirstMenu::Init()
 {
@@ -49,107 +54,114 @@ void FirstMenu::Init()
 
 	vector<string> _names = { "Play", "Options", "Exit" };
 
+	vector<function<void()>> _functions =
+	{
+		[]() { LevelSelectorMenu::GetInstance().Show(); },
+		[]() { MenuOption::GetInstance().Show(); } ,
+		[]() { Game::GetInstance().GetWindow().close(); } 
+	};
+
 	for (string _name : _names) {
 
-		texts.push_back(new TextData(_name, new Text(_name, *font, 50)));
+		texts.push_back(new TextData(_name, new Text(_name, *font, 50), false));
 	}
 
 	Vector2f _pos = Vector2f(180, 400);
+	int _i = 0;
 	for (TextData* _text : texts) {
+		_text->onClick.push_back(_functions[_i]);
 		_text->text->setPosition(_pos);
 		_pos.y += 100;
+		_i++;
 	}
+
+	currentText = texts[0];
+	currentText->text->setFillColor(Color::Red);
 
 	maxIndex = _names.size();
 
 }
 
-void FirstMenu::HandleMouseClick(Mouse::Button _button, const Vector2i& _mousePosition, RenderWindow& _window)
-{
-	if (_button == Mouse::Left)
-	{
 
-		for (TextData* _text : texts) {
-			if (_text->name == "Play") {
-				if (_text->text->getGlobalBounds().contains(static_cast<float>(_mousePosition.x), static_cast<float>(_mousePosition.y))) {
-					LevelSelectorMenu::GetInstance().Show();
+void FirstMenu::HandleGamepadClick(Event _event)
+{
+
+		float _axisYPositionJoy = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+		int _YDirectionJoy = (_axisYPositionJoy <= -DEAD_ZONE) ? -1 : _axisYPositionJoy >= DEAD_ZONE ? 1 : 0;
+
+		float _axisypositionFle = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY);
+		int _ydirectionFle = (_axisypositionFle <= -DEAD_ZONE) ? -1 : _axisypositionFle >= DEAD_ZONE ? 1 : 0;
+
+		if (_event.type == Event::JoystickMoved) {
+
+			if (canClick) {
+				if (_YDirectionJoy == 1) {
+					MoveUp();
+
+				}
+				else if (_YDirectionJoy == -1) {
+
+					MoveDown();
 				}
 			}
-			else if (_text->name == "Options") {
-				if (_text->text->getGlobalBounds().contains(static_cast<float>(_mousePosition.x), static_cast<float>(_mousePosition.y)))
-				{
-					MenuOption::GetInstance().Show();
+			else if (_YDirectionJoy == 0) canClick = true;
+			if (canClick) {
+
+				if (_ydirectionFle == -1) {
+					MoveUp();
 				}
-			}
-			else if (_text->name == "Exit") {
-				if (_text->text->getGlobalBounds().contains(static_cast<float>(_mousePosition.x), static_cast<float>(_mousePosition.y)))
-				{
-					_window.close();
+				else if (_ydirectionFle == 1) {
+					MoveDown();
 				}
+				else if (_event.joystickButton.button == 0) canClick = false;
 			}
 		}
-	}
+		if (_event.type == Event::JoystickButtonPressed) {
+
+				if (_event.joystickButton.button == 0) {
+					currentText->onClick[0]();
+				}
+
+		}
 }
 
-void FirstMenu::HandleKeyboardClick(Event _event)
+void FirstMenu::MoveUp()
 {
-	cout << "test" << endl;
-	if (_event.type == sf::Joystick::Y) {
-		float _axisYPosition = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
-		int _YDirection = (_axisYPosition <= -DEAD_ZONE) ? -1 : _axisYPosition >= DEAD_ZONE ? 1 : 0;
-		if (_YDirection == 1) {
-			cout << "Down" << endl;
-		}
-		else if (_YDirection == -1) {
-			cout << "Up" << endl;
-		
-		}
+	index++;
+	if (index >= maxIndex) index--;
+	currentText->text->setFillColor(sf::Color::White);
+	currentText = texts[index];
+	currentText->text->setFillColor(sf::Color::Red);
+	canClick = false;
 
-		//if ()
-		//{
+}
 
-		//}
-
-		//	if else() {
-
-		//}
-
-	}
-
-	if (_event.joystickButton.button == sf::Joystick::PovY) {
-		index++;
-		cout << index << endl;
-		if (index > maxIndex) index--;
-		texts[index]->text->setFillColor(sf::Color::Red);
-
-	}
-	else if (_event.joystickButton.button == sf::Joystick::PovY) {
-		index--;
-		cout << index << endl;
-		if (index < 0) index++;
-		texts[index]->text->setFillColor(sf::Color::Red);
-
-	}
-
+void FirstMenu::MoveDown()
+{
+	index--;
+	if (index < 0) index++;
+	currentText->text->setFillColor(sf::Color::White);
+	currentText = texts[index];
+	currentText->text->setFillColor(sf::Color::Red);
+	canClick = false;
 }
 
 void FirstMenu::HandleEvents(RenderWindow& _window)
 {
 	Event _event;
+	//cout << "event" << endl;
 	while (_window.pollEvent(_event))
 	{
 		if (_event.type == Event::Closed)
 		{
 			_window.close();
 		}
-		//else if (_event.type == Event::JoystickButtonPressed)
-		//{
-		//	HandleKeyboardClick(_event);
-		//}
-		else if (_event.type == Event::MouseButtonPressed)
+		else if (_event.type == Event::JoystickButtonPressed || _event.type == Event::JoystickMoved)
 		{
-			HandleMouseClick(_event.mouseButton.button, Mouse::getPosition(_window), _window);
+
+			HandleGamepadClick(_event);
 		}
+
 	}
 
 }

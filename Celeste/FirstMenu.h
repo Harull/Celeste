@@ -8,35 +8,32 @@
 using namespace sf;
 using namespace std;
 
-struct TextData {
-    string name;
-	Text* text;
 
-    TextData() = default;
-	TextData(string _name, Text* _text) : name(_name), text(_text) {}
-
-    ~TextData() {
-		delete text;
-    }
-};
 
 class FirstMenu : public Menu, public Singleton<FirstMenu>
 {
 private:
     vector<TextData*> texts;
+	TextData* currentText;
 
     Sprite* background;
     Font* font;
+    
 
     int index;
 	int maxIndex;
 
+	bool canClick;
 
 
 
-    void HandleMouseClick(Mouse::Button _button, const Vector2i& _mousePosition, RenderWindow& _window);
-    void HandleKeyboardClick(Event _event);
+
+
+    void HandleGamepadClick(Event _event);
     void HandleEvents(RenderWindow& _window);
+
+	void MoveDown();
+	void MoveUp();
 
 public:
 

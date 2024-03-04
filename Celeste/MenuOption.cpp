@@ -4,22 +4,22 @@
 #include "FontManager.h"
 #include "LevelSelectorMenu.h"
 #include "MenuSoundBoard.h"
+#define DEAD_ZONE 50.0f
 
 MenuOption::MenuOption()
 {
 	currentVolumeCount = 2;
 
-	volume = new Text();
-	back = new Text();
-	backLevelSelect = new Text();
-	decreaseVolume = new Text();
-	increaseVolume = new Text();
-	currentVolume = new Text();
-
-	soundboard = new Text();
 
 	background = new Sprite();
 	font = new Font();
+
+	texts = vector<TextData*>();
+	canClick = true;
+	currentText = new TextData();
+	index = 0;
+	maxIndex = 0;
+	minIndex = 0;
 
 	inGame = false;
 
@@ -27,14 +27,10 @@ MenuOption::MenuOption()
 
 MenuOption::~MenuOption()
 {
-	delete volume;
-	delete currentVolume;
-	delete back;
-	delete backLevelSelect;
-	delete decreaseVolume;
-	delete increaseVolume;
-
-	delete soundboard;
+	for (auto _text : texts)
+	{
+		delete _text;
+	}
 
 	delete background;
 	delete font;
@@ -51,92 +47,119 @@ void MenuOption::Init()
 		static_cast<float>(_windowSize.y) / background->getLocalBounds().height
 	);
 
-	currentVolume->setString(to_string(currentVolumeCount));
-	volume->setString("Volume");
-	back->setString("Resume");
-	backLevelSelect->setString("Retour");
-	decreaseVolume->setString("<");
-	increaseVolume->setString(">");
-	soundboard->setString("SoundBoard");
-
 	if (!font->loadFromFile("Assets/Fonts/Renogare.otf"))
 	{
 		cerr << "ERROR - Font non charge" << endl;
 	}
 
-	volume->setFont(*font);
-	currentVolume->setFont(*font);
-	back->setFont(*font);
-	backLevelSelect->setFont(*font);
-	decreaseVolume->setFont(*font);
-	increaseVolume->setFont(*font);
+	vector<string> _names =
+	{
+		"Resume",
+		"Volume <" + to_string(currentVolumeCount) + ">",
+		"SoundBoard",
+		"Retour",
+	};
 
-	soundboard->setFont(*font);
+	vector<function<void()>> _functions =
+	{
+		[]() { Game::GetInstance().Resume(); } ,
+		[this]() { ChangeVolume(); },
+		[]() { MenuSoundBoard::GetInstance().Show(); } ,
+		[]() { 
+			MenuOption::GetInstance().SetInGame(false);
+			LevelSelectorMenu::GetInstance().Show(); 
+		}
+	};
+
+	for (string _name : _names) {
+		if (_name != "Resume") {
+			texts.push_back(new TextData(_name, new Text(_name, *font, 50), false));
+		}
+		else
+		{
+			texts.push_back(new TextData(_name, new Text(_name, *font, 50), true));
+		}
+	}
 
 
-	volume->setCharacterSize(50);
-	currentVolume->setCharacterSize(50);
-	back->setCharacterSize(50);
-	backLevelSelect->setCharacterSize(50);
-	decreaseVolume->setCharacterSize(50);
-	increaseVolume->setCharacterSize(50);
+	float _posX = (_windowSize.x - 500.0f) / 2;
+	float _sizeY = 50.0f;
+	float _posY = (_windowSize.y - _sizeY * texts.size()) / 2;
+	Vector2f _pos = Vector2f(_posX, _posY);
+	int _i = 0;
+	for (TextData* _text : texts) {
+		_text->onClick.push_back(_functions[_i]);
+		_text->text->setPosition(_pos);
+		_pos.y += 100;
+		_i++;
+	}
 
-	soundboard->setCharacterSize(50);
+	currentText = texts[0];
+	currentText->text->setFillColor(Color::Red);
 
-	volume->setPosition(700, 575);
-	decreaseVolume->setPosition(925, 575);
-	currentVolume->setPosition(950, 575);
-	increaseVolume->setPosition(1025, 575);
-
-	soundboard->setPosition(1550, 1000);
-
-	back->setPosition(180, 510);
-	backLevelSelect->setPosition(180, 575);
-
+	maxIndex = _names.size();
 
 }
 
-void MenuOption::HandleMouseClick(Mouse::Button _button, const Vector2i& _mousePosition, RenderWindow& _window)
+void MenuOption::HandleGamepadClick(Event _event)
 {
-	if (_button == Mouse::Left)
-	{
+	float _axisYPositionJoy = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+	int _YDirectionJoy = (_axisYPositionJoy <= -DEAD_ZONE) ? -1 : _axisYPositionJoy >= DEAD_ZONE ? 1 : 0;
 
-		if (back->getGlobalBounds().contains(static_cast<float>(_mousePosition.x), static_cast<float>(_mousePosition.y)))
-		{
-			Game::GetInstance().Resume();
-		}
-		else if (backLevelSelect->getGlobalBounds().contains(static_cast<float>(_mousePosition.x), static_cast<float>(_mousePosition.y)))
-		{
-			MenuOption::GetInstance().SetInGame(false);
-			LevelSelectorMenu::GetInstance().Show();
-		}
-		else if (decreaseVolume->getGlobalBounds().contains(static_cast<float>(_mousePosition.x), static_cast<float>(_mousePosition.y)))
-		{
-			currentVolumeCount--;
-			if (currentVolumeCount <= 0) {
-				currentVolumeCount = 0;
-				MusicManager::GetInstance().MuteVolume();
-				currentVolume->setString(to_string(currentVolumeCount));
-				return;
+	float _axisypositionFle = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY);
+	int _ydirectionFle = (_axisypositionFle <= -DEAD_ZONE) ? -1 : _axisypositionFle >= DEAD_ZONE ? 1 : 0;
+
+	if (_event.type == Event::JoystickMoved) {
+
+		if (canClick) {
+			if (_YDirectionJoy == 1) {
+				MoveUp();
 			}
-			currentVolume->setString(to_string(currentVolumeCount));
-			MusicManager::GetInstance().DecreaseVolume();
-		}
-		else if (increaseVolume->getGlobalBounds().contains(static_cast<float>(_mousePosition.x), static_cast<float>(_mousePosition.y)))
-		{
-			currentVolumeCount++;
-			if (currentVolumeCount > 10) {
-				currentVolumeCount = 10;
-				return;
+			else if (_YDirectionJoy == -1) {
+				MoveDown();
 			}
-			currentVolume->setString(to_string(currentVolumeCount));
-			MusicManager::GetInstance().IncreaseVolume();
 		}
-		else if (soundboard->getGlobalBounds().contains(static_cast<float>(_mousePosition.x), static_cast<float>(_mousePosition.y)))
-		{
-			MenuSoundBoard::GetInstance().Show();
+		else if (_YDirectionJoy == 0) canClick = true;
+		if (canClick) {
+
+			if (_ydirectionFle == -1) {
+				MoveUp();
+			}
+			else if (_ydirectionFle == 1) {
+				MoveDown();
+			}
+			else if (_ydirectionFle == 0) canClick = false;
 		}
 	}
+	if (_event.type == Event::JoystickButtonPressed) {
+
+		if (_event.joystickButton.button == 0) {
+			currentText->onClick[0]();
+		}
+
+	}
+	
+}
+
+void MenuOption::MoveUp()
+{
+	index++;
+	if (index >= maxIndex) index--;
+	currentText->text->setFillColor(sf::Color::White);
+	currentText = texts[index];
+	currentText->text->setFillColor(sf::Color::Red);
+	canClick = false;
+
+}
+
+void MenuOption::MoveDown()
+{
+	index--;
+	if (index < minIndex) index++;
+	currentText->text->setFillColor(sf::Color::White);
+	currentText = texts[index];
+	currentText->text->setFillColor(sf::Color::Red);
+	canClick = false;
 }
 
 void MenuOption::HandleEvents(RenderWindow& _window)
@@ -148,11 +171,16 @@ void MenuOption::HandleEvents(RenderWindow& _window)
 		{
 			_window.close();
 		}
-		else if (_event.type == Event::MouseButtonPressed)
+		else if (_event.type == Event::JoystickButtonPressed || _event.type == Event::JoystickMoved)
 		{
-			HandleMouseClick(_event.mouseButton.button, Mouse::getPosition(_window), _window);
+			HandleGamepadClick(_event);
 		}
 	}
+}
+
+void MenuOption::ChangeVolume()
+{
+
 }
 
 bool MenuOption::Show()
@@ -160,24 +188,42 @@ bool MenuOption::Show()
 
 	RenderWindow& _window = Game::GetInstance().GetWindow();
 
+	if (!inGame) {
+		minIndex = 1;
+		index = 1;
+		currentText = texts[minIndex];
+		currentText->text->setFillColor(Color::Red);
+	}
+	else if (inGame) {
+		minIndex = 0;
+		index = 0;
+		for (TextData* _text : texts) {
+			_text->text->setFillColor(Color::White);
+		}
+		currentText = texts[minIndex];
+		currentText->text->setFillColor(Color::Red);
+	}
+
 	while (_window.isOpen())
 	{
 		HandleEvents(_window);
 
 		const View _view(FloatRect(Vector2f(0.0f, 0.0f), Vector2f(1920.0f, 1080.0f)));
 		_window.setView(_view);
-
 		_window.clear();
 		_window.draw(*background);
-		_window.draw(*volume);
-		_window.draw(*decreaseVolume);
-		_window.draw(*currentVolume);
-		_window.draw(*increaseVolume);
-		_window.draw(*backLevelSelect);
-		_window.draw(*soundboard);
 		if (inGame) {
-			_window.draw(*back);
+			for (TextData* _text : texts) {
+				_window.draw(*_text->text);
+			}
 		}
+		else{
+			for (TextData* _text : texts) {
+				if (_text->inGame) continue;
+				_window.draw(*_text->text);
+			}
+		}
+		
 
 		_window.display();
 	}
