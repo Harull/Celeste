@@ -14,7 +14,7 @@ Spike::Spike( const Vector2f& _position, const Vector2f& _size, const string& _p
 }
 
 void Spike::GetHit(int _collisionSide, int _collisionSideBinary) {
-	Character* _hero = dynamic_cast<Character*>(EntityManager::GetInstance().Get("Character"));
+	Character* _hero = Game::GetInstance().GetPlayer()->GetCharacter();
 	_hero->Die();
 	cout << "Die"<<endl;
 }
