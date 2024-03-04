@@ -11,9 +11,22 @@ class Character : public Entity
 	int maxYVelocity;
 	int currentYVelocity;
 	int currentJumpTimerIndex;
+
 	Vector2f checkPoint;
+	
 	bool isJumping;
 	bool isClimbing;
+	bool isDashing;
+
+	int dashCount;
+	int maxDashCount;
+
+	int maxDashVelocity;
+	int currentDashVelocity;
+	int currentDashTimerIndex;
+
+	sf::Vector2i dashDirectionBuffer;
+
 
 public:
 	Character() = default;
@@ -31,6 +44,10 @@ public:
 	{
 		return currentJumpTimerIndex;
 	}
+	int GetCurrentDashTimerIndex()const
+	{
+		return currentDashTimerIndex;
+	}
 	bool GetIsJumping() const
 	{
 		return isJumping;
@@ -38,6 +55,10 @@ public:
 	bool GetIsClimbing() const
 	{
 		return isClimbing;
+	}
+	bool GetIsDashing() const
+	{
+		return isDashing;
 	}
 	void SetCheckPoint(Vector2f _checkPoint)
 	{
@@ -47,6 +68,14 @@ public:
 	{
 		return checkPoint;
 	}
+	void SetDashCount(const int _dashCount)
+	{
+		dashCount = _dashCount;
+	}
+	int GetMaxDashCount()const
+	{
+		return maxDashCount;
+	}
 
 private:
 	void InitShape();
@@ -54,8 +83,10 @@ private:
 public:
 	bool MovingLeftRight(const sf::Event& _event);
 	bool Jump(const sf::Event& _event);
+	bool Dash(const sf::Event& _event);
 	bool Climb(const sf::Event& _event);
 	void ResetJumpValues();
+	void ResetDashValues();
 	virtual void Update();
 	void SetPosition(const sf::Vector2f& newPosition);
 	void Move();

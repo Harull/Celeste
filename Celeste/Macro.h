@@ -1,7 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "EntityManager.h"
 #include <Random>
 
 using namespace std;

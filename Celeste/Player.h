@@ -36,7 +36,7 @@ public:
 
 public:
 	Player();
-	~Player();
+
 
 public:
 	void Update();

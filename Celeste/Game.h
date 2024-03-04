@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Singleton.h"
 #include "Menu.h"
+#include "FirstMenu.h"
 #include "MusicManager.h"
 #include "Snow.h"
 
@@ -30,6 +31,9 @@ public:
 	{
 		return player;
 	}
+	RenderWindow& GetWindow() {
+		return window;
+	}
 
 
 public:
@@ -39,16 +43,23 @@ public:
 public:
 	void Launch();
 	void UpdateWindow();
+	void SelectLevel(const int _value);
+	void Resume();
 
 private:
-	bool Start();
+	void Start();
 	void Stop();
 	void InitWindow();
+	void InitMenu();
 	void InitMap(const int _value);
+	void InitInput();
+	bool ShowOptionsInGame(const Event& _event);
 	void InitPlayer();
 	void Update();
 	void UpdateVisibleArea();
 	void UpdateEvents();
 
+public:
+	void UpdateSnow();
 };
 

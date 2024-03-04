@@ -3,6 +3,13 @@
 #include "EntityManager.h"
 #include"TimerManager.h"
 #include"Camera.h"
+#include "FirstMenu.h"
+#include "LevelSelectorMenu.h"
+#include "MenuOption.h"
+#include "MapManager.h"
+#include "AnimationComponent.h"
+
+
 
 
 #define SCREEN_WIDTH 1280
@@ -12,57 +19,76 @@
 Game::Game() 
 {
 	map = nullptr;
-	player = new Player();
+	player = nullptr;
 	visibleArea = FloatRect();
 	menu = nullptr;
-	snow = new Snow(100.0f, 50.0f, 100.0f);
+	snow = new Snow(100, 50, 100);
 }
 
 Game::~Game()
 {
-	if (map) delete map;
-	if (player) delete player;
-	if (menu) delete menu;
-
+	delete player;
+	delete snow;
 }
 
 void Game::Launch()
 {
-	if (!Start()) return;
-	Update();
+	Start();
 	Stop();
 }
 
-bool Game::Start()
+void Game::Start()
 {
 	InitWindow();
+	InitMenu();
 
 	MusicManager::GetInstance().Play("Celeste_OST.mp3");
-	menu = new Menu();
-	int _level = 1;
-	do
-	{
-		if (!menu->ShowMenu(window)) return false;
-		_level = menu->ShowLevelSelector(window);
-		cout << _level << endl;
-	} while (_level == -1);
-	
-	delete menu;
-	menu = nullptr;
+	MusicManager::GetInstance().SetVolume(2.f);
 
-	InitMap(_level);
+	FirstMenu::GetInstance().Show();
 
-	return true;
+}
 
+void Game::InitMenu()
+{
+	FirstMenu::GetInstance().Init();
+	LevelSelectorMenu::GetInstance().Init(3);
+	MenuOption::GetInstance().Init();
 }
 
 void Game::InitMap(const int _value)
 {
-	if (!map)
-	{
-		map = new Map();
-	}
+	MapManager::GetInstance().Clear();
+	EntityManager::GetInstance().Clear();
+	EventReactionManager::Clear();
+	
+	delete player;
+	player = new Player();
+
+	map = new Map();
+
 	map->Init(_value);
+	InitInput();
+	Update();
+}
+
+void Game::InitInput()
+{
+	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const Event& _event) {
+		if (_event.key.code == sf::Keyboard::Escape) 
+			return MenuOption::GetInstance().Show();
+		return false;
+		});
+}
+
+bool Game::ShowOptionsInGame(const Event& _event) {
+
+	//if (_event.key.code == sf::Keyboard::Escape) {
+	//	menu->ShowMenuOptions(window);
+	//	return true;
+	//}
+	//return false;
+	return true;
 }
 
 void Game::Stop()
@@ -75,8 +101,10 @@ void Game::InitWindow()
 	//window.create(VideoMode(1280, 720), "Celeste");
 	const int _xWindowSize = 1920, _yWindowSize = 1080;
 	window.create(VideoMode(_xWindowSize, _yWindowSize), "Celeste", Style::Fullscreen);
-	Camera::GetInstance().Init({0,0}, { 1920, 1080 });
+	Camera::GetInstance().Init({ 0,0 }, { 1920, 1080 });
 }
+
+
 
 void Game::InitPlayer()
 {
@@ -94,8 +122,9 @@ void Game::Update()
 		TimerManager::GetInstance().Update();
 		Camera::GetInstance().Update(this);
 		UpdateWindow();
+		UpdateSnow();
 
-		FPS(120);
+		FPS(144);
 	}
 }
 
@@ -110,19 +139,26 @@ void Game::UpdateWindow()
 	UpdateVisibleArea();
 	window.setView(Camera::GetInstance());
 
-
 	std::vector<Drawable*> _entities = EntityManager::GetInstance().GetDrawables(visibleArea);
 	for (Drawable* _entity : _entities)
 	{
-			window.draw(*_entity);
-
+		window.draw(*_entity);
 	}
 
-	dt = 0.f;
-	dt = clock.restart().asSeconds();
-	snow->update(dt);
+	window.setView(window.getDefaultView());
 	snow->draw(window);
 	window.display();
+}
+
+void Game::SelectLevel(const int _value)
+{
+	MenuOption::GetInstance().SetInGame(true);
+	InitMap(_value);
+}
+
+void Game::Resume()
+{
+	Update();
 }
 
 void Game::UpdateEvents()
@@ -132,9 +168,18 @@ void Game::UpdateEvents()
 	{
 		if (_event.type == sf::Event::Closed)
 			Stop();
-		else{
+		else {
 			EventReactionManager::Update(_event);
 		}
 	}
 }
+
+void Game::UpdateSnow()
+{
+	dt = 0.f;
+	dt = clock.restart().asSeconds();
+	snow->update(dt);
+}
+
+
 

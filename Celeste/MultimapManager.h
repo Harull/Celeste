@@ -78,4 +78,11 @@ protected:
 			InternDeleteValue(_val);
 		}
 	}
+
+	void InternClear() {
+		for (auto& _value : allValues) {
+			delete _value.second;
+		}
+		allValues.clear();
+	}
 };

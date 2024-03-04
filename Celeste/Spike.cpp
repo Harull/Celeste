@@ -13,6 +13,6 @@ Spike::Spike( const Vector2f& _position, const Vector2f& _size, const string& _p
 }
 
 void Spike::GetHit(int _collisionSide, int _collisionSideBinary) {
-    std::cout << "ok" << endl; 
+    std::cout << "Le spike te tue" << endl; 
 }
 
