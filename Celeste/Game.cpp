@@ -8,6 +8,7 @@
 #include "MenuOption.h"
 #include "MapManager.h"
 #include "AnimationComponent.h"
+#include "MenuSoundBoard.h"
 
 
 
@@ -40,7 +41,7 @@ void Game::Start()
 	InitMenu();
 
 	MusicManager::GetInstance().Play("Celeste_OST.mp3");
-	MusicManager::GetInstance().SetVolume(2.f);
+	MusicManager::GetInstance().SetVolume(20.f);
 
 	FirstMenu::GetInstance().Show();
 
@@ -51,6 +52,7 @@ void Game::InitMenu()
 	FirstMenu::GetInstance().Init();
 	LevelSelectorMenu::GetInstance().Init(3);
 	MenuOption::GetInstance().Init();
+	MenuSoundBoard::GetInstance().Init();
 }
 
 void Game::InitMap(const int _value)

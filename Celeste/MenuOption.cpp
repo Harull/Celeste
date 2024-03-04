@@ -3,6 +3,7 @@
 #include "TextureManager.h"
 #include "FontManager.h"
 #include "LevelSelectorMenu.h"
+#include "MenuSoundBoard.h"
 
 MenuOption::MenuOption()
 {
@@ -14,6 +15,8 @@ MenuOption::MenuOption()
 	decreaseVolume = new Text();
 	increaseVolume = new Text();
 	currentVolume = new Text();
+
+	soundboard = new Text();
 
 	background = new Sprite();
 	font = new Font();
@@ -30,6 +33,8 @@ MenuOption::~MenuOption()
 	delete backLevelSelect;
 	delete decreaseVolume;
 	delete increaseVolume;
+
+	delete soundboard;
 
 	delete background;
 	delete font;
@@ -52,6 +57,7 @@ void MenuOption::Init()
 	backLevelSelect->setString("Retour");
 	decreaseVolume->setString("<");
 	increaseVolume->setString(">");
+	soundboard->setString("SoundBoard");
 
 	if (!font->loadFromFile("Assets/Fonts/Renogare.otf"))
 	{
@@ -65,6 +71,7 @@ void MenuOption::Init()
 	decreaseVolume->setFont(*font);
 	increaseVolume->setFont(*font);
 
+	soundboard->setFont(*font);
 
 
 	volume->setCharacterSize(50);
@@ -74,10 +81,14 @@ void MenuOption::Init()
 	decreaseVolume->setCharacterSize(50);
 	increaseVolume->setCharacterSize(50);
 
+	soundboard->setCharacterSize(50);
+
 	volume->setPosition(700, 575);
 	decreaseVolume->setPosition(925, 575);
 	currentVolume->setPosition(950, 575);
 	increaseVolume->setPosition(1025, 575);
+
+	soundboard->setPosition(1550, 1000);
 
 	back->setPosition(180, 510);
 	backLevelSelect->setPosition(180, 575);
@@ -102,8 +113,10 @@ void MenuOption::HandleMouseClick(Mouse::Button _button, const Vector2i& _mouseP
 		else if (decreaseVolume->getGlobalBounds().contains(static_cast<float>(_mousePosition.x), static_cast<float>(_mousePosition.y)))
 		{
 			currentVolumeCount--;
-			if (currentVolumeCount < 0) {
+			if (currentVolumeCount <= 0) {
 				currentVolumeCount = 0;
+				MusicManager::GetInstance().MuteVolume();
+				currentVolume->setString(to_string(currentVolumeCount));
 				return;
 			}
 			currentVolume->setString(to_string(currentVolumeCount));
@@ -118,6 +131,10 @@ void MenuOption::HandleMouseClick(Mouse::Button _button, const Vector2i& _mouseP
 			}
 			currentVolume->setString(to_string(currentVolumeCount));
 			MusicManager::GetInstance().IncreaseVolume();
+		}
+		else if (soundboard->getGlobalBounds().contains(static_cast<float>(_mousePosition.x), static_cast<float>(_mousePosition.y)))
+		{
+			MenuSoundBoard::GetInstance().Show();
 		}
 	}
 }
@@ -157,6 +174,7 @@ bool MenuOption::Show()
 		_window.draw(*currentVolume);
 		_window.draw(*increaseVolume);
 		_window.draw(*backLevelSelect);
+		_window.draw(*soundboard);
 		if (inGame) {
 			_window.draw(*back);
 		}

@@ -19,8 +19,10 @@ private:
     Text* backLevelSelect;
 	Text* decreaseVolume;
 	Text* increaseVolume;
-	bool inGame;
 
+	Text* soundboard;
+
+	bool inGame;
 
     Sprite* background;
     Font* font;

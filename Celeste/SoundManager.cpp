@@ -3,7 +3,7 @@
 SoundManager::SoundManager()
 {
 	sound = Sound();
-	sound.setVolume(25.0f);
+	sound.setVolume(10.0f);
 }
 
 void SoundManager::Play(const string& _path)

@@ -9,6 +9,8 @@ using namespace sf;
 
 #define S_APPEND(name) name + GetUniqueId()
 
+
+
 static bool Contain(const std::string& _id, const std::string& _value)
 {
 	if (_id.find(_value) != std::string::npos)
