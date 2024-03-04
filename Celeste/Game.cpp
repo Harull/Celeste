@@ -22,13 +22,13 @@ Game::Game()
 	player = nullptr;
 	visibleArea = FloatRect();
 	menu = nullptr;
-	snow = new Snow(100.0f, 50.0f, 100.0f);
+	snow = new Snow(100, 50, 100);
 }
 
 Game::~Game()
 {
 	delete player;
-
+	delete snow;
 }
 
 void Game::Launch()
@@ -75,9 +75,9 @@ void Game::InitMap(const int _value)
 void Game::InitInput()
 {
 	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const Event& _event) {
-		if (_event.key.code == sf::Keyboard::Escape) {
+		if (_event.key.code == sf::Keyboard::Escape) 
 			return MenuOption::GetInstance().Show();
-		}
+		return false;
 		});
 }
 
@@ -122,8 +122,9 @@ void Game::Update()
 		TimerManager::GetInstance().Update();
 		Camera::GetInstance().Update(this);
 		UpdateWindow();
+		UpdateSnow();
 
-		FPS(120);
+		FPS(144);
 	}
 }
 
@@ -138,17 +139,13 @@ void Game::UpdateWindow()
 	UpdateVisibleArea();
 	window.setView(Camera::GetInstance());
 
-
 	std::vector<Drawable*> _entities = EntityManager::GetInstance().GetDrawables(visibleArea);
 	for (Drawable* _entity : _entities)
 	{
 		window.draw(*_entity);
-
 	}
 
-	dt = 0.f;
-	dt = clock.restart().asSeconds();
-	snow->update(dt);
+	window.setView(window.getDefaultView());
 	snow->draw(window);
 	window.display();
 }
@@ -175,6 +172,13 @@ void Game::UpdateEvents()
 			EventReactionManager::Update(_event);
 		}
 	}
+}
+
+void Game::UpdateSnow()
+{
+	dt = 0.f;
+	dt = clock.restart().asSeconds();
+	snow->update(dt);
 }
 
 

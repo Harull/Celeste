@@ -144,16 +144,21 @@ bool MovementComponent::TryToMove(Entity* _entity, const Vector2f& _direction, c
 
 			if (Character* _character = dynamic_cast<Character*>(_entity))
 			{
+				Timer* _dashTimer = TimerManager::GetInstance().GetApproximately("DashTimer");
 				if (_character->GetCurrentDashTimerIndex() > 10)
 				{
-					if (Timer* _dashTimer = TimerManager::GetInstance().GetApproximately("DashTimer"))
+					if (_dashTimer)
 						_dashTimer->Stop();	
 					_character->ResetDashValues();
 					if (_collisionSideBinary & COLLIDE_UP)
-					{
 						_character->SetDashCount(_character->GetMaxDashCount());
-					}
 
+				}
+				else if (!_dashTimer)
+				{
+					_character->ResetDashValues();
+					if (_collisionSideBinary & COLLIDE_UP)
+						_character->SetDashCount(_character->GetMaxDashCount());
 				}
 			}
 

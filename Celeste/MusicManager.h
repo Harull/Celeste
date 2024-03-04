@@ -16,7 +16,7 @@ public:
 	void IncreaseVolume();
 	void DecreaseVolume();
 	void MuteVolume();
-	void UnmuteVolume(int _sound);
-	void SetVolume(int _volume);
+	void UnmuteVolume(const float _sound);
+	void SetVolume(const float _volume);
 };
 

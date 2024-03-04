@@ -2,6 +2,7 @@
 #include "Macro.h"
 #include "MapManager.h"
 #include "TextureManager.h"
+#include "Game.h"
 
 Map::Map() : IManageable(S_APPEND("Map"))
 {

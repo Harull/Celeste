@@ -2,6 +2,7 @@
 #include <vector>
 #include "Snowflake.h"
 
+
 class Snow {
 public:
     Snow() {};

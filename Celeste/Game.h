@@ -59,6 +59,7 @@ private:
 	void UpdateVisibleArea();
 	void UpdateEvents();
 
-
+public:
+	void UpdateSnow();
 };
 

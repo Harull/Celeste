@@ -1,11 +1,12 @@
 #include "Snow.h"
+#include "Macro.h"
 
 Snow::Snow(int numFlakes, float minSpeed, float maxSpeed) :
     flakes(numFlakes)
 {
     for (int i = 0; i < numFlakes; ++i) {
-        float x = static_cast<float>(rand() % static_cast<int>(sf::VideoMode::getDesktopMode().width));
-        float y = static_cast<float>(rand() % static_cast<int>(sf::VideoMode::getDesktopMode().height));
+        float x = static_cast<float>(RandomMaxMin(static_cast<int>(sf::VideoMode::getDesktopMode().width)));
+        float y = static_cast<float>(RandomMaxMin(static_cast<int>(sf::VideoMode::getDesktopMode().height)));
         float speed = (minSpeed + static_cast<float>(rand()) / (RAND_MAX / (maxSpeed - minSpeed)));
         flakes[i] = Snowflake(sf::Vector2f(x, y), speed);
     }
