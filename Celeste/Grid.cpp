@@ -7,6 +7,7 @@
 #include "Macro.h"
 #include "MovingTile.h"
 #include"CheckPoint.h"
+#include "EasterEgg.h"
 
 Grid::Grid(const Vector2i _tilesCount)
 {
@@ -62,6 +63,13 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			else if (_char == '3')
 			{
 				_tile = new Strawberry(Vector2f(_posX, _posY), tileSize);
+				/*_tiles.push_back(new Strawberry(Vector2f(_posX, _posY), tileSize));
+				_indexRow++;*/
+				//continue;
+			}
+			else if (_char == '4')
+			{
+				_tile = new EasterEgg(Vector2f(_posX, _posY), tileSize);
 				/*_tiles.push_back(new Strawberry(Vector2f(_posX, _posY), tileSize));
 				_indexRow++;*/
 				//continue;
