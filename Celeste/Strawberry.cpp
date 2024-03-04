@@ -1,6 +1,7 @@
 #include "Strawberry.h"
 #include"Game.h"
 #include"Player.h"
+
 Strawberry::Strawberry(const Vector2f& _position, const Vector2f& _size, const string& _path)
 	:Tile(ENTITY_STRAWBERRY, _position, _size, _path)
 {

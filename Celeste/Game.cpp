@@ -9,9 +9,6 @@
 #include "MapManager.h"
 #include "AnimationComponent.h"
 
-
-
-
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #define FPS(x) sf::sleep(sf::seconds(1.f / x) - _clock.getElapsedTime())
@@ -41,7 +38,6 @@ void Game::Start()
 {
 	InitWindow();
 	InitMenu();
-
 	MusicManager::GetInstance().Play("Celeste_OST.mp3");
 	MusicManager::GetInstance().SetVolume(2.f);
 
@@ -100,7 +96,8 @@ void Game::InitWindow()
 {
 	//window.create(VideoMode(1280, 720), "Celeste");
 	const int _xWindowSize = 1920, _yWindowSize = 1080;
-	window.create(VideoMode(_xWindowSize, _yWindowSize), "Celeste", Style::Fullscreen);
+	window.create(VideoMode(_xWindowSize, _yWindowSize), "Celeste", Style::Resize);
+
 	Camera::GetInstance().Init({ 0,0 }, { 1920, 1080 });
 }
 

@@ -61,7 +61,7 @@ public:
 	}
 
 	void SetPosition(const Vector2f& newPosition) {
-		cout << "ala" << endl;
+		shape->setPosition(newPosition);
 	}
 
 	Shape* GetShape()const
