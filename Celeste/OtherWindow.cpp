@@ -1,5 +1,6 @@
 #include "OtherWindow.h"
 #include "TextureManager.h"
+#include "Game.h"
 
 OtherWindow::OtherWindow()
 {
@@ -13,10 +14,14 @@ OtherWindow::~OtherWindow()
 
 void OtherWindow::Run()
 {
+    sf::RenderWindow& _mainWindow = Game::GetInstance().GetWindow();
+    _mainWindow.setActive(false);
+    _mainWindow.setVisible(false);
     secondWindow.create(sf::VideoMode(800, 600), "Other Window");
-
+    secondWindow.setActive();
+    secondWindow.requestFocus();
     TextureManager::GetInstance().Load(sprite, "Assets/IMG_5286.jpg", false, true);
-
+    
     while (secondWindow.isOpen())
     {
         sf::Event event;
@@ -34,6 +39,9 @@ void OtherWindow::Run()
         secondWindow.draw(*sprite);
         secondWindow.display();
     }
+    _mainWindow.setActive(true);
+    _mainWindow.setVisible(true);
+
 }
 
 
