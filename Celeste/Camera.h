@@ -8,7 +8,7 @@ class Game;
 
 class Camera: public View, public Singleton<Camera>
 {
-	sf::Vector2f previousIndexes;
+	sf::Vector2i previousIndexes;
 public:
 	void Init(const Vector2f& _position, const Vector2f& _size);
 	void Update(Game* _game);

@@ -4,6 +4,7 @@
 #include "Game.h"
 #include "TimerManager.h"
 #include "MovementComponent.h"
+#include "MapManager.h"
 
 void Camera::Init(const Vector2f& _position, const Vector2f& _size)
 {
@@ -16,19 +17,40 @@ void Camera::Init(const Vector2f& _position, const Vector2f& _size)
 void Camera::Update(Game* _game)
 {
 	const sf::Vector2f _playerPosition = _game->GetPlayer()->GetCharacter()->GetPosition();
-	const sf::Vector2f _index(std::floor(_playerPosition.x / 1920), std::floor(_playerPosition.y / 1080));
+	const sf::Vector2i _index(static_cast<int>(std::floor(_playerPosition.x / 1920)), static_cast<int>(std::floor(_playerPosition.y / 1080)));
 	
 	Timer* _jumpTimer = TimerManager::GetInstance().GetApproximately("JumpTimer");
+	
+	std::vector<std::vector<SmallMap*>> _currentMap = MapManager::GetInstance().GetCurrent()->GetMaps();
+
+	if (previousIndexes.x != _index.x || previousIndexes.y != _index.y)
+	{
+		if (_index.y < 0 || _currentMap.size() - 1 < _index.y)
+		{
+			_game->GetPlayer()->GetCharacter()->Die();
+			return;
+		}
+		else if (_index.x < 0 || _currentMap[_index.y].size() - 1 < _index.x)
+		{
+			_game->GetPlayer()->GetCharacter()->Die();
+			return;
+		}
+		/*else if (!_currentMap[_index.y][_index.x])
+		{
+			_game->GetPlayer()->GetCharacter()->Die();
+			return;
+		}*/
+	}
 	
 
 	if (previousIndexes.x != _index.x)
 	{
-		const float _sign = _index.x - previousIndexes.x;
+		const int _sign = _index.x - previousIndexes.x;
 
 		if (_jumpTimer)
 			_jumpTimer->Pause();
 
-		while (!IsNearlyEqual(getCenter().x, _index.x * 1920.f + 1920.f / 2.f))
+		while (!IsNearlyEqual(getCenter().x, _index.x * getSize().x + getSize().x / 2.f))
 		{
 			_game->UpdateSnow();
 			_game->UpdateWindow();
@@ -40,8 +62,8 @@ void Camera::Update(Game* _game)
 	}
 	 if (previousIndexes.y != _index.y)
 	{
-		const float _sign = _index.y - previousIndexes.y;
-		while (!IsNearlyEqual(getCenter().y, _index.y * 1080.f + 1080.f / 2.f))
+		const int _sign = _index.y - previousIndexes.y;
+		while (!IsNearlyEqual(getCenter().y, _index.y * getSize().y + getSize().y / 2.f))
 		{
 			_game->UpdateSnow();
 			_game->UpdateWindow();

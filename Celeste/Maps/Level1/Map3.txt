@@ -6,7 +6,7 @@ Maps\Level1\PresqueBlack.png
 xxxxx                                  1
 11111                                  1
 11111        11111                     1
-11111                                  1
+11111                           c      1
 1x                                     1
 1x                     111111111111    1
 1x                                     1

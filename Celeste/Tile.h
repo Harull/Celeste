@@ -8,11 +8,11 @@ using namespace std;
 class Tile : public Entity
 {
 protected:
-	bool tangible;
+	bool isTangible;
 public:
-	bool GetTangible() const 
+	bool GetIsTangible() const 
 	{
-		return tangible;
+		return isTangible;
 	}
 	Shape* GetShape()
 	{

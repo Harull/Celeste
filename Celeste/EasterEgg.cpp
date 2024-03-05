@@ -18,7 +18,7 @@ void EasterEgg::GetHit(int _collisionSideBinary)
 {
 	if (_collisionSideBinary != ENTITY_CHARACTER)return;
 	if (use)return;
-	tangible = false;
+	isTangible = false;
 	shape->setFillColor(Color::Transparent);
 	GetComponent<AnimationComponent>()->Finish();
 	otherWindow = new OtherWindow();
