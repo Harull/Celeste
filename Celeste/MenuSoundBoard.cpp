@@ -63,8 +63,6 @@ void MenuSoundBoard::Init()
 		_posY += 50.0f;
 	}
 
-
-
 	vector<string> _nameSongs = {
 	   "anotherone",
 	   "chipi",

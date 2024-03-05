@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <string>
 #include <Random>
 
 using namespace std;
@@ -174,5 +175,26 @@ static void MultiFade(std::vector<Type*> _values, const unsigned int _alpha)
 static float Distance(const Vector2f& _first, const Vector2f& _second)
 {
 	return sqrtf(pow(_second.x - _first.x, 2.0f) + pow(_second.y - _first.y, 2.0f));
+}
+
+
+static void ModifyIntBetweenChevrons(const int _value, Text* _text) {
+
+	string _textCopy = _text->getString();
+
+	size_t _startBracketPos = _textCopy.find_first_of('<');
+
+	size_t _endBracketPos = _textCopy.find_first_of('>', _startBracketPos);
+
+	if (_startBracketPos != string::npos && _endBracketPos != string::npos && _endBracketPos > _startBracketPos) {
+		string _valueBetweenBrackets = _textCopy.substr(_startBracketPos + 1, _endBracketPos - _startBracketPos - 1);
+		
+		int  _valueChanged = std::stoi(_valueBetweenBrackets);
+		_valueChanged = _value;
+
+		_textCopy.replace(_startBracketPos + 1, _endBracketPos - _startBracketPos - 1, to_string(_valueChanged));
+
+		_text->setString(_textCopy);
+	}
 }
 

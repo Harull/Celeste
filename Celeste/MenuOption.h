@@ -19,8 +19,10 @@ private:
     int index;
     int maxIndex;
 	int minIndex;
+    int offsetVolume;
 
     bool canClick;
+	bool canMoveJoystick;
 	bool inGame;
 
     Sprite* background;
@@ -35,6 +37,9 @@ private:
     void MoveDown();
     void MoveUp();
 
+    void Reset();
+
+
 public:
 
 
@@ -45,9 +50,11 @@ public:
 		return texts;
     }
 
-    void SetInGame(const bool _value) {
+    void SetInGame(const bool _value){
         inGame = _value;
     }
+
+	bool IsInGame() const { return inGame; }
 
     void Init();
     virtual bool Show() override;

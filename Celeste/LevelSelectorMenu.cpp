@@ -4,6 +4,7 @@
 #include "FontManager.h"
 #include "Macro.h"
 #include "TimerManager.h"
+#include "MenuOption.h"
 #define DEAD_ZONE 50.0f
 
 LevelSelectorMenu::LevelSelectorMenu()
@@ -46,16 +47,6 @@ void LevelSelectorMenu::Init(const int _levelCounts)
 		cerr << "ERROR - Font non charge" << endl;
 	}
 
-	function<void()> _function =
-	{
-		[this]() {
-			nextPath = backgroundPath[index];
-			TransitionFill();
-			currentLevel = index + 1;
-		} ,
-
-	};
-
 	maxIndex = _levelCounts;
 
 }
@@ -94,10 +85,9 @@ void LevelSelectorMenu::HandleGamepadClick(Event _event)
 	if (!canClick) return;
 
 	if (_event.type == Event::JoystickButtonPressed) {
-
-
 		if (_event.joystickButton.button == 0) {
-			cout << currentLevel << endl;
+			MenuOption::GetInstance().SetInGame(true);
+			cout << boolalpha << MenuOption::GetInstance().IsInGame() << endl;
 			Game::GetInstance().SelectLevel(currentLevel + 1);
 		}
 		else if (_event.joystickButton.button == 1) {

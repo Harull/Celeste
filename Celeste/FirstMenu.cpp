@@ -69,7 +69,7 @@ void FirstMenu::Init()
 	Vector2f _pos = Vector2f(180, 400);
 	int _i = 0;
 	for (TextData* _text : texts) {
-		_text->onClick.push_back(_functions[_i]);
+		_text->onClick = _functions[_i];
 		_text->text->setPosition(_pos);
 		_pos.y += 100;
 		_i++;
@@ -119,7 +119,7 @@ void FirstMenu::HandleGamepadClick(Event _event)
 		if (_event.type == Event::JoystickButtonPressed) {
 
 				if (_event.joystickButton.button == 0) {
-					currentText->onClick[0]();
+					currentText->onClick();
 				}
 
 		}
