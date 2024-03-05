@@ -21,6 +21,11 @@ void Snowflake::update(float dt) {
         position.y = 0.f;
         position.x = static_cast<float>(rand() % static_cast<int>(sf::VideoMode::getDesktopMode().width));
     }
+
+    // Si le flocon atteint le bord gauche, réinitialiser la position à droite
+    if (position.x < 0.f) {
+        position.x = static_cast<float>(sf::VideoMode::getDesktopMode().width);
+    }
 }
 
 void Snowflake::draw(sf::RenderTarget& target) {
