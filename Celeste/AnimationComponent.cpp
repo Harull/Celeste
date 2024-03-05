@@ -59,3 +59,12 @@ void AnimationComponent::Finish()
 		_animation->GetSprite()->setColor(Color::Transparent);
 	}
 }
+
+void AnimationComponent::Restart()
+{
+	for (Animation* _animation : GetAllValues())
+	{
+		_animation->Start();
+		_animation->GetSprite()->setColor(Color::White);
+	}
+}

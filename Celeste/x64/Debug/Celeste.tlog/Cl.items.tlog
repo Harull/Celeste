@@ -16,6 +16,7 @@ C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\FontData.cpp;C:\Users\Kylia\Docu
 C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\FontManager.cpp;C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\x64\Debug\FontManager.obj
 C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\FragileTile.cpp;C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\x64\Debug\FragileTile.obj
 C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\Game.cpp;C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\x64\Debug\Game.obj
+C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\GemDash.cpp;C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\x64\Debug\GemDash.obj
 C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\GravityComponent.cpp;C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\x64\Debug\GravityComponent.obj
 C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\Grid.cpp;C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\x64\Debug\Grid.obj
 C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\LevelSelectorMenu.cpp;C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\x64\Debug\LevelSelectorMenu.obj
@@ -30,6 +31,7 @@ C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\MusicData.cpp;C:\Users\Kylia\Doc
 C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\MusicManager.cpp;C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\x64\Debug\MusicManager.obj
 C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\OtherWindow.cpp;C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\x64\Debug\OtherWindow.obj
 C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\Player.cpp;C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\x64\Debug\Player.obj
+C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\Portal.cpp;C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\x64\Debug\Portal.obj
 C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\SmallMap.cpp;C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\x64\Debug\SmallMap.obj
 C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\Snow.cpp;C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\x64\Debug\Snow.obj
 C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\Snowflake.cpp;C:\Users\Kylia\Documents\GitHub\Celeste\Celeste\x64\Debug\Snowflake.obj
