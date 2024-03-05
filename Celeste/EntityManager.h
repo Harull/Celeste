@@ -20,7 +20,10 @@ public:
 		{
 			if (AnimationComponent* _animation = _entity->GetComponent<AnimationComponent>())
 			{
-				_drawables.push_back(_entity->GetShape());
+				if (Character* _currentCharacter = dynamic_cast<Character*>(_animation->GetOwner()))
+				{
+					_animation->GetCurrentAnimation()->GetSprite()->setColor(_currentCharacter->GetHasDashes() ? sf::Color::White : sf::Color(247, 94, 166, 255));
+				}
 				_drawables.push_back(_animation->GetCurrentAnimation()->GetSprite());
 			}
 			else
@@ -42,7 +45,10 @@ public:
 			if (_visibleArea.intersects(_entity->GetShape()->getGlobalBounds())) {
 				if (AnimationComponent* _animation = _entity->GetComponent<AnimationComponent>())
 				{
-					_drawables.push_back(_entity->GetShape());
+					if (Character* _currentCharacter = dynamic_cast<Character*>(_animation->GetOwner()))
+					{
+						_animation->GetCurrentAnimation()->GetSprite()->setColor(_currentCharacter->GetHasDashes() ? sf::Color::White : sf::Color(247, 94, 166, 255));
+					}
 					_drawables.push_back(_animation->GetCurrentAnimation()->GetSprite());
 				}
 				else

@@ -105,7 +105,7 @@ void Game::InitWindow()
 {
 	//window.create(VideoMode(1280, 720), "Celeste");
 	const int _xWindowSize = 1920, _yWindowSize = 1080;
-	window.create(VideoMode(_xWindowSize, _yWindowSize), "Celeste", Style::Resize);
+	window.create(VideoMode(_xWindowSize, _yWindowSize), "Celeste", Style::Fullscreen);
 
 	Camera::GetInstance().Init({ 0,0 }, { 1920, 1080 });
 }

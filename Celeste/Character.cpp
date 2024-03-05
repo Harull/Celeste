@@ -279,6 +279,7 @@ void Character::ResetDashValues()
 void Character::Update()
 {
 	Entity::Update();
+	//std::cout << GetComponent<CollisionComponent>()->CheckCollision().collisionSideBinary << std::endl;
 }
 
 void Character::Die()
@@ -287,7 +288,6 @@ void Character::Die()
 	{
 		_dashTimer->Stop();
 		ResetDashValues();
-		
 	}
 	
 	isDie = true;
@@ -297,5 +297,5 @@ void Character::Die()
 void Character::Respawn()
 {
 	shape->setPosition(checkPoint);
-	isDie = false();
+	isDie = false;
 }

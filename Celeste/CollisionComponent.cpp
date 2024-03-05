@@ -3,6 +3,7 @@
 #include"Character.h"
 #include"EntityManager.h"
 #include"FragileTile.h"
+#include "Game.h"
 
 
 CollisionInfos CollisionComponent::CheckCollision(const bool _isSpecificCheckOnWalls)
@@ -168,7 +169,6 @@ float CollisionComponent::ComputeYOverlap(const sf::Shape* _entityShape, const s
 	const sf::FloatRect& _tileGlobalBounds = _tileShape->getGlobalBounds();
 
 	CollisionSide _side = _entityGlobalBounds.top < _tileGlobalBounds.top ? COLLIDE_DOWN : COLLIDE_UP;
-
 	if (_side & COLLIDE_DOWN)
 		return _entityGlobalBounds.top + _entityGlobalBounds.height - _tileGlobalBounds.top;
 
@@ -181,7 +181,6 @@ float CollisionComponent::ComputeXOverlap(const sf::Shape* _entityShape, const s
 	const sf::FloatRect& _tileGlobalBounds = _tileShape->getGlobalBounds();
 
 	CollisionSide _side = _entityGlobalBounds.left < _tileGlobalBounds.left ? COLLIDE_LEFT : COLLIDE_RIGHT;
-
 	if (_side & COLLIDE_LEFT)
 		return  _entityGlobalBounds.left + _entityGlobalBounds.width - _tileGlobalBounds.left;
 
