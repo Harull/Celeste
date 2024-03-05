@@ -1,8 +1,8 @@
 #include "Animation.h"
 #include "AnimationComponent.h"
 #include "Timer.h"
-
-#include"Macro.h"
+#include "Macro.h"
+#include "Game.h"
 
 Animation::Animation(const string& _name, AnimationComponent* _owner, Sprite* _sprite,
 	const AnimationData& _data) : IManageable(_name)
@@ -96,7 +96,15 @@ void Animation::Update()
 	Vector2f _shapeSize = owner->GetOwner()->GetShape()->getLocalBounds().getSize();
 	Vector2f _scale = Vector2f(_shapeSize.x / _spriteSize.x, _shapeSize.y / _spriteSize.y);
 	sprite->setScale(_scale);
-	sprite->setPosition(owner->GetOwner()->GetPosition());
+	sf::Vector2f _position = owner->GetOwner()->GetPosition();
+	if (AnimationComponent* _component = dynamic_cast<AnimationComponent*>(owner))
+	{
+		if (dynamic_cast<Character*>(_component->GetOwner()))
+			sprite->setPosition(Game::GetInstance().GetSenseOfGravity() == GRAVITY_NORMAL ? _position : sf::Vector2f(_position.x + _shapeSize.x, _position.y + _shapeSize.y));
+		else
+			sprite->setPosition(_position);
+	}
+	
 
 }
 

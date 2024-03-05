@@ -85,7 +85,10 @@ public:
 	{
 		return isDie;
 	}
-
+	bool GetHasDashes() const
+	{
+		return dashCount > 0;
+	}
 private:
 	void InitShape();
 

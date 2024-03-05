@@ -6,6 +6,8 @@
 #include "CollisionComponent.h"
 #include "TimerManager.h"
 #include"Portal.h"
+#include "Game.h"
+
 
 #define CHARACTER_TEXTURE "Character/Slave.png"
 #define DEAD_ZONE 50.f
@@ -68,6 +70,9 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 
 
 	components.push_back(_animation);
+	shape->setOutlineThickness(2);
+	shape->setOutlineColor(sf::Color::Red);
+	shape->setFillColor(sf::Color::Transparent);
 }
 
 void Character::InitShape()
@@ -137,8 +142,8 @@ bool Character::Jump(const sf::Event& _event)
 
 		if (currentYVelocity < 2) return;
 
-
-		_mvComponent->Move({ _xDirectionModif, -currentYVelocity * 1.f });
+		
+		_mvComponent->Move({ _xDirectionModif, -currentYVelocity * static_cast<float>(Game::GetInstance().GetSenseOfGravity())});
 		currentJumpTimerIndex++;
 		}, sf::seconds(0), true, true);
 
@@ -277,6 +282,7 @@ void Character::ResetDashValues()
 void Character::Update()
 {
 	Entity::Update();
+	//std::cout << GetComponent<CollisionComponent>()->CheckCollision().collisionSideBinary << std::endl;
 }
 
 void Character::Die()
@@ -285,7 +291,6 @@ void Character::Die()
 	{
 		_dashTimer->Stop();
 		ResetDashValues();
-		
 	}
 	
 	isDie = true;

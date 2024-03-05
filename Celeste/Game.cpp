@@ -21,6 +21,7 @@ Game::Game()
 	visibleArea = FloatRect();
 	menu = nullptr;
 	snow = new Snow(100, 50, 100);
+	senseOfGravity = GRAVITY_NORMAL;
 }
 
 Game::~Game()
@@ -76,6 +77,14 @@ void Game::InitInput()
 			return MenuOption::GetInstance().Show();
 		return false;
 		});
+	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const Event& _event){
+		if (_event.key.code == sf::Keyboard::M)
+		{
+			ToggleSenseOfGravity();
+			return true;
+		}
+		return false;
+		});
 }
 
 bool Game::ShowOptionsInGame(const Event& _event) {
@@ -97,7 +106,7 @@ void Game::InitWindow()
 {
 	//window.create(VideoMode(1280, 720), "Celeste");
 	const int _xWindowSize = 1920, _yWindowSize = 1080;
-	window.create(VideoMode(_xWindowSize, _yWindowSize), "Celeste", Style::Resize);
+	window.create(VideoMode(_xWindowSize, _yWindowSize), "Celeste", Style::Fullscreen);
 
 	Camera::GetInstance().Init({ 0,0 }, { 1920, 1080 });
 }

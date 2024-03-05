@@ -28,6 +28,7 @@ MovementComponent::MovementComponent(Entity* _owner, const float _velocity,
 //TODO le bouger de là, le mettre dans character
 void MovementComponent::UpdateAnimations()
 {
+	SenseOfGravity _currentGravitySense = Game::GetInstance().GetSenseOfGravity();
 	if (Character* _character = dynamic_cast<Character*>(owner))
 	{
 		CollisionInfos _collisionInfos = _character->GetComponent<CollisionComponent>()->CheckCollision();
@@ -47,7 +48,7 @@ void MovementComponent::UpdateAnimations()
 				else
 					_adirection = _collisionInfosOnWalls.collisionSideBinary & COLLIDE_RIGHT ? ANIM_DIR_GRAB_LEFT : ANIM_DIR_GRAB_RIGHT;
 			}
-			else if (direction.x > 0)
+			else if (_currentGravitySense == GRAVITY_NORMAL ? (direction.x > 0) : (direction.x < 0))
 			{
 				if (_characterIsDashing)
 					_adirection = ANIM_DIR_DASH_RIGHT;
@@ -58,7 +59,7 @@ void MovementComponent::UpdateAnimations()
 				else
 					_adirection = ANIM_DIR_RIGHT;
 			}
-			else if (direction.x < 0)
+			else if (_currentGravitySense == GRAVITY_NORMAL ? (direction.x < 0) : (direction.x > 0))
 			{
 				if (_characterIsDashing)
 					_adirection = ANIM_DIR_DASH_LEFT;
@@ -163,9 +164,16 @@ bool MovementComponent::TryToMove(Entity* _entity, const Vector2f& _direction, c
 				}
 			}
 
-			if ((_collisionSideBinary & COLLIDE_DOWN) && _destination.y < 0)
-				_newPos = { _newPos.x, -_destination.y };
-			_entity->GetShape()->move(_newPos);
+			SenseOfGravity _currentGravity = Game::GetInstance().GetSenseOfGravity();
+			if (_collisionSideBinary & COLLIDE_DOWN)
+			{
+				if (_currentGravity == GRAVITY_INVERTED)
+					_newPos = { _newPos.x, _destination.y };
+				else
+					_newPos = { _newPos.x, -_destination.y };
+			}
+
+			_entity->GetShape()->move(_currentGravity == GRAVITY_NORMAL ? _newPos : -_newPos);
 
 			return true;
 		}

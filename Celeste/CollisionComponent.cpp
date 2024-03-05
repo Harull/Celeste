@@ -3,6 +3,7 @@
 #include"Character.h"
 #include"EntityManager.h"
 #include"FragileTile.h"
+#include "Game.h"
 
 
 CollisionInfos CollisionComponent::CheckCollision(const bool _isSpecificCheckOnWalls)
@@ -38,6 +39,27 @@ CollisionInfos CollisionComponent::CheckCollision(const bool _isSpecificCheckOnW
 				if (_floatRectBb.intersects(_isSpecificCheckOnWalls ? _tileGbb : sf::FloatRect({ _tileGbb.left + 1, _tileGbb.top}, { _tileGbb.width - 2, _tileGbb.height})))
 				{
 					CollisionSide _currentSide = ComputeRelativePosition(_currentShape, _shapeTile, _collisionSideBinary);
+					if (Game::GetInstance().GetSenseOfGravity() == GRAVITY_INVERTED)
+					{
+						switch (_currentSide)
+						{
+						case COLLIDE_LEFT:
+							_currentSide = COLLIDE_RIGHT;
+							break;
+						case COLLIDE_RIGHT:
+							_currentSide = COLLIDE_LEFT;
+							break;
+						case COLLIDE_UP:
+							_currentSide = COLLIDE_DOWN;
+							break;
+						case COLLIDE_DOWN:
+							_currentSide = COLLIDE_UP;
+							break;
+						default:
+							break;
+						}
+					}
+
 					_collisionSideBinary |= _currentSide;
 					_entityTypeBinary |= _tile->GetType();
 
@@ -147,7 +169,6 @@ float CollisionComponent::ComputeYOverlap(const sf::Shape* _entityShape, const s
 	const sf::FloatRect& _tileGlobalBounds = _tileShape->getGlobalBounds();
 
 	CollisionSide _side = _entityGlobalBounds.top < _tileGlobalBounds.top ? COLLIDE_DOWN : COLLIDE_UP;
-
 	if (_side & COLLIDE_DOWN)
 		return _entityGlobalBounds.top + _entityGlobalBounds.height - _tileGlobalBounds.top;
 
@@ -160,7 +181,6 @@ float CollisionComponent::ComputeXOverlap(const sf::Shape* _entityShape, const s
 	const sf::FloatRect& _tileGlobalBounds = _tileShape->getGlobalBounds();
 
 	CollisionSide _side = _entityGlobalBounds.left < _tileGlobalBounds.left ? COLLIDE_LEFT : COLLIDE_RIGHT;
-
 	if (_side & COLLIDE_LEFT)
 		return  _entityGlobalBounds.left + _entityGlobalBounds.width - _tileGlobalBounds.left;
 
