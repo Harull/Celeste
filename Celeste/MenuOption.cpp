@@ -3,20 +3,27 @@
 #include "TextureManager.h"
 #include "FontManager.h"
 #include "LevelSelectorMenu.h"
+#include "MenuSoundBoard.h"
+#include "Macro.h"
+#define DEAD_ZONE 50.0f
 
 MenuOption::MenuOption()
 {
 	currentVolumeCount = 2;
 
-	volume = new Text();
-	back = new Text();
-	backLevelSelect = new Text();
-	decreaseVolume = new Text();
-	increaseVolume = new Text();
-	currentVolume = new Text();
 
 	background = new Sprite();
 	font = new Font();
+
+	texts = vector<TextData*>();
+	canClick = true;
+
+	currentText = new TextData();
+	index = 0;
+	maxIndex = 0;
+	minIndex = 0;
+
+	offsetVolume = 0;
 
 	inGame = false;
 
@@ -24,12 +31,10 @@ MenuOption::MenuOption()
 
 MenuOption::~MenuOption()
 {
-	delete volume;
-	delete currentVolume;
-	delete back;
-	delete backLevelSelect;
-	delete decreaseVolume;
-	delete increaseVolume;
+	for (auto _text : texts)
+	{
+		delete _text;
+	}
 
 	delete background;
 	delete font;
@@ -46,80 +51,169 @@ void MenuOption::Init()
 		static_cast<float>(_windowSize.y) / background->getLocalBounds().height
 	);
 
-	currentVolume->setString(to_string(currentVolumeCount));
-	volume->setString("Volume");
-	back->setString("Resume");
-	backLevelSelect->setString("Retour");
-	decreaseVolume->setString("<");
-	increaseVolume->setString(">");
-
 	if (!font->loadFromFile("Assets/Fonts/Renogare.otf"))
 	{
 		cerr << "ERROR - Font non charge" << endl;
 	}
 
-	volume->setFont(*font);
-	currentVolume->setFont(*font);
-	back->setFont(*font);
-	backLevelSelect->setFont(*font);
-	decreaseVolume->setFont(*font);
-	increaseVolume->setFont(*font);
+	vector<string> _names =
+	{
+		"Resume",
+		"Volume",
+		"SoundBoard",
+		"Retour",
+	};
+
+	vector<function<void()>> _functions =
+	{
+		[]() { Game::GetInstance().Resume(); } ,
+		[this]() { ChangeVolume(); },
+		[]() { MenuSoundBoard::GetInstance().Show(); } ,
+		[]() {
+			if (MenuOption::GetInstance().IsInGame()) {
+				MenuOption::GetInstance().SetInGame(false);
+				LevelSelectorMenu::GetInstance().Show();
+			}
+			else {
+				FirstMenu::GetInstance().Show();
+			}
+		}
+	};
+
+	for (string _name : _names) {
+		if (_name != "Resume") {
+			if (_name == "Volume") {
+				texts.push_back(new TextData(_name,
+					new Text(_name + "<" + to_string(currentVolumeCount) + ">", *font, 50), false, true));
+			}
+			else
+			{
+				texts.push_back(new TextData(_name, new Text(_name, *font, 50), false));
+			}
+		}
+		else
+		{
+			texts.push_back(new TextData(_name, new Text(_name, *font, 50), true));
+		}
+	}
 
 
+	float _posX = (_windowSize.x - 500.0f) / 2;
+	float _sizeY = 50.0f;
+	float _posY = (_windowSize.y - _sizeY * texts.size()) / 2;
+	//float _posY = (_windowSize.y - 100 * texts.size() + texts.size() * texts[0]->text->getCharacterSize()) / 2;
+	Vector2f _pos = Vector2f(_posX, _posY);
+	int _i = 0;
+	for (TextData* _text : texts) {
+		_text->onClick = _functions[_i];
+		_text->text->setPosition(_pos);
+		_pos.y += 100;
+		_i++;
+	}
 
-	volume->setCharacterSize(50);
-	currentVolume->setCharacterSize(50);
-	back->setCharacterSize(50);
-	backLevelSelect->setCharacterSize(50);
-	decreaseVolume->setCharacterSize(50);
-	increaseVolume->setCharacterSize(50);
+	currentText = texts[0];
+	currentText->text->setFillColor(Color::Red);
 
-	volume->setPosition(700, 575);
-	decreaseVolume->setPosition(925, 575);
-	currentVolume->setPosition(950, 575);
-	increaseVolume->setPosition(1025, 575);
-
-	back->setPosition(180, 510);
-	backLevelSelect->setPosition(180, 575);
-
+	maxIndex = _names.size();
 
 }
 
-void MenuOption::HandleMouseClick(Mouse::Button _button, const Vector2i& _mousePosition, RenderWindow& _window)
+void MenuOption::HandleGamepadClick(Event _event)
 {
-	if (_button == Mouse::Left)
-	{
+	float _axisYPositionJoy = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+	int _yDirectionJoy = (_axisYPositionJoy <= -DEAD_ZONE) ? -1 : _axisYPositionJoy >= DEAD_ZONE ? 1 : 0;
 
-		if (back->getGlobalBounds().contains(static_cast<float>(_mousePosition.x), static_cast<float>(_mousePosition.y)))
-		{
-			Game::GetInstance().Resume();
-		}
-		else if (backLevelSelect->getGlobalBounds().contains(static_cast<float>(_mousePosition.x), static_cast<float>(_mousePosition.y)))
-		{
-			MenuOption::GetInstance().SetInGame(false);
-			LevelSelectorMenu::GetInstance().Show();
-		}
-		else if (decreaseVolume->getGlobalBounds().contains(static_cast<float>(_mousePosition.x), static_cast<float>(_mousePosition.y)))
-		{
-			currentVolumeCount--;
-			if (currentVolumeCount < 0) {
-				currentVolumeCount = 0;
-				return;
+	float _axisXPositionJoy = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+	int _xDirectionJoy = (_axisXPositionJoy <= -DEAD_ZONE) ? -1 : _axisXPositionJoy >= DEAD_ZONE ? 1 : 0;
+
+	float _axisYPositionFle = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY);
+	int _yDirectionFle = (_axisYPositionFle <= -DEAD_ZONE) ? -1 : _axisYPositionFle >= DEAD_ZONE ? 1 : 0;
+
+	float _axisXPositionFle = sf::Joystick::getAxisPosition(0, sf::Joystick::PovX);
+	int _xDirectionFle = (_axisXPositionFle <= -DEAD_ZONE) ? -1 : _axisXPositionFle >= DEAD_ZONE ? 1 : 0;
+
+	if (_event.type == Event::JoystickMoved) {
+
+		if (canClick) {
+			if (_yDirectionJoy == 1) {
+				MoveUp();
 			}
-			currentVolume->setString(to_string(currentVolumeCount));
-			MusicManager::GetInstance().DecreaseVolume();
-		}
-		else if (increaseVolume->getGlobalBounds().contains(static_cast<float>(_mousePosition.x), static_cast<float>(_mousePosition.y)))
-		{
-			currentVolumeCount++;
-			if (currentVolumeCount > 10) {
-				currentVolumeCount = 10;
-				return;
+			else if (_yDirectionJoy == -1) {
+				MoveDown();
 			}
-			currentVolume->setString(to_string(currentVolumeCount));
-			MusicManager::GetInstance().IncreaseVolume();
+			if (canClick) {
+				if (currentText->canChangeValue) {
+
+					if (_xDirectionJoy == -1) {
+						canClick = false;
+						offsetVolume = _xDirectionJoy;
+						currentText->onClick();
+					}
+					else if (_xDirectionJoy == 1) {
+						canClick = false;
+						offsetVolume = _xDirectionJoy;
+						currentText->onClick();
+					}
+				}
+			}
+		}
+
+		if (canClick) {
+			if (_yDirectionFle == -1) {
+				MoveUp();
+			}
+			else if (_yDirectionFle == 1) {
+				MoveDown();
+			}
+		}
+
+		if (currentText->canChangeValue) {
+			if (canClick) {
+				if (_xDirectionFle == -1) {
+					canClick = false;
+					offsetVolume = _xDirectionFle;
+					currentText->onClick();
+				}
+				else if (_xDirectionFle == 1) {
+					canClick = false;
+					offsetVolume = _xDirectionFle;
+					currentText->onClick();
+				}
+			}
 		}
 	}
+	else if (_event.type == Event::JoystickButtonPressed) {
+		if (currentText->canChangeValue) return;
+		if (_event.joystickButton.button == 0) {
+			currentText->onClick();
+		}
+	}
+
+	if (_xDirectionFle == 0 && _yDirectionFle == 0 && _xDirectionJoy == 0 && _yDirectionJoy == 0) canClick = true;
+
+}
+
+void MenuOption::MoveUp()
+{
+	canClick = false;
+	index++;
+	if (index >= maxIndex) index--;
+	currentText->text->setFillColor(sf::Color::White);
+	currentText = texts[index];
+	currentText->text->setFillColor(sf::Color::Red);
+
+}
+
+
+
+void MenuOption::MoveDown()
+{
+	canClick = false;
+	index--;
+	if (index < minIndex) index++;
+	currentText->text->setFillColor(sf::Color::White);
+	currentText = texts[index];
+	currentText->text->setFillColor(sf::Color::Red);
 }
 
 void MenuOption::HandleEvents(RenderWindow& _window)
@@ -131,10 +225,60 @@ void MenuOption::HandleEvents(RenderWindow& _window)
 		{
 			_window.close();
 		}
-		else if (_event.type == Event::MouseButtonPressed)
+		else if (_event.type == Event::JoystickButtonPressed || _event.type == Event::JoystickMoved)
 		{
-			HandleMouseClick(_event.mouseButton.button, Mouse::getPosition(_window), _window);
+			HandleGamepadClick(_event);
 		}
+	}
+}
+
+void MenuOption::ChangeVolume()
+{
+	currentVolumeCount += offsetVolume;
+	if (currentVolumeCount <= 0) {
+		currentVolumeCount = 0;
+		ModifyIntBetweenChevrons(currentVolumeCount, currentText->text);
+		MusicManager::GetInstance().MuteVolume();
+		return;
+	}
+	else if (currentVolumeCount > 10) {
+		currentVolumeCount = 10;
+		ModifyIntBetweenChevrons(currentVolumeCount, currentText->text);
+		return;
+	}
+
+	if (offsetVolume == 0) return;
+	else if (offsetVolume == 1) {
+		MusicManager::GetInstance().IncreaseVolume();
+		ModifyIntBetweenChevrons(currentVolumeCount, currentText->text);
+	}
+	else if (offsetVolume == -1) {
+		MusicManager::GetInstance().DecreaseVolume();
+		ModifyIntBetweenChevrons(currentVolumeCount, currentText->text);
+	}
+}
+
+void MenuOption::Reset()
+{
+	if (!inGame) {
+		cout << "pasinGame : " << boolalpha << inGame << endl;
+		minIndex = 1;
+		index = 1;
+		for (TextData* _text : texts) {
+			_text->text->setFillColor(Color::White);
+		}
+		currentText = texts[minIndex];
+		currentText->text->setFillColor(Color::Red);
+	}
+	else if (inGame) {
+		cout << "inGame : " << boolalpha << inGame << endl;
+		minIndex = 0;
+		index = 0;
+		for (TextData* _text : texts) {
+			_text->text->setFillColor(Color::White);
+		}
+		currentText = texts[minIndex];
+		currentText->text->setFillColor(Color::Red);
 	}
 }
 
@@ -143,23 +287,28 @@ bool MenuOption::Show()
 
 	RenderWindow& _window = Game::GetInstance().GetWindow();
 
+	Reset();
+
 	while (_window.isOpen())
 	{
 		HandleEvents(_window);
 
 		const View _view(FloatRect(Vector2f(0.0f, 0.0f), Vector2f(1920.0f, 1080.0f)));
 		_window.setView(_view);
-
 		_window.clear();
 		_window.draw(*background);
-		_window.draw(*volume);
-		_window.draw(*decreaseVolume);
-		_window.draw(*currentVolume);
-		_window.draw(*increaseVolume);
-		_window.draw(*backLevelSelect);
 		if (inGame) {
-			_window.draw(*back);
+			for (TextData* _text : texts) {
+				_window.draw(*_text->text);
+			}
 		}
+		else {
+			for (TextData* _text : texts) {
+				if (_text->inGame) continue;
+				_window.draw(*_text->text);
+			}
+		}
+
 
 		_window.display();
 	}

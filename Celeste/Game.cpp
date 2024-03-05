@@ -8,7 +8,11 @@
 #include "MenuOption.h"
 #include "MapManager.h"
 #include "AnimationComponent.h"
+
 #include"Portal.h"
+
+#include "MenuSoundBoard.h"
+
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
@@ -41,7 +45,7 @@ void Game::Start()
 	InitWindow();
 	InitMenu();
 	MusicManager::GetInstance().Play("Celeste_OST.mp3");
-	MusicManager::GetInstance().SetVolume(2.f);
+	MusicManager::GetInstance().SetVolume(20.f);
 
 	FirstMenu::GetInstance().Show();
 	
@@ -52,6 +56,7 @@ void Game::InitMenu()
 	FirstMenu::GetInstance().Init();
 	LevelSelectorMenu::GetInstance().Init(3);
 	MenuOption::GetInstance().Init();
+	MenuSoundBoard::GetInstance().Init();
 }
 
 void Game::InitMap(const int _value)
@@ -72,8 +77,8 @@ void Game::InitMap(const int _value)
 
 void Game::InitInput()
 {
-	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const Event& _event) {
-		if (_event.key.code == sf::Keyboard::Escape) 
+	EventReactionManager::BindNewInputReaction(sf::Event::JoystickButtonPressed, [&](const Event& _event) {
+		if (_event.joystickButton.button == 7)
 			return MenuOption::GetInstance().Show();
 		return false;
 		});

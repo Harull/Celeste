@@ -8,31 +8,34 @@
 using namespace sf;
 using namespace std;
 
+
+
 class FirstMenu : public Menu, public Singleton<FirstMenu>
 {
 private:
-    Text* play;
-    Text* options;
-    Text* exit;
+    vector<TextData*> texts;
+	TextData* currentText;
+
     Sprite* background;
     Font* font;
+    
+
+    int index;
+	int maxIndex;
+
+	bool canClick;
 
 
 
-    void HandleMouseClick(Mouse::Button _button, const Vector2i& _mousePosition, RenderWindow& _window);
+
+
+    void HandleGamepadClick(Event _event);
     void HandleEvents(RenderWindow& _window);
 
+	void MoveDown();
+	void MoveUp();
+
 public:
-
-    vector<Drawable*>& GetDrawables()  {
-
-        vector<Drawable*> drawables;
-        drawables.push_back(background);
-        drawables.push_back(play);
-        drawables.push_back(options);
-        drawables.push_back(exit);
-        return drawables;
-    }
 
     FirstMenu();
     ~FirstMenu();

@@ -5,111 +5,186 @@
 #include "LevelSelectorMenu.h"
 #include "MenuOption.h"
 
+#define DEAD_ZONE 50.0f
+
 FirstMenu::FirstMenu()
 {
-    play = new Text();
-    options = new Text();
-    exit = new Text();
-    background = new Sprite();
+
+	texts = vector<TextData*>();
+
+	background = new Sprite();
 	font = new Font();
 
+	canClick = true;
+	currentText = new TextData();
+
+	index = 0;
+	maxIndex = 0;
 }
 
 FirstMenu::~FirstMenu()
 {
-    delete play;
-    delete options;
-    delete exit;
-    delete background;
-    delete font;
+
+	for (auto _text : texts)
+	{
+		delete _text;
+	}
+
+	delete background;
+	delete font;
 }
+
+
 
 void FirstMenu::Init()
 {
-    Vector2u _windowSize = Game::GetInstance().GetWindowSize();
+	Vector2u _windowSize = Game::GetInstance().GetWindowSize();
 
 	TextureManager::GetInstance().Load(background, "Assets/Background/celeste_background.png");
 
-    background->setScale(
-        static_cast<float>(_windowSize.x) / background->getLocalBounds().width,
-        static_cast<float>(_windowSize.y) / background->getLocalBounds().height
-    );
+	background->setScale(
+		static_cast<float>(_windowSize.x) / background->getLocalBounds().width,
+		static_cast<float>(_windowSize.y) / background->getLocalBounds().height
+	);
 
-    play->setString("Climb");
-    options->setString("Options");
-    exit->setString("Exit");
+	if (!font->loadFromFile("Assets/Fonts/Renogare.otf"))
+	{
+		cerr << "ERROR - Font non charge" << endl;
+	}
 
-    if (!font->loadFromFile("Assets/Fonts/Renogare.otf"))
-    {
-        cerr << "ERROR - Font non charge" << endl;
-    }
+	vector<string> _names = { "Play", "Options", "Exit" };
 
-    play->setFont(*font);
-    options->setFont(*font);
-    exit->setFont(*font);
+	vector<function<void()>> _functions =
+	{
+		[]() { LevelSelectorMenu::GetInstance().Show(); },
+		[]() { MenuOption::GetInstance().Show(); } ,
+		[]() { Game::GetInstance().GetWindow().close(); } 
+	};
 
-    play->setCharacterSize(80);
-    options->setCharacterSize(50);
-    exit->setCharacterSize(50);
+	for (string _name : _names) {
 
-    play->setPosition(180, 400);
-    options->setPosition(180, 510);
-    exit->setPosition(180, 575);
+		texts.push_back(new TextData(_name, new Text(_name, *font, 50), false));
+	}
+
+	Vector2f _pos = Vector2f(180, 400);
+	int _i = 0;
+	for (TextData* _text : texts) {
+		_text->onClick = _functions[_i];
+		_text->text->setPosition(_pos);
+		_pos.y += 100;
+		_i++;
+	}
+
+	currentText = texts[0];
+	currentText->text->setFillColor(Color::Red);
+
+	maxIndex = _names.size();
+
 }
 
-void FirstMenu::HandleMouseClick(Mouse::Button _button, const Vector2i& _mousePosition, RenderWindow& _window)
+
+void FirstMenu::HandleGamepadClick(Event _event)
 {
-    if (_button == Mouse::Left)
-    {
-        if (play->getGlobalBounds().contains(static_cast<float>(_mousePosition.x), static_cast<float>(_mousePosition.y)))
-        {
-            LevelSelectorMenu::GetInstance().Show();
-        }
-        else if (options->getGlobalBounds().contains(static_cast<float>(_mousePosition.x), static_cast<float>(_mousePosition.y)))
-        {
-			MenuOption::GetInstance().Show();
-        }
-        else if (exit->getGlobalBounds().contains(static_cast<float>(_mousePosition.x), static_cast<float>(_mousePosition.y)))
-        {
-            _window.close();
-        }
-    }
+
+		float _axisYPositionJoy = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+		int _YDirectionJoy = (_axisYPositionJoy <= -DEAD_ZONE) ? -1 : _axisYPositionJoy >= DEAD_ZONE ? 1 : 0;
+
+		float _axisypositionFle = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY);
+		int _ydirectionFle = (_axisypositionFle <= -DEAD_ZONE) ? -1 : _axisypositionFle >= DEAD_ZONE ? 1 : 0;
+
+		if (_event.type == Event::JoystickMoved) {
+
+			if (canClick) {
+				if (_YDirectionJoy == 1) {
+					MoveUp();
+
+				}
+				else if (_YDirectionJoy == -1) {
+
+					MoveDown();
+				}
+			}
+			else if (_YDirectionJoy == 0) canClick = true;
+			if (canClick) {
+
+				if (_ydirectionFle == -1) {
+					MoveUp();
+				}
+				else if (_ydirectionFle == 1) {
+					MoveDown();
+				}
+				else if (_event.joystickButton.button == 0) canClick = false;
+			}
+		}
+		if (_event.type == Event::JoystickButtonPressed) {
+
+				if (_event.joystickButton.button == 0) {
+					currentText->onClick();
+				}
+
+		}
+}
+
+void FirstMenu::MoveUp()
+{
+	index++;
+	if (index >= maxIndex) index--;
+	currentText->text->setFillColor(sf::Color::White);
+	currentText = texts[index];
+	currentText->text->setFillColor(sf::Color::Red);
+	canClick = false;
+
+}
+
+void FirstMenu::MoveDown()
+{
+	index--;
+	if (index < 0) index++;
+	currentText->text->setFillColor(sf::Color::White);
+	currentText = texts[index];
+	currentText->text->setFillColor(sf::Color::Red);
+	canClick = false;
 }
 
 void FirstMenu::HandleEvents(RenderWindow& _window)
 {
-    Event _event;
-    while (_window.pollEvent(_event))
-    {
-        if (_event.type == Event::Closed)
-        {
-            _window.close();
-        }
-        else if (_event.type == Event::MouseButtonPressed)
-        {
-            HandleMouseClick(_event.mouseButton.button, Mouse::getPosition(_window), _window);
-        }
-    }
+	Event _event;
+	//cout << "event" << endl;
+	while (_window.pollEvent(_event))
+	{
+		if (_event.type == Event::Closed)
+		{
+			_window.close();
+		}
+		else if (_event.type == Event::JoystickButtonPressed || _event.type == Event::JoystickMoved)
+		{
+
+			HandleGamepadClick(_event);
+		}
+
+	}
 
 }
 
 bool FirstMenu::Show()
 {
-    
-    RenderWindow& _window = Game::GetInstance().GetWindow();
 
-    while (_window.isOpen())
-    {
-        HandleEvents(_window);
+	RenderWindow& _window = Game::GetInstance().GetWindow();
 
-        const View _view(FloatRect(Vector2f(0.0f, 0.0f), Vector2f(1920.0f, 1080.0f)));
-        _window.setView(_view);
-        _window.clear();
-        _window.draw(*background);
-        _window.draw(*play);
-        _window.draw(*options);
-        _window.draw(*exit);
-        _window.display();
-    }
-    return true;
+	while (_window.isOpen())
+	{
+		HandleEvents(_window);
+
+		const View _view(FloatRect(Vector2f(0.0f, 0.0f), Vector2f(1920.0f, 1080.0f)));
+		_window.setView(_view);
+		_window.clear();
+		_window.draw(*background);
+
+		for (TextData* _text : texts) {
+			_window.draw(*_text->text);
+		}
+
+		_window.display();
+	}
+	return true;
 }

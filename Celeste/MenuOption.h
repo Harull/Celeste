@@ -13,22 +13,32 @@ class MenuOption : public Menu, public Singleton<MenuOption>
 private:
     int currentVolumeCount;
 
-	Text* volume;
-	Text* currentVolume;
-    Text* back;
-    Text* backLevelSelect;
-	Text* decreaseVolume;
-	Text* increaseVolume;
-	bool inGame;
+    vector<TextData*> texts;
+    TextData* currentText;
 
+    int index;
+    int maxIndex;
+	int minIndex;
+    int offsetVolume;
+
+    bool canClick;
+	bool canMoveJoystick;
+	bool inGame;
 
     Sprite* background;
     Font* font;
 
 
 
-    void HandleMouseClick(Mouse::Button _button, const Vector2i& _mousePosition, RenderWindow& _window);
+    void HandleGamepadClick(Event _event);
     void HandleEvents(RenderWindow& _window);
+	void ChangeVolume();
+
+    void MoveDown();
+    void MoveUp();
+
+    void Reset();
+
 
 public:
 
@@ -36,9 +46,15 @@ public:
     MenuOption();
     ~MenuOption();
 
-    void SetInGame(const bool _value) {
+    vector<TextData*> GetTexts() {
+		return texts;
+    }
+
+    void SetInGame(const bool _value){
         inGame = _value;
     }
+
+	bool IsInGame() const { return inGame; }
 
     void Init();
     virtual bool Show() override;

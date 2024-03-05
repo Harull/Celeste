@@ -32,12 +32,8 @@ void MusicManager::IncreaseVolume()
 		{
 			currentVolume += 10; 
 			_musicData->setVolume(currentVolume);
-			cout << "Volume augmenté. Volume actuel: " << currentVolume << endl;
 		}
-		else
-		{
-			cout << "le son est deja a fond." << endl;
-		}
+
 	}
 }
 
@@ -50,12 +46,8 @@ void MusicManager::DecreaseVolume()
 		{
 			currentVolume -= 10; 
 			_musicData->setVolume(currentVolume);
-			cout << "Volume diminué. Volume actuel: " << currentVolume << endl;
 		}
-		else
-		{
-			cout << "le son est deja coupé." << endl;
-		}
+
 	}
 }
 
