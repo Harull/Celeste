@@ -42,6 +42,7 @@ private:
 
 public:
 	virtual void Update() override;
+	void SetThickness(const float _size);
 	void Finish();
 	void Restart();
 };

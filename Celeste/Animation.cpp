@@ -76,7 +76,12 @@ Vector2i Animation::GetNewStart()
 
 void Animation::Start()
 {
+	if (!timer)
+	{
 	timer = new Timer("Animation" + data.name, this, &Animation::SetNext, seconds(data.timeBetween), true, true);
+
+	}
+	timer->Start();
 }
 
 void Animation::Reset()

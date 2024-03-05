@@ -32,6 +32,10 @@ class Game : public Singleton<Game>
 	SenseOfGravity senseOfGravity;
 
 public:
+	Map* GetMap()
+	{
+		return map;
+	}
 	Vector2u GetWindowSize()
 	{
 		return window.getSize();
