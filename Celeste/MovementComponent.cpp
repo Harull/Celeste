@@ -163,9 +163,18 @@ bool MovementComponent::TryToMove(Entity* _entity, const Vector2f& _direction, c
 				}
 			}
 
+			SenseOfGravity _currentGravity = Game::GetInstance().GetSenseOfGravity();
+			/*if (_collisionSideBinary & COLLIDE_DOWN &&
+				((_currentGravity == GRAVITY_NORMAL && _destination.y > 0) ||
+				(_currentGravity == GRAVITY_INVERTED && _destination.y < 0)))
+			{
+				_newPos = { _newPos.x, -_destination.y };
+			}*/
+
 			if ((_collisionSideBinary & COLLIDE_DOWN) && _destination.y < 0)
 				_newPos = { _newPos.x, -_destination.y };
-			_entity->GetShape()->move(_newPos);
+
+			_entity->GetShape()->move(_currentGravity == GRAVITY_NORMAL ? _newPos : -_newPos);
 
 			return true;
 		}
