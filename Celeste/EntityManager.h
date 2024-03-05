@@ -25,6 +25,7 @@ public:
 					_animation->GetCurrentAnimation()->GetSprite()->setColor(_currentCharacter->GetHasDashes() ? sf::Color::White : sf::Color(247, 94, 166, 255));
 				}
 				_drawables.push_back(_animation->GetCurrentAnimation()->GetSprite());
+				
 			}
 			else
 			{

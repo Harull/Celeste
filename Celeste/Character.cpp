@@ -7,6 +7,7 @@
 #include "TimerManager.h"
 #include"Portal.h"
 #include "Game.h"
+#include"EntityManager.h"
 
 
 #define CHARACTER_TEXTURE "Character/Slave.png"
@@ -18,7 +19,13 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 			new GravityComponent(this, 4.5f),
 			new CollisionComponent(this) })
 {
-	new Timer("PortalAppears", [this]() {new Portal(shape->getPosition(), shape->getGlobalBounds().getSize()); },seconds(5));
+	new Timer("PortalAppears", [this]() {Portal* _portal = new Portal(shape->getPosition(), shape->getGlobalBounds().getSize());
+	GetComponent< MovementComponent>()->SetCanMove(false);
+	
+	GetComponent<AnimationComponent>()->Finish();
+	data.inPortal = true;
+	_portal->Teleport();
+		}, seconds(5));
 	maxYVelocity = _maxYVelocity;
 	currentYVelocity = 0;
 	currentJumpTimerIndex = 0;
@@ -73,6 +80,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 	shape->setOutlineThickness(2);
 	shape->setOutlineColor(sf::Color::Red);
 	shape->setFillColor(sf::Color::Transparent);
+	data = PortalData();
 }
 
 void Character::InitShape()
@@ -281,6 +289,15 @@ void Character::ResetDashValues()
 
 void Character::Update()
 {
+	if (data.inPortal)
+	{
+		
+	}
+	if (!data.inPortal)
+	{
+		GetComponent<AnimationComponent>()->Restart();
+	}
+
 	Entity::Update();
 	//std::cout << GetComponent<CollisionComponent>()->CheckCollision().collisionSideBinary << std::endl;
 }

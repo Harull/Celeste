@@ -51,11 +51,33 @@ void AnimationComponent::Update()
 	currentIndex = _newIndex;
 }
 
+void AnimationComponent::SetThickness(const float _size)
+{
+	for (Animation* _animation:GetAllValues())
+	{
+		_animation->GetSprite()->rotate(_size);
+	}
+}
+
 void AnimationComponent::Finish()
 {
 	for (Animation* _animation : GetAllValues())
 	{
 		_animation->Stop();
+		
 		_animation->GetSprite()->setColor(Color::Transparent);
+	}
+}
+
+void AnimationComponent::Restart()
+{
+
+	Update();
+	GetCurrentAnimation()->Start();
+	for (Animation* _animation : GetAllValues())
+	{
+		
+
+		_animation->GetSprite()->setColor(Color(255,255,255,255));
 	}
 }
