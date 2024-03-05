@@ -29,6 +29,7 @@ private:
 public:
 	Animation* GetCurrentAnimation() const
 	{
+
 		return GetAllValues()[currentIndex];
 	}
 

@@ -8,6 +8,7 @@ AnimationComponent::AnimationComponent(Entity* _owner, const string& _path, cons
 	InitAnimations(_path, _animationsData );
 	currentIndex = -1;
 	direction = _direction;
+	Update();
 }
 
 
@@ -41,6 +42,7 @@ void AnimationComponent::Update()
 		_currentAnimation->Stop();
 		currentIndex = -1;
 	}
+	
 
 	Animation* _animation = GetAllValues()[_newIndex];
 	//cout << "Start : " << _animation->GetData().name << endl;

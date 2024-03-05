@@ -12,7 +12,7 @@ enum AnimationDirection
 {
 	ANIM_DIR_NONE, ANIM_DIR_JUMP_LEFT, ANIM_DIR_JUMP_RIGHT, ANIM_DIR_LEFT, ANIM_DIR_RIGHT, ANIM_DIR_FALL_LEFT, ANIM_DIR_FALL_RIGHT, 
 	ANIM_DIR_GRAB_LEFT, ANIM_DIR_GRAB_RIGHT, ANIM_DIR_CLIMB_LEFT, ANIM_DIR_CLIMB_RIGHT,
-	ANIM_DIR_DASH_LEFT, ANIM_DIR_DASH_RIGHT
+	ANIM_DIR_DASH_LEFT, ANIM_DIR_DASH_RIGHT,ANIM_DIR_STANDBY,ANIM_DIR_APPEARS,ANIM_DIR_DISAPPEARS
 };
 
 enum ReadDirection
@@ -30,11 +30,12 @@ struct AnimationData
 	Vector2f size;
 	ReadDirection readDirection;
 	AnimationDirection direction;
+	AnimationDirection nextDirection;
 
 	AnimationData() = default;
 	AnimationData(const string& _name, const Vector2f& _start, const Vector2f& _size,
 		const ReadDirection& _readDirection, const AnimationDirection& _direction,
-		const bool _canLoop, const int _count, const float _timeBetween)
+		const bool _canLoop, const int _count, const float _timeBetween, const AnimationDirection& _nextDirection=ANIM_DIR_NONE)
 	{
 		name = _name;
 		start = _start;
@@ -44,6 +45,7 @@ struct AnimationData
 		canLoop = _canLoop;
 		count = _count;
 		timeBetween = _timeBetween;
+		nextDirection = _nextDirection;
 	}
 };
 

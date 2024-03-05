@@ -35,6 +35,7 @@ void Animation::SetNext()
 	{
 		if (!data.canLoop)
 		{
+			owner->SetDirection(data.nextDirection);
 			Stop();
 			return;
 		}
@@ -75,7 +76,7 @@ Vector2i Animation::GetNewStart()
 
 void Animation::Start()
 {
-	timer = new Timer("Animation" + data.name, this, &Animation::SetNext, seconds(data.timeBetween), true, data.canLoop);
+	timer = new Timer("Animation" + data.name, this, &Animation::SetNext, seconds(data.timeBetween), true, true);
 }
 
 void Animation::Reset()

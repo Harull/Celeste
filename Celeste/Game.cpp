@@ -8,6 +8,7 @@
 #include "MenuOption.h"
 #include "MapManager.h"
 #include "AnimationComponent.h"
+#include"Portal.h"
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
@@ -42,7 +43,7 @@ void Game::Start()
 	MusicManager::GetInstance().SetVolume(2.f);
 
 	FirstMenu::GetInstance().Show();
-
+	
 }
 
 void Game::InitMenu()

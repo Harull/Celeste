@@ -5,6 +5,7 @@
 #include "AnimationComponent.h"
 #include "CollisionComponent.h"
 #include "TimerManager.h"
+#include"Portal.h"
 
 #define CHARACTER_TEXTURE "Character/Slave.png"
 #define DEAD_ZONE 50.f
@@ -15,6 +16,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 			new GravityComponent(this, 4.5f),
 			new CollisionComponent(this) })
 {
+	new Timer("PortalAppears", [this]() {new Portal(shape->getPosition(), shape->getGlobalBounds().getSize()); },seconds(5));
 	maxYVelocity = _maxYVelocity;
 	currentYVelocity = 0;
 	currentJumpTimerIndex = 0;
@@ -293,5 +295,5 @@ void Character::Die()
 void Character::Respawn()
 {
 	shape->setPosition(checkPoint);
-	isDie = false();
+	isDie = false;
 }
