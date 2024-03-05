@@ -107,7 +107,7 @@ void Game::InitWindow()
 	const int _xWindowSize = 1920, _yWindowSize = 1080;
 	window.create(VideoMode(_xWindowSize, _yWindowSize), "Celeste", Style::Fullscreen);
 
-	Camera::GetInstance().Init({ 0,0 }, { 1920, 1080 });
+	Camera::GetInstance().Init({ 0,0 }, { 1920, 1080 - 24 }); // -24 c'est - la moitié d'un bloc
 }
 
 

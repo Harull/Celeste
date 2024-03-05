@@ -39,7 +39,9 @@ void Map::Init(const int _value)
 		maps.push_back(_tempMaps);
 		_startPosition.x = startPosition.x;
 		_startPosition.y += _tempMaps[_i]->GetGrid()->GetTileSize().y * 22;
+		_tempMaps.clear();
 	}
+
 
 }
 

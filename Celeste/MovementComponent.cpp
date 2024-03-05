@@ -167,9 +167,9 @@ bool MovementComponent::TryToMove(Entity* _entity, const Vector2f& _direction, c
 			SenseOfGravity _currentGravity = Game::GetInstance().GetSenseOfGravity();
 			if (_collisionSideBinary & COLLIDE_DOWN)
 			{
-				if (_currentGravity == GRAVITY_INVERTED)
+				if (_currentGravity == GRAVITY_INVERTED && _destination.y > 0)
 					_newPos = { _newPos.x, _destination.y };
-				else
+				else if (_destination.y < 0)
 					_newPos = { _newPos.x, -_destination.y };
 			}
 

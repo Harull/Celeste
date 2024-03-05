@@ -4,7 +4,7 @@
 
 class Strawberry : public Tile
 {
-	bool use;
+	bool isUsed;
 public:
 	Strawberry(const Vector2f& _position, const Vector2f& _size, const string& _path = "Assets/Fraise.png");
 

@@ -11,14 +11,15 @@ Strawberry::Strawberry(const Vector2f& _position, const Vector2f& _size, const s
 		ANIM_DIR_NONE
 	));
 	collisionReaction = [this](int _collisionSide, int _collisionSideBinary) {GetHit(_collisionSideBinary); };
-	use = false;
+	isUsed = false;
+	isTangible = false;
 }
 
 void Strawberry::GetHit(int _collisionSideBinary)
 {
 	if (_collisionSideBinary != ENTITY_CHARACTER)return;
-	if (use)return;
-	tangible = false;
+	if (isUsed)return;
+	isUsed = true;
 	shape->setFillColor(Color::Transparent);
 	GetComponent<AnimationComponent>()->Finish();
 	Game::GetInstance().GetPlayer()->GetPlayerData().IncreaseStrawBerry();

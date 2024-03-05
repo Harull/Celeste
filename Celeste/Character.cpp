@@ -53,8 +53,8 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 		AnimationData("ClimbLeftWall", Vector2f(12.f, 300.f), Vector2f(21.f, 40.f), _readDirection, ANIM_DIR_CLIMB_LEFT, _toRepeat, 4, _speedA * 2.f),
 		AnimationData("ClimbRightWall", Vector2f(14.f, 252.f), Vector2f(21.f, 40.f), _readDirection, ANIM_DIR_CLIMB_RIGHT, _toRepeat, 4, _speedA * 2.f),
 
-		AnimationData("DashRight", Vector2f(12.f, 455.f), Vector2f(25.f, 30.f), _readDirection, ANIM_DIR_DASH_RIGHT, _toRepeat, 8, _speedA / 2.f),
-		AnimationData("DashLeft", Vector2f(12.f, 503.f), Vector2f(25.f, 30.f), _readDirection, ANIM_DIR_DASH_LEFT, _toRepeat, 8, _speedA / 2.f),
+		AnimationData("DashRight", Vector2f(12.f, 455.f), Vector2f(25.f, 40.f), _readDirection, ANIM_DIR_DASH_RIGHT, _toRepeat, 8, _speedA),
+		AnimationData("DashLeft", Vector2f(12.f, 503.f), Vector2f(25.f, 40.f), _readDirection, ANIM_DIR_DASH_LEFT, _toRepeat, 8, _speedA ),
 
 
 		AnimationData("None", Vector2f(12.f, 203), _sizeA, _readDirection, ANIM_DIR_NONE, _toRepeat, 1, _speedA),
@@ -278,8 +278,10 @@ void Character::ResetDashValues()
 
 void Character::Update()
 {
+	if (isDie)
+		Respawn();
+
 	Entity::Update();
-	//std::cout << GetComponent<CollisionComponent>()->CheckCollision().collisionSideBinary << std::endl;
 }
 
 void Character::Die()

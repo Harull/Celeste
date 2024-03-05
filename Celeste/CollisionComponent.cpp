@@ -28,7 +28,7 @@ CollisionInfos CollisionComponent::CheckCollision(const bool _isSpecificCheckOnW
 			for (Tile* _tile : _tiles)
 			{
 				if (!_tile) continue;
-				if (!_tile->GetTangible())continue;
+				
 
 				sf::Shape* _shapeTile = _tile->GetShape();
 
@@ -60,7 +60,9 @@ CollisionInfos CollisionComponent::CheckCollision(const bool _isSpecificCheckOnW
 						}
 					}
 
-					_collisionSideBinary |= _currentSide;
+					if (_tile->GetIsTangible()) {
+						_collisionSideBinary |= _currentSide;
+					}
 					_entityTypeBinary |= _tile->GetType();
 
 					if (function<void(int _collisionSide, int _collisionSideBinary)>_collisionReaction = _tile->GetCollisionReaction())
@@ -76,13 +78,10 @@ CollisionInfos CollisionComponent::CheckCollision(const bool _isSpecificCheckOnW
 						float _xCurrentOverlap = ComputeXOverlap(_currentShape, _shapeTile);
 						_minXOverlap = _minXOverlap > _xCurrentOverlap ? _xCurrentOverlap : _minXOverlap;
 					}
-					Character* _hero = Game::GetInstance().GetPlayer()->GetCharacter();
-					if (_hero->IsDie())
-					{
-						_hero->Respawn();
-						return CollisionInfos();
-					}
+					
 				}
+					
+
 			}
 		}
 	}

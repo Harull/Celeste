@@ -21,10 +21,10 @@ void FragileTile::GetHit(int _collisionSide, int _collisionSideBinary)
 		[this]() {
 			
 			TextureManager::GetInstance().Load(shape, "Assets/Snow1_erase.png");
-	tangible = false;
+	isTangible = false;
 		new Timer("TimerRespawn" + id, [this]() {
 		
-			tangible = true;
+			isTangible = true;
 			TextureManager::GetInstance().Load(shape, PATH_FRAGILE_TILE); 
 			}, seconds(5));
 	
