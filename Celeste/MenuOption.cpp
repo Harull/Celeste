@@ -114,7 +114,7 @@ void MenuOption::Init()
 	currentText = texts[0];
 	currentText->text->setFillColor(Color::Red);
 
-	maxIndex = _names.size();
+	maxIndex = static_cast<int>(_names.size());
 
 }
 

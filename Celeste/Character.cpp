@@ -156,7 +156,7 @@ bool Character::Dash(const sf::Event& _event)
 	if (_event.type == sf::Event::JoystickButtonPressed && _event.joystickButton.button != 2)return false;
 	if (_event.type == sf::Event::KeyPressed && _event.key.code != _dashKey)return false;
 
-	if (isDashing || dashCount <= 0) return false;
+	if (dashCount <= 0) return false;
 	isDashing = true;
 	dashCount--;
 	currentDashTimerIndex = 0;
@@ -184,7 +184,7 @@ bool Character::Dash(const sf::Event& _event)
 								-static_cast<int>(sf::Keyboard::isKeyPressed(_up)) + sf::Keyboard::isKeyPressed(_down) };
 	}
 
-	if (auto _currentDashTimer = TimerManager::GetInstance().GetApproximately("DashTimer"))
+	if (Timer* _currentDashTimer = TimerManager::GetInstance().GetApproximately("DashTimer"))
 	{
 		currentDashTimerIndex = 0;
 		currentDashVelocity = maxDashVelocity;
@@ -281,10 +281,11 @@ void Character::ResetDashValues()
 
 void Character::Update()
 {
-	if (isDie)
+	if (isDead)
 		Respawn();
 
 	Entity::Update();
+
 }
 
 void Character::Die()
@@ -295,12 +296,12 @@ void Character::Die()
 		ResetDashValues();
 	}
 	
-	isDie = true;
+	isDead = true;
 
 }
 
 void Character::Respawn()
 {
 	shape->setPosition(checkPoint);
-	isDie = false;
+	isDead = false;
 }

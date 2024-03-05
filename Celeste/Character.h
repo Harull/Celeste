@@ -17,7 +17,7 @@ class Character : public Entity
 	bool isJumping;
 	bool isClimbing;
 	bool isDashing;
-	bool isDie;
+	bool isDead;
 
 	int dashCount;
 	int maxDashCount;
@@ -79,11 +79,11 @@ public:
 	}
 	void SetDie(bool _isDie)
 	{
-		isDie = _isDie;
+		isDead = _isDie;
 	}
 	bool IsDie()
 	{
-		return isDie;
+		return isDead;
 	}
 	bool GetHasDashes() const
 	{

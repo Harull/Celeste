@@ -16,25 +16,26 @@ GemDash::GemDash(const Vector2f& _position, const Vector2f& _size, const string&
 		ANIM_DIR_NONE
 	));
 	collisionReaction = [this](int _collisionSide, int _collisionSideBinary) {GetHit(_collisionSideBinary); };
-	use = false;
+	isUsed = false;
+	isTangible = false;
 }
 
 void GemDash::GetHit(int _collisionSideBinary)
 {
 	if (_collisionSideBinary != ENTITY_CHARACTER)return;
-	if (use)return;
-	tangible = false;
+	if (isUsed)return;
 	GetComponent<AnimationComponent>()->Finish();
 	shape->setFillColor(Color::Transparent);
+	isUsed = true;
+
+	Character* _currentCharacter = Game::GetInstance().GetPlayer()->GetCharacter();
+	_currentCharacter->SetDashCount(_currentCharacter->GetMaxDashCount());
 
 	new Timer("TimerDestroy" + id,
 		[this]() {
-
-			tangible = false;
 			new Timer("TimerRespawn" + id, [this]() {
+				isUsed = false;
 				GetComponent<AnimationComponent>()->Restart();
-				tangible = true;
 				}, seconds(2));
 		}, seconds(2));
-	Game::GetInstance().GetPlayer()->GetCharacter()->SetDashCount(1);
 }

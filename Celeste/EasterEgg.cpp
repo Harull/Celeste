@@ -11,14 +11,15 @@ EasterEgg::EasterEgg(const Vector2f& _position, const Vector2f& _size, const str
 		ANIM_DIR_NONE
 	));
 	collisionReaction = [this](int _collisionSide, int _collisionSideBinary) {GetHit(_collisionSideBinary); };
-	use = false;
+	isTangible = false;
+	isUsed = false;
 }
 
 void EasterEgg::GetHit(int _collisionSideBinary)
 {
 	if (_collisionSideBinary != ENTITY_CHARACTER)return;
-	if (use)return;
-	isTangible = false;
+	if (isUsed)return;
+	isUsed = true;
 	shape->setFillColor(Color::Transparent);
 	GetComponent<AnimationComponent>()->Finish();
 	otherWindow = new OtherWindow();

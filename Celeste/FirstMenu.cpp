@@ -78,7 +78,7 @@ void FirstMenu::Init()
 	currentText = texts[0];
 	currentText->text->setFillColor(Color::Red);
 
-	maxIndex = _names.size();
+	maxIndex = static_cast<int>(_names.size());
 
 }
 
@@ -161,9 +161,7 @@ void FirstMenu::HandleEvents(RenderWindow& _window)
 
 			HandleGamepadClick(_event);
 		}
-
 	}
-
 }
 
 bool FirstMenu::Show()

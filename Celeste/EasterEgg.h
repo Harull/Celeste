@@ -6,7 +6,7 @@
 class EasterEgg : public Tile
 {
 	OtherWindow* otherWindow;
-	bool use;
+	bool isUsed;
 
 public:
 	EasterEgg(const Vector2f& _position, const Vector2f& _size, const string& _path = "Assets/FraiseCursed.png");
