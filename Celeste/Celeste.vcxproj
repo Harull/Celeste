@@ -150,6 +150,7 @@
     <ClCompile Include="FontData.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="FragileTile.cpp" />
+    <ClCompile Include="FragileWallTile.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GemDash.cpp" />
     <ClCompile Include="GravityComponent.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="FontData.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="FragileTile.h" />
+    <ClInclude Include="FragileWallTile.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GemDash.h" />
     <ClInclude Include="GravityComponent.h" />
