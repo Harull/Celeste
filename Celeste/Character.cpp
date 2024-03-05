@@ -5,6 +5,7 @@
 #include "AnimationComponent.h"
 #include "CollisionComponent.h"
 #include "TimerManager.h"
+#include "Game.h"
 
 #define CHARACTER_TEXTURE "Character/Slave.png"
 #define DEAD_ZONE 50.f
@@ -138,8 +139,8 @@ bool Character::Jump(const sf::Event& _event)
 
 		if (currentYVelocity < 2) return;
 
-
-		_mvComponent->Move({ _xDirectionModif, -currentYVelocity * 1.f });
+		
+		_mvComponent->Move({ _xDirectionModif, -currentYVelocity * static_cast<float>(Game::GetInstance().GetSenseOfGravity())});
 		currentJumpTimerIndex++;
 		}, sf::seconds(0), true, true);
 
