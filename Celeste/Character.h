@@ -9,7 +9,9 @@ class Character : public Entity
 {
 	// J'avais fait un jump component mais je l'ai laissé à l'école donc rip
 	int maxYVelocity;
+	int maxXVelocity;
 	int currentYVelocity;
+	int currentXVelocity;
 	int currentJumpTimerIndex;
 
 	Vector2f checkPoint;
@@ -95,6 +97,7 @@ private:
 public:
 	bool MovingLeftRight(const sf::Event& _event);
 	bool Jump(const sf::Event& _event);
+	bool WallJump(const sf::Event& _event);
 	bool Dash(const sf::Event& _event);
 	bool Climb(const sf::Event& _event);
 	void ResetJumpValues();
