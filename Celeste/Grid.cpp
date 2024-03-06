@@ -11,6 +11,7 @@
 #include "GemDash.h"
 #include "FragileWallTile.h"
 #include "OneDirectionTile.h"
+#include "TextureManager.h"
 
 Grid::Grid(const Vector2i _tilesCount)
 {
@@ -18,19 +19,19 @@ Grid::Grid(const Vector2i _tilesCount)
 	tileSize = Vector2f(50.0f, 50.0f);
 	tiles = vector<vector<Tile*>>();
 	spawnPosition = Vector2f();
+	gridForLoad = vector<vector<char>>();
 }
 
 
 void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 {
 	tileSize = Vector2f(48.0f, 48.0f);
-	vector<vector<char>> _gridForLoad;
 	const string _pathMap = "Maps/Level" + to_string(_level) + "/Map" + to_string(_value) + ".txt";
-	StreamManager::GetInstance().LoadSmallMap(_gridForLoad, _pathMap);
+	StreamManager::GetInstance().LoadSmallMap(gridForLoad, _pathMap);
 
 	string _pathBack;
 
-	for (const char& _char : _gridForLoad[0]) {
+	for (const char& _char : gridForLoad[0]) {
 		_pathBack += _char;
 	}
 	new Entity({ S_APPEND("0Background"), ENTITY_NONE, sf::Vector2f(_startPos.x , _startPos.y + 48.f), Vector2f(tileSize.x * 40.0f, tileSize.y * 22.0f), _pathBack });
@@ -42,8 +43,8 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 	EntityType _type;
 	Vector2f _destination;
 
-	_gridForLoad.erase(_gridForLoad.begin());
-	for (const vector<char>& _vChar : _gridForLoad) {
+	gridForLoad.erase(gridForLoad.begin());
+	for (const vector<char>& _vChar : gridForLoad) {
 		_indexColumn++;
 		for (const char& _char : _vChar) {
 			Tile* _tile;
@@ -53,7 +54,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 
 			if (_char == '1')
 			{
-				_path = "Assets/Snow1.png";
+				_path = "";
 				_type = ENTITY_TILE;
 				_tile = new Tile(_type, Vector2f(_posX, _posY), tileSize, _path);
 			}
@@ -148,14 +149,106 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 		_tiles.clear();
 	}
 
-	//FinalMap();
+	ChangeTexture();
 }
 
 
-void Grid::FinalMap() {
-	//tiles[0][1]
-	//for ()
-	//{
+void Grid::ChangeTexture() {
+	for (int _i = 0; _i < gridForLoad.size(); ++_i) {
+		for (int _j = 0; _j < gridForLoad[_i].size(); ++_j) {
+			if (gridForLoad[_i][_j] == '1') {
+				FinalMap(_i, _j);
+			}
+			
+		}
+	}
+}
 
-	//}
+
+void Grid::FinalMap(int _i, int _j) {
+
+	bool _isEmptyTop;
+	if (_i - 1 < 0) _isEmptyTop = false;
+	else
+	{
+		_isEmptyTop = (gridForLoad[_i - 1][_j] != '1');
+	}
+
+	bool _isEmptyDown;
+	if (_i + 1 > gridForLoad.size() - 1) _isEmptyDown = false;
+	else
+	{
+		_isEmptyDown = (gridForLoad[_i + 1][_j] != '1');
+	}
+
+	bool _isEmptyLeft;
+	if (_j - 1 < 0) _isEmptyLeft = false;
+	else
+	{
+		_isEmptyLeft = (gridForLoad[_i][_j - 1] != '1');
+	}
+
+	bool _isEmptyRight;
+	if (_j + 1 > gridForLoad[_i].size() - 1) _isEmptyRight = false;
+	else
+	{
+		_isEmptyRight = (gridForLoad[_i][_j + 1] != '1');
+	}
+
+	if (_isEmptyDown && _isEmptyTop && _isEmptyLeft && _isEmptyRight) {
+		TextureManager::GetInstance().Load(tiles[_i][_j]->GetShape(), "Assets/Snow/PleinBlock.png");
+	}
+
+	else if (_isEmptyDown && _isEmptyTop && _isEmptyLeft) {
+		TextureManager::GetInstance().Load(tiles[_i][_j]->GetShape(), "Assets/Snow/HautGaucheBas.png");
+	}
+	else if (_isEmptyDown && _isEmptyTop && _isEmptyRight) {
+		TextureManager::GetInstance().Load(tiles[_i][_j]->GetShape(), "Assets/Snow/HautDroiteBas.png");
+	}
+
+	else if (_isEmptyTop && _isEmptyLeft && _isEmptyRight) {
+		TextureManager::GetInstance().Load(tiles[_i][_j]->GetShape(), "Assets/Snow/GaucheHautDroit.png");
+	}
+	else if (_isEmptyDown && _isEmptyLeft && _isEmptyRight) {
+		TextureManager::GetInstance().Load(tiles[_i][_j]->GetShape(), "Assets/Snow/GaucheDroiteBas.png");
+	}
+
+	else if (_isEmptyDown && _isEmptyTop) {
+		TextureManager::GetInstance().Load(tiles[_i][_j]->GetShape(), "Assets/Snow/HautBas.png");
+	}
+	else if (_isEmptyLeft && _isEmptyRight) {
+		TextureManager::GetInstance().Load(tiles[_i][_j]->GetShape(), "Assets/Snow/GaucheDroite.png");
+	}
+
+
+	else if (_isEmptyDown && _isEmptyLeft) {
+		TextureManager::GetInstance().Load(tiles[_i][_j]->GetShape(), "Assets/Snow/CoinBasGauche.png");
+	}
+	else if (_isEmptyDown && _isEmptyRight) {
+		TextureManager::GetInstance().Load(tiles[_i][_j]->GetShape(), "Assets/Snow/CoinBasDroit.png");
+	}
+
+	else if (_isEmptyTop && _isEmptyLeft) {
+		TextureManager::GetInstance().Load(tiles[_i][_j]->GetShape(), "Assets/Snow/CoinHautGauche.png");
+	}
+	else if (_isEmptyTop && _isEmptyRight) {
+		TextureManager::GetInstance().Load(tiles[_i][_j]->GetShape(), "Assets/Snow/CoinHautDroit.png");
+	}
+	else if (_isEmptyDown ) {
+		TextureManager::GetInstance().Load(tiles[_i][_j]->GetShape(), "Assets/Snow/SnowPlafon.png");
+	}
+	else if (_isEmptyTop) {
+		TextureManager::GetInstance().Load(tiles[_i][_j]->GetShape(), "Assets/Snow/SnowSol.png");
+	}
+	else if(_isEmptyLeft)
+	{
+		TextureManager::GetInstance().Load(tiles[_i][_j]->GetShape(), "Assets/Snow/SnowGauche.png");
+	}
+	else if (_isEmptyRight)
+	{
+		TextureManager::GetInstance().Load(tiles[_i][_j]->GetShape(), "Assets/Snow/SnowDroite.png");
+	}
+	else {
+		TextureManager::GetInstance().Load(tiles[_i][_j]->GetShape(), "Assets/Snow/PleinBlock.png");
+	}
 }

@@ -9,6 +9,7 @@
 #include "MapManager.h"
 #include "AnimationComponent.h"
 #include "MenuSoundBoard.h"
+#include "SoundManager.h"
 
 #include"Portal.h"
 
@@ -62,7 +63,7 @@ void Game::InitMenu()
 
 void Game::InitMap(const int _value)
 {
-	MusicManager::GetInstance().Play("Sounds/SoundSelector.mp3");
+	SoundManager::GetInstance().Play("Assets/Songs/Sounds/SoundSelector.mp3", 5.0f);
 	MapManager::GetInstance().Clear();
 	EntityManager::GetInstance().Clear();
 	EventReactionManager::Clear();

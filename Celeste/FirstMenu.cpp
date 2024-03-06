@@ -15,6 +15,7 @@ FirstMenu::FirstMenu()
 	background = new Sprite();
 	font = new Font();
 
+
 	canClick = true;
 	currentText = new TextData();
 
