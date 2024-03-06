@@ -25,6 +25,7 @@ LevelSelectorMenu::LevelSelectorMenu()
 LevelSelectorMenu::~LevelSelectorMenu()
 {
 	delete background;
+	delete font;
 	if (timer) timer->SetToRemove(true);
 
 }
@@ -87,7 +88,6 @@ void LevelSelectorMenu::HandleGamepadClick(Event _event)
 	if (_event.type == Event::JoystickButtonPressed) {
 		if (_event.joystickButton.button == 0) {
 			MenuOption::GetInstance().SetInGame(true);
-			cout << boolalpha << MenuOption::GetInstance().IsInGame() << endl;
 			Game::GetInstance().SelectLevel(currentLevel + 1);
 		}
 		else if (_event.joystickButton.button == 1) {

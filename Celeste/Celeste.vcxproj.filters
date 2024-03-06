@@ -261,15 +261,6 @@
     <ClCompile Include="CheckPoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FirstMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelSelectorMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuOption.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Snow.cpp">
       <Filter>Source Files\Snow</Filter>
     </ClCompile>
@@ -284,6 +275,18 @@
     </ClCompile>
     <ClCompile Include="Portal.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstMenu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelSelectorMenu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuOption.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuSoundBoard.cpp">
+      <Filter>Source Files\Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -440,15 +443,6 @@
     <ClInclude Include="CheckPoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FirstMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelSelectorMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuOption.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Snow.h">
       <Filter>Source Files\Snow</Filter>
     </ClInclude>
@@ -463,6 +457,18 @@
     </ClInclude>
     <ClInclude Include="Portal.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelSelectorMenu.h">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuOption.h">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuSoundBoard.h">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstMenu.h">
+      <Filter>Source Files\Menu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

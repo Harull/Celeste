@@ -61,7 +61,7 @@ void MenuOption::Init()
 		"Resume",
 		"Volume",
 		"SoundBoard",
-		"Retour",
+		"Retour Menu",
 	};
 
 	vector<function<void()>> _functions =
@@ -114,7 +114,7 @@ void MenuOption::Init()
 	currentText = texts[0];
 	currentText->text->setFillColor(Color::Red);
 
-	maxIndex = _names.size();
+	maxIndex = static_cast<int>(_names.size());
 
 }
 
@@ -261,7 +261,6 @@ void MenuOption::ChangeVolume()
 void MenuOption::Reset()
 {
 	if (!inGame) {
-		cout << "pasinGame : " << boolalpha << inGame << endl;
 		minIndex = 1;
 		index = 1;
 		for (TextData* _text : texts) {
@@ -271,7 +270,6 @@ void MenuOption::Reset()
 		currentText->text->setFillColor(Color::Red);
 	}
 	else if (inGame) {
-		cout << "inGame : " << boolalpha << inGame << endl;
 		minIndex = 0;
 		index = 0;
 		for (TextData* _text : texts) {

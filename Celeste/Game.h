@@ -75,7 +75,6 @@ private:
 	void InitMenu();
 	void InitMap(const int _value);
 	void InitInput();
-	bool ShowOptionsInGame(const Event& _event);
 	void InitPlayer();
 	void Update();
 	void UpdateVisibleArea();

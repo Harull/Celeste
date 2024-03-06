@@ -78,7 +78,7 @@ void FirstMenu::Init()
 	currentText = texts[0];
 	currentText->text->setFillColor(Color::Red);
 
-	maxIndex = _names.size();
+	maxIndex = static_cast<int>(_names.size());
 
 }
 
@@ -149,7 +149,6 @@ void FirstMenu::MoveDown()
 void FirstMenu::HandleEvents(RenderWindow& _window)
 {
 	Event _event;
-	//cout << "event" << endl;
 	while (_window.pollEvent(_event))
 	{
 		if (_event.type == Event::Closed)
