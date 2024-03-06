@@ -141,6 +141,7 @@
     <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Dialog.cpp" />
     <ClCompile Include="EasterEgg.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityManager.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Dialog.h" />
     <ClInclude Include="EasterEgg.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityManager.h" />

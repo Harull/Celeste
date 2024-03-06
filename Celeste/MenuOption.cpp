@@ -6,6 +6,7 @@
 #include "MenuSoundBoard.h"
 #include "Macro.h"
 #include"EntityManager.h"
+#include "SoundManager.h"
 #define DEAD_ZONE 50.0f
 
 MenuOption::MenuOption()
@@ -45,7 +46,7 @@ void MenuOption::Init()
 {
 	Vector2u _windowSize = Game::GetInstance().GetWindowSize();
 
-	TextureManager::GetInstance().Load(background, "Assets/Background/celeste_background.png");
+	TextureManager::GetInstance().Load(background, "Assets/Background/celeste_background_dark.png");
 
 	background->setScale(
 		static_cast<float>(_windowSize.x) / background->getLocalBounds().width,
@@ -198,20 +199,29 @@ void MenuOption::MoveUp()
 {
 	canClick = false;
 	index++;
-	if (index >= maxIndex) index--;
+	if (index >= maxIndex)
+	{
+		index--;
+		return;
+	}
+	SoundManager::GetInstance().Play("C:/Users/Kylia/Music/ui_main_roll_down.wav");
+
 	currentText->text->setFillColor(sf::Color::White);
 	currentText = texts[index];
 	currentText->text->setFillColor(sf::Color::Red);
-
 }
-
-
 
 void MenuOption::MoveDown()
 {
 	canClick = false;
 	index--;
-	if (index < minIndex) index++;
+	if (index < minIndex)
+	{
+		index++;
+		return;
+	}
+	SoundManager::GetInstance().Play("C:/Users/Kylia/Music/ui_main_roll_down.wav");
+
 	currentText->text->setFillColor(sf::Color::White);
 	currentText = texts[index];
 	currentText->text->setFillColor(sf::Color::Red);
@@ -295,6 +305,7 @@ bool MenuOption::Show()
 		const View _view(FloatRect(Vector2f(0.0f, 0.0f), Vector2f(1920.0f, 1080.0f)));
 		_window.setView(_view);
 		_window.clear();
+		_window.draw(*background);
 		_window.draw(*background);
 		if (inGame) {
 			for (TextData* _text : texts) {
