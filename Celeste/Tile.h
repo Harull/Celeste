@@ -7,6 +7,8 @@ using namespace std;
 
 class Tile : public Entity
 {
+	string name;
+
 protected:
 	bool isTangible;
 public:

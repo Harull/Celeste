@@ -79,6 +79,7 @@ public:
 
 public:
 	Grid(const Vector2i _tilesCount);
+	void FinalMap();
 
 public:
 	void InitMap(const int _level, const int _value, Vector2f _startPos);

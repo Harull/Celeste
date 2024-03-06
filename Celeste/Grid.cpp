@@ -140,4 +140,15 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 		tiles.push_back(_tiles);
 		_tiles.clear();
 	}
+
+	//FinalMap();
+}
+
+
+void Grid::FinalMap() {
+	//tiles[0][1]
+	//for ()
+	//{
+
+	//}
 }
