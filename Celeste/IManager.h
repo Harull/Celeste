@@ -25,7 +25,6 @@ public:
 	{
 		for (auto _pair : allValues)
 		{
-			if (_pair.second)return;
 			delete _pair.second;
 			_pair.second = nullptr;
 		}
@@ -47,6 +46,21 @@ public:
 		allValues[_key] = _value;
 		current = _value;
 		_value->SetID(_key);
+	}
+	void DeleteAll()
+	{
+		for (auto _pair : allValues)
+		{
+			delete _pair.second;
+			_pair.second = nullptr;
+		}
+		allValues.clear();
+
+		for (Value* _value : unregisteredValues)
+		{
+			delete _value;
+		}
+		unregisteredValues.clear();
 	}
 	void Remove(Value* _value)
 	{
