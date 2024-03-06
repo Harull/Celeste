@@ -8,6 +8,7 @@
 #include "MenuOption.h"
 #include "MapManager.h"
 #include "AnimationComponent.h"
+#include "MenuSoundBoard.h"
 
 #include"Portal.h"
 
@@ -82,6 +83,13 @@ void Game::InitInput()
 			return MenuOption::GetInstance().Show();
 		return false;
 		});
+
+	EventReactionManager::BindNewInputReaction(sf::Event::JoystickButtonPressed, [&](const Event& _event) {
+		if (_event.joystickButton.button == 6)
+			return MenuSoundBoard::GetInstance().Show();
+		return false;
+		});
+
 	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const Event& _event){
 		if (_event.key.code == sf::Keyboard::M)
 		{
@@ -92,15 +100,6 @@ void Game::InitInput()
 		});
 }
 
-bool Game::ShowOptionsInGame(const Event& _event) {
-
-	//if (_event.key.code == sf::Keyboard::Escape) {
-	//	menu->ShowMenuOptions(window);
-	//	return true;
-	//}
-	//return false;
-	return true;
-}
 
 void Game::Stop()
 {
