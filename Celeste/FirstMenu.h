@@ -21,6 +21,7 @@ private:
 
     int index;
 	int maxIndex;
+    int hoveredIndex;
 
 	bool canClick;
 

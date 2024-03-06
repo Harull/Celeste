@@ -8,6 +8,7 @@
 #include"Portal.h"
 #include "Game.h"
 #include"EntityManager.h"
+#include "SoundManager.h"
 
 
 #define CHARACTER_TEXTURE "Character/Slave.png"
@@ -137,6 +138,7 @@ bool Character::Jump(const sf::Event& _event)
 	isJumping = true;
 	currentJumpTimerIndex = 0;
 
+
 	Timer* _jumpTimer = new Timer("JumpTimer", [&]() {
 		MovementComponent* _mvComponent = GetComponent<MovementComponent>();
 
@@ -155,6 +157,7 @@ bool Character::Jump(const sf::Event& _event)
 		_mvComponent->Move({ 0.f, -currentYVelocity * static_cast<float>(Game::GetInstance().GetSenseOfGravity())});
 		currentJumpTimerIndex++;
 		}, sf::seconds(0), true, true);
+	SoundManager::GetInstance().Play("Assets/Songs/Sounds/jump.wav");
 
 	return true;
 }
@@ -259,6 +262,7 @@ bool Character::Dash(const sf::Event& _event)
 		}, sf::seconds(0), true, true);
 
 	}
+	SoundManager::GetInstance().Play("Assets/Songs/Sounds/dash_pink_left.wav");
 
 	
 	return true;
@@ -363,7 +367,7 @@ void Character::Die()
 	}
 	
 	isDead = true;
-
+	SoundManager::GetInstance().Play("Assets/Songs/Sounds/death.wav");
 }
 
 void Character::Respawn()

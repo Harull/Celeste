@@ -4,6 +4,7 @@
 #include "FontManager.h"
 #include "LevelSelectorMenu.h"
 #include "MenuOption.h"
+#include "SoundManager.h"
 
 #define DEAD_ZONE 50.0f
 
@@ -20,11 +21,11 @@ FirstMenu::FirstMenu()
 
 	index = 0;
 	maxIndex = 0;
+	hoveredIndex = -1;
 }
 
 FirstMenu::~FirstMenu()
 {
-
 	for (auto _text : texts)
 	{
 		delete _text;
@@ -128,18 +129,27 @@ void FirstMenu::HandleGamepadClick(Event _event)
 void FirstMenu::MoveUp()
 {
 	index++;
-	if (index >= maxIndex) index--;
+	if (index >= maxIndex)
+	{
+		index--;
+		return;
+	}
+	SoundManager::GetInstance().Play("C:/Users/Kylia/Music/ui_main_roll_down.wav");
 	currentText->text->setFillColor(sf::Color::White);
 	currentText = texts[index];
 	currentText->text->setFillColor(sf::Color::Red);
 	canClick = false;
-
 }
 
 void FirstMenu::MoveDown()
 {
 	index--;
-	if (index < 0) index++;
+	if (index < 0)
+	{
+		index++;
+		return;
+	}
+	SoundManager::GetInstance().Play("C:/Users/Kylia/Music/ui_main_roll_down.wav");
 	currentText->text->setFillColor(sf::Color::White);
 	currentText = texts[index];
 	currentText->text->setFillColor(sf::Color::Red);
