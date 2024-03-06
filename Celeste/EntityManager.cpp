@@ -54,3 +54,15 @@ vector<Entity*> EntityManager::GetAllEntites()
 	}
 	return _entities;
 }
+
+void EntityManager::StopAnimation()
+{
+	for (Entity* _entity : GetAllValues())
+	{
+		if (AnimationComponent* _anim = _entity->GetComponent<AnimationComponent>())
+		{
+			_anim->Finish();
+		}
+
+	}
+}

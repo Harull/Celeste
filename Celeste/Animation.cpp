@@ -92,6 +92,7 @@ void Animation::Reset()
 void Animation::Stop()
 {
 	if (!timer) return;
+	
 	timer->Reset();
 }
 
