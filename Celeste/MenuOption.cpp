@@ -5,6 +5,7 @@
 #include "LevelSelectorMenu.h"
 #include "MenuSoundBoard.h"
 #include "Macro.h"
+#include"EntityManager.h"
 #define DEAD_ZONE 50.0f
 
 MenuOption::MenuOption()

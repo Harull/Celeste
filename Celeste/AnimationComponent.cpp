@@ -30,7 +30,7 @@ void AnimationComponent::Update()
 		_animation->Update();
 	}
 
-	const int _newIndex = GetNextIndex(direction);
+	 int _newIndex = GetNextIndex(direction);
 	if (currentIndex == _newIndex) return;
 
 	if (currentIndex != -1)
@@ -43,12 +43,16 @@ void AnimationComponent::Update()
 		_currentAnimation->Stop();
 		currentIndex = -1;
 	}
+	if (_newIndex == -1)
+	{
+		return;
+	}
 	
-
 	Animation* _animation = GetAllValues()[_newIndex];
 	//cout << "Start : " << _animation->GetData().name << endl;
 	_animation->Start();
 	currentIndex = _newIndex;
+
 }
 
 void AnimationComponent::SetThickness(const float _size)
