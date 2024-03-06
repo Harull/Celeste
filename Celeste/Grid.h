@@ -16,6 +16,7 @@ class Grid
 	Vector2i tilesCount;
 	Vector2f tileSize;
 	vector<vector<Tile*>> tiles;
+	vector<vector<char>> gridForLoad;
 	Vector2f spawnPosition;
 	vector<Vector2f> tilePositionsEmpty;
 
@@ -79,6 +80,8 @@ public:
 
 public:
 	Grid(const Vector2i _tilesCount);
+	void ChangeTexture();
+	void FinalMap(int _i, int _j);
 
 public:
 	void InitMap(const int _level, const int _value, Vector2f _startPos);

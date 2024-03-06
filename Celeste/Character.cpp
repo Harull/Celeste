@@ -20,6 +20,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 			new GravityComponent(this, 4.5f),
 			new CollisionComponent(this) })
 {
+
 	new Timer("PortalAppears", [this]() {Portal* _portal = new Portal(shape->getPosition(), shape->getGlobalBounds().getSize());
 	GetComponent< MovementComponent>()->SetCanMove(false);
 	GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_IN_PORTAL);

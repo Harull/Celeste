@@ -6,7 +6,7 @@ SoundManager::SoundManager()
 	sound.setVolume(10.0f);
 }
 
-void SoundManager::Play(const string& _path)
+void SoundManager::Play(const string& _path, const float _volume)
 {
 	if (_path == "") return;
 
@@ -21,6 +21,7 @@ void SoundManager::Play(const string& _path)
 	if (_soundData)
 	{
 		sound.setBuffer(*_soundData);
+		sound.setVolume(_volume);
 		sound.play();
 	}
 }

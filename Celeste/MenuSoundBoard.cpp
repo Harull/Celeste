@@ -4,7 +4,6 @@
 #include "FontManager.h"
 #include "Macro.h"
 #include "SoundManager.h"
-#include "SoundManager.h"
 #include "MenuOption.h"
 
 #define DEAD_ZONE 50.0f

@@ -17,6 +17,6 @@ private:
 	void Load(const string& _path);
 
 public:
-	void Play(const string& _path);
+	void Play(const string& _path, const float _volume = 10.0f);
 };
 
