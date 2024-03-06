@@ -150,6 +150,7 @@
     <ClCompile Include="FontData.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="FragileTile.cpp" />
+    <ClCompile Include="FragileWallTile.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GemDash.cpp" />
     <ClCompile Include="GravityComponent.cpp" />
@@ -165,6 +166,7 @@
     <ClCompile Include="MovingTile.cpp" />
     <ClCompile Include="MusicData.cpp" />
     <ClCompile Include="MusicManager.cpp" />
+    <ClCompile Include="OneDirectionTile.cpp" />
     <ClCompile Include="OtherWindow.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Portal.cpp" />
@@ -202,6 +204,7 @@
     <ClInclude Include="FontData.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="FragileTile.h" />
+    <ClInclude Include="FragileWallTile.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GemDash.h" />
     <ClInclude Include="GravityComponent.h" />
@@ -220,6 +223,7 @@
     <ClInclude Include="MultimapManager.h" />
     <ClInclude Include="MusicData.h" />
     <ClInclude Include="MusicManager.h" />
+    <ClInclude Include="OneDirectionTile.h" />
     <ClInclude Include="OtherWindow.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Portal.h" />

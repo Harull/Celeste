@@ -4,7 +4,20 @@
 #include"AnimationComponent.h"
 
 class Component;
+struct PortalData
+{
+	bool inPortal;
+	
+	Vector2f currentsize;
 
+	PortalData()
+	{
+		
+		inPortal = false;
+		currentsize = Vector2f{1.f,1.f};
+	}
+	
+};
 class Character : public Entity
 {
 	// J'avais fait un jump component mais je l'ai laissé à l'école donc rip
@@ -29,7 +42,7 @@ class Character : public Entity
 	int currentDashTimerIndex;
 
 	sf::Vector2i dashDirectionBuffer;
-
+	PortalData data;
 
 public:
 	Character() = default;

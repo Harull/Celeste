@@ -140,7 +140,7 @@ T* GetRandomItemInVector(std::vector<T*>& _vectorConcerned)
 template<typename T>
 T GetRandomItemInVector(std::vector<T>& _vectorConcerned)
 {
-	if (_vectorConcerned.empty()) return nullptr;
+	if (_vectorConcerned.empty()) return T ();
 	const int _arraySize = static_cast<int> (_vectorConcerned.size());
 	return _vectorConcerned[RandomMaxMin(_arraySize - 1)];
 }

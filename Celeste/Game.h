@@ -32,6 +32,10 @@ class Game : public Singleton<Game>
 	SenseOfGravity senseOfGravity;
 
 public:
+	Map* GetMap()
+	{
+		return map;
+	}
 	Vector2u GetWindowSize()
 	{
 		return window.getSize();
@@ -75,7 +79,6 @@ private:
 	void InitMenu();
 	void InitMap(const int _value);
 	void InitInput();
-	bool ShowOptionsInGame(const Event& _event);
 	void InitPlayer();
 	void Update();
 	void UpdateVisibleArea();

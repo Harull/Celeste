@@ -18,16 +18,11 @@ private:
 
     Sprite* background;
     Font* font;
-    
 
     int index;
 	int maxIndex;
 
 	bool canClick;
-
-
-
-
 
     void HandleGamepadClick(Event _event);
     void HandleEvents(RenderWindow& _window);

@@ -20,8 +20,6 @@ private:
 	string nextPath;
 	int currentLevel;
 
-
-	TextData* currentText;
 	int index;
 	int maxIndex;
 	bool canClick;

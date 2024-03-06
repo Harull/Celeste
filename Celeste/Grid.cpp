@@ -9,6 +9,8 @@
 #include"CheckPoint.h"
 #include "EasterEgg.h"
 #include "GemDash.h"
+#include "FragileWallTile.h"
+#include "OneDirectionTile.h"
 
 Grid::Grid(const Vector2i _tilesCount)
 {
@@ -94,7 +96,19 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 				_type = ENTITY_TILE;
 				_tile = new FragileTile(_type, Vector2f(_posX, _posY), tileSize, _path);
 			}
-			else if (_char == 'm')
+			else if (_char == 'w')
+			{
+				_path = "Assets/Snow2.png";
+				_type = ENTITY_TILE;
+				_tile = new FragileWallTile(_type, Vector2f(_posX, _posY), tileSize, _path);
+			}
+			else if (_char == 's')
+			{
+				_path = "Assets/WoodPlank.png";
+				_type = ENTITY_TILE;
+				_tile = new OneDirectionTile(_type, Vector2f(_posX, _posY), tileSize, _path);
+			}
+			else if (_char == 's')
 			{
 				_path = "Assets/Snow1.png";
 				_type = ENTITY_TILE;
@@ -122,6 +136,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			else
 			{
 				_tile = nullptr;
+				tilePositionsEmpty.push_back(Vector2f(_posX, _posY));
 			}
 
 			_tiles.push_back(_tile);

@@ -149,7 +149,6 @@ void FirstMenu::MoveDown()
 void FirstMenu::HandleEvents(RenderWindow& _window)
 {
 	Event _event;
-	//cout << "event" << endl;
 	while (_window.pollEvent(_event))
 	{
 		if (_event.type == Event::Closed)

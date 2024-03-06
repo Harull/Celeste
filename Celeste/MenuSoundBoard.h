@@ -10,26 +10,36 @@ using namespace std;
 class MenuSoundBoard : public Menu, public Singleton<MenuSoundBoard>
 {
 private:
-    vector<Text*> buttons;
-	Text* back;
-	vector<string> paths;
+
 	vector<Vector2f> positions;
-    int index;
-	int maxValue;
-	Shape* forMouse;
+	Shape* backgroundShape;
     Shape* background;
     Font* font;
-    string nextPath;
 
+    int index;
+	int maxValue;
+    int halfSize;
+	int halfSizeToShow;
+	int halfSizeToShow2;
+	int beginIndexToShow;
+	int endIndexToShow;
+	int size;
+	vector<TextData*> texts;
+	vector<TextData*> textsToShow;
+    TextData* currentText;
+	bool canClick;
 
-
-
-
-
-    void HandleMouseClick(Mouse::Button _button, const Vector2i& _mousePosition, RenderWindow& _window);
-	void HandleMouseScroll(const float _delta, const Vector2i& _mousePosition, RenderWindow& _window);
-    void HandleKeyboardClick(Keyboard::Scancode _button);
+    void HandleGamepadClick(Event _event);
     void HandleEvents(RenderWindow& _window);
+
+    void AllWhite() {
+		for (TextData* _text : textsToShow) {
+			_text->text->setFillColor(Color::White);
+		}
+    }
+
+	void MoveUp();
+	void MoveDown();
 
 
 public:
