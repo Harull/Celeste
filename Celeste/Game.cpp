@@ -62,6 +62,7 @@ void Game::InitMenu()
 
 void Game::InitMap(const int _value)
 {
+	MusicManager::GetInstance().Play("Sounds/SoundSelector.mp3");
 	MapManager::GetInstance().Clear();
 	EntityManager::GetInstance().Clear();
 	EventReactionManager::Clear();

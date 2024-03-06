@@ -1,5 +1,5 @@
 #include "FragileWallTile.h"
-#include"CollisionComponent.h"
+#include "CollisionComponent.h"
 #include "TextureManager.h"
 #include "Game.h"
 

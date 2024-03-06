@@ -46,10 +46,12 @@ public:
 			if (_visibleArea.intersects(_entity->GetShape()->getGlobalBounds())) {
 				if (AnimationComponent* _animation = _entity->GetComponent<AnimationComponent>())
 				{
+					if (!_animation->GetCurrentAnimation())continue;
 					if (Character* _currentCharacter = dynamic_cast<Character*>(_animation->GetOwner()))
 					{
 						_animation->GetCurrentAnimation()->GetSprite()->setColor(_currentCharacter->GetHasDashes() ? sf::Color::White : sf::Color(247, 94, 166, 255));
 					}
+					
 					_drawables.push_back(_animation->GetCurrentAnimation()->GetSprite());
 				}
 				else
@@ -66,6 +68,7 @@ public:
 	bool IsAvailable(const Vector2f& _position, const Vector2f& _size);
 	void DisplayAllEntities() const;
 	vector<Entity*> GetAllEntites();
+	void StopAnimation();
 	
 };
 
