@@ -21,7 +21,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 {
 	new Timer("PortalAppears", [this]() {Portal* _portal = new Portal(shape->getPosition(), shape->getGlobalBounds().getSize());
 	GetComponent< MovementComponent>()->SetCanMove(false);
-	
+	GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_IN_PORTAL);
 	GetComponent<AnimationComponent>()->Finish();
 	data.inPortal = true;
 	_portal->Teleport();
@@ -48,7 +48,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 	const int _count = 8;
 	const int _countStop = 1;
 	const float _speedA = 0.1f;
-	AnimationDirection direction = ANIM_DIR_RIGHT;
+	AnimationDirection direction = ANIM_DIR_IN_PORTAL;
 
 	AnimationComponent* _animation = new AnimationComponent(this, CHARACTER_TEXTURE, {
 		AnimationData("WalkRight", Vector2f(12.0f, 7.f), _sizeA, _readDirection, ANIM_DIR_RIGHT, _toRepeat, _count, _speedA),
@@ -65,6 +65,12 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 
 		AnimationData("DashRight", Vector2f(12.f, 455.f), Vector2f(25.f, 40.f), _readDirection, ANIM_DIR_DASH_RIGHT, _toRepeat, 8, _speedA),
 		AnimationData("DashLeft", Vector2f(12.f, 503.f), Vector2f(25.f, 40.f), _readDirection, ANIM_DIR_DASH_LEFT, _toRepeat, 8, _speedA ),
+
+
+		AnimationData("EnterInPortal", Vector2f(11.f, 543.f), Vector2f(29.f, 38.f), _readDirection, ANIM_DIR_IN_PORTAL, false, 8, 0.5),
+		AnimationData("OutofPortal", Vector2f(12.f, 503.f), Vector2f(25.f, 40.f), _readDirection, ANIM_DIR_OUT_PORTAL, false, 8, _speedA ),
+
+		
 
 
 		AnimationData("None", Vector2f(12.f, 203), _sizeA, _readDirection, ANIM_DIR_NONE, _toRepeat, 1, _speedA),
