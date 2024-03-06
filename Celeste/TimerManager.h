@@ -76,6 +76,7 @@ public:
         return false;
     }
 
+
     void SetRenderCallBack(function<void()> _callback)
     {
         renderCallback = _callback;
