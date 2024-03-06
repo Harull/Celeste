@@ -8,13 +8,13 @@ struct PortalData
 {
 	bool inPortal;
 	
-	float currentsize;
+	Vector2f currentsize;
 
 	PortalData()
 	{
 		
 		inPortal = false;
-		currentsize = 0;
+		currentsize = Vector2f{1.f,1.f};
 	}
 	
 };

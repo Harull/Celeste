@@ -7,7 +7,7 @@
 
 #define PATH_PORTAL "Assets/portal.png"
 
-Portal::Portal(Vector2f _position, Vector2f _size) :Entity(EntityData("Portal", ENTITY_NONE, { _position.x-_size.x/2,_position.y }, { _size.x * 2,_size.y }))
+Portal::Portal(Vector2f _position, Vector2f _size) :Entity(EntityData("Portal", ENTITY_NONE, { _position.x+_size.x/2,_position.y }, { _size.x * 2,_size.y }))
 {
 	AnimationComponent* _anim = new AnimationComponent(this, PATH_PORTAL, {
 		AnimationData("Standby",{0.f,25.f},{128.125f,95.f},READ_RIGHT,ANIM_DIR_STANDBY,false,8,0.1f,ANIM_DIR_DISAPPEARS),

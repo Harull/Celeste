@@ -295,7 +295,7 @@ void Character::Update()
 
 	if (data.inPortal)
 	{
-		
+		shape->setScale(data.currentsize);
 	}
 	if (!data.inPortal)
 	{
