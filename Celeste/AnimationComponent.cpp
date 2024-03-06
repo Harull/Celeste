@@ -78,8 +78,7 @@ void AnimationComponent::Restart()
 
 	for (Animation* _animation : GetAllValues())
 	{
-		_animation->Start();
-		_animation->GetSprite()->setColor(Color::White);
+		_animation->Reset();
 
 
 

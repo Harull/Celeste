@@ -35,7 +35,10 @@ void Animation::SetNext()
 	{
 		if (!data.canLoop)
 		{
+			if (data.nextDirection!= AnimationDirection(-1))
+			{
 			owner->SetDirection(data.nextDirection);
+			}
 			Stop();
 			return;
 		}

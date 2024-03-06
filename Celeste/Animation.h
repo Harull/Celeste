@@ -35,7 +35,7 @@ struct AnimationData
 	AnimationData() = default;
 	AnimationData(const string& _name, const Vector2f& _start, const Vector2f& _size,
 		const ReadDirection& _readDirection, const AnimationDirection& _direction,
-		const bool _canLoop, const int _count, const float _timeBetween, const AnimationDirection& _nextDirection=ANIM_DIR_NONE)
+		const bool _canLoop, const int _count, const float _timeBetween,  AnimationDirection _nextDirection= AnimationDirection (- 1))
 	{
 		name = _name;
 		start = _start;
