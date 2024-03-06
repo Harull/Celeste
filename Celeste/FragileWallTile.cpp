@@ -1,5 +1,5 @@
 #include "FragileWallTile.h"
-#include"CollisionComponent.h"
+#include "CollisionComponent.h"
 #include "TextureManager.h"
 #include "Game.h"
 
@@ -14,7 +14,7 @@ void FragileWallTile::GetHit(int _collisionSide, int _collisionSideBinary)
 
 	if (Game::GetInstance().GetPlayer()->GetCharacter()->GetIsDashing())
 	{
-		tangible = false;
+		isTangible = false;
 		TextureManager::GetInstance().Load(shape, "Assets/Vide.png");
 	}
 

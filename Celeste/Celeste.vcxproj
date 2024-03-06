@@ -166,6 +166,7 @@
     <ClCompile Include="MovingTile.cpp" />
     <ClCompile Include="MusicData.cpp" />
     <ClCompile Include="MusicManager.cpp" />
+    <ClCompile Include="OneDirectionTile.cpp" />
     <ClCompile Include="OtherWindow.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Portal.cpp" />
@@ -222,6 +223,7 @@
     <ClInclude Include="MultimapManager.h" />
     <ClInclude Include="MusicData.h" />
     <ClInclude Include="MusicManager.h" />
+    <ClInclude Include="OneDirectionTile.h" />
     <ClInclude Include="OtherWindow.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Portal.h" />

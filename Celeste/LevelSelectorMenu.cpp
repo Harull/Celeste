@@ -5,6 +5,8 @@
 #include "Macro.h"
 #include "TimerManager.h"
 #include "MenuOption.h"
+#include "MusicManager.h"
+
 #define DEAD_ZONE 50.0f
 
 LevelSelectorMenu::LevelSelectorMenu()
@@ -48,7 +50,6 @@ void LevelSelectorMenu::Init(const int _levelCounts)
 	}
 
 	maxIndex = _levelCounts;
-
 }
 
 void LevelSelectorMenu::HandleGamepadClick(Event _event)
@@ -89,6 +90,8 @@ void LevelSelectorMenu::HandleGamepadClick(Event _event)
 			MenuOption::GetInstance().SetInGame(true);
 			cout << boolalpha << MenuOption::GetInstance().IsInGame() << endl;
 			Game::GetInstance().SelectLevel(currentLevel + 1);
+			MusicManager::GetInstance().Play("Sounds/SoundSelector.mp3");
+
 		}
 		else if (_event.joystickButton.button == 1) {
 			FirstMenu::GetInstance().Show();
