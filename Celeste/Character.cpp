@@ -21,11 +21,11 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 {
 	new Timer("PortalAppears", [this]() {Portal* _portal = new Portal(shape->getPosition(), shape->getGlobalBounds().getSize());
 	GetComponent< MovementComponent>()->SetCanMove(false);
-	
-	GetComponent<AnimationComponent>()->Finish();
+	GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_IN_PORTAL);
 	data.inPortal = true;
 	_portal->Teleport();
 		}, seconds(5));
+
 	maxYVelocity = _maxYVelocity;
 	wallJumpDirection = 0;
 	currentJumpTimerIndex = 0;
@@ -48,7 +48,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 	const int _count = 8;
 	const int _countStop = 1;
 	const float _speedA = 0.1f;
-	AnimationDirection direction = ANIM_DIR_RIGHT;
+	AnimationDirection direction = ANIM_DIR_NONE;
 
 	AnimationComponent* _animation = new AnimationComponent(this, CHARACTER_TEXTURE, {
 		AnimationData("WalkRight", Vector2f(12.0f, 7.f), _sizeA, _readDirection, ANIM_DIR_RIGHT, _toRepeat, _count, _speedA),
@@ -63,8 +63,14 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 		AnimationData("ClimbLeftWall", Vector2f(12.f, 300.f), Vector2f(21.f, 40.f), _readDirection, ANIM_DIR_CLIMB_LEFT, _toRepeat, 4, _speedA * 2.f),
 		AnimationData("ClimbRightWall", Vector2f(14.f, 252.f), Vector2f(21.f, 40.f), _readDirection, ANIM_DIR_CLIMB_RIGHT, _toRepeat, 4, _speedA * 2.f),
 
-		AnimationData("DashRight", Vector2f(12.f, 455.f), Vector2f(25.f, 40.f), _readDirection, ANIM_DIR_DASH_RIGHT, _toRepeat, 8, _speedA),
+		AnimationData("DashRight", Vector2f(10.f, 455.f), Vector2f(25.f, 40.f), _readDirection, ANIM_DIR_DASH_RIGHT, _toRepeat, 8, _speedA),
 		AnimationData("DashLeft", Vector2f(12.f, 503.f), Vector2f(25.f, 40.f), _readDirection, ANIM_DIR_DASH_LEFT, _toRepeat, 8, _speedA ),
+
+
+		AnimationData("EnterInPortal", Vector2f(10.f, 541.f), Vector2f(31.f, 40.f), _readDirection, ANIM_DIR_IN_PORTAL, false, 9, 0.1f),
+		AnimationData("OutofPortal", Vector2f(15.5f, 592.f), Vector2f(26.25f, 42.f), _readDirection, ANIM_DIR_OUT_PORTAL, false, 9, 0.1f ),
+
+		
 
 
 		AnimationData("None", Vector2f(12.f, 203), _sizeA, _readDirection, ANIM_DIR_NONE, _toRepeat, 1, _speedA),

@@ -52,8 +52,8 @@ void Camera::Update(Game* _game)
 
 		while (!IsNearlyEqual(getCenter().x, _index.x * getSize().x + getSize().x / 2.f))
 		{
-			_game->UpdateSnow();
-			_game->UpdateWindow();
+			/*_game->UpdateSnow();
+			_game->UpdateWindow();*/
 			move(_sign * 0.8f , 0);
 		}
 
@@ -65,8 +65,9 @@ void Camera::Update(Game* _game)
 		const int _sign = _index.y - previousIndexes.y;
 		while (!IsNearlyEqual(getCenter().y, _index.y * getSize().y + getSize().y / 2.f))
 		{
-			_game->UpdateSnow();
-			_game->UpdateWindow();
+			/*_game->UpdateSnow();
+			_game->UpdateWindow();*/
+			
 			move(0, _sign * 0.5f);
 		}
 		if (_sign <= 0)

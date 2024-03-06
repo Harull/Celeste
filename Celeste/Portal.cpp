@@ -7,16 +7,17 @@
 
 #define PATH_PORTAL "Assets/portal.png"
 
-Portal::Portal(Vector2f _position, Vector2f _size) :Entity(EntityData("Portal", ENTITY_NONE, { _position.x+_size.x/2,_position.y }, { _size.x * 2,_size.y }))
+Portal::Portal(Vector2f _position, Vector2f _size) :Entity(EntityData("Portal", ENTITY_NONE, { _position.x - _size.x/8.f,_position.y }, { _size.x * 2,_size.y }))
 {
 	AnimationComponent* _anim = new AnimationComponent(this, PATH_PORTAL, {
-		AnimationData("Standby",{0.f,25.f},{128.125f,95.f},READ_RIGHT,ANIM_DIR_STANDBY,false,8,0.1f,ANIM_DIR_DISAPPEARS),
-		AnimationData("Appear",{0.f,154.f},{128.125f,95.f},READ_RIGHT,ANIM_DIR_APPEARS,false,8,0.1f,ANIM_DIR_STANDBY),
+		AnimationData("Standby",{0.f,25.f},{128.125f,95.f},READ_RIGHT,ANIM_DIR_STANDBY,false,8,0.1f, ANIM_DIR_DISAPPEARS),
+		AnimationData("Appear",{0.f,154.f},{128.125f,95.f},READ_RIGHT,ANIM_DIR_APPEARS,false,8,0.1f, ANIM_DIR_STANDBY),
 		AnimationData("Disappear",{0.f,285.f},{128.125f,95.f},READ_RIGHT,ANIM_DIR_DISAPPEARS,false,8,0.1f),
 		}, ANIM_DIR_APPEARS);
 
 	components.push_back(_anim);
 	InitDestination();
+	
 }
 
 void Portal::InitDestination()
@@ -60,11 +61,15 @@ void Portal::InitDestination()
 void Portal::Teleport()
 {
 	
-	new Timer("Teleport player", [this]() {shape->setPosition(destination);
+	new Timer("Teleport player", [this]() {shape->setPosition( {destination.x + shape->getGlobalBounds().getSize().x / 8.f,destination.y});
 		Character* _player=Game::GetInstance().GetPlayer()->GetCharacter();
+
 	_player->GetShape()->setPosition(destination);
-	_player->GetComponent< MovementComponent>()->SetCanMove(true);
-	
+
+	new Timer("free player", [this]() {Character* _player = Game::GetInstance().GetPlayer()->GetCharacter();
+	_player->GetComponent< MovementComponent>()->SetCanMove(true); }, seconds(1));
+	_player->GetComponent<AnimationComponent>()->Restart();
+	_player->GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_OUT_PORTAL);
 	GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_APPEARS);
 	GetComponent<AnimationComponent>()->Restart();
 		}, seconds(3));
