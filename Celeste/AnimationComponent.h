@@ -29,7 +29,7 @@ private:
 public:
 	Animation* GetCurrentAnimation() const
 	{
-
+		if (currentIndex==-1)return nullptr;
 		return GetAllValues()[currentIndex];
 	}
 
