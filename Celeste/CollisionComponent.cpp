@@ -66,7 +66,7 @@ CollisionInfos CollisionComponent::CheckCollision(const bool _isSpecificCheckOnW
 					_entityTypeBinary |= _tile->GetType();
 
 					if (function<void(int _collisionSide, int _collisionSideBinary)>_collisionReaction = _tile->GetCollisionReaction())
-						_collisionReaction(_collisionSideBinary, owner->GetType());
+						_collisionReaction(_currentSide, owner->GetType());
 
 					if (_currentSide & COLLIDE_UP)
 					{

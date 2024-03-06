@@ -11,5 +11,8 @@ OneDirectionTile::OneDirectionTile(const EntityType _type, const Vector2f& _posi
 
 void OneDirectionTile::GetHit(int _collisionSide, int _collisionSideBinary)
 {
-    
+    if (_collisionSideBinary == ENTITY_CHARACTER && !(_collisionSide & COLLIDE_UP))
+        isTangible = false;
+    else
+        isTangible = true;
 }

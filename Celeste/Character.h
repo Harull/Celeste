@@ -22,10 +22,9 @@ class Character : public Entity
 {
 	// J'avais fait un jump component mais je l'ai laissé à l'école donc rip
 	int maxYVelocity;
-	int maxXVelocity;
 	int currentYVelocity;
-	int currentXVelocity;
 	int currentJumpTimerIndex;
+	int wallJumpDirection;
 
 	Vector2f checkPoint;
 	

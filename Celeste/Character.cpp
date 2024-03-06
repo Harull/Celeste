@@ -27,9 +27,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 	_portal->Teleport();
 		}, seconds(5));
 	maxYVelocity = _maxYVelocity;
-	maxXVelocity = maxYVelocity * 2;
-	currentYVelocity = 0;
-	currentXVelocity = 0;
+	wallJumpDirection = 0;
 	currentJumpTimerIndex = 0;
 	checkPoint = Vector2f(0.f, 0.f);
 
@@ -127,8 +125,9 @@ bool Character::Jump(const sf::Event& _event)
 	sf::Keyboard::Key _jumpKey = sf::Keyboard::Space;
 	if (_event.type == sf::Event::JoystickButtonPressed && _event.joystickButton.button != 0)return false;
 	if (_event.type == sf::Event::KeyPressed && _event.key.code != _jumpKey)return false;
+	if (WallJump(_event)) return false;
 
-	if (isJumping || (!(GetComponent<CollisionComponent>()->CheckCollision().collisionSideBinary & COLLIDE_UP) && !isClimbing)) return false;
+	if (isJumping || (!(GetComponent<CollisionComponent>()->CheckCollision().collisionSideBinary & COLLIDE_UP))) return false;
 	isJumping = true;
 	currentJumpTimerIndex = 0;
 
@@ -136,15 +135,9 @@ bool Character::Jump(const sf::Event& _event)
 		MovementComponent* _mvComponent = GetComponent<MovementComponent>();
 
 		sf::Vector2f _direction = _mvComponent->GetDirection();
-		float _xDirectionModif = 0.f;
 		
 		if (currentJumpTimerIndex == 0)
 		{
-			if (isClimbing)
-			{
-				CollisionInfos _collisionInfos = GetComponent<CollisionComponent>()->CheckCollision(true);
-				_xDirectionModif = _collisionInfos.collisionSideBinary & COLLIDE_LEFT ? -5.f : 5.f;
-			}
 			currentYVelocity = maxYVelocity;
 		}
 		else
@@ -153,7 +146,7 @@ bool Character::Jump(const sf::Event& _event)
 		if (currentYVelocity < 2) return;
 
 		
-		_mvComponent->Move({ _xDirectionModif, -currentYVelocity * static_cast<float>(Game::GetInstance().GetSenseOfGravity())});
+		_mvComponent->Move({ 0.f, -currentYVelocity * static_cast<float>(Game::GetInstance().GetSenseOfGravity())});
 		currentJumpTimerIndex++;
 		}, sf::seconds(0), true, true);
 
@@ -168,47 +161,41 @@ bool Character::WallJump(const sf::Event& _event)
 
 	int _collisionSideBinary = GetComponent<CollisionComponent>()->CheckCollision(true).collisionSideBinary;
 
-	if (isJumping || _collisionSideBinary & COLLIDE_UP ||
-		(!(_collisionSideBinary & COLLIDE_RIGHT) && !(_collisionSideBinary & COLLIDE_LEFT))) return false;
-	isJumping = true;
+	if (_collisionSideBinary & COLLIDE_UP ||(!(_collisionSideBinary & COLLIDE_RIGHT) && !(_collisionSideBinary & COLLIDE_LEFT))) return false;
 	currentJumpTimerIndex = 0;
 
+	wallJumpDirection = (_collisionSideBinary & COLLIDE_RIGHT) ? 1 : -1;
 
 	if (Timer* _currentJumpTimer = TimerManager::GetInstance().GetApproximately("JumpTimer"))
 	{
-		currentJumpTimerIndex = 0;
-		currentYVelocity = maxYVelocity;
-		currentXVelocity = maxXVelocity;
-		_currentJumpTimer->Reset();
+		_currentJumpTimer->Stop();
 	}
-	else
-	{
-		Timer* _jumpTimer = new Timer("JumpTimer", [&]() {
-			MovementComponent* _mvComponent = GetComponent<MovementComponent>();
+	Timer* _jumpTimer = new Timer("JumpTimer", [&]() {
+		MovementComponent* _mvComponent = GetComponent<MovementComponent>();
 
-			sf::Vector2f _direction = _mvComponent->GetDirection();
-			float _xDirectionModif = 0.f;
+		sf::Vector2f _direction = _mvComponent->GetDirection();
+		float _yMultiplier = 0.85f;
+		float _xMultiplier = 1.4f;
+		float _currentXVelocity = 0.f;
 
-			if (currentJumpTimerIndex == 0)
-			{
-				if (isClimbing)
-				{
-					CollisionInfos _collisionInfos = GetComponent<CollisionComponent>()->CheckCollision(true);
-					_xDirectionModif = _collisionInfos.collisionSideBinary & COLLIDE_LEFT ? -5.f : 5.f;
-				}
-				currentYVelocity = maxYVelocity;
-			}
-			else
-				currentYVelocity = maxYVelocity / ((currentJumpTimerIndex / 12) + 1);
+		if (currentJumpTimerIndex == 0)
+		{
+			currentYVelocity = maxYVelocity;
+			_currentXVelocity = 1.f * _xMultiplier;
+		}
+		else
+		{
+			currentYVelocity = maxYVelocity / ((currentJumpTimerIndex / 12) + 1);
+			_currentXVelocity = 1.f * _xMultiplier / ((currentJumpTimerIndex / 12) + 1);
+		}
 
-			if (currentYVelocity < 2) return;
+		if (currentYVelocity < 2) return;
 
 
-			_mvComponent->Move({ _xDirectionModif, -currentYVelocity * static_cast<float>(Game::GetInstance().GetSenseOfGravity()) });
-			currentJumpTimerIndex++;
-			}, sf::seconds(0), true, true);
+		_mvComponent->Move(sf::Vector2f(static_cast<float>(wallJumpDirection) * _currentXVelocity, -currentYVelocity * _yMultiplier) * static_cast<float>(Game::GetInstance().GetSenseOfGravity()));
+		currentJumpTimerIndex++;
+		}, sf::seconds(0), true, true);
 
-	}
 	return true;
 }
 
