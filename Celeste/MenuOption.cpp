@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "TextureManager.h"
 #include "FontManager.h"
+#include "TimerManager.h"
 #include "LevelSelectorMenu.h"
 #include "MenuSoundBoard.h"
 #include "Macro.h"
@@ -73,6 +74,7 @@ void MenuOption::Init()
 		[]() {
 			if (MenuOption::GetInstance().IsInGame()) {
 				MenuOption::GetInstance().SetInGame(false);
+				TimerManager::GetInstance().DeleteAll();
 				LevelSelectorMenu::GetInstance().Show();
 			}
 			else {
