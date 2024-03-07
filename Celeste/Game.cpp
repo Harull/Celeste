@@ -10,6 +10,7 @@
 #include "AnimationComponent.h"
 #include "MenuSoundBoard.h"
 #include "SoundManager.h"
+#include "MenuEndLevel.h"
 
 #include"Portal.h"
 
@@ -59,6 +60,8 @@ void Game::InitMenu()
 	LevelSelectorMenu::GetInstance().Init(3);
 	MenuOption::GetInstance().Init();
 	MenuSoundBoard::GetInstance().Init();
+	MenuEndLevel::GetInstance().Init();
+
 }
 
 void Game::InitMap(const int _value)

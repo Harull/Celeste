@@ -12,6 +12,7 @@
 #include "FragileWallTile.h"
 #include "OneDirectionTile.h"
 #include "TextureManager.h"
+#include "TileEnd.h"
 
 Grid::Grid(const Vector2i _tilesCount)
 {
@@ -90,6 +91,12 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 				_path = "Assets/Vide.png";
 				_type = ENTITY_CHECKPOINT;
 				_tile = new CheckPoint(_type, Vector2f(_posX, _posY), tileSize, _path);
+			}
+			else if (_char == 'F')
+			{
+				_path = "Assets/Vide.png";
+				_type = ENTITY_TILE_END;
+				_tile = new TileEnd(_type, Vector2f(_posX, _posY), tileSize, _path);
 			}
 			else if (_char == 'f')
 			{

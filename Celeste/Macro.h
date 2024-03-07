@@ -40,6 +40,10 @@ static void SetOriginAtMiddle(sf::Shape& _shape)
 	_shape.setOrigin(_shape.getGlobalBounds().getSize() / 2.f);
 }
 
+static void SetOriginAtMiddle(sf::Text& _text) {
+	_text.setOrigin(_text.getLocalBounds().getSize() / 2.f);
+}
+
 static void SetOriginAtMiddle(sf::Sprite* _sprite)
 {
 	_sprite->setOrigin(_sprite->getLocalBounds().getSize() / 2.f);

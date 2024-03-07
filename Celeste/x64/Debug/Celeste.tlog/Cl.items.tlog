@@ -26,6 +26,7 @@ C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\Main.cpp;C:
 C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\Map.cpp;C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\x64\Debug\Map.obj
 C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\MapManager.cpp;C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\x64\Debug\MapManager.obj
 C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\Menu.cpp;C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\x64\Debug\Menu.obj
+C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\MenuEndLevel.cpp;C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\x64\Debug\MenuEndLevel.obj
 C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\MenuOption.cpp;C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\x64\Debug\MenuOption.obj
 C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\MenuSoundBoard.cpp;C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\x64\Debug\MenuSoundBoard.obj
 C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\MovementComponent.cpp;C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\x64\Debug\MovementComponent.obj
@@ -46,6 +47,7 @@ C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\Strawberry.
 C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\TextureData.cpp;C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\x64\Debug\TextureData.obj
 C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\TextureManager.cpp;C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\x64\Debug\TextureManager.obj
 C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\Tile.cpp;C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\x64\Debug\Tile.obj
+C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\TileEnd.cpp;C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\x64\Debug\TileEnd.obj
 C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\Timer.cpp;C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\x64\Debug\Timer.obj
 C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\TimerManager.cpp;C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\x64\Debug\TimerManager.obj
 C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\Trap.cpp;C:\Users\tranz\Desktop\Prog_Cours\SFML\CelesteGroupe\Celeste\Celeste\x64\Debug\Trap.obj

@@ -161,6 +161,7 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuEndLevel.cpp" />
     <ClCompile Include="MenuOption.cpp" />
     <ClCompile Include="MenuSoundBoard.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
@@ -181,6 +182,7 @@
     <ClCompile Include="TextureData.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileEnd.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TimerManager.cpp" />
     <ClCompile Include="Trap.cpp" />
@@ -218,6 +220,7 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapManager.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuEndLevel.h" />
     <ClInclude Include="MenuOption.h" />
     <ClInclude Include="MenuSoundBoard.h" />
     <ClInclude Include="MovementComponent.h" />
@@ -241,6 +244,7 @@
     <ClInclude Include="TextureData.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileEnd.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TimerManager.h" />
     <ClInclude Include="Trap.h" />

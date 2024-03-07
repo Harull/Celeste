@@ -1,0 +1,145 @@
+#include "MenuEndLevel.h"
+#include "Game.h"
+#include "TextureManager.h"
+#include "FontManager.h"
+#include "Macro.h"
+#include "TimerManager.h"
+#include "MenuOption.h"
+#include "SoundManager.h"
+#include "LevelSelectorMenu.h"
+
+#define DEAD_ZONE 50.0f
+
+MenuEndLevel::MenuEndLevel()
+{
+	text = nullptr;
+	names = vector<string>();
+	font = nullptr;
+	timer = nullptr;
+	currentLevel = 0;
+	currentAlpha = 255.0f;
+	alphaFactor = 3.f;
+	canClick = true;
+
+	index = 0;
+	maxIndex = 0;
+}
+
+MenuEndLevel::~MenuEndLevel()
+{
+	delete text;
+	delete font;
+	if (timer) timer->SetToRemove(true);
+
+}
+
+void MenuEndLevel::Init()
+{
+	Vector2u _windowSize = Game::GetInstance().GetWindowSize();
+
+	font = new Font();
+	if (!font->loadFromFile("Assets/Fonts/Renogare.otf"))
+	{
+		cerr << "ERROR - Font non charge" << endl;
+	}
+
+	names = { "Bravo !", "Tu as fini !", "Mais tu es vraiment nul" };
+
+	maxIndex = static_cast<int>(names.size() - 1);
+
+	text = new TextData(names[index], new Text(names[index], *font, 55), false);
+	SetOriginAtMiddle(*text->text);
+	text->text->setPosition(_windowSize.x / 2.0f, _windowSize.y / 2.0f);
+
+
+}
+
+void MenuEndLevel::HandleGamepadClick(Event _event)
+{
+
+	if (!canClick) return;
+
+	if (_event.type == Event::JoystickButtonPressed) {
+		if (_event.joystickButton.button == 0) {
+
+			SoundManager::GetInstance().Play("Assets/Songs/Sounds/SoundSelector.mp3", 5.0f);
+			index++;
+			if (index > maxIndex) LevelSelectorMenu::GetInstance().Show();
+
+			TransitionFill();
+
+		}
+	}
+}
+
+
+
+void MenuEndLevel::HandleEvents(RenderWindow& _window)
+{
+	Event _event;
+	while (_window.pollEvent(_event))
+	{
+		if (_event.type == Event::Closed)
+		{
+			_window.close();
+		}
+		else if (_event.type == Event::JoystickButtonPressed || _event.type == Event::JoystickMoved)
+		{
+			HandleGamepadClick(_event);
+		}
+	}
+}
+
+bool MenuEndLevel::Show()
+{
+	RenderWindow& _window = Game::GetInstance().GetWindow();
+	while (_window.isOpen())
+	{
+		TimerManager::GetInstance().Update();
+		HandleEvents(_window);
+
+		const View _view(FloatRect(Vector2f(0.0f, 0.0f), Vector2f(1920.0f, 1080.0f)));
+		_window.setView(_view);
+		_window.clear();
+		_window.draw(*text->text);
+
+		_window.display();
+	}
+	return true;
+}
+
+void MenuEndLevel::TransitionFill() {
+	canClick = false;
+	const std::function<void()>& _callback = [&]() {
+
+		Fade(text->text, (unsigned int)currentAlpha);
+
+		currentAlpha -= alphaFactor;
+		if (currentAlpha <= 0 || currentAlpha >= 255)
+		{
+			timer->Pause();
+			timer->Reset();
+			text->text->setString(names[index]);
+			SetOriginAtMiddle(*text->text);
+			TransitionUnFill();
+
+		}};
+	timer = new Timer("FadeTimer", _callback, sf::seconds(0.01f), true, true);
+}
+
+
+
+void MenuEndLevel::TransitionUnFill()
+{
+	const std::function<void()>& _callback2 = [&]() {
+		Fade(text->text, (unsigned int)currentAlpha);
+
+		currentAlpha += alphaFactor;
+		if (currentAlpha <= 0 || currentAlpha >= 255)
+		{
+			timer->Pause();
+			timer->Reset();
+			canClick = true;
+		}};
+	timer = new Timer("FadeTimer2", _callback2, sf::seconds(0.01f), true, true);
+}

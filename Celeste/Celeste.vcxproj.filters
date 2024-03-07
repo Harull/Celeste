@@ -264,12 +264,6 @@
     <ClCompile Include="FirstMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LevelSelectorMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuOption.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Snow.cpp">
       <Filter>Source Files\Snow</Filter>
     </ClCompile>
@@ -288,9 +282,6 @@
     <ClCompile Include="GemDash.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MenuSoundBoard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FragileWallTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -298,6 +289,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Dialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuOption.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuSoundBoard.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelSelectorMenu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="TileEnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuEndLevel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -458,12 +464,6 @@
     <ClInclude Include="FirstMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LevelSelectorMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuOption.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Snow.h">
       <Filter>Source Files\Snow</Filter>
     </ClInclude>
@@ -482,9 +482,6 @@
     <ClInclude Include="GemDash.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MenuSoundBoard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="FragileWallTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -492,6 +489,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Dialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelSelectorMenu.h">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuOption.h">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuSoundBoard.h">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="TileEnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuEndLevel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
