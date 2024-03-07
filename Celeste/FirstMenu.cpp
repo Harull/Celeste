@@ -16,6 +16,7 @@ FirstMenu::FirstMenu()
 	background = new Sprite();
 	font = new Font();
 
+	icons = vector<Shape*>();
 
 	canClick = true;
 	currentText = new TextData();
@@ -31,7 +32,9 @@ FirstMenu::~FirstMenu()
 	{
 		delete _text;
 	}
-
+	for (auto _icon : icons) {
+		delete _icon;
+	}
 	delete background;
 	delete font;
 }
@@ -55,6 +58,7 @@ void FirstMenu::Init()
 	}
 
 	vector<string> _names = { "Play", "Options", "Exit" };
+	vector<string> _pathIcons = { "Assets/Icons/Vide.png", "Assets/Icons/Options.png", "Assets/Icons/Retour.png" };
 
 	vector<function<void()>> _functions =
 	{
@@ -65,7 +69,8 @@ void FirstMenu::Init()
 
 	for (string _name : _names) {
 
-		texts.push_back(new TextData(_name, new Text(_name, *font, 50), false));
+		texts.push_back(new TextData(_name, new Text(_name, *font, 55), false));
+		icons.push_back(new RectangleShape(Vector2f(60.0f, 60.0f)));
 	}
 
 	Vector2f _pos = Vector2f(180, 400);
@@ -73,6 +78,11 @@ void FirstMenu::Init()
 	for (TextData* _text : texts) {
 		_text->onClick = _functions[_i];
 		_text->text->setPosition(_pos);
+		_text->text->setOutlineThickness(3.0f);
+
+		icons[_i]->setPosition(Vector2f(_pos.x - 75.0f, _pos.y));
+		TextureManager::GetInstance().Load(icons[_i], _pathIcons[_i]);
+
 		_pos.y += 100;
 		_i++;
 	}
@@ -190,6 +200,10 @@ bool FirstMenu::Show()
 
 		for (TextData* _text : texts) {
 			_window.draw(*_text->text);
+		}
+
+		for (Shape* _icon : icons) {
+			_window.draw(*_icon);
 		}
 
 		_window.display();

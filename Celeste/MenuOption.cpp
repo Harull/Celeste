@@ -110,6 +110,7 @@ void MenuOption::Init()
 	for (TextData* _text : texts) {
 		_text->onClick = _functions[_i];
 		_text->text->setPosition(_pos);
+		_text->text->setOutlineThickness(3.0f);
 		_pos.y += 100;
 		_i++;
 	}

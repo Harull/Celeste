@@ -39,7 +39,9 @@ MenuSoundBoard::~MenuSoundBoard()
 	for (auto _text : texts) {
 		delete _text;
 
-	}delete font;
+	}
+
+	delete font;
 	delete backgroundShape;
 	delete background;
 }
@@ -62,7 +64,7 @@ void MenuSoundBoard::Init()
 	float _sizeY = 50.0f;
 	float _posY = (_windowSize.y - _sizeY * maxValue) / 2;
 	backgroundShape = new RectangleShape(Vector2f(500.0f, (_sizeY * maxValue) + 15.0f));
-	backgroundShape->setPosition(_posX, _posY);
+	backgroundShape->setPosition(_posX - 10.0f, _posY);
 	backgroundShape->setFillColor(Color(0, 0, 0, 120));
 	backgroundShape->setOutlineThickness(5.0f);
 
@@ -96,6 +98,7 @@ void MenuSoundBoard::Init()
 	for (int _i = 0; _i < maxValue; _i++)
 	{
 		texts[_i]->text->setPosition(positions[_i]);
+		texts[_i]->text->setOutlineThickness(3.0f);
 		textsToShow.push_back(texts[_i]);
 	}
 	size = static_cast<int>(texts.size());

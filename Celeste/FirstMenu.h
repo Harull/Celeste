@@ -16,7 +16,7 @@ private:
     vector<TextData*> texts;
 	TextData* currentText;
 
-	Shape* Shape;
+	vector<Shape*> icons;
 
     Sprite* background;
     Font* font;
