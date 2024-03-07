@@ -64,7 +64,12 @@ void MenuEndLevel::HandleGamepadClick(Event _event)
 
 			SoundManager::GetInstance().Play("Assets/Songs/Sounds/SoundSelector.mp3", 5.0f);
 			index++;
-			if (index > maxIndex) LevelSelectorMenu::GetInstance().Show();
+			if (index > maxIndex) {
+				index = 0;
+				text->text->setString(names[index]);
+				SetOriginAtMiddle(*text->text);
+				LevelSelectorMenu::GetInstance().Show(); 
+			}
 
 			TransitionFill();
 
