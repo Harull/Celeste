@@ -7,7 +7,7 @@ public:
 	FragileWallTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path);
 public:
 
-	void GetHit(int _collisionSide, int _collisionSideBinary);
+	void GetHit(const int _collisionSideBinary, const int _collisionTypeBinary);
 };
 
 

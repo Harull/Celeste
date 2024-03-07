@@ -49,6 +49,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 	currentDashVelocity = _maxYVelocity * 2;
 	currentDashTimerIndex = 0;
 	dashDirectionBuffer = Vector2i(0, 0);
+	collisionSideBinBonkBuffer = 0;
 
 	InitShape();
 	const Vector2f& _sizeA = Vector2f(24.4f, 41.f);
@@ -190,7 +191,7 @@ bool Character::WallJump(const sf::Event& _event)
 		MovementComponent* _mvComponent = GetComponent<MovementComponent>();
 
 		sf::Vector2f _direction = _mvComponent->GetDirection();
-		float _yMultiplier = 0.85f;
+		float _yMultiplier = 0.9f;
 		float _xMultiplier = 1.4f;
 		float _currentXVelocity = 0.f;
 
@@ -213,6 +214,65 @@ bool Character::WallJump(const sf::Event& _event)
 		}, sf::seconds(0), true, true);
 
 	return true;
+}
+
+bool Character::Bonk(const int _collisionSideBinary)
+{
+	collisionSideBinBonkBuffer = _collisionSideBinary;
+
+	if (Timer* _currentDashTimer = TimerManager::GetInstance().GetApproximately("DashTimer"))
+	{
+		_currentDashTimer->Stop();
+	}
+
+	if (Timer* _currentJumpTimer = TimerManager::GetInstance().GetApproximately("JumpTimer"))
+	{
+		_currentJumpTimer->Stop();
+		currentJumpTimerIndex = 0;
+	}
+	currentJumpTimerIndex = 0;
+	Timer* _bonkTimer = new Timer("JumpTimer", [&]() {
+		MovementComponent* _mvComponent = GetComponent<MovementComponent>();
+
+		sf::Vector2f _direction = _mvComponent->GetDirection();
+
+		float _yMultiplier = 0.9f;
+		float _xMultiplier = 1.4f;
+
+		switch (collisionSideBinBonkBuffer)
+		{
+		case COLLIDE_NONE:
+			break;
+		case COLLIDE_LEFT:
+			_yMultiplier = -_yMultiplier;
+			_xMultiplier = -_xMultiplier;
+			break;
+		case COLLIDE_RIGHT:
+			_yMultiplier = _yMultiplier;
+			_xMultiplier = _xMultiplier;
+			break;
+		case COLLIDE_UP:
+			_yMultiplier = -_yMultiplier;
+			_xMultiplier = 0.f;
+			break;
+		case COLLIDE_DOWN:
+			_yMultiplier = _yMultiplier;
+			_xMultiplier = 0.f;
+			break;
+		default:
+			break;
+		}
+		
+		float _currentYVelocity = 1.f * _yMultiplier * maxYVelocity / ((currentJumpTimerIndex / 12) + 1);
+		float _currentXVelocity = 1.f * _xMultiplier / ((currentJumpTimerIndex / 12) + 1);
+		
+
+		if (std::abs(_currentYVelocity) < 2) return;
+
+		_mvComponent->Move(sf::Vector2f(_currentXVelocity, -currentYVelocity * _yMultiplier) * static_cast<float>(Game::GetInstance().GetSenseOfGravity()));
+		currentJumpTimerIndex++;
+		}, sf::seconds(0), true, true);
+	return false;
 }
 
 bool Character::Dash(const sf::Event& _event)
