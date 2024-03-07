@@ -39,6 +39,7 @@ void Animation::SetNext()
 			{
 				owner->SetDirection(data.nextDirection);
 			}
+			Reset();
 			Stop();
 			return;
 		}
@@ -95,7 +96,7 @@ void Animation::Stop()
 {
 	if (!timer) return;
 	
-	timer->Reset();
+	timer->Pause();
 }
 
 void Animation::Update()

@@ -12,7 +12,8 @@ Portal::Portal(Vector2f _position, Vector2f _size) :Entity(EntityData("Portal", 
 	AnimationComponent* _anim = new AnimationComponent(this, PATH_PORTAL, {
 		AnimationData("Appear",{0.f,154.f},{128.125f,95.f},READ_RIGHT,ANIM_DIR_APPEARS,false,8,0.18f, ANIM_DIR_STANDBY),
 		AnimationData("Standby",{0.f,25.f},{128.125f,95.f},READ_RIGHT,ANIM_DIR_STANDBY,false,8,0.18f, ANIM_DIR_DISAPPEARS),
-		AnimationData("Disappear",{0.f,285.f},{128.125f,95.f},READ_RIGHT,ANIM_DIR_DISAPPEARS,false,8,0.1f),
+		AnimationData("Disappear",{0.f,285.f},{128.125f,95.f},READ_RIGHT,ANIM_DIR_DISAPPEARS,false,8,0.1f,ANIM_DIR_INVICIBLE),
+		AnimationData("none",{0.f,0.f},{0.f,00.f},READ_RIGHT,ANIM_DIR_INVICIBLE,true,8,0.1f),
 		}, ANIM_DIR_APPEARS);
 
 	components.push_back(_anim);
@@ -72,11 +73,11 @@ void Portal::Teleport()
 			}, seconds(2));
 
 		new Timer("animOut player", [this]() {Character* _player = Game::GetInstance().GetPlayer()->GetCharacter();
-		_player->GetComponent<AnimationComponent>()->Restart();
 		_player->GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_OUT_PORTAL);
-			}, seconds(2));
+		_player->GetComponent<AnimationComponent>()->Refresh();
+			}, seconds(1.2));
 
 		GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_APPEARS);
-		GetComponent<AnimationComponent>()->Restart();
+		GetComponent<AnimationComponent>()->Refresh();
 		}, seconds(5));
 }

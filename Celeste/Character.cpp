@@ -28,6 +28,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 		GetComponent<MovementComponent>()->SetCanMove(false);
 
 		new Timer("AnimationPortal", [this]() {
+			GetComponent<AnimationComponent>()->Refresh();
 			GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_IN_PORTAL); }, sf::seconds(1.f));
 
 		data.inPortal = true;
@@ -75,11 +76,12 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 		AnimationData("DashLeft", Vector2f(12.f, 500.f), Vector2f(25.f, 42.f), _readDirection, ANIM_DIR_DASH_LEFT, _toRepeat, 8, _speedA ),
 
 
-		AnimationData("EnterInPortal", Vector2f(10.f, 540.f), Vector2f(31.f, 40.f), _readDirection, ANIM_DIR_IN_PORTAL, false, 9, _speedA * 2.f),
+		AnimationData("EnterInPortal", Vector2f(10.f, 540.f), Vector2f(31.f, 40.f), _readDirection, ANIM_DIR_IN_PORTAL, false, 9, _speedA * 2.f,ANIM_DIR_INVICIBLE),
 		AnimationData("OutofPortal", Vector2f(13.f, 589.f), Vector2f(27.f, 40.f), _readDirection, ANIM_DIR_OUT_PORTAL, false, 9,_speedA * 2.f),
 
 
 		AnimationData("None", Vector2f(12.f, 203), _sizeA, _readDirection, ANIM_DIR_NONE, _toRepeat, 1, _speedA * 2.f),
+		AnimationData("invisible",{0.f,0.f},{0.f,00.f},READ_RIGHT,ANIM_DIR_INVICIBLE,_toRepeat,1,0.1f),
 		}, direction);
 
 
