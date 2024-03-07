@@ -25,7 +25,6 @@ void GemDash::GetHit(int _collisionSideBinary)
 	if (_collisionSideBinary != ENTITY_CHARACTER)return;
 	if (isUsed)return;
 	GetComponent<AnimationComponent>()->Finish();
-	shape->setFillColor(Color::Transparent);
 	isUsed = true;
 
 	Character* _currentCharacter = Game::GetInstance().GetPlayer()->GetCharacter();

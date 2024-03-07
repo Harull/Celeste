@@ -102,7 +102,7 @@ CollisionComponent::CollisionComponent(Entity* _owner):Component(_owner)
 CollisionSide CollisionComponent::ComputeRelativePosition(const sf::Shape* _entityShape, const sf::Shape* _tileShape,
 	const int initialCollisionSideBinary)
 {
-	const float _marginOfError = 50.f;
+	const float _marginOfError = 48.f;
 
 	sf::FloatRect _entityGlobalBounds = _entityShape->getGlobalBounds();
 	const sf::FloatRect& _tileGlobalBounds = _tileShape->getGlobalBounds();

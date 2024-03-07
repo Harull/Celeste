@@ -14,7 +14,6 @@ MenuOption::MenuOption()
 {
 	currentVolumeCount = 2;
 
-
 	background = new Sprite();
 	font = new Font();
 

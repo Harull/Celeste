@@ -37,7 +37,7 @@ void Animation::SetNext()
 		{
 			if (data.nextDirection!= AnimationDirection(-1))
 			{
-			owner->SetDirection(data.nextDirection);
+				owner->SetDirection(data.nextDirection);
 			}
 			Stop();
 			return;
@@ -81,8 +81,7 @@ void Animation::Start()
 {
 	if (!timer)
 	{
-	timer = new Timer("Animation" + data.name, this, &Animation::SetNext, seconds(data.timeBetween), true, true);
-
+		timer = new Timer("Animation" + data.name, this, &Animation::SetNext, seconds(data.timeBetween), true, true);
 	}
 	timer->Start();
 }

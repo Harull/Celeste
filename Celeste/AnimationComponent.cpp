@@ -68,19 +68,15 @@ void AnimationComponent::Finish()
 	for (Animation* _animation : GetAllValues())
 	{
 		_animation->Stop();
-		
 		_animation->GetSprite()->setColor(Color::Transparent);
 	}
 }
 
 void AnimationComponent::Restart()
 {
-
 	for (Animation* _animation : GetAllValues())
 	{
 		_animation->Reset();
-
-
-
+		_animation->GetSprite()->setColor(Color(255,255,255,255));
 	}
 }

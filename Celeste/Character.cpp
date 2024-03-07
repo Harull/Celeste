@@ -21,11 +21,17 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 			new CollisionComponent(this) })
 {
 
-	new Timer("PortalAppears", [this]() {Portal* _portal = new Portal(shape->getPosition(), shape->getGlobalBounds().getSize());
-	GetComponent< MovementComponent>()->SetCanMove(false);
-	GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_IN_PORTAL);
-	data.inPortal = true;
-	_portal->Teleport();
+	new Timer("PortalAppears", [this]() {
+		
+		const sf::Vector2f& _shapePos = shape->getPosition();
+		Portal* _portal = new Portal({ _shapePos.x + 10, _shapePos.y + 4 } , shape->getGlobalBounds().getSize());
+		GetComponent<MovementComponent>()->SetCanMove(false);
+
+		new Timer("AnimationPortal", [this]() {
+			GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_IN_PORTAL); }, sf::seconds(1.f));
+
+		data.inPortal = true;
+		_portal->Teleport();
 		}, seconds(5));
 
 	maxYVelocity = _maxYVelocity;
@@ -65,17 +71,15 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 		AnimationData("ClimbLeftWall", Vector2f(12.f, 300.f), Vector2f(21.f, 40.f), _readDirection, ANIM_DIR_CLIMB_LEFT, _toRepeat, 4, _speedA * 2.f),
 		AnimationData("ClimbRightWall", Vector2f(14.f, 252.f), Vector2f(21.f, 40.f), _readDirection, ANIM_DIR_CLIMB_RIGHT, _toRepeat, 4, _speedA * 2.f),
 
-		AnimationData("DashRight", Vector2f(10.f, 455.f), Vector2f(25.f, 40.f), _readDirection, ANIM_DIR_DASH_RIGHT, _toRepeat, 8, _speedA),
-		AnimationData("DashLeft", Vector2f(12.f, 503.f), Vector2f(25.f, 40.f), _readDirection, ANIM_DIR_DASH_LEFT, _toRepeat, 8, _speedA ),
+		AnimationData("DashRight", Vector2f(12.f, 450.f), Vector2f(25.f, 42.f), _readDirection, ANIM_DIR_DASH_RIGHT, _toRepeat, 8, _speedA),
+		AnimationData("DashLeft", Vector2f(12.f, 500.f), Vector2f(25.f, 42.f), _readDirection, ANIM_DIR_DASH_LEFT, _toRepeat, 8, _speedA ),
 
 
-		AnimationData("EnterInPortal", Vector2f(10.f, 541.f), Vector2f(31.f, 40.f), _readDirection, ANIM_DIR_IN_PORTAL, false, 9, 0.1f),
-		AnimationData("OutofPortal", Vector2f(15.5f, 592.f), Vector2f(26.25f, 42.f), _readDirection, ANIM_DIR_OUT_PORTAL, false, 9, 0.1f ),
-
-		
+		AnimationData("EnterInPortal", Vector2f(10.f, 540.f), Vector2f(31.f, 40.f), _readDirection, ANIM_DIR_IN_PORTAL, false, 9, _speedA * 2.f),
+		AnimationData("OutofPortal", Vector2f(13.f, 589.f), Vector2f(27.f, 40.f), _readDirection, ANIM_DIR_OUT_PORTAL, false, 9,_speedA * 2.f),
 
 
-		AnimationData("None", Vector2f(12.f, 203), _sizeA, _readDirection, ANIM_DIR_NONE, _toRepeat, 1, _speedA),
+		AnimationData("None", Vector2f(12.f, 203), _sizeA, _readDirection, ANIM_DIR_NONE, _toRepeat, 1, _speedA * 2.f),
 		}, direction);
 
 
