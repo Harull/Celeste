@@ -45,4 +45,5 @@ public:
 	void SetThickness(const float _size);
 	void Finish();
 	void Restart();
+	void Refresh();
 };
