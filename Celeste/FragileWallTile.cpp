@@ -8,12 +8,13 @@ FragileWallTile::FragileWallTile(const EntityType _type, const Vector2f& _positi
 	collisionReaction = [this](int _collisionSide, int _collisionSideBinary) {GetHit(_collisionSide, _collisionSideBinary); };
 }
 
-void FragileWallTile::GetHit(int _collisionSide, int _collisionSideBinary)
+void FragileWallTile::GetHit(int _collisionSideBinary, int _collisionTypeBinary)
 {
-	if (_collisionSideBinary != ENTITY_CHARACTER)return;
-
-	if (Game::GetInstance().GetPlayer()->GetCharacter()->GetIsDashing())
+	if (_collisionTypeBinary != ENTITY_CHARACTER)return;
+	Character* _currentChar = Game::GetInstance().GetPlayer()->GetCharacter();
+	if (_currentChar->GetIsDashing())
 	{
+		_currentChar->Bonk(_collisionSideBinary);
 		isTangible = false;
 		TextureManager::GetInstance().Load(shape, "Assets/Vide.png");
 	}

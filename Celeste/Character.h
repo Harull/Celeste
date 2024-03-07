@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "Entity.h"
 #include"AnimationComponent.h"
+#include "CollisionComponent.h"
 
 class Component;
 struct PortalData
@@ -43,6 +44,7 @@ class Character : public Entity
 	sf::Vector2i dashDirectionBuffer;
 	PortalData data;
 
+	int collisionSideBinBonkBuffer;
 public:
 	Character() = default;
 	Character(const sf::Vector2f _size, const sf::Vector2f _position, const int _maxYVelocity, const bool _isVisible = false);
@@ -110,6 +112,7 @@ public:
 	bool MovingLeftRight(const sf::Event& _event);
 	bool Jump(const sf::Event& _event);
 	bool WallJump(const sf::Event& _event);
+	bool Bonk(const int _collisionSideBinary);
 	bool Dash(const sf::Event& _event);
 	bool Climb(const sf::Event& _event);
 	void ResetJumpValues();
