@@ -134,6 +134,9 @@ void Game::Update()
 		_clock.restart();
 		
 		UpdateEvents();
+		if (!window.isOpen())
+			return;
+
 		EntityManager::GetInstance().Update();
 		TimerManager::GetInstance().Update();
 		Camera::GetInstance().Update(this);
@@ -141,6 +144,12 @@ void Game::Update()
 		UpdateSnow();
 
 		FPS(144);
+		if (player->GetCharacter()->GetHasWon())
+		{
+			MenuOption::GetInstance().SetInGame(false);
+			TimerManager::GetInstance().DeleteAll();
+			MenuEndLevel::GetInstance().Show();
+		}
 	}
 }
 
@@ -174,6 +183,7 @@ void Game::SelectLevel(const int _value)
 
 void Game::Resume()
 {
+	if (!window.isOpen())return;
 	Update();
 }
 

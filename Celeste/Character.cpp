@@ -21,7 +21,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 			new CollisionComponent(this) })
 {
 
-	new Timer("PortalAppears", [this]() {
+	/*new Timer("PortalAppears", [this]() {
 		
 		const sf::Vector2f& _shapePos = shape->getPosition();
 		Portal* _portal = new Portal({ _shapePos.x + 10, _shapePos.y + 4 } , shape->getGlobalBounds().getSize());
@@ -33,7 +33,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 
 		data.inPortal = true;
 		_portal->Teleport();
-		}, seconds(5));
+		}, seconds(5));*/
 
 	maxYVelocity = _maxYVelocity;
 	wallJumpDirection = 0;
@@ -50,6 +50,8 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 	currentDashTimerIndex = 0;
 	dashDirectionBuffer = Vector2i(0, 0);
 	collisionSideBinBonkBuffer = 0;
+
+	hasWon = false;
 
 	InitShape();
 	const Vector2f& _sizeA = Vector2f(24.4f, 41.f);
