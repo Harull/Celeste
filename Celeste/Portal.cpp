@@ -78,7 +78,7 @@ void Portal::Teleport()
 		new Timer("animOut player", [this]() {Character* _player = Game::GetInstance().GetPlayer()->GetCharacter();
 		_player->GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_OUT_PORTAL);
 		_player->GetComponent<AnimationComponent>()->Refresh();
-			}, seconds(1.2));
+			}, seconds(1.2f));
 
 		GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_APPEARS);
 		GetComponent<AnimationComponent>()->Refresh();

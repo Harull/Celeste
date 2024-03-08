@@ -414,6 +414,7 @@ void Character::Update()
 		Respawn();
 	}
 
+
 	// Climb
 	if (isClimbing)
 	{
@@ -436,9 +437,10 @@ void Character::Update()
 	}
 
 
-	//Ecrasement
-	CollisionInfos _collision = GetComponent<CollisionComponent>()->CheckCollision();
-	if ((_collision.collisionSideBinary & COLLIDE_UP) && (_collision.collisionSideBinary & COLLIDE_DOWN)) {
+	
+	CollisionInfos _colisitions = GetComponent<CollisionComponent>()->CheckCollision();
+	if (((_colisitions.collisionSideBinary & COLLIDE_UP) && (_colisitions.collisionSideBinary & COLLIDE_DOWN))|| ((_colisitions.collisionSideBinary & COLLIDE_LEFT) && (_colisitions.collisionSideBinary & COLLIDE_RIGHT))) {
+
 		Die();
 	}
 

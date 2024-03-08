@@ -13,6 +13,7 @@
 #include "OneDirectionTile.h"
 #include "TextureManager.h"
 #include "TileEnd.h"
+#include"FallingTile.h"
 
 Grid::Grid(const Vector2i _tilesCount)
 {
@@ -42,16 +43,16 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 	vector<string> _test;
 	int _indexRow = 0, _indexColumn = 0;
 	EntityType _type;
-	Vector2f _destination;
+	
 
 	gridForLoad.erase(gridForLoad.begin());
 	for (const vector<char>& _vChar : gridForLoad) {
+		Vector2f _positionmouv = Vector2f();
 		_indexColumn++;
 		for (const char& _char : _vChar) {
 			Tile* _tile;
 			const float _posX = static_cast<float>(_indexRow * tileSize.x + _startPos.x);
 			const float _posY = static_cast<float>(_indexColumn * tileSize.y + _startPos.y);
-			Vector2f _positionmouv;
 
 			if (_char == '1')
 			{
@@ -121,23 +122,50 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 				_path = "Assets/MovingTile.png";
 				_type = ENTITY_TILE;
 				_tile = new MovingTile(_type, Vector2f(_posX, _posY), tileSize, _path);
+				if (_positionmouv!=Vector2f())
+				{
+					MovingTile* _moveTile = dynamic_cast<MovingTile*>(_tile);
+					_moveTile->AddDestination(_positionmouv);
+				}
+			}
+			else if (_char == 't')
+			{
+				_path = "Assets/Snow1.png";
+				_type = ENTITY_TILE;
+				_tile = new FallingTile(_type, Vector2f(_posX, _posY), tileSize, _path);
 			}
 			else if (_char == 'd')
 			{
-				for (vector<Tile*> _tilem : tiles)
-				{
-					for (Tile* _tileu : _tilem)
+				
+				_positionmouv =  Vector2f(_posX, _posY);
+				
+					for (Tile* _tileu : _tiles)
 					{
 
 						if (MovingTile* _moveTile=dynamic_cast<MovingTile*>(_tileu))
 						{
-							_positionmouv = Vector2f(_posX, _posY);
 							_moveTile->AddDestination(_positionmouv);
+							
 						}
 
 					}
+					for (vector<Tile*> _tilesStocked : tiles)
+					{
+						
+						for (Tile* _tileStocked :_tilesStocked)
+						{
 
-				}
+						if (MovingTile* _moveTile = dynamic_cast<MovingTile*>(_tileStocked))
+						{
+							_moveTile->AddDestination(_positionmouv);
+
+						}
+						}
+					}
+
+
+				
+				
 				_tile = nullptr;
 			}
 
