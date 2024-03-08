@@ -6,17 +6,18 @@
 #include<iostream>
 using namespace std;
 
+
 class SoundManager : public Singleton<SoundManager>, public IManager<string, SoundData>
 {
-	Sound sound;
+    vector<Sound*> sounds;
 
 public:
-	SoundManager();
+    SoundManager();
+	~SoundManager();
 
 private:
-	void Load(const string& _path);
+    void Load(const string& _path);
 
 public:
-	void Play(const string& _path, const float _volume = 10.0f);
+    void Play(const string& _path, const float _volume = 10.0f);
 };
-
