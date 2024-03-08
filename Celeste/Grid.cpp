@@ -100,7 +100,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			}
 			else if (_char == 'f')
 			{
-				_path = "Assets/Snow1.png";
+				_path = "Assets/FragileTile.png";
 				_type = ENTITY_TILE;
 				_tile = new FragileTile(_type, Vector2f(_posX, _posY), tileSize, _path);
 			}
