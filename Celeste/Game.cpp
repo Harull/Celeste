@@ -136,7 +136,7 @@ void Game::Update()
 		UpdateEvents();
 		EntityManager::GetInstance().Update();
 		TimerManager::GetInstance().Update();
-		Camera::GetInstance().Update(this);
+		Camera::GetInstance().Update();
 		UpdateWindow();
 		UpdateSnow();
 
