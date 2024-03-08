@@ -52,6 +52,8 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 	dashDirectionBuffer = Vector2i(0, 0);
 	collisionSideBinBonkBuffer = 0;
 
+	hasWon = false;
+
 	InitShape();
 	const Vector2f& _sizeA = Vector2f(24.4f, 41.f);
 	const ReadDirection& _readDirection = READ_RIGHT;

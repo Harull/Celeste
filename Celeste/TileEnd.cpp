@@ -16,10 +16,6 @@ TileEnd::TileEnd(const EntityType _type, const Vector2f& _position, const Vector
 void TileEnd::GetHit(int _collisionSide, int _collisionSideBinary)
 {
 	if (_collisionSideBinary != ENTITY_CHARACTER)return;
-
-		MenuOption::GetInstance().SetInGame(false);
-		TimerManager::GetInstance().DeleteAll();
-		MenuEndLevel::GetInstance().Show();
-
+	Game::GetInstance().GetPlayer()->GetCharacter()->SetHasWon(true);
 }
 

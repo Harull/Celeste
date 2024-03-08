@@ -45,6 +45,8 @@ class Character : public Entity
 	PortalData data;
 
 	int collisionSideBinBonkBuffer;
+
+	bool hasWon;
 public:
 	Character() = default;
 	Character(const sf::Vector2f _size, const sf::Vector2f _position, const int _maxYVelocity, const bool _isVisible = false);
@@ -104,6 +106,14 @@ public:
 	bool GetHasDashes() const
 	{
 		return dashCount > 0;
+	}
+	void SetHasWon(const bool _status)
+	{
+		hasWon = _status;
+	}
+	bool GetHasWon()const
+	{
+		return hasWon;
 	}
 private:
 	void InitShape();
