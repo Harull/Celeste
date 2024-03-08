@@ -121,6 +121,9 @@
     <Filter Include="Source Files\Snow">
       <UniqueIdentifier>{69d859e9-8462-4df8-81a9-86367144eed1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Ball">
+      <UniqueIdentifier>{6cd6c8af-e4c9-4344-9ca1-043b277391b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -193,9 +196,6 @@
       <Filter>Source Files\Entities\Tiles</Filter>
     </ClCompile>
     <ClCompile Include="AnimationComponent.cpp">
-      <Filter>Source Files\Component\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
       <Filter>Source Files\Component\Animation</Filter>
     </ClCompile>
     <ClCompile Include="CollisionComponent.cpp">
@@ -299,6 +299,9 @@
     </ClCompile>
     <ClCompile Include="Dialog.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Source Files\Ball</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -493,6 +496,9 @@
     </ClInclude>
     <ClInclude Include="Dialog.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>Source Files\Ball</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

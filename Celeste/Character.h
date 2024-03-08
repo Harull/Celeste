@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "Entity.h"
 #include"AnimationComponent.h"
+#include"AnimationDeath.h"
 
 class Component;
 struct PortalData
@@ -42,6 +43,8 @@ class Character : public Entity
 
 	sf::Vector2i dashDirectionBuffer;
 	PortalData data;
+	AnimationDeath animationDeath;
+
 
 public:
 	Character() = default;
