@@ -14,6 +14,7 @@ private:
 	float currentAlpha;
 	float alphaFactor;
 	Timer* timer;
+	Timer* timer2;
 	Shape* background;
 	vector<string> backgroundPath;
 	Font* font;

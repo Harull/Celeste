@@ -19,7 +19,7 @@ MenuEndLevel::MenuEndLevel()
 	currentLevel = 0;
 	currentAlpha = 255.0f;
 	alphaFactor = 3.f;
-	canClick = true;
+	canClick = false;
 
 	index = 0;
 	maxIndex = 0;
@@ -30,6 +30,8 @@ MenuEndLevel::~MenuEndLevel()
 	delete text;
 	delete font;
 	if (timer) timer->SetToRemove(true);
+	if (timer2) timer2->SetToRemove(true);
+	if (timerSound) timerSound->SetToRemove(true);
 
 }
 
@@ -68,6 +70,7 @@ void MenuEndLevel::HandleGamepadClick(Event _event)
 				index = 0;
 				text->text->setString(names[index]);
 				SetOriginAtMiddle(*text->text);
+				canClick = false;
 				LevelSelectorMenu::GetInstance().Show(); 
 			}
 
@@ -97,6 +100,8 @@ void MenuEndLevel::HandleEvents(RenderWindow& _window)
 
 bool MenuEndLevel::Show()
 {
+	SoundManager::GetInstance().Play("Assets/Songs/Sounds/cassette_get.wav", 5.0f);
+	timerSound = new Timer("CassetteTimer", [&]() { canClick = true; }, sf::seconds(2.f), true,false);
 	RenderWindow& _window = Game::GetInstance().GetWindow();
 	while (_window.isOpen())
 	{
@@ -142,9 +147,9 @@ void MenuEndLevel::TransitionUnFill()
 		currentAlpha += alphaFactor;
 		if (currentAlpha <= 0 || currentAlpha >= 255)
 		{
-			timer->Pause();
-			timer->Reset();
+			timer2->Pause();
+			timer2->Reset();
 			canClick = true;
 		}};
-	timer = new Timer("FadeTimer2", _callback2, sf::seconds(0.01f), true, true);
+	timer2 = new Timer("FadeTimer2", _callback2, sf::seconds(0.01f), true, true);
 }

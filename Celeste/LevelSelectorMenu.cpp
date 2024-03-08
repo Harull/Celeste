@@ -29,6 +29,7 @@ LevelSelectorMenu::~LevelSelectorMenu()
 	delete background;
 	delete font;
 	if (timer) timer->SetToRemove(true);
+	if (timer2) timer2->SetToRemove(true);
 
 }
 
@@ -189,9 +190,9 @@ void LevelSelectorMenu::TransitionUnFill()
 		currentAlpha += alphaFactor;
 		if (currentAlpha <= 0 || currentAlpha >= 255)
 		{
-			timer->Pause();
-			timer->Reset();
+			timer2->Pause();
+			timer2->Reset();
 			canClick = true;
 		}};
-	timer = new Timer("FadeTimer2", _callback2, sf::seconds(0.01f), true, true);
+	timer2 = new Timer("FadeTimer2", _callback2, sf::seconds(0.01f), true, true);
 }

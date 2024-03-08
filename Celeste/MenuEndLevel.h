@@ -16,6 +16,8 @@ private:
 	float currentAlpha;
 	float alphaFactor;
 	Timer* timer;
+	Timer* timer2;
+	Timer* timerSound;
 	vector<string> names;
 
 
