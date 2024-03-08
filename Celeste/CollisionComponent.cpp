@@ -4,10 +4,15 @@
 #include"EntityManager.h"
 #include"FragileTile.h"
 #include "Game.h"
+#include"FallingTile.h"
 
 
 CollisionInfos CollisionComponent::CheckCollision(const bool _isSpecificCheckOnWalls)
 {
+	if (FallingTile* _falling =dynamic_cast<FallingTile*>(owner))
+	{
+		cout << " f" << endl;
+	}
 	sf::Shape* _currentShape = owner->GetShape();
 	sf::FloatRect _floatRectBb = _currentShape->getGlobalBounds();
 	int _collisionSideBinary = COLLIDE_NONE;
@@ -67,8 +72,7 @@ CollisionInfos CollisionComponent::CheckCollision(const bool _isSpecificCheckOnW
 
 					if (function<void(int _collisionSide, int _collisionSideBinary)>_collisionReaction = _tile->GetCollisionReaction())
 						_collisionReaction(_currentSide, owner->GetType());
-					if (Character* _char = dynamic_cast<Character*>(owner))
-					{
+					
 					if (_currentSide & COLLIDE_UP)
 					{
 						float _yCurrentOverlap = ComputeYOverlap(_currentShape, _shapeTile);
@@ -80,7 +84,7 @@ CollisionInfos CollisionComponent::CheckCollision(const bool _isSpecificCheckOnW
 						_minXOverlap = _minXOverlap > _xCurrentOverlap ? _xCurrentOverlap : _minXOverlap;
 					}
 
-					}
+					
 					
 				}
 					

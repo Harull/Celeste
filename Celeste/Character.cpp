@@ -414,7 +414,7 @@ void Character::Update()
 		Respawn();
 	}
 	CollisionInfos _colisitions = GetComponent<CollisionComponent>()->CheckCollision();
-	if ((_colisitions.collisionSideBinary & COLLIDE_UP) && (_colisitions.collisionSideBinary & COLLIDE_DOWN)) {
+	if (((_colisitions.collisionSideBinary & COLLIDE_UP) && (_colisitions.collisionSideBinary & COLLIDE_DOWN))|| ((_colisitions.collisionSideBinary & COLLIDE_LEFT) && (_colisitions.collisionSideBinary & COLLIDE_RIGHT))) {
 		Die();
 	}
 	

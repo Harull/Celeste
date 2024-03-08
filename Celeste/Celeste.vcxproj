@@ -147,6 +147,7 @@
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="EntityType.h" />
     <ClCompile Include="EventReaction.cpp" />
+    <ClCompile Include="FallingTile.cpp" />
     <ClCompile Include="FirstMenu.cpp" />
     <ClCompile Include="FontData.cpp" />
     <ClCompile Include="FontManager.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="EventReaction.h" />
     <ClInclude Include="EventReactionManager.h" />
+    <ClInclude Include="FallingTile.h" />
     <ClInclude Include="FirstMenu.h" />
     <ClInclude Include="FontData.h" />
     <ClInclude Include="FontManager.h" />
