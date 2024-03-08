@@ -1,6 +1,7 @@
 #include "MovingTile.h"
 #include "Game.h"
 #include "MovementComponent.h"
+#include "TimerManager.h"
 
 
 MovingTile::MovingTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path):Tile(_type, _position, _size, _path)
@@ -12,6 +13,10 @@ MovingTile::MovingTile(const EntityType _type, const Vector2f& _position, const 
 	indexDestination = 0;
 	activated = false;
 	
+	yeetMultiplier = 5;
+	currentYeetTimerIndex = 0;
+	timeSinceDestination = sf::Clock();
+	isYeeted = false;
 }
 
 void MovingTile::CarryCharacter()
@@ -40,6 +45,58 @@ void MovingTile::CarryCharacter()
 	
 }
 
+void MovingTile::YeetCharacter()
+{
+	Character* _character = Game::GetInstance().GetPlayer()->GetCharacter();
+
+	if (!_character) return;
+
+	currentYeetTimerIndex = 0;
+
+	if (Timer* _currentYeetTimer = TimerManager::GetInstance().GetApproximately("YeetTimer"))
+	{
+		_currentYeetTimer->Reset();
+	}
+	else if (MovementComponent* _chMvCp = Game::GetInstance().GetPlayer()->GetCharacter()->GetComponent<MovementComponent>())
+	{
+		new Timer("YeetTimer", [&]() {
+
+			Character* _character = Game::GetInstance().GetPlayer()->GetCharacter();
+			MovementComponent* _mvComponent = _character->GetComponent<MovementComponent>();
+			MovementComponent* _thisMvCp = GetComponent<MovementComponent>();
+
+			sf::Vector2f _dirWithVelocity = _thisMvCp->GetDirection() * _thisMvCp->GetVelocity();
+			sf::Vector2f _finalMove;
+
+			_finalMove = (_dirWithVelocity * yeetMultiplier) / static_cast<float>(((currentYeetTimerIndex / 10) + 1));
+
+			if (std::abs(_finalMove.x) < 2 || std::abs(_finalMove.y) < 2)
+			{
+				isYeeted = false;
+				return;
+			}
+
+			_mvComponent->Move(-_finalMove, false);
+			currentYeetTimerIndex++;
+
+			}, sf::seconds(0), true, true);
+		
+	}
+				
+}
+
+bool MovingTile::TryYeetCharater()
+{
+	Character* _character = Game::GetInstance().GetPlayer()->GetCharacter();
+	if (timeSinceDestination.getElapsedTime() < sf::seconds(1) && _character->GetIsJumping())
+	{
+		isYeeted = true;
+		YeetCharacter();
+	}
+
+	return false;
+}
+
 void MovingTile::Move(int _collisionSide, int _collisionSideBinary)
 {
 	if (_collisionSide != COLLIDE_UP)return;
@@ -56,6 +113,12 @@ void MovingTile::Move(int _collisionSide, int _collisionSideBinary)
 
 void MovingTile::Update()
 {
+
+	if (timeSinceDestination.getElapsedTime() < sf::seconds(1) && !isYeeted)
+	{
+		if (TryYeetCharater())return;
+	}
+
 	CarryCharacter();
 	Entity::Update();
 	MovementComponent* _move = GetComponent<MovementComponent>();
@@ -72,6 +135,7 @@ void MovingTile::Update()
 	}
 	else if (indexDestination >= destination.size()-1)
 	{
+		timeSinceDestination.restart();
 		indexDestination = 0;
 	}
 	else

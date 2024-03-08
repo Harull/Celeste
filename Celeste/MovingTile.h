@@ -7,6 +7,12 @@ class MovingTile :public Tile
 	Vector2f currentDestination;
 	int indexDestination;
 	bool activated;
+
+	float yeetMultiplier;
+	int currentYeetTimerIndex;
+	sf::Clock timeSinceDestination;
+	bool isYeeted;
+
 public:
 	void UpdateDirection()
 	{
@@ -24,6 +30,8 @@ public:
 
 private:
 	void CarryCharacter();
+	void YeetCharacter();
+	bool TryYeetCharater();
 	void Move(int _collisionSide, int _collisionSideBinary);
 
 	virtual void Update()override;
