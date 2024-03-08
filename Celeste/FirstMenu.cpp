@@ -145,7 +145,7 @@ void FirstMenu::MoveUp()
 		index--;
 		return;
 	}
-	SoundManager::GetInstance().Play("C:/Users/Kylia/Music/ui_main_roll_down.wav");
+	SoundManager::GetInstance().Play("Assets/Songs/Sounds/ui_main_roll_down.wav");
 	currentText->text->setFillColor(sf::Color::White);
 	currentText = texts[index];
 	currentText->text->setFillColor(sf::Color::Red);
@@ -160,7 +160,7 @@ void FirstMenu::MoveDown()
 		index++;
 		return;
 	}
-	SoundManager::GetInstance().Play("C:/Users/Kylia/Music/ui_main_roll_down.wav");
+	SoundManager::GetInstance().Play("Assets/Songs/Sounds/ui_main_roll_down.wav");
 	currentText->text->setFillColor(sf::Color::White);
 	currentText = texts[index];
 	currentText->text->setFillColor(sf::Color::Red);

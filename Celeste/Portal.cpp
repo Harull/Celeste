@@ -3,6 +3,7 @@
 #include"Game.h"
 #include"Macro.h"
 #include"MovementComponent.h"
+#include "SoundManager.h"
 
 
 #define PATH_PORTAL "Assets/portal.png"

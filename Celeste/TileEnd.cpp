@@ -18,6 +18,7 @@ void TileEnd::GetHit(int _collisionSide, int _collisionSideBinary)
 {
 	if (_collisionSideBinary != ENTITY_CHARACTER)return;
 
+	
 	SoundManager::GetInstance().Play("Assets/Songs/Sounds/cassette_get.wav", 5.0f);
 
 }

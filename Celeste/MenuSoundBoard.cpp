@@ -98,8 +98,10 @@ void MenuSoundBoard::Init()
 	for (int _i = 0; _i < maxValue; _i++)
 	{
 		texts[_i]->text->setPosition(positions[_i]);
-		texts[_i]->text->setOutlineThickness(3.0f);
 		textsToShow.push_back(texts[_i]);
+	}
+	for (TextData* _text : texts) {
+		_text->text->setOutlineThickness(3.0f);
 	}
 	size = static_cast<int>(texts.size());
 	index = static_cast<int>(textsToShow.size()) / 2; 
