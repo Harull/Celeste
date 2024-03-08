@@ -147,7 +147,6 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 							_moveTile->AddDestination(_positionmouv);
 							
 						}
-
 					}
 					for (vector<Tile*> _tilesStocked : tiles)
 					{
@@ -155,11 +154,10 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 						for (Tile* _tileStocked :_tilesStocked)
 						{
 
-						if (MovingTile* _moveTile = dynamic_cast<MovingTile*>(_tileStocked))
-						{
-							_moveTile->AddDestination(_positionmouv);
-
-						}
+							if (MovingTile* _moveTile = dynamic_cast<MovingTile*>(_tileStocked))
+							{
+								_moveTile->AddDestination(_positionmouv);
+							}
 						}
 					}
 
