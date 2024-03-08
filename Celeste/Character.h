@@ -45,6 +45,7 @@ class Character : public Entity
 	PortalData data;
 
 	int collisionSideBinBonkBuffer;
+	CollisionSide lastWallCollisionSide;
 
 	bool hasWon;
 public:

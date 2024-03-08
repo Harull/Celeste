@@ -23,7 +23,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 {
 
 	/*new Timer("PortalAppears", [this]() {
-		
+
 		const sf::Vector2f& _shapePos = shape->getPosition();
 		Portal* _portal = new Portal({ _shapePos.x + 10, _shapePos.y + 4 } , shape->getGlobalBounds().getSize());
 		GetComponent<MovementComponent>()->SetCanMove(false);
@@ -51,6 +51,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 	currentDashTimerIndex = 0;
 	dashDirectionBuffer = Vector2i(0, 0);
 	collisionSideBinBonkBuffer = 0;
+	lastWallCollisionSide = COLLIDE_NONE;
 
 	hasWon = false;
 
@@ -77,7 +78,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 		AnimationData("ClimbRightWall", Vector2f(14.f, 252.f), Vector2f(21.f, 40.f), _readDirection, ANIM_DIR_CLIMB_RIGHT, _toRepeat, 4, _speedA * 2.f),
 
 		AnimationData("DashRight", Vector2f(12.f, 450.f), Vector2f(25.f, 42.f), _readDirection, ANIM_DIR_DASH_RIGHT, _toRepeat, 8, _speedA),
-		AnimationData("DashLeft", Vector2f(12.f, 500.f), Vector2f(25.f, 42.f), _readDirection, ANIM_DIR_DASH_LEFT, _toRepeat, 8, _speedA ),
+		AnimationData("DashLeft", Vector2f(12.f, 500.f), Vector2f(25.f, 42.f), _readDirection, ANIM_DIR_DASH_LEFT, _toRepeat, 8, _speedA),
 
 
 		AnimationData("EnterInPortal", Vector2f(10.f, 540.f), Vector2f(31.f, 40.f), _readDirection, ANIM_DIR_IN_PORTAL, false, 9, _speedA * 2.f,ANIM_DIR_INVICIBLE),
@@ -155,7 +156,7 @@ bool Character::Jump(const sf::Event& _event)
 		MovementComponent* _mvComponent = GetComponent<MovementComponent>();
 
 		sf::Vector2f _direction = _mvComponent->GetDirection();
-		
+
 		if (currentJumpTimerIndex == 0)
 		{
 			currentYVelocity = maxYVelocity;
@@ -165,8 +166,8 @@ bool Character::Jump(const sf::Event& _event)
 
 		if (currentYVelocity < 2) return;
 
-		
-		_mvComponent->Move({ 0.f, -currentYVelocity * static_cast<float>(Game::GetInstance().GetSenseOfGravity())});
+
+		_mvComponent->Move({ 0.f, -currentYVelocity * static_cast<float>(Game::GetInstance().GetSenseOfGravity()) });
 		currentJumpTimerIndex++;
 		}, sf::seconds(0), true, true);
 	SoundManager::GetInstance().Play("Assets/Songs/Sounds/jump.wav");
@@ -182,13 +183,15 @@ bool Character::WallJump(const sf::Event& _event)
 
 	int _collisionSideBinary = GetComponent<CollisionComponent>()->CheckCollision(true).collisionSideBinary;
 
-	if (_collisionSideBinary & COLLIDE_UP ||(!(_collisionSideBinary & COLLIDE_RIGHT) && !(_collisionSideBinary & COLLIDE_LEFT))) return false;
+	if (_collisionSideBinary & COLLIDE_UP || (!(_collisionSideBinary & COLLIDE_RIGHT) && !(_collisionSideBinary & COLLIDE_LEFT))) return false;
 	currentJumpTimerIndex = 0;
+	isClimbing = false;
 
 	wallJumpDirection = (_collisionSideBinary & COLLIDE_RIGHT) ? 1 : -1;
 
 	if (Timer* _currentJumpTimer = TimerManager::GetInstance().GetApproximately("JumpTimer"))
 	{
+		std::cout << "un timer jump de stoppé dans walljump" << std::endl;
 		_currentJumpTimer->Stop();
 	}
 	Timer* _jumpTimer = new Timer("JumpTimer", [&]() {
@@ -266,10 +269,10 @@ bool Character::Bonk(const int _collisionSideBinary)
 		default:
 			break;
 		}
-		
+
 		float _currentYVelocity = 1.f * _yMultiplier * maxYVelocity / ((currentJumpTimerIndex / 12) + 1);
 		float _currentXVelocity = 1.f * _xMultiplier / ((currentJumpTimerIndex / 12) + 1);
-		
+
 
 		if (std::abs(_currentYVelocity) < 2) return;
 
@@ -322,20 +325,20 @@ bool Character::Dash(const sf::Event& _event)
 	else
 	{
 		Timer* _dashTimer = new Timer("DashTimer", [&]() {
-		MovementComponent* _mvComponent = GetComponent<MovementComponent>();
+			MovementComponent* _mvComponent = GetComponent<MovementComponent>();
 
-		currentDashVelocity = maxYVelocity / ((currentDashTimerIndex / 10) + 1);
+			currentDashVelocity = maxYVelocity / ((currentDashTimerIndex / 10) + 1);
 
-		if (currentDashVelocity < 2) return;
+			if (currentDashVelocity < 2) return;
 
-		_mvComponent->Move(sf::Vector2f(dashDirectionBuffer * currentDashVelocity), false);
-		currentDashTimerIndex++;
-		}, sf::seconds(0), true, true);
+			_mvComponent->Move(sf::Vector2f(dashDirectionBuffer * currentDashVelocity), false);
+			currentDashTimerIndex++;
+			}, sf::seconds(0), true, true);
 
 	}
 	SoundManager::GetInstance().Play("Assets/Songs/Sounds/dash_pink_left.wav");
 
-	
+
 	return true;
 }
 
@@ -344,13 +347,6 @@ bool Character::Climb(const sf::Event& _event)
 	sf::Keyboard::Key _climbKey = sf::Keyboard::V;
 	sf::Keyboard::Key _upKey = sf::Keyboard::Z;
 	sf::Keyboard::Key _downKey = sf::Keyboard::S;
-
-	const CollisionInfos& _collisionInfo = GetComponent<CollisionComponent>()->CheckCollision(true);
-	if (!(_collisionInfo.entityTypeBinary & ENTITY_TILE) || (!(_collisionInfo.collisionSideBinary & COLLIDE_RIGHT) && !(_collisionInfo.collisionSideBinary & COLLIDE_LEFT)))
-	{
-		isClimbing = false;
-		return false;
-	}
 
 	if (_event.type == sf::Event::KeyPressed && _event.key.code != _climbKey && _event.key.code != _upKey && _event.key.code != _downKey)return false;
 
@@ -372,12 +368,14 @@ bool Character::Climb(const sf::Event& _event)
 			isJumping = false;
 		}
 	}
-	else if ((_event.type == sf::Event::KeyReleased && _event.key.code == _climbKey) ||  ((_event.type == sf::Event::JoystickMoved) && sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::Z) <= 50))
+	else if ((_event.type == sf::Event::KeyReleased && _event.key.code == _climbKey) || ((_event.type == sf::Event::JoystickMoved) && sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::Z) <= 50))
 	{
 		isClimbing = false;
 	}
-	if (!isClimbing) return false;
 
+	CollisionInfos _collisionWWall = GetComponent<CollisionComponent>()->CheckCollision(true);
+	if (!(_collisionWWall.entityTypeBinary & ENTITY_TILE) || (!(_collisionWWall.collisionSideBinary & COLLIDE_RIGHT) && !(_collisionWWall.collisionSideBinary & COLLIDE_LEFT))) isClimbing = false;
+	if (!isClimbing) return false;
 
 	MovementComponent* _mvComponent = GetComponent<MovementComponent>();
 	sf::Vector2f _direction = _mvComponent->GetDirection();
@@ -392,6 +390,7 @@ bool Character::Climb(const sf::Event& _event)
 		_yDirection = -(sf::Keyboard::isKeyPressed(_upKey) * 1.f) + sf::Keyboard::isKeyPressed(_downKey) * 1.f;
 
 	sf::Vector2f _newDirection(_direction.x, _yDirection);
+	lastWallCollisionSide = GetComponent<CollisionComponent>()->CheckCollision(true).collisionSideBinary & COLLIDE_LEFT ? COLLIDE_LEFT : COLLIDE_RIGHT;
 
 	_mvComponent->SetDirection(_newDirection);
 	return true;
@@ -415,11 +414,34 @@ void Character::Update()
 	if (isDead) {
 		Respawn();
 	}
-	CollisionInfos _colisitions = GetComponent<CollisionComponent>()->CheckCollision();
-	if ((_colisitions.collisionSideBinary & COLLIDE_UP) && (_colisitions.collisionSideBinary & COLLIDE_DOWN)) {
+
+	// Climb
+	if (isClimbing)
+	{
+		CollisionInfos _collisionWWall = GetComponent<CollisionComponent>()->CheckCollision(true);
+		if (!(_collisionWWall.entityTypeBinary & ENTITY_TILE) || (!(_collisionWWall.collisionSideBinary & COLLIDE_RIGHT) && !(_collisionWWall.collisionSideBinary & COLLIDE_LEFT)))
+		{
+			isClimbing = false;
+			const float _senseOfGravity = static_cast<float>(Game::GetInstance().GetSenseOfGravity());
+			if (lastWallCollisionSide & COLLIDE_RIGHT)
+			{
+				MovementComponent* _mvComponent = GetComponent<MovementComponent>();
+				_mvComponent->Move(sf::Vector2f(-10, -10) * _senseOfGravity);
+			}
+			else if (lastWallCollisionSide & COLLIDE_LEFT)
+			{
+				MovementComponent* _mvComponent = GetComponent<MovementComponent>();
+				_mvComponent->Move(sf::Vector2f(10, -10) * _senseOfGravity);
+			}
+		}
+	}
+
+
+	//Ecrasement
+	CollisionInfos _collision = GetComponent<CollisionComponent>()->CheckCollision();
+	if ((_collision.collisionSideBinary & COLLIDE_UP) && (_collision.collisionSideBinary & COLLIDE_DOWN)) {
 		Die();
 	}
-	
 
 	Entity::Update();
 
@@ -432,7 +454,7 @@ void Character::Die()
 		_dashTimer->Stop();
 		ResetDashValues();
 	}
-	
+
 	isDead = true;
 	SoundManager::GetInstance().Play("Assets/Songs/Sounds/death.wav");
 }
