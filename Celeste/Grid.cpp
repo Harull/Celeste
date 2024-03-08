@@ -118,7 +118,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			}
 			else if (_char == 'm')
 			{
-				_path = "Assets/Snow1.png";
+				_path = "Assets/MovingTile.png";
 				_type = ENTITY_TILE;
 				_tile = new MovingTile(_type, Vector2f(_posX, _posY), tileSize, _path);
 			}

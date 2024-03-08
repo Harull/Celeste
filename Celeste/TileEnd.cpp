@@ -4,6 +4,7 @@
 #include "MenuOption.h"
 #include "TimerManager.h"
 #include "MenuEndLevel.h"
+#include "SoundManager.h"
 
 TileEnd::TileEnd(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path)
 	:Tile(_type, _position, _size, _path)
@@ -17,9 +18,7 @@ void TileEnd::GetHit(int _collisionSide, int _collisionSideBinary)
 {
 	if (_collisionSideBinary != ENTITY_CHARACTER)return;
 
-		MenuOption::GetInstance().SetInGame(false);
-		TimerManager::GetInstance().DeleteAll();
-		MenuEndLevel::GetInstance().Show();
+	SoundManager::GetInstance().Play("Assets/Songs/Sounds/cassette_get.wav", 5.0f);
 
 }
 
