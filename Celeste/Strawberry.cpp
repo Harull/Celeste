@@ -1,6 +1,7 @@
 #include "Strawberry.h"
 #include"Game.h"
 #include"Player.h"
+#include "SoundManager.h"
 
 Strawberry::Strawberry(const Vector2f& _position, const Vector2f& _size, const string& _path)
 	:Tile(ENTITY_STRAWBERRY, _position, _size, _path)
@@ -19,6 +20,7 @@ void Strawberry::GetHit(int _collisionSideBinary)
 {
 	if (_collisionSideBinary != ENTITY_CHARACTER)return;
 	if (isUsed)return;
+	SoundManager::GetInstance().Play("Assets/Songs/Sounds/strawberry_red_get_1000.wav", 5.0f);
 	isUsed = true;
 	shape->setFillColor(Color::Transparent);
 	GetComponent<AnimationComponent>()->Finish();
