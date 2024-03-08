@@ -37,6 +37,7 @@ void SoundManager::Play(const string& _path, const float _volume)
         _sound->play();
 
     }
+    Update();
 }
 
 void SoundManager::Load(const string& _path)
@@ -53,4 +54,16 @@ void SoundManager::Load(const string& _path)
 			cerr << "Le son n'a pas été correctement chargée !" << endl;
 		}
 	}
+}
+
+void SoundManager::Update()
+{
+    for (Sound* _sound : sounds) {
+        if (!_sound->getStatus())
+        {
+            sounds.erase(remove(sounds.begin(), sounds.end(), _sound), sounds.end());
+            delete _sound;
+        }
+    }
+	
 }
