@@ -43,7 +43,7 @@ public:
 		std::vector<EventReaction*> _allReactions = EventReactionManager::GetValues(_event.type);
 		for (EventReaction* _reaction : _allReactions)
 		{
-			if(_reaction->ExecuteCallbacks(_event)) return;
+			_reaction->ExecuteCallbacks(_event);
 		}
 	}
 	static void Clear() {
