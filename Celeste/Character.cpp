@@ -22,19 +22,20 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 			new CollisionComponent(this) })
 {
 
-	/*new Timer("PortalAppears", [this]() {
+	new Timer("PortalAppears", [this]() {
 		
 		const sf::Vector2f& _shapePos = shape->getPosition();
 		Portal* _portal = new Portal({ _shapePos.x + 10, _shapePos.y + 4 } , shape->getGlobalBounds().getSize());
 		GetComponent<MovementComponent>()->SetCanMove(false);
 
 		new Timer("AnimationPortal", [this]() {
+			SoundManager::GetInstance().Play("Assets/Songs/Sounds/Luigi173.wav", 5.0f);
 			GetComponent<AnimationComponent>()->Refresh();
 			GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_IN_PORTAL); }, sf::seconds(1.f));
-
 		data.inPortal = true;
 		_portal->Teleport();
-		}, seconds(5));*/
+
+		}, seconds(5));
 
 	maxYVelocity = _maxYVelocity;
 	wallJumpDirection = 0;
