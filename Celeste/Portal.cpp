@@ -3,6 +3,7 @@
 #include"Game.h"
 #include"Macro.h"
 #include"MovementComponent.h"
+#include"Camera.h"
 
 
 #define PATH_PORTAL "Assets/portal.png"
@@ -67,6 +68,7 @@ void Portal::Teleport()
 
 		Character* _player = Game::GetInstance().GetPlayer()->GetCharacter();
 		_player->GetShape()->setPosition(destination);
+		Camera::GetInstance().Update(true);
 
 		new Timer("free player", [this]() {Character* _player = Game::GetInstance().GetPlayer()->GetCharacter();
 		_player->GetComponent< MovementComponent>()->SetCanMove(true); 

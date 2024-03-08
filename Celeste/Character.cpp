@@ -9,6 +9,7 @@
 #include "Game.h"
 #include"EntityManager.h"
 #include "SoundManager.h"
+#include"Camera.h"
 
 
 #define CHARACTER_TEXTURE "Character/Slave.png"
@@ -437,5 +438,6 @@ void Character::Die()
 void Character::Respawn()
 {
 	shape->setPosition(checkPoint);
+	Camera::GetInstance().Update(true);
 	isDead = false;
 }

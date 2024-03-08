@@ -14,9 +14,10 @@ void Camera::Init(const Vector2f& _position, const Vector2f& _size)
 	setCenter(_size/2.f);
 }
 
-void Camera::Update(Game* _game)
+void Camera::Update(bool _heroTeleport)
 {
-	const sf::Vector2f _playerPosition = _game->GetPlayer()->GetCharacter()->GetPosition();
+	Game& _game = Game::GetInstance();
+	const sf::Vector2f _playerPosition = _game.GetPlayer()->GetCharacter()->GetPosition();
 	const sf::Vector2i _index(static_cast<int>(std::floor(_playerPosition.x / 1920)), static_cast<int>(std::floor(_playerPosition.y / 1080)));
 	
 	Timer* _jumpTimer = TimerManager::GetInstance().GetApproximately("JumpTimer");
@@ -27,12 +28,12 @@ void Camera::Update(Game* _game)
 	{
 		if (_index.y < 0 || _currentMap.size() - 1 < _index.y)
 		{
-			_game->GetPlayer()->GetCharacter()->Die();
+			_game.GetPlayer()->GetCharacter()->Die();
 			return;
 		}
 		else if (_index.x < 0 || _currentMap[_index.y].size() - 1 < _index.x)
 		{
-			_game->GetPlayer()->GetCharacter()->Die();
+			_game.GetPlayer()->GetCharacter()->Die();
 			return;
 		}
 		/*else if (!_currentMap[_index.y][_index.x])
@@ -52,8 +53,12 @@ void Camera::Update(Game* _game)
 
 		while (!IsNearlyEqual(getCenter().x, _index.x * getSize().x + getSize().x / 2.f))
 		{
-			/*_game->UpdateSnow();
-			_game->UpdateWindow();*/
+			if (!_heroTeleport)
+			{
+			_game.UpdateSnow();
+			_game.UpdateWindow();
+
+			}
 			move(_sign * 0.8f , 0);
 		}
 
@@ -65,8 +70,12 @@ void Camera::Update(Game* _game)
 		const int _sign = _index.y - previousIndexes.y;
 		while (!IsNearlyEqual(getCenter().y, _index.y * getSize().y + getSize().y / 2.f))
 		{
-			/*_game->UpdateSnow();
-			_game->UpdateWindow();*/
+			if (!_heroTeleport)
+			{
+				_game.UpdateSnow();
+				_game.UpdateWindow();
+
+			}
 			
 			move(0, _sign * 0.5f);
 		}
@@ -74,14 +83,14 @@ void Camera::Update(Game* _game)
 		{
 			if (_jumpTimer)
 			{
-				_game->GetPlayer()->GetCharacter()->ResetJumpValues();
+				_game.GetPlayer()->GetCharacter()->ResetJumpValues();
 				_jumpTimer->Reset();
 			}
 		}
 		else if (_jumpTimer)
 		{
 			_jumpTimer->Stop();
-			_game->GetPlayer()->GetCharacter()->GetComponent<MovementComponent>()->Move();
+			_game.GetPlayer()->GetCharacter()->GetComponent<MovementComponent>()->Move();
 		}
 	}
 
