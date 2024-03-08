@@ -21,7 +21,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 			new CollisionComponent(this) })
 {
 
-	new Timer("PortalAppears", [this]() {
+	/*new Timer("PortalAppears", [this]() {
 		
 		const sf::Vector2f& _shapePos = shape->getPosition();
 		Portal* _portal = new Portal({ _shapePos.x + 10, _shapePos.y + 4 } , shape->getGlobalBounds().getSize());
@@ -33,7 +33,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 
 		data.inPortal = true;
 		_portal->Teleport();
-		}, seconds(5));
+		}, seconds(5));*/
 
 	maxYVelocity = _maxYVelocity;
 	wallJumpDirection = 0;
@@ -141,7 +141,8 @@ bool Character::Jump(const sf::Event& _event)
 	if (_event.type == sf::Event::JoystickButtonPressed && _event.joystickButton.button != 0)return false;
 	if (_event.type == sf::Event::KeyPressed && _event.key.code != _jumpKey)return false;
 	if (WallJump(_event)) return false;
-
+	GravityComponent* _grav = GetComponent<GravityComponent>();
+	_grav->Update();
 	if (isJumping || (!(GetComponent<CollisionComponent>()->CheckCollision().collisionSideBinary & COLLIDE_UP))) return false;
 	isJumping = true;
 	currentJumpTimerIndex = 0;
@@ -408,18 +409,14 @@ void Character::ResetDashValues()
 void Character::Update()
 {
 
-	if (isDead)
+	if (isDead) {
 		Respawn();
-
-	if (data.inPortal)
-	{
-		shape->setScale(data.currentsize);
 	}
-	if (!data.inPortal)
-	{
-		GetComponent<AnimationComponent>()->Restart();
+	CollisionInfos _colisitions = GetComponent<CollisionComponent>()->CheckCollision();
+	if ((_colisitions.collisionSideBinary & COLLIDE_UP) && (_colisitions.collisionSideBinary & COLLIDE_DOWN)) {
+		Die();
 	}
-
+	
 
 	Entity::Update();
 

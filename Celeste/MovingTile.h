@@ -6,6 +6,7 @@ class MovingTile :public Tile
 	vector<Vector2f>destination;
 	Vector2f currentDestination;
 	int indexDestination;
+	bool activated;
 public:
 	void UpdateDirection()
 	{

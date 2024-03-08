@@ -116,7 +116,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 				_type = ENTITY_TILE;
 				_tile = new OneDirectionTile(_type, Vector2f(_posX, _posY), tileSize, _path);
 			}
-			else if (_char == 's')
+			else if (_char == 'm')
 			{
 				_path = "Assets/Snow1.png";
 				_type = ENTITY_TILE;
