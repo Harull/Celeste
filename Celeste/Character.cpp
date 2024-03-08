@@ -428,6 +428,7 @@ void Character::Update()
 
 void Character::Die()
 {
+	RenderWindow& _window = Game::GetInstance().GetWindow();
 	if (Timer* _dashTimer = TimerManager::GetInstance().GetApproximately("DashTimer"))
 	{
 		_dashTimer->Stop();
@@ -436,6 +437,7 @@ void Character::Die()
 	
 	isDead = true;
 	SoundManager::GetInstance().Play("Assets/Songs/Sounds/death.wav");
+
 }
 
 void Character::Respawn()
