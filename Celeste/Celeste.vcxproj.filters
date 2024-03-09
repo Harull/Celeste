@@ -306,6 +306,9 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="FallingTile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -362,9 +365,6 @@
     <ClInclude Include="EventReactionManager.h">
       <Filter>Source Files\Manager\InputManager</Filter>
     </ClInclude>
-    <ClInclude Include="MultimapManager.h">
-      <Filter>Source Files\Manager\InputManager</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Source Files\Manager\Camera</Filter>
     </ClInclude>
@@ -393,9 +393,6 @@
       <Filter>Source Files\Entities\Tiles</Filter>
     </ClInclude>
     <ClInclude Include="AnimationComponent.h">
-      <Filter>Source Files\Component\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
       <Filter>Source Files\Component\Animation</Filter>
     </ClInclude>
     <ClInclude Include="CollisionComponent.h">
@@ -505,6 +502,15 @@
     </ClInclude>
     <ClInclude Include="MenuEndLevel.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FallingTile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Source Files\Data\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="MultimapManager.h">
+      <Filter>Source Files\Manager\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

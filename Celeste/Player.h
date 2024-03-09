@@ -36,7 +36,7 @@ public:
 
 public:
 	Player();
-
+	
 
 public:
 	void Update();
