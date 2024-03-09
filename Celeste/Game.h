@@ -22,8 +22,6 @@ class Game : public Singleton<Game>
 	Map* map;
 	Player* player;
 	FloatRect visibleArea;
-	Menu* menu;
-	MusicManager* musicManager;
 
 	Snow* snow;
 	sf::Clock clock;

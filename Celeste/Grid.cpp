@@ -43,11 +43,11 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 	vector<string> _test;
 	int _indexRow = 0, _indexColumn = 0;
 	EntityType _type;
+	vector<Vector2f> _positionsmouv = vector<Vector2f>();
 	
 
 	gridForLoad.erase(gridForLoad.begin());
 	for (const vector<char>& _vChar : gridForLoad) {
-		Vector2f _positionmouv = Vector2f();
 		_indexColumn++;
 		for (const char& _char : _vChar) {
 			Tile* _tile;
@@ -122,11 +122,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 				_path = "Assets/MovingTile.png";
 				_type = ENTITY_TILE;
 				_tile = new MovingTile(_type, Vector2f(_posX, _posY), tileSize, _path);
-				if (_positionmouv!=Vector2f())
-				{
-					MovingTile* _moveTile = dynamic_cast<MovingTile*>(_tile);
-					_moveTile->AddDestination(_positionmouv);
-				}
+				
 			}
 			else if (_char == 't')
 			{
@@ -137,34 +133,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			else if (_char == 'd')
 			{
 				
-				_positionmouv =  Vector2f(_posX, _posY);
-				
-					for (Tile* _tileu : _tiles)
-					{
-
-						if (MovingTile* _moveTile=dynamic_cast<MovingTile*>(_tileu))
-						{
-							_moveTile->AddDestination(_positionmouv);
-							
-						}
-
-					}
-					for (vector<Tile*> _tilesStocked : tiles)
-					{
-						
-						for (Tile* _tileStocked :_tilesStocked)
-						{
-
-						if (MovingTile* _moveTile = dynamic_cast<MovingTile*>(_tileStocked))
-						{
-							_moveTile->AddDestination(_positionmouv);
-
-						}
-						}
-					}
-
-
-				
+				_positionsmouv.push_back(Vector2f(_posX, _posY));
 				
 				_tile = nullptr;
 			}
@@ -183,7 +152,23 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 		tiles.push_back(_tiles);
 		_tiles.clear();
 	}
+	for (vector<Tile*> _tilesStocked : tiles)
+	{
 
+		for (Tile* _tileStocked : _tilesStocked)
+		{
+
+			if (MovingTile* _moveTile = dynamic_cast<MovingTile*>(_tileStocked))
+			{
+				for (Vector2f _destination : _positionsmouv)
+				{
+				_moveTile->AddDestination(_destination);
+
+				}
+
+			}
+		}
+	}
 	ChangeTexture();
 }
 

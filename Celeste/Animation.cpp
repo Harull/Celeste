@@ -21,6 +21,7 @@ Animation::~Animation()
 {
 	delete sprite;
 	sprite = nullptr;
+	timer->SetToRemove(true);
 }
 
 

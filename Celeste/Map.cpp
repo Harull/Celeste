@@ -14,6 +14,9 @@ Map::Map() : IManageable(S_APPEND("Map"))
 }
 
 
+
+
+
 void Map::Register()
 {
 	MapManager::GetInstance().Add(id, this);

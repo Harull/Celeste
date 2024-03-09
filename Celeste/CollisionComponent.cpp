@@ -9,10 +9,7 @@
 
 CollisionInfos CollisionComponent::CheckCollision(const bool _isSpecificCheckOnWalls)
 {
-	if (FallingTile* _falling =dynamic_cast<FallingTile*>(owner))
-	{
-		cout << " f" << endl;
-	}
+	
 	sf::Shape* _currentShape = owner->GetShape();
 	sf::FloatRect _floatRectBb = _currentShape->getGlobalBounds();
 	int _collisionSideBinary = COLLIDE_NONE;

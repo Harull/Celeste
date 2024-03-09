@@ -26,7 +26,6 @@ Game::Game()
 	map = nullptr;
 	player = nullptr;
 	visibleArea = FloatRect();
-	menu = nullptr;
 	snow = new Snow(100, 50, 100);
 	senseOfGravity = GRAVITY_NORMAL;
 }

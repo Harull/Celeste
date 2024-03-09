@@ -15,6 +15,11 @@ EasterEgg::EasterEgg(const Vector2f& _position, const Vector2f& _size, const str
 	isUsed = false;
 }
 
+EasterEgg::~EasterEgg()
+{
+	delete otherWindow;
+}
+
 void EasterEgg::GetHit(int _collisionSideBinary)
 {
 	if (_collisionSideBinary != ENTITY_CHARACTER)return;

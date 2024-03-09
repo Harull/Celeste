@@ -17,5 +17,6 @@ private:
 
 public:
 	SmallMap(const int _level, const int _value, Vector2f _startPos);
+	~SmallMap();
 };
 

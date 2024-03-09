@@ -2,6 +2,8 @@
 #include"GravityComponent.h"
 #include"MovementComponent.h"
 #include"CollisionComponent.h"
+#include"Character.h"
+#include"Game.h"
 FallingTile::FallingTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path):Tile(_type, _position, _size, _path)
 {
 	use = false;
@@ -25,6 +27,7 @@ void FallingTile::GetHit(int _collisionSide, int _collisionSideBinary)
 
 void FallingTile::Update()
 {
+	CarryCharacter();
 	Entity::Update();
 	if (CollisionComponent* _collision = GetComponent<CollisionComponent>())
 	{
@@ -34,4 +37,29 @@ void FallingTile::Update()
 			components.clear();
 		}
 	}
+}
+void FallingTile::CarryCharacter()
+{
+	Character* _character = Game::GetInstance().GetPlayer()->GetCharacter();
+	MovementComponent* _thisMvCp = GetComponent<MovementComponent>();
+	
+	if (!_character || !(_character->GetShape()->getGlobalBounds().intersects(shape->getGlobalBounds())) ||_thisMvCp==nullptr)
+		return;
+
+	if (CollisionComponent* _collision = _character->GetComponent<CollisionComponent>())
+	{
+		CollisionInfos _currentInfos = _collision->CheckCollision(true);
+		if (_currentInfos.collisionSideBinary & COLLIDE_UP ||
+			_currentInfos.collisionSideBinary & COLLIDE_RIGHT ||
+			_currentInfos.collisionSideBinary & COLLIDE_LEFT)
+		{
+			if (MovementComponent* _chMvCp = Game::GetInstance().GetPlayer()->GetCharacter()->GetComponent<MovementComponent>())
+			{
+				sf::Vector2f _dirWithVelocity = _thisMvCp->GetDirection() * _thisMvCp->GetVelocity();
+				_chMvCp->Move({ _dirWithVelocity.x / _chMvCp->GetVelocity(), _dirWithVelocity.y });
+			}
+		}
+	}
+
+
 }
