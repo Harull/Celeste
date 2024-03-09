@@ -9,5 +9,6 @@ public:
 public:
 	void GetHit(int _collisionSide, int _collisionSideBinary);
 	void Update()override;
+	void CarryCharacter();
 };
 
