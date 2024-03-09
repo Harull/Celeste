@@ -118,8 +118,9 @@ public:
 	}
 private:
 	void InitShape();
-
+	void StopAllJumps();
 public:
+	virtual void Update();
 	bool MovingLeftRight(const sf::Event& _event);
 	bool Jump(const sf::Event& _event);
 	bool WallJump(const sf::Event& _event);
@@ -128,7 +129,6 @@ public:
 	bool Climb(const sf::Event& _event);
 	void ResetJumpValues();
 	void ResetDashValues();
-	virtual void Update();
 	void SetPosition(const sf::Vector2f& newPosition);
 	void Move();
 	void Dash();

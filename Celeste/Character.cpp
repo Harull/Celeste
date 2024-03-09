@@ -21,7 +21,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 			new GravityComponent(this, 4.5f),
 			new CollisionComponent(this) })
 {
-	new Timer("PortalAppears", [this]() {
+/*	new Timer("PortalAppears", [this]() {
 		const sf::Vector2f& _shapePos = shape->getPosition();
 		Portal* _portal = new Portal({ _shapePos.x + 10, _shapePos.y + 4 } , shape->getGlobalBounds().getSize());
 		GetComponent<MovementComponent>()->SetCanMove(false);
@@ -33,7 +33,7 @@ Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, con
 		data.inPortal = true;
 		_portal->Teleport();
 
-		}, seconds(5));
+		}, seconds(5))*/;
 
 	maxYVelocity = _maxYVelocity;
 	wallJumpDirection = 0;
@@ -106,6 +106,15 @@ void Character::InitShape()
 	TextureManager::GetInstance().Load(shape, CHARACTER_TEXTURE);
 }
 
+void Character::StopAllJumps()
+{
+	if (Timer* _currentJumpTimer = TimerManager::GetInstance().GetApproximately("JumpTimer"))
+		_currentJumpTimer->Stop();
+	if (Timer* _currentJumpTimer = TimerManager::GetInstance().GetApproximately("WJTimer"))
+		_currentJumpTimer->Stop();
+	currentJumpTimerIndex = 0;
+}
+
 bool Character::MovingLeftRight(const sf::Event& _event)
 {
 	sf::Keyboard::Key _leftKey = sf::Keyboard::Q;
@@ -150,7 +159,7 @@ bool Character::Jump(const sf::Event& _event)
 	isJumping = true;
 	currentJumpTimerIndex = 0;
 
-
+	StopAllJumps();
 	Timer* _jumpTimer = new Timer("JumpTimer", [&]() {
 		MovementComponent* _mvComponent = GetComponent<MovementComponent>();
 
@@ -188,12 +197,8 @@ bool Character::WallJump(const sf::Event& _event)
 
 	wallJumpDirection = (_collisionSideBinary & COLLIDE_RIGHT) ? 1 : -1;
 
-	if (Timer* _currentJumpTimer = TimerManager::GetInstance().GetApproximately("JumpTimer"))
-	{
-		std::cout << "un timer jump de stoppé dans walljump" << std::endl;
-		_currentJumpTimer->Stop();
-	}
-	Timer* _jumpTimer = new Timer("JumpTimer", [&]() {
+	StopAllJumps();
+	Timer* _jumpTimer = new Timer("WJTimer", [&]() {
 		MovementComponent* _mvComponent = GetComponent<MovementComponent>();
 
 		sf::Vector2f _direction = _mvComponent->GetDirection();
@@ -212,7 +217,8 @@ bool Character::WallJump(const sf::Event& _event)
 			_currentXVelocity = 1.f * _xMultiplier / ((currentJumpTimerIndex / 12) + 1);
 		}
 
-		if (currentYVelocity < 2) return;
+		if (currentYVelocity < 2)
+			return;
 
 
 		_mvComponent->Move(sf::Vector2f(static_cast<float>(wallJumpDirection) * _currentXVelocity, -currentYVelocity * _yMultiplier) * static_cast<float>(Game::GetInstance().GetSenseOfGravity()));
@@ -231,11 +237,8 @@ bool Character::Bonk(const int _collisionSideBinary)
 		_currentDashTimer->Stop();
 	}
 
-	if (Timer* _currentJumpTimer = TimerManager::GetInstance().GetApproximately("JumpTimer"))
-	{
-		_currentJumpTimer->Stop();
-		currentJumpTimerIndex = 0;
-	}
+	StopAllJumps();
+
 	currentJumpTimerIndex = 0;
 	Timer* _bonkTimer = new Timer("JumpTimer", [&]() {
 		MovementComponent* _mvComponent = GetComponent<MovementComponent>();
@@ -349,32 +352,24 @@ bool Character::Climb(const sf::Event& _event)
 
 	if (_event.type == sf::Event::KeyPressed && _event.key.code != _climbKey && _event.key.code != _upKey && _event.key.code != _downKey)return false;
 
-	if (_event.type == sf::Event::JoystickMoved && sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::Z) >= 50)
+	if ((_event.type == sf::Event::JoystickMoved && sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::Z) >= 50)
+		|| (_event.type == sf::Event::KeyPressed && _event.key.code == _climbKey) )
 	{
 		isClimbing = true;
-		if (Timer* _jumpTimer = TimerManager::GetInstance().GetApproximately("JumpTimer"))
-		{
-			_jumpTimer->Stop();
-			isJumping = false;
-		}
 	}
-	else if (_event.type == sf::Event::KeyPressed && _event.key.code == _climbKey)
+
+	else if ((_event.type == sf::Event::KeyReleased && _event.key.code == _climbKey) ||
+		((_event.type == sf::Event::JoystickMoved) && sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::Z) <= 50))
 	{
-		isClimbing = true;
-		if (Timer* _jumpTimer = TimerManager::GetInstance().GetApproximately("JumpTimer"))
-		{
-			_jumpTimer->Stop();
-			isJumping = false;
-		}
-	}
-	else if ((_event.type == sf::Event::KeyReleased && _event.key.code == _climbKey) || ((_event.type == sf::Event::JoystickMoved) && sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::Z) <= 50))
-	{
+		MovementComponent* _mvComponent = GetComponent<MovementComponent>();
 		isClimbing = false;
+		_mvComponent->SetDirection({ _mvComponent->GetDirection().x, 0 });
 	}
 
 	CollisionInfos _collisionWWall = GetComponent<CollisionComponent>()->CheckCollision(true);
 	if (!(_collisionWWall.entityTypeBinary & ENTITY_TILE) || (!(_collisionWWall.collisionSideBinary & COLLIDE_RIGHT) && !(_collisionWWall.collisionSideBinary & COLLIDE_LEFT))) isClimbing = false;
 	if (!isClimbing) return false;
+	StopAllJumps();
 
 	MovementComponent* _mvComponent = GetComponent<MovementComponent>();
 	sf::Vector2f _direction = _mvComponent->GetDirection();
@@ -422,6 +417,9 @@ void Character::Update()
 		if (!(_collisionWWall.entityTypeBinary & ENTITY_TILE) || (!(_collisionWWall.collisionSideBinary & COLLIDE_RIGHT) && !(_collisionWWall.collisionSideBinary & COLLIDE_LEFT)))
 		{
 			isClimbing = false;
+			MovementComponent* _mvComponent = GetComponent<MovementComponent>();
+			_mvComponent->SetDirection({ _mvComponent->GetDirection().x, 0 });
+
 			const float _senseOfGravity = static_cast<float>(Game::GetInstance().GetSenseOfGravity());
 			if (lastWallCollisionSide & COLLIDE_RIGHT)
 			{
@@ -436,14 +434,13 @@ void Character::Update()
 		}
 	}
 
-
 	
-	CollisionInfos _colisitions = GetComponent<CollisionComponent>()->CheckCollision();
-	if (((_colisitions.collisionSideBinary & COLLIDE_UP) && (_colisitions.collisionSideBinary & COLLIDE_DOWN))|| ((_colisitions.collisionSideBinary & COLLIDE_LEFT) && (_colisitions.collisionSideBinary & COLLIDE_RIGHT))) {
+	CollisionInfos _collisitions = GetComponent<CollisionComponent>()->CheckCollision();
+	if (((_collisitions.collisionSideBinary & COLLIDE_UP) && (_collisitions.collisionSideBinary & COLLIDE_DOWN))|| ((_collisitions.collisionSideBinary & COLLIDE_LEFT) && (_collisitions.collisionSideBinary & COLLIDE_RIGHT))) {
 
 		Die();
 	}
-
+	
 	Entity::Update();
 
 }
