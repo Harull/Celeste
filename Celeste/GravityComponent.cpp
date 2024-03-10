@@ -17,6 +17,7 @@ void GravityComponent::Update()
 	if (MovementComponent* _movementComp = owner->GetComponent<MovementComponent>())
 	{
 		sf::Vector2f _dir = _movementComp->GetDirection();
+		//std::cout << "Move Gravity" << std::endl;
 		_movementComp->Move({ 0, gravity * Game::GetInstance().GetSenseOfGravity()});
 	}
 }

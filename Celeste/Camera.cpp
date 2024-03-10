@@ -59,7 +59,7 @@ void Camera::Update(bool _heroTeleport)
 			_game.UpdateWindow();
 
 			}
-			move(_sign * 0.8f , 0);
+			move(_sign * 1.5f , 0);
 		}
 
 		if (_jumpTimer)
@@ -77,7 +77,7 @@ void Camera::Update(bool _heroTeleport)
 
 			}
 			
-			move(0, _sign * 0.5f);
+			move(0, _sign * 1.2f);
 		}
 		if (_sign <= 0)
 		{
@@ -90,6 +90,7 @@ void Camera::Update(bool _heroTeleport)
 		else if (_jumpTimer)
 		{
 			_jumpTimer->Stop();
+			//std::cout << "Move Camera" << std::endl;
 			_game.GetPlayer()->GetCharacter()->GetComponent<MovementComponent>()->Move();
 		}
 	}
