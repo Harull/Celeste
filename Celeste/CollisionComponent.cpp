@@ -24,6 +24,11 @@ CollisionInfos CollisionComponent::CheckCollision(const bool _isSpecificCheckOnW
 	{
 		for (SmallMap* _smallMap : _smallMapVect)
 		{
+			if (Character* _hero = dynamic_cast<Character*>(owner))
+			{
+				if (_hero->IsDie())return CollisionInfos();
+				
+			}
 			if (!_smallMap)continue;
 			Grid* _currentGrid = _smallMap->GetGrid();
 			std::vector<Tile*> _tiles = _currentGrid->GetTilesMap();

@@ -11,5 +11,6 @@ void CheckPoint::GetHit(int _collisionSide, int _collisionSideBinary)
 {
 	if (_collisionSideBinary != ENTITY_CHARACTER)return;
 	Character* _hero = dynamic_cast<Character*>(EntityManager::GetInstance().Get("Character"));
+	
 	_hero->SetCheckPoint(GetPosition());
 }

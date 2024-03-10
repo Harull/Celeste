@@ -82,6 +82,7 @@ public:
 	}
 	void SetCheckPoint(Vector2f _checkPoint)
 	{
+
 		checkPoint = _checkPoint;
 	}
 	Vector2f GetCheckPoint()

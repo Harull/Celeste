@@ -405,9 +405,6 @@ void Character::ResetDashValues()
 void Character::Update()
 {
 
-	if (isDead) {
-		Respawn();
-	}
 
 
 	// Climb
@@ -442,6 +439,9 @@ void Character::Update()
 	}
 	
 	Entity::Update();
+	if (isDead) {
+		Respawn();
+	}
 
 }
 
@@ -455,13 +455,17 @@ void Character::Die()
 	}
 
 	isDead = true;
+	isJumping = false;
+	isClimbing = false;
+	isDashing = false;
+	
 	SoundManager::GetInstance().Play("Assets/Songs/Sounds/death.wav");
 
 }
 
 void Character::Respawn()
 {
-	shape->setPosition(checkPoint);
+	shape->setPosition(checkPoint.x,checkPoint.y-shape->getGlobalBounds().getSize().y/2);
 	Camera::GetInstance().Update(true);
 	isDead = false;
 }
