@@ -153,8 +153,8 @@
 		if (_event.type == sf::Event::KeyPressed && _event.key.code != _jumpKey)return false;
 		if (WallJump(_event)) return false;
 
-		/*GravityComponent* _grav = GetComponent<GravityComponent>();
-		_grav->Update();*/
+		GravityComponent* _grav = GetComponent<GravityComponent>();
+		_grav->Update();
 
 		if (isJumping || (!(GetComponent<CollisionComponent>()->CheckCollision().collisionSideBinary & COLLIDE_UP))) return false;
 		isJumping = true;
