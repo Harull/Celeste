@@ -1,9 +1,10 @@
 #pragma once
+
 #include "Tile.h"
-#include"Timer.h"
+#include "Timer.h"
+
 class FragileTile:public Tile
 {
-	
 public:
 	FragileTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path, Grid* _owner);
 public:

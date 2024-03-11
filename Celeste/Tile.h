@@ -44,13 +44,9 @@ public:
 
 public:
 	template <typename Type>
-	std::vector<Type*> GetStackOfTypeArround(const std::pair<int, int>& _index = { -1,-1 })
+	std::vector<Type*> GetStackOfTypeArround(const std::pair<int, int>& _index)
 	{
-		Tile* _concernedTile;
-		if (_index == std::pair<int, int>(-1, -1))
-			_concernedTile = this;
-		else
-			_concernedTile = owner->GetTiles()[_index.first][_index.second];
+		Tile* _concernedTile = owner->GetTiles()[_index.first][_index.second];
 
 		std::vector<Type*> _sum;
 		_concernedTile->SetIsMarkedByGetStackOfTypeArroundTile(true);
@@ -81,5 +77,13 @@ public:
 			}
 		}
 		return _sum;
+	}
+
+	template <typename Type>
+	std::vector<Type*> GetStackOfTypeArround()
+	{
+		std::vector<Type*> _toReturn = GetStackOfTypeArround<Type>(this->index);
+		owner->ResetAllMarks();
+		return _toReturn;
 	}
 };
