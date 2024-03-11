@@ -10,18 +10,26 @@ FragileTile::FragileTile(const EntityType _type, const Vector2f& _position, cons
 	collisionReaction = [this](int _collisionSide, int _collisionSideBinary) {GetHit(_collisionSide, _collisionSideBinary); };
 }
 
-void FragileTile::GetHit(int _collisionSide, int _collisionSideBinary)
+void FragileTile::GetHit(int _collisionSide, int _collisionSideBinary, const bool _hitAllAround)
 {
 	if (_collisionSide != COLLIDE_UP)return;
 	if (_collisionSideBinary != ENTITY_CHARACTER)return;
 	if (TimerManager::GetInstance().GetApproximately("TimerDestroy" + id ))return;
 	if (TimerManager::GetInstance().GetApproximately("TimerRespawn" + id ))return;
-	
+
+	if (_hitAllAround)
+	{
+		auto _vector = this->GetStackOfTypeArround<FragileTile>();
+		for (auto _tile : _vector)
+		{
+			_tile->GetHit(_collisionSide, _collisionSideBinary, false);
+		}
+	}
+
 	new Timer("TimerDestroy" + id,
 		[this]() {
-			
 			TextureManager::GetInstance().Load(shape, "Assets/FragileTile_erase.png");
-	isTangible = false;
+			isTangible = false;
 		new Timer("TimerRespawn" + id, [this]() {
 		
 			isTangible = true;
