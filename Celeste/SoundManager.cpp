@@ -4,6 +4,7 @@
 SoundManager::SoundManager()
 {
     sounds = vector<Sound*>();
+    volume = 2.0f;
 
 }
 
