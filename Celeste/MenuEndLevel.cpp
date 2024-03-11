@@ -47,8 +47,6 @@ void MenuEndLevel::Init()
 
 	names = { "Bravo !", "Tu as fini !", "Mais tu es vraiment nul" };
 
-	maxIndex = static_cast<int>(names.size() - 1);
-
 	text = new TextData(names[index], new Text(names[index], *font, 55), false);
 	SetOriginAtMiddle(*text->text);
 	text->text->setPosition(_windowSize.x / 2.0f, _windowSize.y / 2.0f);
@@ -71,6 +69,7 @@ void MenuEndLevel::HandleGamepadClick(Event _event)
 				text->text->setString(names[index]);
 				SetOriginAtMiddle(*text->text);
 				canClick = false;
+				names.pop_back();
 				LevelSelectorMenu::GetInstance().Show(); 
 			}
 
@@ -103,6 +102,9 @@ bool MenuEndLevel::Show()
 	SoundManager::GetInstance().Play("Assets/Songs/Sounds/cassette_get.wav", 5.0f);
 	timerSound = new Timer("CassetteTimer", [&]() { canClick = true; }, sf::seconds(2.f), true,false);
 	RenderWindow& _window = Game::GetInstance().GetWindow();
+	names.push_back(Game::GetInstance().GetStopwatch()->stopwatchText);
+	maxIndex = static_cast<int>(names.size() - 1);
+
 	while (_window.isOpen())
 	{
 		TimerManager::GetInstance().Update();
