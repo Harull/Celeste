@@ -19,7 +19,7 @@ LevelSelectorMenu::LevelSelectorMenu()
 	currentAlpha = 255.0f;
 	alphaFactor = 3.f;
 	canClick = true;
-
+	snow = new Snow(100, 50, 100);
 	index = 0;
 	maxIndex = 0;
 }
@@ -52,6 +52,13 @@ void LevelSelectorMenu::Init(const int _levelCounts)
 	}
 
 	maxIndex = _levelCounts;
+}
+
+void LevelSelectorMenu::UpdateSnow()
+{
+	dt = 0.f;
+	dt = clock.restart().asSeconds();
+	snow->update(dt);
 }
 
 void LevelSelectorMenu::HandleGamepadClick(Event _event)
@@ -158,6 +165,8 @@ bool LevelSelectorMenu::Show()
 		_window.setView(_view);
 		_window.clear();
 		_window.draw(*background);
+		UpdateSnow();
+		snow->draw(_window);
 		_window.display();
 	}
 	return true;
@@ -168,6 +177,7 @@ void LevelSelectorMenu::TransitionFill() {
 	const std::function<void()>& _callback = [&]() {
 
 		Fade(background, (unsigned int)currentAlpha);
+
 
 		currentAlpha -= alphaFactor;
 		if (currentAlpha <= 0 || currentAlpha >= 255)

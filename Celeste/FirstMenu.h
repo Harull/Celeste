@@ -20,7 +20,10 @@ private:
 
     Sprite* background;
     Font* font;
-
+    Snow* snow;
+    Clock clock;
+    
+    float dt;
     int index;
 	int maxIndex;
     int hoveredIndex;
@@ -33,12 +36,16 @@ private:
 	void MoveDown();
 	void MoveUp();
 
+
 public:
 
     FirstMenu();
     ~FirstMenu();
 
     void Init();
+
     virtual bool Show() override;
+
+    void UpdateSnow();
 
 };

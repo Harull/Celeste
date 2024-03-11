@@ -6,7 +6,6 @@
 #include "Menu.h"
 #include "FirstMenu.h"
 #include "MusicManager.h"
-#include "Snow.h"
 #include "Macro.h"
 
 using namespace sf;
