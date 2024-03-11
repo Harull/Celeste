@@ -121,6 +121,42 @@
     <Filter Include="Source Files\Snow">
       <UniqueIdentifier>{69d859e9-8462-4df8-81a9-86367144eed1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Entities\Tiles\FragileTile">
+      <UniqueIdentifier>{97607aa4-08f2-453c-a1c6-d4bc30dd4a68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Tiles\Trap">
+      <UniqueIdentifier>{0392a7d6-2300-4647-8808-f9eedd904026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Tiles\Trap\Spike">
+      <UniqueIdentifier>{774aa8d3-92ac-48dd-a34e-802886e55cd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Tiles\Strawberry">
+      <UniqueIdentifier>{174534ee-ca49-467c-8ff7-1df03bb010c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Tiles\EasterEgg">
+      <UniqueIdentifier>{c6e3c7df-1856-461f-9938-a91090d0bc27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Tiles\FallingTile">
+      <UniqueIdentifier>{766d29a0-c84d-4d4a-af4c-6f26106453db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Tiles\FragileWall">
+      <UniqueIdentifier>{e90223d1-e5b9-471a-853e-1ca03090b43b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Tiles\GemDash">
+      <UniqueIdentifier>{ae750c9f-9bae-42c5-bfc1-0dd73a024ffd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Tiles\OneDirectionTile">
+      <UniqueIdentifier>{f1476f90-cf97-4810-9428-869dcfe313dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Tiles\EasterEgg\OtherWindow">
+      <UniqueIdentifier>{15750080-c053-4892-8e1a-2d1792970067}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Tiles\End">
+      <UniqueIdentifier>{86aa352b-f883-4df2-9829-9fbaee39060a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Character\Portal">
+      <UniqueIdentifier>{a008b091-46cd-4856-8573-d7b6bca497e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -150,12 +186,6 @@
     <ClCompile Include="Grid.cpp">
       <Filter>Source Files\MapRelated</Filter>
     </ClCompile>
-    <ClCompile Include="Spike.cpp">
-      <Filter>Source Files\Entities\Tiles</Filter>
-    </ClCompile>
-    <ClCompile Include="Trap.cpp">
-      <Filter>Source Files\Entities\Tiles</Filter>
-    </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Source Files\Entities\Tiles</Filter>
     </ClCompile>
@@ -171,9 +201,6 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files\Manager\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="FragileTile.cpp">
-      <Filter>Source Files\Entities\Tiles</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
@@ -188,9 +215,6 @@
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>Source Files\Manager\Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="Strawberry.cpp">
-      <Filter>Source Files\Entities\Tiles</Filter>
     </ClCompile>
     <ClCompile Include="AnimationComponent.cpp">
       <Filter>Source Files\Component\Animation</Filter>
@@ -252,38 +276,11 @@
     <ClCompile Include="FontManager.cpp">
       <Filter>Source Files\Manager\Font</Filter>
     </ClCompile>
-    <ClCompile Include="MovingTile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CheckPoint.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FirstMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Snow.cpp">
       <Filter>Source Files\Snow</Filter>
     </ClCompile>
     <ClCompile Include="Snowflake.cpp">
       <Filter>Source Files\Snow</Filter>
-    </ClCompile>
-    <ClCompile Include="OtherWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EasterEgg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Portal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GemDash.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FragileWallTile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OneDirectionTile.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Dialog.cpp">
       <Filter>Source Files</Filter>
@@ -297,17 +294,56 @@
     <ClCompile Include="LevelSelectorMenu.cpp">
       <Filter>Source Files\Menu</Filter>
     </ClCompile>
-    <ClCompile Include="TileEnd.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuEndLevel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="FragileTile.cpp">
+      <Filter>Source Files\Entities\Tiles\FragileTile</Filter>
+    </ClCompile>
+    <ClCompile Include="Trap.cpp">
+      <Filter>Source Files\Entities\Tiles\Trap</Filter>
+    </ClCompile>
+    <ClCompile Include="Spike.cpp">
+      <Filter>Source Files\Entities\Tiles\Trap\Spike</Filter>
+    </ClCompile>
+    <ClCompile Include="Strawberry.cpp">
+      <Filter>Source Files\Entities\Tiles\Strawberry</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingTile.cpp">
+      <Filter>Source Files\Entities\Tiles\MovingTile</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckPoint.cpp">
+      <Filter>Source Files\Entities\Tiles\CheckPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="EasterEgg.cpp">
+      <Filter>Source Files\Entities\Tiles\EasterEgg</Filter>
+    </ClCompile>
     <ClCompile Include="FallingTile.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Entities\Tiles\FallingTile</Filter>
+    </ClCompile>
+    <ClCompile Include="FragileWallTile.cpp">
+      <Filter>Source Files\Entities\Tiles\FragileWall</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstMenu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="GemDash.cpp">
+      <Filter>Source Files\Entities\Tiles\GemDash</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuEndLevel.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="OneDirectionTile.cpp">
+      <Filter>Source Files\Entities\Tiles\OneDirectionTile</Filter>
+    </ClCompile>
+    <ClCompile Include="OtherWindow.cpp">
+      <Filter>Source Files\Entities\Tiles\EasterEgg\OtherWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="TileEnd.cpp">
+      <Filter>Source Files\Entities\Tiles\End</Filter>
+    </ClCompile>
+    <ClCompile Include="Portal.cpp">
+      <Filter>Source Files\Entities\Character\Portal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -344,12 +380,6 @@
     <ClInclude Include="Grid.h">
       <Filter>Source Files\MapRelated</Filter>
     </ClInclude>
-    <ClInclude Include="Trap.h">
-      <Filter>Source Files\Entities\Tiles</Filter>
-    </ClInclude>
-    <ClInclude Include="Spike.h">
-      <Filter>Source Files\Entities\Tiles</Filter>
-    </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>Source Files\Entities\Tiles</Filter>
     </ClInclude>
@@ -368,9 +398,6 @@
     <ClInclude Include="Camera.h">
       <Filter>Source Files\Manager\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="FragileTile.h">
-      <Filter>Source Files\Entities\Tiles</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Source Files\Game</Filter>
     </ClInclude>
@@ -388,9 +415,6 @@
     </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>Source Files\Manager\Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="Strawberry.h">
-      <Filter>Source Files\Entities\Tiles</Filter>
     </ClInclude>
     <ClInclude Include="AnimationComponent.h">
       <Filter>Source Files\Component\Animation</Filter>
@@ -452,38 +476,11 @@
     <ClInclude Include="FontManager.h">
       <Filter>Source Files\Manager\Font</Filter>
     </ClInclude>
-    <ClInclude Include="MovingTile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CheckPoint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FirstMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Snow.h">
       <Filter>Source Files\Snow</Filter>
     </ClInclude>
     <ClInclude Include="Snowflake.h">
       <Filter>Source Files\Snow</Filter>
-    </ClInclude>
-    <ClInclude Include="OtherWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EasterEgg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Portal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GemDash.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FragileWallTile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OneDirectionTile.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Dialog.h">
       <Filter>Header Files</Filter>
@@ -497,20 +494,59 @@
     <ClInclude Include="MenuSoundBoard.h">
       <Filter>Source Files\Menu</Filter>
     </ClInclude>
-    <ClInclude Include="TileEnd.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuEndLevel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FallingTile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Source Files\Data\Animation</Filter>
     </ClInclude>
     <ClInclude Include="MultimapManager.h">
       <Filter>Source Files\Manager\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckPoint.h">
+      <Filter>Source Files\Entities\Tiles\CheckPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="FragileTile.h">
+      <Filter>Source Files\Entities\Tiles\FragileTile</Filter>
+    </ClInclude>
+    <ClInclude Include="Trap.h">
+      <Filter>Source Files\Entities\Tiles\Trap</Filter>
+    </ClInclude>
+    <ClInclude Include="Spike.h">
+      <Filter>Source Files\Entities\Tiles\Trap\Spike</Filter>
+    </ClInclude>
+    <ClInclude Include="Strawberry.h">
+      <Filter>Source Files\Entities\Tiles\Strawberry</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingTile.h">
+      <Filter>Source Files\Entities\Tiles\MovingTile</Filter>
+    </ClInclude>
+    <ClInclude Include="EasterEgg.h">
+      <Filter>Source Files\Entities\Tiles\EasterEgg</Filter>
+    </ClInclude>
+    <ClInclude Include="FallingTile.h">
+      <Filter>Source Files\Entities\Tiles\FallingTile</Filter>
+    </ClInclude>
+    <ClInclude Include="FragileWallTile.h">
+      <Filter>Source Files\Entities\Tiles\FragileWall</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstMenu.h">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="GemDash.h">
+      <Filter>Source Files\Entities\Tiles\GemDash</Filter>
+    </ClInclude>
+    <ClInclude Include="OneDirectionTile.h">
+      <Filter>Source Files\Entities\Tiles\OneDirectionTile</Filter>
+    </ClInclude>
+    <ClInclude Include="OtherWindow.h">
+      <Filter>Source Files\Entities\Tiles\EasterEgg\OtherWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="TileEnd.h">
+      <Filter>Source Files\Entities\Tiles\End</Filter>
+    </ClInclude>
+    <ClInclude Include="Portal.h">
+      <Filter>Source Files\Entities\Character\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuEndLevel.h">
+      <Filter>Source Files\Menu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
