@@ -11,6 +11,7 @@
 #include "MenuSoundBoard.h"
 #include "SoundManager.h"
 #include "MenuEndLevel.h"
+#include "TimerManager.h"
 
 #include"Portal.h"
 
@@ -28,12 +29,15 @@ Game::Game()
 	visibleArea = FloatRect();
 	snow = new Snow(100, 50, 100);
 	senseOfGravity = GRAVITY_NORMAL;
+	stopwatch = new Stopwatch();
+
 }
 
 Game::~Game()
 {
 	delete player;
 	delete snow;
+	delete stopwatch;
 }
 
 void Game::Launch()
@@ -117,6 +121,7 @@ void Game::InitWindow()
 	window.create(VideoMode(_xWindowSize, _yWindowSize), "Celeste", Style::Fullscreen);
 
 	Camera::GetInstance().Init({ 0,0 }, { 1920, 1080 - 24 }); // -24 c'est - la moitié d'un bloc
+	stopwatch->Init();
 }
 
 
@@ -141,6 +146,7 @@ void Game::Update()
 		Camera::GetInstance().Update();
 		UpdateWindow();
 		UpdateSnow();
+		stopwatch->Update();
 
 		FPS(144);
 		if (player->GetCharacter()->GetHasWon())
@@ -170,6 +176,9 @@ void Game::UpdateWindow()
 	}
 
 	window.setView(window.getDefaultView());
+
+	window.draw(*stopwatch->text);
+
 	snow->draw(window);
 	window.display();
 }
