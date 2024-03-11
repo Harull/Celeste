@@ -4,7 +4,7 @@
 #include "TimerManager.h"
 
 
-MovingTile::MovingTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path):Tile(_type, _position, _size, _path)
+MovingTile::MovingTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path, Grid* _owner):Tile(_type, _position, _size, _path, _owner)
 {
 	destination.push_back(_position);
 	components.push_back(new MovementComponent(this,false,true));
@@ -13,7 +13,7 @@ MovingTile::MovingTile(const EntityType _type, const Vector2f& _position, const 
 	indexDestination = 0;
 	activated = false;
 	
-	yeetMultiplier = 10;
+	yeetMultiplier = 5;
 	currentYeetTimerIndex = 0;
 	timeSinceDestination = sf::Clock();
 	isYeeted = false;

@@ -51,5 +51,9 @@ private:
 
 public:
 	void Init(const int _value);
+	
+	
+
+
 
 };

@@ -2,8 +2,8 @@
 #include "Game.h"
 #include "Player.h"
 
-EasterEgg::EasterEgg(const Vector2f& _position, const Vector2f& _size, const string& _path)
-	:Tile(ENTITY_STRAWBERRY, _position, _size, _path)
+EasterEgg::EasterEgg(const Vector2f& _position, const Vector2f& _size, Grid* _owner, const string& _path)
+	:Tile(ENTITY_STRAWBERRY, _position, _size, _path, _owner)
 {
 	components.push_back(new AnimationComponent(
 		this, _path,
