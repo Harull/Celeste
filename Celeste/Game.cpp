@@ -56,7 +56,7 @@ void Game::Start()
 void Game::InitMenu()
 {
 	FirstMenu::GetInstance().Init();
-	LevelSelectorMenu::GetInstance().Init(3);
+	LevelSelectorMenu::GetInstance().Init(6);
 	MenuOption::GetInstance().Init();
 	MenuSoundBoard::GetInstance().Init();
 	MenuEndLevel::GetInstance().Init();
