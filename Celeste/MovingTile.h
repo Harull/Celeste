@@ -35,5 +35,6 @@ private:
 	void Move(int _collisionSide, int _collisionSideBinary);
 
 	virtual void Update()override;
+	virtual void Reset()override;
 };
 

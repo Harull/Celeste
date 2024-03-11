@@ -10,7 +10,7 @@ using namespace sf;
 
 #define PATH_LEVEL "Save/Map"
 #define PATH_VILLAGE_MAP "Save/village.txt"
-
+#define TILE_SIZE Vector2f(50.f,50.f)
 class Grid
 {
 	Vector2i tilesCount;

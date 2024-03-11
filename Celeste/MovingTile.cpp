@@ -122,7 +122,7 @@ void MovingTile::Update()
 	CarryCharacter();
 	Entity::Update();
 	MovementComponent* _move = GetComponent<MovementComponent>();
-	if(!_move->IsAtLocation(currentDestination))return;
+	if(!_move->IsAtLocation(currentDestination)|| !_move->GetCanMove())return;
 	if (indexDestination == 0)
 	{
 		_move->SetCanMove(false);
@@ -142,12 +142,23 @@ void MovingTile::Update()
 	{
 		indexDestination++;
 	}
-
+	
 	_move->SetCanMove(false);
 	new Timer("Stop" + id, [this]() {
 		MovementComponent* _move = GetComponent<MovementComponent>();
 		_move->SetCanMove(true);
 		}, seconds(2.5), true, false);
 	UpdateDirection();
+	
+}
+
+void MovingTile::Reset()
+{
+	currentDestination = destination[0];
+	indexDestination = 0;
+	shape->setPosition(currentDestination);
+	activated = false;
+	isYeeted = false;
+	GetComponent<MovementComponent>()->SetCanMove(false);
 	
 }

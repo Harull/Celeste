@@ -10,6 +10,7 @@
 #include"EntityManager.h"
 #include "SoundManager.h"
 #include"Camera.h"
+#include"Grid.h"
 
 
 #define CHARACTER_TEXTURE "Character/Slave.png"
@@ -465,7 +466,8 @@ void Character::Die()
 
 void Character::Respawn()
 {
-	shape->setPosition(checkPoint.x,checkPoint.y-shape->getGlobalBounds().getSize().y/2);
+	shape->setPosition(checkPoint.x,checkPoint.y-(shape->getGlobalBounds().getSize().y- TILE_SIZE.y)/2);
 	Camera::GetInstance().Update(true);
 	isDead = false;
+	EntityManager::GetInstance().Reset();
 }

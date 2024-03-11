@@ -87,5 +87,6 @@ private:
 
 public:
 	virtual void Update();
+	virtual void Reset();
 };
 

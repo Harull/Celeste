@@ -8,6 +8,7 @@ FallingTile::FallingTile(const EntityType _type, const Vector2f& _position, cons
 {
 	use = false;
 	collisionReaction = [this](int _collisionSide, int _collisionSideBinary) {GetHit(_collisionSide, _collisionSideBinary); };
+	startPosition = _position;
 
 }
 
@@ -62,4 +63,10 @@ void FallingTile::CarryCharacter()
 	}
 
 
+}
+
+void FallingTile::Reset()
+{
+	shape->setPosition(startPosition);
+	use = false;
 }

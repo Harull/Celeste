@@ -43,3 +43,7 @@ void Entity::Update()
 		_component->Update();
 	}
 }
+
+void Entity::Reset()
+{
+}

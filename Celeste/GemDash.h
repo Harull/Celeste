@@ -12,5 +12,6 @@ public:
 
 public:
 	void GetHit(int _collisionSideBinary);
+	virtual void Reset()override;
 };
 
