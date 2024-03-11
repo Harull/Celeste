@@ -13,6 +13,7 @@
 MenuOption::MenuOption()
 {
 	currentVolumeCount = 2;
+	currentVolumeCountMusic = 2;
 
 	background = new Sprite();
 	font = new Font();
@@ -62,7 +63,8 @@ void MenuOption::Init()
 	vector<string> _names =
 	{
 		"Resume",
-		"Volume",
+		"Volume Music",
+		"Volume Songs",
 		"SoundBoard",
 		"Retour Menu",
 	};
@@ -70,6 +72,7 @@ void MenuOption::Init()
 	vector<function<void()>> _functions =
 	{
 		[]() { Game::GetInstance().Resume(); } ,
+		[this]() { ChangeVolumeMusic(); },
 		[this]() { ChangeVolume(); },
 		[]() { MenuSoundBoard::GetInstance().Show(); } ,
 		[]() {
@@ -87,7 +90,7 @@ void MenuOption::Init()
 
 	for (string _name : _names) {
 		if (_name != "Resume") {
-			if (_name == "Volume") {
+			if (_name == "Volume Music" || _name == "Volume Songs") {
 				texts.push_back(new TextData(_name,
 					new Text(_name + "<" + to_string(currentVolumeCount) + ">", *font, 50), false, true));
 			}
@@ -254,13 +257,39 @@ void MenuOption::HandleEvents(RenderWindow& _window)
 	}
 }
 
+void MenuOption::ChangeVolumeMusic()
+{
+	currentVolumeCountMusic += offsetVolume;
+	if (currentVolumeCountMusic <= 0) {
+		currentVolumeCountMusic = 0;
+		ModifyIntBetweenChevrons(currentVolumeCountMusic, currentText->text);
+		MusicManager::GetInstance().MuteVolume();
+		return;
+	}
+	else if (currentVolumeCountMusic > 10) {
+		currentVolumeCountMusic = 10;
+		ModifyIntBetweenChevrons(currentVolumeCountMusic, currentText->text);
+		return;
+	}
+
+	if (offsetVolume == 0) return;
+	else if (offsetVolume == 1) {
+		MusicManager::GetInstance().IncreaseVolume();
+		ModifyIntBetweenChevrons(currentVolumeCountMusic, currentText->text);
+	}
+	else if (offsetVolume == -1) {
+		MusicManager::GetInstance().DecreaseVolume();
+		ModifyIntBetweenChevrons(currentVolumeCountMusic, currentText->text);
+	}
+}
+
 void MenuOption::ChangeVolume()
 {
 	currentVolumeCount += offsetVolume;
 	if (currentVolumeCount <= 0) {
 		currentVolumeCount = 0;
 		ModifyIntBetweenChevrons(currentVolumeCount, currentText->text);
-		MusicManager::GetInstance().MuteVolume();
+		SoundManager::GetInstance().MuteVolume();
 		return;
 	}
 	else if (currentVolumeCount > 10) {
@@ -271,11 +300,11 @@ void MenuOption::ChangeVolume()
 
 	if (offsetVolume == 0) return;
 	else if (offsetVolume == 1) {
-		MusicManager::GetInstance().IncreaseVolume();
+		SoundManager::GetInstance().SetVolume(currentVolumeCount);
 		ModifyIntBetweenChevrons(currentVolumeCount, currentText->text);
 	}
 	else if (offsetVolume == -1) {
-		MusicManager::GetInstance().DecreaseVolume();
+		SoundManager::GetInstance().SetVolume(currentVolumeCount);
 		ModifyIntBetweenChevrons(currentVolumeCount, currentText->text);
 	}
 }

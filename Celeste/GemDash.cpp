@@ -31,14 +31,14 @@ void GemDash::GetHit(int _collisionSideBinary)
 
 	Character* _currentCharacter = Game::GetInstance().GetPlayer()->GetCharacter();
 	_currentCharacter->SetDashCount(_currentCharacter->GetMaxDashCount());
-	SoundManager::GetInstance().Play("diamond_touch.wav", 5.0f);
+	SoundManager::GetInstance().Play("diamond_touch.wav");
 
 	new Timer("TimerDestroy" + id,
 		[this]() {
 			new Timer("TimerRespawn" + id, [this]() {
 				isUsed = false;
 				GetComponent<AnimationComponent>()->Restart();
-				SoundManager::GetInstance().Play("diamond_return.wav", 5.0f);
+				SoundManager::GetInstance().Play("diamond_return.wav");
 				}, seconds(2));
 		}, seconds(2));
 }

@@ -11,6 +11,7 @@ using namespace std;
 class MenuOption : public Menu, public Singleton<MenuOption>
 {
 private:
+    int currentVolumeCountMusic;
     int currentVolumeCount;
 
     vector<TextData*> texts;
@@ -35,6 +36,7 @@ private:
 
     void HandleGamepadClick(Event _event);
     void HandleEvents(RenderWindow& _window);
+	void ChangeVolumeMusic();
 	void ChangeVolume();
 
     void MoveDown();
