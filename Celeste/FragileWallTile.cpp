@@ -19,7 +19,7 @@ void FragileWallTile::GetHit(int _collisionSideBinary, int _collisionTypeBinary)
 	Character* _currentChar = Game::GetInstance().GetPlayer()->GetCharacter();
 	if (_currentChar->GetIsDashing())
 	{
-		SoundManager::GetInstance().Play("wallbreak_ice.wav", 5.0f);
+		SoundManager::GetInstance().Play("wallbreak_ice.wav", 2.0f);
 		_currentChar->Bonk(_collisionSideBinary);
 		isTangible = false;
 		TextureManager::GetInstance().Load(shape, "Assets/Vide.png");
