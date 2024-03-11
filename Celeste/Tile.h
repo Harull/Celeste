@@ -33,6 +33,7 @@ public:
 	bool GetIsMarkedByGetStackOfTypeArroundTile()const
 	{
 		return isMarkedByGetStackOfTypeArroundTile;
+		return isMarkedByGetStackOfTypeArroundTile;
 	}
 	void SetIsMarkedByGetStackOfTypeArroundTile(const bool _status)
 	{
@@ -82,6 +83,7 @@ public:
 	template <typename Type>
 	std::vector<Type*> GetStackOfTypeArround()
 	{
+		if (!owner->GetTiles()[this->index.first][this->index.second]) return std::vector<Type*>();
 		std::vector<Type*> _toReturn = GetStackOfTypeArround<Type>(this->index);
 		owner->ResetAllMarks();
 		return _toReturn;
