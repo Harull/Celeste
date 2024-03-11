@@ -30,9 +30,17 @@ void FallingTile::Update()
 {
 	CarryCharacter();
 	Entity::Update();
+
+	sf::FloatRect _rect(Camera::GetInstance().getCenter() - Camera::GetInstance().getSize() / 2.0f, Camera::GetInstance().getSize());
+	if (!_rect.intersects(shape->getGlobalBounds())) {
+		components.clear();
+		return;
+	}
+
 	if (CollisionComponent* _collision = GetComponent<CollisionComponent>())
 	{
 		CollisionInfos _info =_collision->CheckCollision();
+
 		if ((_info.collisionSideBinary & COLLIDE_LEFT) && (_info.entityTypeBinary  & ENTITY_TILE))
 		{
 			components.clear();
@@ -46,10 +54,6 @@ void FallingTile::CarryCharacter()
 	
 	if (!_character || !(_character->GetShape()->getGlobalBounds().intersects(shape->getGlobalBounds())) ||_thisMvCp==nullptr)
 		return;
-	if (!Camera::GetInstance().getViewport().intersects(shape->getGlobalBounds())) {
-		components.clear();
-		return;
-	}
 	
 	if (CollisionComponent* _collision = _character->GetComponent<CollisionComponent>())
 	{

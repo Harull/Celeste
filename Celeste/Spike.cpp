@@ -14,6 +14,7 @@ Spike::Spike( const Vector2f& _position, const Vector2f& _size, const string& _p
 }
 
 void Spike::GetHit(int _collisionSide, int _collisionSideBinary) {
+	if (_collisionSideBinary != ENTITY_CHARACTER) return;
 	Character* _hero = Game::GetInstance().GetPlayer()->GetCharacter();
 	_hero->Die();
 }
