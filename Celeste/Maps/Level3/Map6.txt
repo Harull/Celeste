@@ -12,7 +12,7 @@ Maps\Level3\PresqueBlack.png
 1                                      1
 111111                                 1
 1    1                                 1
-1    1111111111tttt                    1
+1    1111111111                        1
 1                                      1
 1                                      1
 1                        g             1
