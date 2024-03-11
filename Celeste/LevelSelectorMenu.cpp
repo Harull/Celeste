@@ -90,6 +90,7 @@ void LevelSelectorMenu::HandleGamepadClick(Event _event)
 	if (_event.type == Event::JoystickButtonPressed) {
 		if (_event.joystickButton.button == 0) {
 			MenuOption::GetInstance().SetInGame(true);
+			Game::GetInstance().GetStopwatch()->Reset();
 			Game::GetInstance().SelectLevel(currentLevel + 1);
 			MusicManager::GetInstance().Play("Sounds/SoundSelector.mp3");
 
