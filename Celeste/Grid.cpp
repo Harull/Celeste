@@ -14,6 +14,50 @@
 #include "TextureManager.h"
 #include "TileEnd.h"
 #include"FallingTile.h"
+#include "Tile.h"
+
+vector<Tile*> Grid::GetTilesMap()
+{
+	vector<Tile*> _newTiles;
+
+	for (vector<Tile*> _tiles : tiles)
+	{
+		_newTiles.insert(_newTiles.end(), _tiles.begin(), _tiles.end());
+	}
+
+	return _newTiles;
+}
+
+vector<Drawable*> Grid::GetDrawablesMap()
+{
+	vector<Drawable*> _drawables;
+
+	for (vector<Tile*> _tiles : tiles)
+	{
+		for (Tile* _tile : _tiles)
+		{
+			if (!_tile)continue;
+			_drawables.push_back(_tile->GetShape());
+		}
+	}
+	return _drawables;
+}
+
+vector<Shape*> Grid::GetShapesMap()
+{
+	vector<Shape*> _shapes;
+
+	for (vector<Tile*> _tiles : tiles)
+	{
+		for (Tile* _tile : _tiles)
+		{
+			if (!_tile) continue;
+			_shapes.push_back(_tile->GetShape());
+		}
+
+	}
+	return _shapes;
+}
 
 
 Grid::Grid(const Vector2i _tilesCount)
@@ -59,77 +103,77 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			{
 				_path = "";
 				_type = ENTITY_TILE;
-				_tile = new Tile(_type, Vector2f(_posX, _posY), tileSize, _path);
+				_tile = new Tile(_type, Vector2f(_posX, _posY), tileSize, _path, this);
 			}
 			else if (_char == '2')
 			{
 				_path = "Assets/SpikeTop.png";
 				_type = ENTITY_TILE;
-				_tile = new Spike(Vector2f(_posX, _posY), tileSize, _path, ENTITY_TILE);
+				_tile = new Spike(Vector2f(_posX, _posY), tileSize, _path, ENTITY_TILE, this);
 			}
 			else if (_char == '3')
 			{
-				_tile = new Strawberry(Vector2f(_posX, _posY), tileSize);
+				_tile = new Strawberry(Vector2f(_posX, _posY), tileSize, this);
 				/*_tiles.push_back(new Strawberry(Vector2f(_posX, _posY), tileSize));
 				_indexRow++;*/
 				//continue;
 			}
 			else if (_char == '4')
 			{
-				_tile = new EasterEgg(Vector2f(_posX, _posY), tileSize);
+				_tile = new EasterEgg(Vector2f(_posX, _posY), tileSize, this);
 			}
 			else if (_char == 'g')
 			{
-				_tile = new GemDash(Vector2f(_posX, _posY), tileSize);
+				_tile = new GemDash(Vector2f(_posX, _posY), tileSize, this);
 			}
 			else if (_char == 'x')
 			{
 				_path = "Assets/Avoir.png";
 				_type = ENTITY_TILE;
-				_tile = new Tile(_type, Vector2f(_posX, _posY), tileSize, _path);
+				_tile = new Tile(_type, Vector2f(_posX, _posY), tileSize, _path, this);
 			}
 			else if (_char == 'c')
 			{
 				_path = "Assets/Vide.png";
 				_type = ENTITY_CHECKPOINT;
-				_tile = new CheckPoint(_type, Vector2f(_posX, _posY), tileSize, _path);
+				_tile = new CheckPoint(_type, Vector2f(_posX, _posY), tileSize, _path, this);
 			}
 			else if (_char == 'F')
 			{
 				_path = "Assets/Vide.png";
 				_type = ENTITY_TILE_END;
-				_tile = new TileEnd(_type, Vector2f(_posX, _posY), tileSize, _path);
+				_tile = new TileEnd(_type, Vector2f(_posX, _posY), tileSize, _path, this);
 			}
 			else if (_char == 'f')
 			{
 				_path = "Assets/FragileTile.png";
 				_type = ENTITY_TILE;
-				_tile = new FragileTile(_type, Vector2f(_posX, _posY), tileSize, _path);
+				_tile = new FragileTile(_type, Vector2f(_posX, _posY), tileSize, _path, this);
 			}
 			else if (_char == 'w')
 			{
 				_path = "Assets/Snow2.png";
 				_type = ENTITY_TILE;
-				_tile = new FragileWallTile(_type, Vector2f(_posX, _posY), tileSize, _path);
+				_tile = new FragileWallTile(_type, Vector2f(_posX, _posY), tileSize, _path, this);
 			}
 			else if (_char == 's')
 			{
 				_path = "Assets/WoodPlank.png";
 				_type = ENTITY_TILE;
-				_tile = new OneDirectionTile(_type, Vector2f(_posX, _posY), tileSize, _path);
+				_tile = new OneDirectionTile(_type, Vector2f(_posX, _posY), tileSize, _path, this);
 			}
 			else if (_char == 'm')
 			{
 				_path = "Assets/MovingTile.png";
 				_type = ENTITY_TILE;
-				_tile = new MovingTile(_type, Vector2f(_posX, _posY), tileSize, _path);
-				
+				_tile = new MovingTile(_type, Vector2f(_posX, _posY), tileSize, _path, this);
+
 			}
 			else if (_char == 't')
 			{
 				_path = "Assets/Snow1.png";
 				_type = ENTITY_TILE;
-				_tile = new FallingTile(_type, Vector2f(_posX, _posY), tileSize, _path);
+				_tile = new FallingTile(_type, Vector2f(_posX, _posY), tileSize, _path, this);
 			}
 			else if (_char == 'd')
 			{
@@ -163,14 +207,27 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			{
 				for (Vector2f _destination : _positionsmouv)
 				{
-				_moveTile->AddDestination(_destination);
-
+					_moveTile->AddDestination(_destination);
 				}
 
 			}
 		}
 	}
 	ChangeTexture();
+}
+
+void Grid::ResetAllMarks()
+{
+	for (auto _vect : tiles)
+	{
+		for (auto _value : _vect)
+		{
+			if (_value)
+			{
+				_value->SetIsMarkedByGetStackOfTypeArroundTile(false);
+			}
+		}
+	}
 }
 
 
@@ -272,4 +329,12 @@ void Grid::FinalMap(int _i, int _j) {
 	else {
 		TextureManager::GetInstance().Load(tiles[_i][_j]->GetShape(), "Assets/Snow/PleinBlock.png");
 	}
+}
+
+bool Grid::IsIndexValid(const std::pair<int, int> _index)
+{
+	if (_index.first < 0 || _index.second < 0)return false;
+	if (_index.first >= tiles.size()) return false;
+	if (_index.second >= tiles[_index.first].size()) return false;
+	return true;
 }

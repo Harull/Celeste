@@ -1,6 +1,6 @@
 #include "CheckPoint.h"
 #include"EntityManager.h"
-CheckPoint::CheckPoint(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path):Tile(  _type,   _position,   _size,   _path)
+CheckPoint::CheckPoint(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path, Grid* _owner):Tile(_type,   _position,   _size,   _path, _owner)
 {
 	collisionReaction=[this](int _collisionSide, int _collisionSideBinary) {GetHit(_collisionSide, _collisionSideBinary); };
 	shape->setFillColor(Color::Transparent);

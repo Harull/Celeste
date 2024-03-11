@@ -49,7 +49,7 @@ void SoundManager::Load(const string& _path)
 	if (!_soundData)
 	{
 		_soundData = new SoundData(_path);
-		if (!_soundData->loadFromFile(_path))
+        if (!_soundData->loadFromFile("Assets/Songs/Sounds/"+_path))
 		{
 			cerr << "Le son n'a pas été correctement chargée !" << endl;
 		}
@@ -59,7 +59,7 @@ void SoundManager::Load(const string& _path)
 void SoundManager::Update()
 {
     for (Sound* _sound : sounds) {
-        if (!_sound->getStatus())
+        if (_sound==nullptr ||!_sound->getStatus())
         {
             sounds.erase(remove(sounds.begin(), sounds.end(), _sound), sounds.end());
             delete _sound;

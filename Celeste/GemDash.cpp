@@ -4,13 +4,13 @@
 #include "TextureManager.h"
 #include "Game.h"
 #include "SoundManager.h"
-#include"TimerManager.h";
+#include "TimerManager.h";
 
 #define PATH_GEM "Assets/Gem.png"
 
 
-GemDash::GemDash(const Vector2f& _position, const Vector2f& _size, const string& _path)
-	:Tile(ENTITY_STRAWBERRY, _position, _size, _path)
+GemDash::GemDash(const Vector2f& _position, const Vector2f& _size, Grid* _owner, const string& _path)
+	:Tile(ENTITY_STRAWBERRY, _position, _size, _path, _owner)
 {
 	components.push_back(new AnimationComponent(
 		this, _path,
@@ -31,14 +31,14 @@ void GemDash::GetHit(int _collisionSideBinary)
 
 	Character* _currentCharacter = Game::GetInstance().GetPlayer()->GetCharacter();
 	_currentCharacter->SetDashCount(_currentCharacter->GetMaxDashCount());
-	SoundManager::GetInstance().Play("Assets/Songs/Sounds/diamond_touch.wav", 5.0f);
+	SoundManager::GetInstance().Play("diamond_touch.wav", 5.0f);
 
 	new Timer("TimerDestroy" + id,
 		[this]() {
 			new Timer("TimerRespawn" + id, [this]() {
 				isUsed = false;
 				GetComponent<AnimationComponent>()->Restart();
-				SoundManager::GetInstance().Play("Assets/Songs/Sounds/diamond_return.wav", 5.0f);
+				SoundManager::GetInstance().Play("diamond_return.wav", 5.0f);
 				}, seconds(2));
 		}, seconds(2));
 }

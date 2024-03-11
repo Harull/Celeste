@@ -29,7 +29,7 @@
 			GetComponent<MovementComponent>()->SetCanMove(false);
 
 			new Timer("AnimationPortal", [this]() {
-				SoundManager::GetInstance().Play("Assets/Songs/Sounds/Luigi173.wav", 5.0f);
+				SoundManager::GetInstance().Play("Luigi173.wav", 5.0f);
 				GetComponent<AnimationComponent>()->Refresh();
 				GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_IN_PORTAL); }, sf::seconds(1.f));
 			data.inPortal = true;
@@ -182,7 +182,7 @@
 			_mvComponent->Move({ 0.f, -currentYVelocity * static_cast<float>(Game::GetInstance().GetSenseOfGravity()) });
 			currentJumpTimerIndex++;
 			}, sf::seconds(0), true, true);
-		SoundManager::GetInstance().Play("Assets/Songs/Sounds/jump.wav");
+		SoundManager::GetInstance().Play("jump.wav");
 
 		return true;
 	}
@@ -344,7 +344,7 @@
 				}, sf::seconds(0), true, true);
 
 		}
-		SoundManager::GetInstance().Play("Assets/Songs/Sounds/dash_pink_left.wav");
+		SoundManager::GetInstance().Play("dash_pink_left.wav");
 
 
 		return true;
@@ -469,7 +469,7 @@
 		isClimbing = false;
 		isDashing = false;
 	
-		SoundManager::GetInstance().Play("Assets/Songs/Sounds/death.wav");
+		SoundManager::GetInstance().Play("death.wav");
 
 	}
 

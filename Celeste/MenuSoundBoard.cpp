@@ -8,7 +8,7 @@
 
 #define DEAD_ZONE 50.0f
 
-#define PATH(name) "Assets/Songs/SoundBoard/" + string(name) + ".mp3"
+#define PATH(name) string(name) + ".mp3"
 
 
 
