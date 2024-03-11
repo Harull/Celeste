@@ -31,6 +31,7 @@ LevelSelectorMenu::~LevelSelectorMenu()
 	delete font;
 	if (timer) timer->SetToRemove(true);
 	if (timer2) timer2->SetToRemove(true);
+	delete snow;
 
 }
 

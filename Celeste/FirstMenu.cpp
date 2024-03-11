@@ -40,6 +40,7 @@ FirstMenu::~FirstMenu()
 	}
 	delete background;
 	delete font;
+	delete snow;
 
 }
 
