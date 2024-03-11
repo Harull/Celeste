@@ -23,19 +23,19 @@
 				new GravityComponent(this, 4.5f),
 				new CollisionComponent(this) })
 	{
-	/*	new Timer("PortalAppears", [this]() {
+		new Timer("PortalAppears", [this]() {
 			const sf::Vector2f& _shapePos = shape->getPosition();
 			Portal* _portal = new Portal({ _shapePos.x + 10, _shapePos.y + 4 } , shape->getGlobalBounds().getSize());
 			GetComponent<MovementComponent>()->SetCanMove(false);
 
 			new Timer("AnimationPortal", [this]() {
-				SoundManager::GetInstance().Play("Luigi173.wav", 5.0f);
+				SoundManager::GetInstance().Play("Luigi173.wav");
 				GetComponent<AnimationComponent>()->Refresh();
 				GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_IN_PORTAL); }, sf::seconds(1.f));
 			data.inPortal = true;
 			_portal->Teleport();
 
-			}, seconds(5))*/;
+			}, seconds(5));
 
 		maxYVelocity = _maxYVelocity;
 		wallJumpDirection = 0;
@@ -469,7 +469,7 @@
 		isClimbing = false;
 		isDashing = false;
 	
-		SoundManager::GetInstance().Play("death.wav", 1.0f);
+		SoundManager::GetInstance().Play("death.wav");
 
 	}
 
