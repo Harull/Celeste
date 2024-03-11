@@ -3,6 +3,8 @@
 #include <iostream>
 #include "Timer.h"
 #include "Singleton.h"
+#include "Snow.h"
+
 
 
 using namespace std;

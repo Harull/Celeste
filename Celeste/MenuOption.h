@@ -20,6 +20,9 @@ private:
     int maxIndex;
 	int minIndex;
     int offsetVolume;
+    Snow* snow;
+    Clock clock;
+    float dt;
 
     bool canClick;
 	bool canMoveJoystick;
@@ -57,6 +60,7 @@ public:
 	bool IsInGame() const { return inGame; }
 
     void Init();
+	void UpdateSnow();
     virtual bool Show() override;
 
 };

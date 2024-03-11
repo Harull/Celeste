@@ -20,6 +20,10 @@ private:
 	Font* font;
 	string nextPath;
 	int currentLevel;
+	float dt;
+
+	Snow* snow;
+	Clock clock;
 
 	int index;
 	int maxIndex;
@@ -43,6 +47,7 @@ public:
 
 
 	void Init(const int _levelCounts);
+	void UpdateSnow();
 	virtual bool Show() override;
 
 	};

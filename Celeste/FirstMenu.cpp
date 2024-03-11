@@ -24,6 +24,9 @@ FirstMenu::FirstMenu()
 	index = 0;
 	maxIndex = 0;
 	hoveredIndex = -1;
+
+	snow = new Snow(100, 50, 100);
+
 }
 
 FirstMenu::~FirstMenu()
@@ -37,6 +40,7 @@ FirstMenu::~FirstMenu()
 	}
 	delete background;
 	delete font;
+
 }
 
 
@@ -204,10 +208,18 @@ bool FirstMenu::Show()
 
 		for (Shape* _icon : icons) {
 			_window.draw(*_icon);
-		}
+		}                                                                                   
+		UpdateSnow();
+		snow->draw(_window);
 
 		_window.display();
 	}
 	return true;
 }
 
+void FirstMenu::UpdateSnow()
+{
+	dt = 0.f;
+	dt = clock.restart().asSeconds();
+	snow->update(dt);
+}

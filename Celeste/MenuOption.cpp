@@ -28,6 +28,7 @@ MenuOption::MenuOption()
 	offsetVolume = 0;
 
 	inGame = false;
+	snow = new Snow(100, 50, 100);
 
 }
 
@@ -120,6 +121,13 @@ void MenuOption::Init()
 
 	maxIndex = static_cast<int>(_names.size());
 
+}
+
+void MenuOption::UpdateSnow()
+{
+	dt = 0.f;
+	dt = clock.restart().asSeconds();
+	snow->update(dt);
 }
 
 void MenuOption::HandleGamepadClick(Event _event)
@@ -321,7 +329,8 @@ bool MenuOption::Show()
 			}
 		}
 
-
+		UpdateSnow();
+		snow->draw(_window);
 		_window.display();
 	}
 	return true;
