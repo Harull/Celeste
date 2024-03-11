@@ -19,7 +19,7 @@ public:
 		currentDestination = destination[indexDestination];
 		MovementComponent* _move = GetComponent<MovementComponent>();
 		Vector2f _direction = _move->GetDirectionByPositions(currentDestination);
-		_move->SetDirection(_direction);
+		_move->SetDirection(_direction * 5.f);
 	}
 	void AddDestination(Vector2f _destination)
 	{

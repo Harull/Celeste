@@ -5,11 +5,11 @@
 	#include "AnimationComponent.h"
 	#include "CollisionComponent.h"
 	#include "TimerManager.h"
-	#include"Portal.h"
+	#include "Portal.h"
 	#include "Game.h"
-	#include"EntityManager.h"
+	#include "EntityManager.h"
 	#include "SoundManager.h"
-	#include"Camera.h"
+	#include "Camera.h"
 
 
 	#define CHARACTER_TEXTURE "Character/Slave.png"
