@@ -7,8 +7,8 @@
 #define PATH_FRAGILE_TILE "Assets/Snow1.png"
 
 
-Spike::Spike( const Vector2f& _position, const Vector2f& _size, const string& _path, const EntityType& _type)
-	: Trap( _position, _size, _path, _type)
+Spike::Spike( const Vector2f& _position, const Vector2f& _size, const string& _path, const EntityType& _type, Grid* _owner)
+	: Trap( _position, _size, _path, _type, _owner)
 {
 	collisionReaction = [this](int _collisionSide, int _collisionSideBinary) {GetHit(_collisionSide, _collisionSideBinary); };
 }
