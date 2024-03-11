@@ -75,6 +75,7 @@ void MenuOption::Init()
 			if (MenuOption::GetInstance().IsInGame()) {
 				MenuOption::GetInstance().SetInGame(false);
 				TimerManager::GetInstance().DeleteAll();
+				MusicManager::GetInstance().Play("Celeste_OST.mp3");
 				LevelSelectorMenu::GetInstance().Show();
 			}
 			else {
@@ -206,7 +207,7 @@ void MenuOption::MoveUp()
 		index--;
 		return;
 	}
-	SoundManager::GetInstance().Play("Assets/Songs/Sounds/ui_main_roll_down.wav");
+	SoundManager::GetInstance().Play("ui_main_roll_down.wav");
 
 	currentText->text->setFillColor(sf::Color::White);
 	currentText = texts[index];
@@ -222,7 +223,7 @@ void MenuOption::MoveDown()
 		index++;
 		return;
 	}
-	SoundManager::GetInstance().Play("Assets/Songs/Sounds/ui_main_roll_down.wav");
+	SoundManager::GetInstance().Play("ui_main_roll_down.wav");
 
 	currentText->text->setFillColor(sf::Color::White);
 	currentText = texts[index];

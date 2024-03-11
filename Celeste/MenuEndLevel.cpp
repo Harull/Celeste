@@ -64,7 +64,7 @@ void MenuEndLevel::HandleGamepadClick(Event _event)
 	if (_event.type == Event::JoystickButtonPressed) {
 		if (_event.joystickButton.button == 0) {
 
-			SoundManager::GetInstance().Play("Assets/Songs/Sounds/SoundSelector.mp3", 5.0f);
+			SoundManager::GetInstance().Play("SoundSelector.mp3", 5.0f);
 			index++;
 			if (index > maxIndex) {
 				index = 0;
@@ -100,7 +100,7 @@ void MenuEndLevel::HandleEvents(RenderWindow& _window)
 
 bool MenuEndLevel::Show()
 {
-	SoundManager::GetInstance().Play("Assets/Songs/Sounds/cassette_get.wav", 5.0f);
+	SoundManager::GetInstance().Play("cassette_get.wav", 5.0f);
 	timerSound = new Timer("CassetteTimer", [&]() { canClick = true; }, sf::seconds(2.f), true,false);
 	RenderWindow& _window = Game::GetInstance().GetWindow();
 	while (_window.isOpen())

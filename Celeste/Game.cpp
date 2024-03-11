@@ -65,7 +65,7 @@ void Game::InitMenu()
 
 void Game::InitMap(const int _value)
 {
-	SoundManager::GetInstance().Play("Assets/Songs/Sounds/SoundSelector.mp3", 5.0f);
+	SoundManager::GetInstance().Play("SoundSelector.mp3", 5.0f);
 	MapManager::GetInstance().Clear();
 	EntityManager::GetInstance().Clear();
 	EventReactionManager::Clear();
