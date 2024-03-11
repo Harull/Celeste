@@ -48,7 +48,10 @@ void FallingTile::CarryCharacter()
 	
 	if (!_character || !(_character->GetShape()->getGlobalBounds().intersects(shape->getGlobalBounds())) ||_thisMvCp==nullptr)
 		return;
-	if (!Camera::GetInstance().getViewport().intersects(shape->getGlobalBounds()))return;
+	if (!Camera::GetInstance().getViewport().intersects(shape->getGlobalBounds())) {
+		components.clear();
+		return;
+	}
 	
 	if (CollisionComponent* _collision = _character->GetComponent<CollisionComponent>())
 	{

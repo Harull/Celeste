@@ -469,7 +469,7 @@
 		isClimbing = false;
 		isDashing = false;
 	
-		SoundManager::GetInstance().Play("death.wav", 3.0f);
+		SoundManager::GetInstance().Play("death.wav", 1.0f);
 
 	}
 
