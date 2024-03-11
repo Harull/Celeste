@@ -1,9 +1,10 @@
 #include "FallingTile.h"
-#include"GravityComponent.h"
-#include"MovementComponent.h"
-#include"CollisionComponent.h"
-#include"Character.h"
-#include"Game.h"
+#include "GravityComponent.h"
+#include "MovementComponent.h"
+#include "CollisionComponent.h"
+#include "Character.h"
+#include "Game.h"
+#include "Camera.h"
 
 FallingTile::FallingTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path, Grid* _owner):Tile(_type, _position, _size, _path, _owner)
 {
@@ -47,7 +48,8 @@ void FallingTile::CarryCharacter()
 	
 	if (!_character || !(_character->GetShape()->getGlobalBounds().intersects(shape->getGlobalBounds())) ||_thisMvCp==nullptr)
 		return;
-
+	if (!Camera::GetInstance().getViewport().intersects(shape->getGlobalBounds()))return;
+	
 	if (CollisionComponent* _collision = _character->GetComponent<CollisionComponent>())
 	{
 		CollisionInfos _currentInfos = _collision->CheckCollision(true);
