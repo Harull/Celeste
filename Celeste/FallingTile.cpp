@@ -18,8 +18,6 @@ void FallingTile::GetHit(int _collisionSide, int _collisionSideBinary)
 {
 	if (_collisionSideBinary == ENTITY_CHARACTER&&!use)
 	{
-		
-		
 		components.push_back(new GravityComponent(this, 4.5f));
 		components.push_back(new MovementComponent(this));
 		components.push_back(new CollisionComponent(this));

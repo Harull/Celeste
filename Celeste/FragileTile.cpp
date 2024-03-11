@@ -34,8 +34,8 @@ void FragileTile::GetHit(int _collisionSide, int _collisionSideBinary, const boo
 		
 			isTangible = true;
 			TextureManager::GetInstance().Load(shape, PATH_FRAGILE_TILE); 
-			}, seconds(2));
+			}, seconds(4));
 	
-		}, seconds(0.5));
+		}, seconds(0.8));
 
 }
