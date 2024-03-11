@@ -4,7 +4,7 @@
 #include "TextureManager.h"
 #include "Game.h"
 #include "SoundManager.h"
-#include"TimerManager.h";
+#include "TimerManager.h";
 
 #define PATH_GEM "Assets/Gem.png"
 
@@ -31,14 +31,14 @@ void GemDash::GetHit(int _collisionSideBinary)
 
 	Character* _currentCharacter = Game::GetInstance().GetPlayer()->GetCharacter();
 	_currentCharacter->SetDashCount(_currentCharacter->GetMaxDashCount());
-	SoundManager::GetInstance().Play("Assets/Songs/Sounds/diamond_touch.wav", 5.0f);
+	SoundManager::GetInstance().Play("diamond_touch.wav", 5.0f);
 
 	new Timer("TimerDestroy" + id,
 		[this]() {
 			new Timer("TimerRespawn" + id, [this]() {
 				isUsed = false;
 				GetComponent<AnimationComponent>()->Restart();
-				SoundManager::GetInstance().Play("Assets/Songs/Sounds/diamond_return.wav", 5.0f);
+				SoundManager::GetInstance().Play("diamond_return.wav", 5.0f);
 				}, seconds(2));
 		}, seconds(2));
 }

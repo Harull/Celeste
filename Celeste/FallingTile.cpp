@@ -71,4 +71,5 @@ void FallingTile::Reset()
 {
 	shape->setPosition(startPosition);
 	use = false;
+	components.clear();
 }

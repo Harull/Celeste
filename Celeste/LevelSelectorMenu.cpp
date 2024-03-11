@@ -6,6 +6,7 @@
 #include "TimerManager.h"
 #include "MenuOption.h"
 #include "MusicManager.h"
+#include"SoundManager.h"
 
 #define DEAD_ZONE 50.0f
 
@@ -98,9 +99,10 @@ void LevelSelectorMenu::HandleGamepadClick(Event _event)
 		if (_event.joystickButton.button == 0) {
 			MenuOption::GetInstance().SetInGame(true);
 			Game::GetInstance().GetStopwatch()->Reset();
+			SoundManager::GetInstance().Play("SoundSelector.mp3");
+			string _path = "Map" + to_string(currentLevel+1);
+			MusicManager::GetInstance().Play(_path + ".mp3");
 			Game::GetInstance().SelectLevel(currentLevel + 1);
-			MusicManager::GetInstance().Play("Sounds/SoundSelector.mp3");
-
 		}
 		else if (_event.joystickButton.button == 1) {
 			FirstMenu::GetInstance().Show();
