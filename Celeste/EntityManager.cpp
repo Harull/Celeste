@@ -13,6 +13,15 @@ void EntityManager::Update()
 	GarbageValues();
 }
 
+void EntityManager::Reset()
+{
+
+	for (auto _pair : allValues)
+	{
+		_pair.second->Reset();
+	}
+}
+
 bool EntityManager::IsAvailable(const Vector2f& _position, const Vector2f& _size)
 {
 	/*const FloatRect& _rect = FloatRect(_position - _size / 2.0f, _size);

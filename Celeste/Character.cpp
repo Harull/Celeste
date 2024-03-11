@@ -1,15 +1,17 @@
-	#include "Character.h"
-	#include "TextureManager.h"
-	#include "MovementComponent.h"
-	#include "GravityComponent.h"
-	#include "AnimationComponent.h"
-	#include "CollisionComponent.h"
-	#include "TimerManager.h"
-	#include"Portal.h"
-	#include "Game.h"
-	#include"EntityManager.h"
-	#include "SoundManager.h"
-	#include"Camera.h"
+
+#include "Character.h"
+#include "TextureManager.h"
+#include "MovementComponent.h"
+#include "GravityComponent.h"
+#include "AnimationComponent.h"
+#include "CollisionComponent.h"
+#include "TimerManager.h"
+#include"Portal.h"
+#include "Game.h"
+#include"EntityManager.h"
+#include "SoundManager.h"
+#include"Camera.h"
+#include"Grid.h"
 
 
 	#define CHARACTER_TEXTURE "Character/Slave.png"
@@ -471,9 +473,17 @@
 
 	}
 
+
 	void Character::Respawn()
 	{
-		shape->setPosition(checkPoint.x,checkPoint.y-shape->getGlobalBounds().getSize().y/2);
+		shape->setPosition(checkPoint.x, checkPoint.y - (shape->getGlobalBounds().getSize().y - TILE_SIZE.y) / 2);
 		Camera::GetInstance().Update(true);
 		isDead = false;
+		isJumping = false;
+		isClimbing = false;
+		isDashing = false;
+	EntityManager::GetInstance().Reset();
 	}
+
+	
+	

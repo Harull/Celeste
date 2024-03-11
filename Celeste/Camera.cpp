@@ -4,6 +4,7 @@
 #include "Game.h"
 #include "TimerManager.h"
 #include "MovementComponent.h"
+#include"EntityManager.h"
 #include "MapManager.h"
 
 void Camera::Init(const Vector2f& _position, const Vector2f& _size)
@@ -61,6 +62,7 @@ void Camera::Update(bool _heroTeleport)
 			}
 			move(_sign * 1.5f , 0);
 		}
+			EntityManager::GetInstance().Reset();
 
 		if (_jumpTimer)
 			_jumpTimer->Start();
@@ -79,6 +81,7 @@ void Camera::Update(bool _heroTeleport)
 			
 			move(0, _sign * 1.2f);
 		}
+			EntityManager::GetInstance().Reset();
 		if (_sign <= 0)
 		{
 			if (_jumpTimer)
@@ -95,5 +98,6 @@ void Camera::Update(bool _heroTeleport)
 		}
 	}
 
+	
 	previousIndexes = _index;
 }
