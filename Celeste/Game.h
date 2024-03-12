@@ -90,6 +90,7 @@ class Game : public Singleton<Game>
 	Map* map;
 	Player* player;
 	FloatRect visibleArea;
+	RectangleShape* loadingScreen;
 
 	Menu* menu;
 	MusicManager* musicManager;
@@ -145,7 +146,7 @@ public:
 
 public:
 	void Launch();
-	void UpdateWindow();
+	void UpdateWindow(bool _loading = false);
 	void SelectLevel(const int _value);
 	void Resume();
 

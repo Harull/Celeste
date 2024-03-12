@@ -300,6 +300,7 @@ void MenuOption::ChangeVolume()
 
 	if (offsetVolume == 0) return;
 	else if (offsetVolume == 1) {
+
 		SoundManager::GetInstance().SetVolume(static_cast<float>(currentVolumeCount));
 		ModifyIntBetweenChevrons(currentVolumeCount, currentText->text);
 	}
