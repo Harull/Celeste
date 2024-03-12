@@ -110,7 +110,7 @@ bool MenuEndLevel::Show()
 	RenderWindow& _window = Game::GetInstance().GetWindow();
 	names.push_back(Game::GetInstance().GetStopwatch()->stopwatchText);
 	maxIndex = static_cast<int>(names.size() - 1);
-	TextureManager::GetInstance().Load(background, PATH(RandomMaxMin(7)));
+	TextureManager::GetInstance().Load(background, PATH(RandomMaxMin(7, 1)));
 
 	while (_window.isOpen())
 	{

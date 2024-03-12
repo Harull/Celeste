@@ -12,8 +12,8 @@
 
 MenuOption::MenuOption()
 {
-	currentVolumeCount = 2.0f;
-	currentVolumeCountMusic = 2.0f;
+	currentVolumeCount = 2;
+	currentVolumeCountMusic = 2;
 
 	background = new Sprite();
 	font = new Font();
@@ -300,11 +300,11 @@ void MenuOption::ChangeVolume()
 
 	if (offsetVolume == 0) return;
 	else if (offsetVolume == 1) {
-		SoundManager::GetInstance().SetVolume(currentVolumeCount);
+		SoundManager::GetInstance().SetVolume(static_cast<float>(currentVolumeCount));
 		ModifyIntBetweenChevrons(currentVolumeCount, currentText->text);
 	}
 	else if (offsetVolume == -1) {
-		SoundManager::GetInstance().SetVolume(currentVolumeCount);
+		SoundManager::GetInstance().SetVolume(static_cast<float>(currentVolumeCount));
 		ModifyIntBetweenChevrons(currentVolumeCount, currentText->text);
 	}
 }
