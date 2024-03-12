@@ -36,6 +36,6 @@ void FragileTile::GetHit(int _collisionSide, int _collisionSideBinary, const boo
 			TextureManager::GetInstance().Load(shape, PATH_FRAGILE_TILE); 
 			}, seconds(4));
 	
-		}, seconds(0.8));
+		}, seconds(0.8f));
 
 }

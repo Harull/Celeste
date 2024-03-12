@@ -108,8 +108,12 @@ void MenuOption::Init()
 
 	float _posX = (_windowSize.x - 500.0f) / 2;
 	float _sizeY = 50.0f;
-	float _posY = (_windowSize.y - _sizeY * texts.size()) / 2;
-	//float _posY = (_windowSize.y - 100 * texts.size() + texts.size() * texts[0]->text->getCharacterSize()) / 2;
+
+	float _w = static_cast<float>(_windowSize.y);
+	float _x = static_cast<float>(texts[0]->text->getCharacterSize());
+	float _y = static_cast<float>(texts.size());
+
+	float _posY = (_w - _x * _y) / 2  - 50.f * _y + 100.f;
 	Vector2f _pos = Vector2f(_posX, _posY);
 	int _i = 0;
 	for (TextData* _text : texts) {
@@ -300,11 +304,11 @@ void MenuOption::ChangeVolume()
 
 	if (offsetVolume == 0) return;
 	else if (offsetVolume == 1) {
-		SoundManager::GetInstance().SetVolume(currentVolumeCount);
+		SoundManager::GetInstance().SetVolume(currentVolumeCount * 1.f);
 		ModifyIntBetweenChevrons(currentVolumeCount, currentText->text);
 	}
 	else if (offsetVolume == -1) {
-		SoundManager::GetInstance().SetVolume(currentVolumeCount);
+		SoundManager::GetInstance().SetVolume(currentVolumeCount * 1.f);
 		ModifyIntBetweenChevrons(currentVolumeCount, currentText->text);
 	}
 }
