@@ -11,8 +11,8 @@ using namespace std;
 class MenuOption : public Menu, public Singleton<MenuOption>
 {
 private:
-    int currentVolumeCountMusic;
-    int currentVolumeCount;
+    float currentVolumeCountMusic;
+    float currentVolumeCount;
 
     vector<TextData*> texts;
     TextData* currentText;

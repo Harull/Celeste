@@ -4,7 +4,7 @@
 #include "TextureManager.h"
 #include "Game.h"
 #include "SoundManager.h"
-#include "TimerManager.h";
+#include "TimerManager.h"
 
 #define PATH_GEM "Assets/Gem.png"
 

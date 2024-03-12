@@ -40,7 +40,7 @@ struct Stopwatch {
 
 	void Init() {
 		text->setPosition(Vector2f(10.0f, 0.0f));
-		text->setCharacterSize(30);
+		text->setCharacterSize(40);
 		font = new Font();
 		if (!font->loadFromFile("Assets/Fonts/Renogare.otf"))
 		{

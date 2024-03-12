@@ -12,8 +12,8 @@
 
 MenuOption::MenuOption()
 {
-	currentVolumeCount = 2;
-	currentVolumeCountMusic = 2;
+	currentVolumeCount = 2.0f;
+	currentVolumeCountMusic = 2.0f;
 
 	background = new Sprite();
 	font = new Font();
