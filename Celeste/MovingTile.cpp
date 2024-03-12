@@ -13,7 +13,7 @@ MovingTile::MovingTile(const EntityType _type, const Vector2f& _position, const 
 	indexDestination = 0;
 	activated = false;
 	
-	yeetMultiplier = 5;
+	yeetMultiplier = 3;
 	currentYeetTimerIndex = 0;
 	timeSinceDestination = sf::Clock();
 	isYeeted = false;
