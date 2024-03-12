@@ -77,7 +77,7 @@ void MovingTile::YeetCharacter()
 				return;
 			}
 
-			std::cout << "Move Yeet" << std::endl;
+			//std::cout << "Move Yeet" << std::endl;
 			_mvComponent->Move(-_finalMove, false);
 			currentYeetTimerIndex++;
 
