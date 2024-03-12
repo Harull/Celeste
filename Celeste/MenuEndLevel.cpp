@@ -70,6 +70,7 @@ void MenuEndLevel::HandleGamepadClick(Event _event)
 				SetOriginAtMiddle(*text->text);
 				canClick = false;
 				names.pop_back();
+				MusicManager::GetInstance().Play("Celeste_OST.mp3");
 				LevelSelectorMenu::GetInstance().Show(); 
 			}
 
