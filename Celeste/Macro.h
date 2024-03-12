@@ -174,6 +174,12 @@ static void Fade(Type* _value, const unsigned int _alpha)
 }
 
 template <typename Type>
+static void FadeOutlineColor(Type* _value, const unsigned int _alpha)
+{
+	_value->setOutlineColor(sf::Color(0, 0, 0, _alpha));
+}
+
+template <typename Type>
 static void MultiFade(std::vector<Type*> _values, const unsigned int _alpha)
 {
 	for (auto _value : _values)
