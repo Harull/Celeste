@@ -9,6 +9,7 @@
 #include "LevelSelectorMenu.h"
 
 #define DEAD_ZONE 50.0f
+#define PATH(name) "Assets/Background/End/" + to_string(name) + ".png"
 
 MenuEndLevel::MenuEndLevel()
 {
@@ -20,6 +21,7 @@ MenuEndLevel::MenuEndLevel()
 	currentAlpha = 255.0f;
 	alphaFactor = 3.f;
 	canClick = false;
+	background = nullptr;
 
 	index = 0;
 	maxIndex = 0;
@@ -29,6 +31,7 @@ MenuEndLevel::~MenuEndLevel()
 {
 	delete text;
 	delete font;
+	delete background;
 	if (timer) timer->SetToRemove(true);
 	if (timer2) timer2->SetToRemove(true);
 	if (timerSound) timerSound->SetToRemove(true);
@@ -48,9 +51,11 @@ void MenuEndLevel::Init()
 	names = { "Bravo !", "Tu as fini !", "Mais tu es vraiment nul" };
 
 	text = new TextData(names[index], new Text(names[index], *font, 55), false);
+	text->text->setOutlineThickness(3.0f);
 	SetOriginAtMiddle(*text->text);
 	text->text->setPosition(_windowSize.x / 2.0f, _windowSize.y / 2.0f);
-
+	background = new RectangleShape(Vector2f(1920.0f, 1080.0f));
+	TextureManager::GetInstance().Load(background, PATH(1));
 
 }
 
@@ -104,6 +109,7 @@ bool MenuEndLevel::Show()
 	RenderWindow& _window = Game::GetInstance().GetWindow();
 	names.push_back(Game::GetInstance().GetStopwatch()->stopwatchText);
 	maxIndex = static_cast<int>(names.size() - 1);
+	TextureManager::GetInstance().Load(background, PATH(RandomMaxMin(7)));
 
 	while (_window.isOpen())
 	{
@@ -113,6 +119,7 @@ bool MenuEndLevel::Show()
 		const View _view(FloatRect(Vector2f(0.0f, 0.0f), Vector2f(1920.0f, 1080.0f)));
 		_window.setView(_view);
 		_window.clear();
+		_window.draw(*background);
 		_window.draw(*text->text);
 
 		_window.display();
@@ -125,6 +132,8 @@ void MenuEndLevel::TransitionFill() {
 	const std::function<void()>& _callback = [&]() {
 
 		Fade(text->text, (unsigned int)currentAlpha);
+		FadeOutlineColor(text->text, (unsigned int)currentAlpha);
+	
 
 		currentAlpha -= alphaFactor;
 		if (currentAlpha <= 0 || currentAlpha >= 255)
@@ -145,6 +154,7 @@ void MenuEndLevel::TransitionUnFill()
 {
 	const std::function<void()>& _callback2 = [&]() {
 		Fade(text->text, (unsigned int)currentAlpha);
+		FadeOutlineColor(text->text, (unsigned int)currentAlpha);
 
 		currentAlpha += alphaFactor;
 		if (currentAlpha <= 0 || currentAlpha >= 255)

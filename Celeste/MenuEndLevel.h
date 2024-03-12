@@ -20,7 +20,7 @@ private:
 	Timer* timerSound;
 	vector<string> names;
 
-
+	Shape* background;
 	Font* font;
 	string nextPath;
 	int currentLevel;
