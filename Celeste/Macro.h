@@ -188,7 +188,7 @@ static float Distance(const Vector2f& _first, const Vector2f& _second)
 }
 
 
-static void ModifyIntBetweenChevrons(const int _value, Text* _text) {
+static void ModifyIntBetweenChevrons(const float _value, Text* _text) {
 
 	string _textCopy = _text->getString();
 
@@ -199,7 +199,7 @@ static void ModifyIntBetweenChevrons(const int _value, Text* _text) {
 	if (_startBracketPos != string::npos && _endBracketPos != string::npos && _endBracketPos > _startBracketPos) {
 		string _valueBetweenBrackets = _textCopy.substr(_startBracketPos + 1, _endBracketPos - _startBracketPos - 1);
 		
-		int  _valueChanged = std::stoi(_valueBetweenBrackets);
+		float _valueChanged = static_cast<float>(std::stoi(_valueBetweenBrackets));
 		_valueChanged = _value;
 
 		_textCopy.replace(_startBracketPos + 1, _endBracketPos - _startBracketPos - 1, to_string(_valueChanged));
