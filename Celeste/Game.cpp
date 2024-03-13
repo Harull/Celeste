@@ -14,7 +14,7 @@
 #include "TimerManager.h"
 #include"TextureManager.h"
 #include"Portal.h"
-
+#include"LoadingLogo.h"
 #include "MenuSoundBoard.h"
 
 
@@ -83,13 +83,16 @@ void Game::InitMap(const int _value)
 	map->Init(_value);
 	InitInput();
 	Camera::GetInstance().Update(true);
-	new Timer("Loading", [this]() {}, seconds(5));
+	new Timer("Loading", [this]() {}, seconds(15));
+	Vector2f _logoPosition = Vector2f(window.getSize().x * 0.95, window.getSize().y * 0.9);
+	LoadingLogo* _loadingImage = new  LoadingLogo(_logoPosition);
 	while (TimerManager::GetInstance().GetApproximately("Loading"))
 	{
 		TimerManager::GetInstance().Update();
+		_loadingImage->Update();
 		UpdateWindow(true);
 	}
-
+	_loadingImage->SetToRemove(true);
 	Update();
 }
 
@@ -178,6 +181,8 @@ void Game::UpdateWindow(bool _loading)
 	{
 
 		window.clear();
+		Sprite* _sprite =EntityManager::GetInstance().GetApproximately("LoadingLogo")->GetComponent<AnimationComponent>()->GetCurrentAnimation()->GetSprite();
+		window.draw(*_sprite);
 		window.draw(*loadingScreen);
 		window.display();
 		return;
