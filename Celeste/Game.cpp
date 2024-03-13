@@ -27,7 +27,6 @@ Game::Game()
 	map = nullptr;
 	player = nullptr;
 	visibleArea = FloatRect();
-	snow = new Snow(100, 50, 100);
 	senseOfGravity = GRAVITY_NORMAL;
 	stopwatch = new Stopwatch();
 
@@ -48,6 +47,7 @@ void Game::Launch()
 
 void Game::Start()
 {
+	snow = new Snow(100, 50, 100);
 	InitWindow();
 	InitMenu();
 	MusicManager::GetInstance().Play("Celeste_OST.mp3");

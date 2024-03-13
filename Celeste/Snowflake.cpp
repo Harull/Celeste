@@ -1,20 +1,25 @@
 #include "Snowflake.h"
 
-Snowflake::Snowflake(sf::Vector2f position, float speed) :
-    position(position), speed(speed)
+Snowflake::Snowflake(sf::Vector2f _position, float _speed) :
+    position(_position), speed(_speed)
 {
-    float randomRadius = static_cast<float>(rand() % 5 + 1);
-    shape.setRadius(randomRadius);
-    shape.setFillColor(sf::Color::White);
+    shape = new CircleShape();
+    float _randomRadius = static_cast<float>(rand() % 20 + 10);
+    shape->setRadius(_randomRadius);
+
+	TextureManager::GetInstance().Load(shape, "C:/Users/Kylia/Pictures/Meme/image.png");
 }
+
+
 
 Snowflake::Snowflake()
 {
 }
 
-void Snowflake::update(float dt) {
-    position.y += speed * dt;
-    position.x -= speed * dt;
+
+void Snowflake::update(float _dt) {
+    position.y += speed * _dt;
+    position.x -= speed * _dt;
 
 
     if (position.y > sf::VideoMode::getDesktopMode().height) {
@@ -22,13 +27,12 @@ void Snowflake::update(float dt) {
         position.x = static_cast<float>(rand() % static_cast<int>(sf::VideoMode::getDesktopMode().width));
     }
 
-    // Si le flocon atteint le bord gauche, réinitialiser la position à droite
     if (position.x < 0.f) {
         position.x = static_cast<float>(sf::VideoMode::getDesktopMode().width);
     }
 }
 
-void Snowflake::draw(sf::RenderTarget& target) {
-    shape.setPosition(position);
-    target.draw(shape);
+void Snowflake::draw(sf::RenderTarget& _target) {
+    shape->setPosition(position);
+    _target.draw(*shape);
 }
