@@ -185,12 +185,12 @@ bool MovementComponent::TryToMove(Entity* _entity, const Vector2f& _direction, c
 Vector2f MovementComponent::GetDirectionByPositions(Vector2f _destination)
 {
 	
-		Vector2f _entityPos = owner->GetPosition();
-		if (IsNearlyEqual(_entityPos, _destination)) return Vector2f(0.0f, 0.0f);
+	Vector2f _entityPos = owner->GetPosition();
+	if (IsNearlyEqual(_entityPos, _destination)) return Vector2f(0.0f, 0.0f);
 
 		
-		Vector2f _direction = _destination - _entityPos;
-		Normalize(_direction);
+	Vector2f _direction = _destination - _entityPos;
+	Normalize(_direction);
 	
-		return _direction;
+	return _direction;
 }

@@ -12,6 +12,9 @@ class MovingTile :public Tile
 	int currentYeetTimerIndex;
 	sf::Clock timeSinceDestination;
 	bool isYeeted;
+	sf::Vector2f dirWithVelocity;
+	sf::Vector2f previousNonNullDirection;
+	sf::Vector2f yeetFinalMove;
 
 public:
 	void UpdateDirection()
@@ -30,7 +33,7 @@ public:
 
 private:
 	void CarryCharacter();
-	void YeetCharacter();
+	void YeetCharacter(const bool _fromPreviousLocation = false);
 	bool TryYeetCharater();
 	void Move(int _collisionSide, int _collisionSideBinary);
 

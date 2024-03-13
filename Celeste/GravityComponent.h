@@ -17,6 +17,6 @@ public:
 
 public:
 	void Update() override;
-	void ApplyGravity();
+	void ApplyGravity(const bool _reverted = false);
 };
 

@@ -105,6 +105,12 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 				_type = ENTITY_TILE;
 				_tile = new Tile(_type, Vector2f(_posX, _posY), tileSize, _path, this);
 			}
+			else if (_char == 'I')
+			{
+				_path = "";
+				_type = ENTITY_TILE;
+				_tile = new Tile(_type, Vector2f(_posX, _posY), tileSize, _path, this);
+			}
 			else if (_char == '2')
 			{
 				_path = "Assets/SpikeTop.png";
@@ -231,21 +237,27 @@ void Grid::ResetAllMarks()
 
 
 void Grid::ChangeTexture() {
+
 	for (int _i = 0; _i < gridForLoad.size(); ++_i) {
 		for (int _j = 0; _j < gridForLoad[_i].size(); ++_j) {
-			if (gridForLoad[_i][_j] == '1' ) {
-				FinalMap(_i, _j, '1');
-			}
-			else if (gridForLoad[_i][_j] == 't')
+			char _currentTileChar = gridForLoad[_i][_j];
+
+			switch (_currentTileChar)
 			{
-				FinalMap(_i, _j, 't');
-				tiles[_i][_j]->GetShape()->setFillColor(sf::Color::Blue);
+			case '1':
+				break;
+			case 't':
+				tiles[_i][_j]->GetShape()->setFillColor(sf::Color(200, 203, 203, 255));
+				break;
+			case 'w':
+				break;
+			case 'I':
+				tiles[_i][_j]->GetShape()->setFillColor(sf::Color(79, 30, 19, 255));
+				break;
+			default:
+				continue;
 			}
-			else if (gridForLoad[_i][_j] == 'w')
-			{
-				FinalMap(_i, _j, 'w');
-			}
-			
+			FinalMap(_i, _j, _currentTileChar);
 		}
 	}
 }

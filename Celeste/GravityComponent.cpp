@@ -17,10 +17,10 @@ void GravityComponent::Update()
 	ApplyGravity();
 }
 
-void GravityComponent::ApplyGravity()
+void GravityComponent::ApplyGravity(const bool _reverted)
 {
 	if (MovementComponent* _movementComp = owner->GetComponent<MovementComponent>())
 	{
-		_movementComp->Move({ 0, gravity * Game::GetInstance().GetSenseOfGravity() });
+		_movementComp->Move({ 0, gravity * Game::GetInstance().GetSenseOfGravity() * (_reverted ? -1 : 1)});
 	}
 }

@@ -83,7 +83,7 @@ void Game::InitMap(const int _value)
 	map->Init(_value);
 	InitInput();
 	Camera::GetInstance().Update(true);
-	new Timer("Loading", [this]() {}, seconds(5));
+	//new Timer("Loading", [this]() {}, seconds(5));
 	while (TimerManager::GetInstance().GetApproximately("Loading"))
 	{
 		TimerManager::GetInstance().Update();
