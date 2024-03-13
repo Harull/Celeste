@@ -2,6 +2,7 @@
 #include"CollisionComponent.h"
 #include"TimerManager.h"
 #include "TextureManager.h"
+#include "Macro.h"
 
 #define PATH_FRAGILE_TILE "Assets/FragileTile.png"
 
@@ -24,6 +25,8 @@ void FragileTile::GetHit(int _collisionSide, int _collisionSideBinary, const boo
 		{
 			_tile->GetHit(_collisionSide, _collisionSideBinary, false);
 		}
+		_vector.push_back(this);
+		//ShakeBlocks(_vector);
 	}
 
 	new Timer("TimerDestroy" + id,

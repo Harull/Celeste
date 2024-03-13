@@ -214,3 +214,20 @@ static void ModifyIntBetweenChevrons(const float _value, Text* _text) {
 	}
 }
 
+
+template <typename T>
+static void ShakeBlocks(vector<T*> _shapes) {
+	vector<Vector2f> _origin;
+	for (auto _shape : _shapes) {
+		_origin.push_back(_shape->GetShape()->getPosition());
+	}
+	for (auto _shape : _shapes) {
+		_shape->GetShape()->setPosition(Vector2f(_origin[RandomMaxMin(_origin.size() - 1)].x + RandomMaxMin(10, -10), _origin[RandomMaxMin(_origin.size() - 1)].y + RandomMaxMin(10, -10)));
+	}
+	int _i = 0;
+	for (auto _shape : _shapes) {
+		_shape->GetShape()->setPosition(_origin[_i]);
+		_i++;
+	}
+
+}
