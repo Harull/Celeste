@@ -5,11 +5,13 @@
 #include "Character.h"
 #include "Game.h"
 #include "Camera.h"
+#include "TimerManager.h"
 
 FallingTile::FallingTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path, Grid* _owner):
 	Tile(_type, _position, _size, _path, _owner)
 {
 	use = false;
+	index = 0;
 	isComplete = false;
 	collisionReaction = [this](int _collisionSide, int _collisionSideBinary) {GetHit(_collisionSide, _collisionSideBinary); };
 	startPosition = _position;
@@ -20,19 +22,28 @@ void FallingTile::GetHit(int _collisionSide, int _collisionSideBinary, const boo
 {
 	if (_collisionSideBinary == ENTITY_CHARACTER && !use)
 	{
-		components.push_back(new GravityComponent(this, 4.5f));
-		components.push_back(new MovementComponent(this));
-		components.push_back(new CollisionComponent(this));
+	
 		use = true;
-
 		if (_hitAllAround)
 		{
 			auto _vector = this->GetStackOfTypeArround<FallingTile>();
 			for (auto _tile : _vector)
 			{
 				_tile->GetHit(_collisionSide, _collisionSideBinary, false);
+				_tile->SetIsShake(true);
 			}
+			SetIsShake(true);
 		}
+		new Timer("TimerShakeFalling" + id,
+			[this]() {
+				components.push_back(new CollisionComponent(this));
+				components.push_back(new GravityComponent(this, 4.5f));	
+				components.push_back(new MovementComponent(this));
+				
+				SetIsShake(false);
+				shape->setPosition(GetOriginalPosition());
+
+			}, seconds(1.0f));
 	}
 	
 	
@@ -40,9 +51,22 @@ void FallingTile::GetHit(int _collisionSide, int _collisionSideBinary, const boo
 
 void FallingTile::Update()
 {
+	if (GetIsShake())
+	{
+		index++;
+		if (index % 2 == 0) {
+			shape->setPosition(GetOriginalPosition());
+		}
+		else
+		{
+			ShakeShape(GetShape());
+		}
+	}
 	if (isComplete)return;
 	CarryCharacter();
 	Entity::Update();
+
+	
 
 	sf::FloatRect _rect(Camera::GetInstance().getCenter() - Camera::GetInstance().getSize() / 2.0f, Camera::GetInstance().getSize());
 	/*if (!_rect.intersects(shape->getGlobalBounds())) {
@@ -59,6 +83,7 @@ void FallingTile::Update()
 			MarkHasComplete();
 
 			auto _vector = this->GetStackOfTypeArround<FallingTile>();
+
 			for (auto _tile : _vector)
 			{
 				_tile->MarkHasComplete();
@@ -86,7 +111,6 @@ void FallingTile::CarryCharacter()
 				if (MovementComponent* _chMvCp = Game::GetInstance().GetPlayer()->GetCharacter()->GetComponent<MovementComponent>())
 				{
 					sf::Vector2f _dirWithVelocity = _thisMvCp->GetDirection() * _thisMvCp->GetVelocity();
-					std::cout << _dirWithVelocity.x << " | " << _dirWithVelocity.y << std::endl;
 					_chMvCp->Move({ 0, 4.5f / 2.5f });
 				}
 			}
@@ -98,8 +122,14 @@ void FallingTile::CarryCharacter()
 
 void FallingTile::Reset()
 {
-	shape->setPosition(startPosition);
+	SetIsShake(false);
+	shape->setPosition(GetOriginalPosition());
 	use = false;
+	index = 0;
 	components.clear();
 	isComplete = false;
+	if (Timer* _timerDestroy = TimerManager::GetInstance().GetApproximately("TimerShakeFalling" + id))
+	{
+		_timerDestroy->SetToRemove(true);
+	}
 }

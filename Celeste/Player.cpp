@@ -23,6 +23,7 @@ void Player::InitInput()
 	EventReactionManager::BindNewInputReaction(sf::Event::JoystickButtonPressed, [&](const sf::Event& _event) {return character->Jump(_event); });
 
 	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const sf::Event& _event) {return character->Dash(_event); });
+	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const sf::Event& _event) {return character->Goofy(_event); });
 	EventReactionManager::BindNewInputReaction(sf::Event::JoystickButtonPressed, [&](const sf::Event& _event) {return character->Dash(_event); });
 }
 

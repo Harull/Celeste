@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include <Random>
+#include "Tile.h"
+
 
 using namespace std;
 using namespace sf;
@@ -144,7 +146,7 @@ T* GetRandomItemInVector(std::vector<T*>& _vectorConcerned)
 template<typename T>
 T GetRandomItemInVector(std::vector<T>& _vectorConcerned)
 {
-	if (_vectorConcerned.empty()) return T ();
+	if (_vectorConcerned.empty()) return T();
 	const int _arraySize = static_cast<int> (_vectorConcerned.size());
 	return _vectorConcerned[RandomMaxMin(_arraySize - 1)];
 }
@@ -204,7 +206,7 @@ static void ModifyIntBetweenChevrons(const int _value, Text* _text) {
 
 	if (_startBracketPos != string::npos && _endBracketPos != string::npos && _endBracketPos > _startBracketPos) {
 		string _valueBetweenBrackets = _textCopy.substr(_startBracketPos + 1, _endBracketPos - _startBracketPos - 1);
-		
+
 		int _valueChanged = std::stoi(_valueBetweenBrackets);
 		_valueChanged = _value;
 
@@ -212,5 +214,20 @@ static void ModifyIntBetweenChevrons(const int _value, Text* _text) {
 
 		_text->setString(_textCopy);
 	}
+}
+
+
+static void ShakeShape(Shape* _shape) {
+
+
+
+	float _shakeMagnitude = 3.0f;
+	Vector2f _originalPosition = _shape->getPosition();
+
+	float _offsetX = (rand() % static_cast<int>(2 * _shakeMagnitude)) - _shakeMagnitude;
+	float _offsetY = (rand() % static_cast<int>(2 * _shakeMagnitude)) - _shakeMagnitude;
+
+	_shape->setPosition(_originalPosition.x + _offsetX, _originalPosition.y + _offsetY);
+
 }
 

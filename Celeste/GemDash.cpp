@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "SoundManager.h"
 #include "TimerManager.h"
+#include "Macro.h"
 
 #define PATH_GEM "Assets/Gem.png"
 

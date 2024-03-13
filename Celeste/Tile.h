@@ -15,8 +15,19 @@ protected:
 	bool isMarkedByGetStackOfTypeArroundTile;
 
 	bool isTangible;
+	bool isShake;
+
 
 public:
+
+
+	void SetIsShake(const bool _status) {
+		isShake = _status;
+	}
+	bool GetIsShake() const {
+		return isShake;
+	}
+
 	bool GetIsTangible() const
 	{
 		return isTangible;

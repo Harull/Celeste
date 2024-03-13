@@ -14,4 +14,5 @@ Tile::Tile(const EntityType _type, const Vector2f& _position, const Vector2f& _s
 
 	isMarkedByGetStackOfTypeArroundTile = false;
 	owner = _owner;
+
 }
