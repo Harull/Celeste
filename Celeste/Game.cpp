@@ -85,11 +85,14 @@ void Game::InitMap(const int _value)
 	InitInput();
 	Camera::GetInstance().Update(true);
 
-	new Timer("Loading", [this]() {}, seconds(2));
-	Vector2f _logoPosition = Vector2f(window.getSize().x * 0.95, window.getSize().y * 0.9);
+
+
+	new Timer("LoadingPause", [this]() {}, seconds(7));
+	Vector2f _logoPosition = Vector2f(float(window.getSize().x * 0.95), float(window.getSize().y * 0.9));
+
 	LoadingLogo* _loadingImage = new  LoadingLogo(_logoPosition);
 
-	while (TimerManager::GetInstance().GetApproximately("Loading"))
+	while (TimerManager::GetInstance().GetApproximately("LoadingPause"))
 	{
 		TimerManager::GetInstance().Update();
 		_loadingImage->Update();
