@@ -4,10 +4,10 @@ Snowflake::Snowflake(sf::Vector2f _position, float _speed) :
     position(_position), speed(_speed)
 {
     shape = new CircleShape();
-    float _randomRadius = static_cast<float>(rand() % 20 + 10);
+    float _randomRadius = static_cast<float>(rand() % 5 + 1);
     shape->setRadius(_randomRadius);
 
-	TextureManager::GetInstance().Load(shape, "C:/Users/Kylia/Pictures/Meme/image.png");
+	//TextureManager::GetInstance().Load(shape, "C:/Users/Kylia/Pictures/Meme/image.png");
 }
 
 
