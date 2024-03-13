@@ -17,5 +17,6 @@ public:
 
 public:
 	void Update() override;
+	void ApplyGravity();
 };
 

@@ -53,7 +53,7 @@ public:
 public:
 	Grid(const Vector2i _tilesCount);
 	void ChangeTexture();
-	void FinalMap(int _i, int _j);
+	void FinalMap(const int _i, const  int _j, const char _char);
 	bool IsIndexValid(const std::pair<int, int> _index);
 
 public:
