@@ -399,6 +399,19 @@
 		return true;
 	}
 
+	bool Character::Goofy(const Event& _event)
+	{
+		sf::Keyboard::Key _goofyTime = sf::Keyboard::P;
+
+		if (_event.type == sf::Event::KeyPressed && _event.key.code != _goofyTime)return false;
+
+		new Timer("Taunt", [this]() {GetComponent<MovementComponent>()->SetCanMove(true); }, seconds(2));
+		GetComponent<MovementComponent>()->SetCanMove(false);
+		GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_DASH_RIGHT);
+
+		return false;
+	}
+
 	void Character::ResetJumpValues()
 	{
 		isJumping = true;
