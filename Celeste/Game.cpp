@@ -12,7 +12,7 @@
 #include "SoundManager.h"
 #include "MenuEndLevel.h"
 #include "TimerManager.h"
-
+#include"TextureManager.h"
 #include"Portal.h"
 
 #include "MenuSoundBoard.h"
@@ -29,7 +29,8 @@ Game::Game()
 	visibleArea = FloatRect();
 	senseOfGravity = GRAVITY_NORMAL;
 	stopwatch = new Stopwatch();
-
+	loadingScreen = new RectangleShape({ 1920 ,1080 });
+	loadingScreen->setPosition({ 0.f,0.f });
 }
 
 Game::~Game()
@@ -48,6 +49,7 @@ void Game::Launch()
 void Game::Start()
 {
 	snow = new Snow(100, 50, 100);
+	TextureManager::GetInstance().Load(loadingScreen, "Assets/Texture/Madeline.png");
 	InitWindow();
 	InitMenu();
 	MusicManager::GetInstance().Play("Celeste_OST.mp3");
@@ -76,11 +78,18 @@ void Game::InitMap(const int _value)
 	
 	delete player;
 	player = new Player();
-
 	map = new Map();
 
 	map->Init(_value);
 	InitInput();
+	Camera::GetInstance().Update(true);
+	new Timer("Loading", [this]() {}, seconds(5));
+	while (TimerManager::GetInstance().GetApproximately("Loading"))
+	{
+		TimerManager::GetInstance().Update();
+		UpdateWindow(true);
+	}
+
 	Update();
 }
 
@@ -163,8 +172,16 @@ void Game::UpdateVisibleArea()
 	visibleArea = FloatRect(Camera::GetInstance().getCenter() - Camera::GetInstance().getSize() / 2.0f, Camera::GetInstance().getSize());
 }
 
-void Game::UpdateWindow()
+void Game::UpdateWindow(bool _loading)
 {
+	if (_loading)
+	{
+
+		window.clear();
+		window.draw(*loadingScreen);
+		window.display();
+		return;
+	}
 	window.clear(sf::Color::Black);
 	UpdateVisibleArea();
 	window.setView(Camera::GetInstance());

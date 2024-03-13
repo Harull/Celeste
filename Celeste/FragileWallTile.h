@@ -8,7 +8,6 @@ public:
 public:
 
 	void GetHit(const int _collisionSideBinary, const int _collisionTypeBinary);
-	virtual void Reset();
 };
 
 

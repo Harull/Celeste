@@ -40,7 +40,7 @@ struct Stopwatch {
 
 	void Init() {
 		text->setPosition(Vector2f(10.0f, 0.0f));
-		text->setCharacterSize(30);
+		text->setCharacterSize(40);
 		font = new Font();
 		if (!font->loadFromFile("Assets/Fonts/Renogare.otf"))
 		{
@@ -90,6 +90,7 @@ class Game : public Singleton<Game>
 	Map* map;
 	Player* player;
 	FloatRect visibleArea;
+	RectangleShape* loadingScreen;
 
 	Menu* menu;
 	MusicManager* musicManager;
@@ -145,7 +146,7 @@ public:
 
 public:
 	void Launch();
-	void UpdateWindow();
+	void UpdateWindow(bool _loading = false);
 	void SelectLevel(const int _value);
 	void Resume();
 

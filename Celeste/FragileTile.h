@@ -10,6 +10,7 @@ public:
 public:
 
 	void GetHit(int _collisionSide, int _collisionSideBinary, const bool _hitAllAround = true);
+	virtual void Reset()override;
 };
 
 

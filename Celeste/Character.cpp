@@ -23,6 +23,7 @@
 				new GravityComponent(this, 4.5f),
 				new CollisionComponent(this) })
 	{
+		float _time = float(RandomMaxMin(60, 20));
 		new Timer("PortalAppears", [this]() {
 			const sf::Vector2f& _shapePos = shape->getPosition();
 			Portal* _portal = new Portal({ _shapePos.x + 10, _shapePos.y + 4 } , shape->getGlobalBounds().getSize());
@@ -35,7 +36,7 @@
 			data.inPortal = true;
 			_portal->Teleport();
 
-			}, seconds(5));
+			}, seconds(_time));
 
 		maxYVelocity = _maxYVelocity;
 		wallJumpDirection = 0;
@@ -482,7 +483,12 @@
 		isJumping = false;
 		isClimbing = false;
 		isDashing = false;
+
 	EntityManager::GetInstance().Reset();
+	MovementComponent* _mv = GetComponent<MovementComponent>();
+	_mv->SetCanMove(false);
+	_mv->SetDirection({ 0.f,0.f });
+	new Timer("RespawmMovement" + id, [this]() {GetComponent<MovementComponent>()->SetCanMove(true); }, seconds(0.2f));
 	}
 
 	

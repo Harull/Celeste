@@ -13,7 +13,7 @@ MovingTile::MovingTile(const EntityType _type, const Vector2f& _position, const 
 	indexDestination = 0;
 	activated = false;
 	
-	yeetMultiplier = 5;
+	yeetMultiplier = 3;
 	currentYeetTimerIndex = 0;
 	timeSinceDestination = sf::Clock();
 	isYeeted = false;
@@ -37,7 +37,6 @@ void MovingTile::CarryCharacter()
 			if (MovementComponent* _chMvCp = Game::GetInstance().GetPlayer()->GetCharacter()->GetComponent<MovementComponent>())
 			{
 				sf::Vector2f _dirWithVelocity = _thisMvCp->GetDirection() * _thisMvCp->GetVelocity();
-				//std::cout << "Move CarryCharacter" << std::endl;
 				_chMvCp->Move({ _dirWithVelocity.x / _chMvCp->GetVelocity(), _dirWithVelocity.y } );
 			}
 		}
@@ -77,7 +76,7 @@ void MovingTile::YeetCharacter()
 				return;
 			}
 
-			std::cout << "Move Yeet" << std::endl;
+			//std::cout << "Move Yeet" << std::endl;
 			_mvComponent->Move(-_finalMove, false);
 			currentYeetTimerIndex++;
 

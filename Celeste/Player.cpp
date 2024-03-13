@@ -4,7 +4,7 @@
 
 Player::Player()
 {
-	character = new Character({ 1920.f / 40.f * 1.25f, 1080.f / 22.5f * 2.5f}, { 200.f, 50.f }, 15, true);
+	character = new Character({ 1920.f / 40.f - 5.f, 1080.f / 22.5f * 2.f - 5.f}, { 200.f, 50.f }, 15, true);
 	InitInput();
 }
 

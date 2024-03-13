@@ -57,7 +57,7 @@ void Camera::Update(bool _heroTeleport)
 			if (!_heroTeleport)
 			{
 			_game.UpdateSnow();
-			_game.UpdateWindow();
+			_game.UpdateWindow(false);
 
 			}
 			move(_sign * 1.5f , 0);
@@ -75,7 +75,7 @@ void Camera::Update(bool _heroTeleport)
 			if (!_heroTeleport)
 			{
 				_game.UpdateSnow();
-				_game.UpdateWindow();
+				_game.UpdateWindow(false);
 
 			}
 			

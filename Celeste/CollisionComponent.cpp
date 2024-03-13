@@ -9,92 +9,98 @@
 
 CollisionInfos CollisionComponent::CheckCollision(const bool _isSpecificCheckOnWalls)
 {
-	
 	sf::Shape* _currentShape = owner->GetShape();
+	sf::Vector2f _position = _currentShape->getPosition();
+	std::pair<int, int> _smallMapIndex = { static_cast<int>(_position.y / (1080.f - 24.f)), static_cast<int>(_position.x / 1920.f) };
+
 	sf::FloatRect _floatRectBb = _currentShape->getGlobalBounds();
 	int _collisionSideBinary = COLLIDE_NONE;
 	int _entityTypeBinary = ENTITY_NONE;
 	float _minYOverlap = INFINITY, _minXOverlap = INFINITY;
 
 	Map* _currentMap = MapManager::GetInstance().GetCurrent();
-	if (!_currentMap) return { _entityTypeBinary, _collisionSideBinary };
+	if (!_currentMap) return CollisionInfos();
 
 	std::vector<std::vector<SmallMap*>> _allSmallMaps = _currentMap->GetMaps();
-	for (auto _smallMapVect : _allSmallMaps)
+	if (_smallMapIndex.first < 0 || _smallMapIndex.first >= _allSmallMaps.size())
+		return CollisionInfos();
+	else if (_smallMapIndex.second < 0 || _smallMapIndex.second >= _allSmallMaps[_smallMapIndex.first].size())
+		return CollisionInfos();
+
+	SmallMap* _smallMap = _allSmallMaps[_smallMapIndex.first][_smallMapIndex.second];
+	
+
+	if (!_smallMap) return CollisionInfos();
+	Grid* _currentGrid = _smallMap->GetGrid();
+	std::vector<Tile*> _tiles = _currentGrid->GetTilesMap();
+	for (Tile* _tile : _tiles)
 	{
-		for (SmallMap* _smallMap : _smallMapVect)
+		if (Character* _hero = dynamic_cast<Character*>(owner))
 		{
-			if (!_smallMap)continue;
-			Grid* _currentGrid = _smallMap->GetGrid();
-			std::vector<Tile*> _tiles = _currentGrid->GetTilesMap();
-			for (Tile* _tile : _tiles)
-			{
-			if (Character* _hero = dynamic_cast<Character*>(owner))
-			{
-				if (_hero->IsDie())return CollisionInfos();
-				
-			}
-				if (!_tile) continue;
-				
+			if (_hero->IsDie())return CollisionInfos();
 
-				sf::Shape* _shapeTile = _tile->GetShape();
-
-				// Normalement pas possible
-				if (_shapeTile == _currentShape)continue;
-
-				const sf::FloatRect& _tileGbb = _shapeTile->getGlobalBounds();
-				if (_floatRectBb.intersects(_isSpecificCheckOnWalls ? _tileGbb : sf::FloatRect({ _tileGbb.left + 1, _tileGbb.top}, { _tileGbb.width - 2, _tileGbb.height})))
-				{
-					CollisionSide _currentSide = ComputeRelativePosition(_currentShape, _shapeTile, _collisionSideBinary);
-					if (Game::GetInstance().GetSenseOfGravity() == GRAVITY_INVERTED)
-					{
-						switch (_currentSide)
-						{
-						case COLLIDE_LEFT:
-							_currentSide = COLLIDE_RIGHT;
-							break;
-						case COLLIDE_RIGHT:
-							_currentSide = COLLIDE_LEFT;
-							break;
-						case COLLIDE_UP:
-							_currentSide = COLLIDE_DOWN;
-							break;
-						case COLLIDE_DOWN:
-							_currentSide = COLLIDE_UP;
-							break;
-						default:
-							break;
-						}
-					}
-
-					if (_tile->GetIsTangible()) {
-						_collisionSideBinary |= _currentSide;
-					}
-					_entityTypeBinary |= _tile->GetType();
-
-					if (function<void(int _collisionSide, int _collisionSideBinary)>_collisionReaction = _tile->GetCollisionReaction())
-						_collisionReaction(_currentSide, owner->GetType());
-					
-					if (_currentSide & COLLIDE_UP)
-					{
-						float _yCurrentOverlap = ComputeYOverlap(_currentShape, _shapeTile);
-						_minYOverlap = _minYOverlap > _yCurrentOverlap ? _yCurrentOverlap : _minYOverlap;
-					}
-					else
-					{
-						float _xCurrentOverlap = ComputeXOverlap(_currentShape, _shapeTile);
-						_minXOverlap = _minXOverlap > _xCurrentOverlap ? _xCurrentOverlap : _minXOverlap;
-					}
-
-					
-					
-				}
-					
-
-			}
 		}
+		if (!_tile) continue;
+
+
+		sf::Shape* _shapeTile = _tile->GetShape();
+
+		// Normalement pas possible
+		if (_shapeTile == _currentShape)continue;
+
+		const sf::FloatRect& _tileGbb = _shapeTile->getGlobalBounds();
+		if (_floatRectBb.intersects(_isSpecificCheckOnWalls ? _tileGbb : sf::FloatRect({ _tileGbb.left + 1, _tileGbb.top }, { _tileGbb.width - 2, _tileGbb.height })))
+		{
+			CollisionSide _currentSide = ComputeRelativePosition(_currentShape, _shapeTile, _collisionSideBinary);
+			if (Game::GetInstance().GetSenseOfGravity() == GRAVITY_INVERTED)
+			{
+				switch (_currentSide)
+				{
+				case COLLIDE_LEFT:
+					_currentSide = COLLIDE_RIGHT;
+					break;
+				case COLLIDE_RIGHT:
+					_currentSide = COLLIDE_LEFT;
+					break;
+				case COLLIDE_UP:
+					_currentSide = COLLIDE_DOWN;
+					break;
+				case COLLIDE_DOWN:
+					_currentSide = COLLIDE_UP;
+					break;
+				default:
+					break;
+				}
+			}
+
+			if (_tile->GetIsTangible()) {
+				_collisionSideBinary |= _currentSide;
+			}
+			_entityTypeBinary |= _tile->GetType();
+
+			if (function<void(int _collisionSide, int _collisionSideBinary)>_collisionReaction = _tile->GetCollisionReaction())
+				_collisionReaction(_currentSide, owner->GetType());
+
+			if (_currentSide & COLLIDE_UP)
+			{
+				float _yCurrentOverlap = ComputeYOverlap(_currentShape, _shapeTile);
+				_minYOverlap = _minYOverlap > _yCurrentOverlap ? _yCurrentOverlap : _minYOverlap;
+			}
+			else
+			{
+				float _xCurrentOverlap = ComputeXOverlap(_currentShape, _shapeTile);
+				_minXOverlap = _minXOverlap > _xCurrentOverlap ? _xCurrentOverlap : _minXOverlap;
+			}
+
+
+
+		}
+
+
 	}
-	return { _entityTypeBinary, _collisionSideBinary, _minXOverlap, _minYOverlap};
+
+
+	return { _entityTypeBinary, _collisionSideBinary, _minXOverlap, _minYOverlap };
 }
 
 
@@ -103,7 +109,7 @@ void CollisionComponent::Update()
 
 }
 
-CollisionComponent::CollisionComponent(Entity* _owner):Component(_owner)
+CollisionComponent::CollisionComponent(Entity* _owner) :Component(_owner)
 {
 
 }
@@ -112,10 +118,8 @@ CollisionSide CollisionComponent::ComputeRelativePosition(const sf::Shape* _enti
 	const int initialCollisionSideBinary)
 {
 	const float _marginOfError = 48.f;
-
 	sf::FloatRect _entityGlobalBounds = _entityShape->getGlobalBounds();
 	const sf::FloatRect& _tileGlobalBounds = _tileShape->getGlobalBounds();
-	
 	float _overlapLeft = _tileGlobalBounds.left + _tileGlobalBounds.width - _entityGlobalBounds.left;
 	_overlapLeft += _marginOfError;
 	float _overlapRight = _entityGlobalBounds.left + _entityGlobalBounds.width - _tileGlobalBounds.left;
@@ -126,7 +130,7 @@ CollisionSide CollisionComponent::ComputeRelativePosition(const sf::Shape* _enti
 	float _overlaps[] = { _overlapLeft, _overlapRight, _overlapTop, _overlapBottom };
 	CollisionSide _sides[] = { CollisionSide::COLLIDE_LEFT, CollisionSide::COLLIDE_RIGHT, CollisionSide::COLLIDE_UP, CollisionSide::COLLIDE_DOWN };
 	float _maxOverlap = _overlaps[0];
-	CollisionSide _maxSide = _sides[0]; 
+	CollisionSide _maxSide = _sides[0];
 
 	for (int i = 1; i < 4; ++i) {
 		if (_overlaps[i] > _maxOverlap) {
@@ -135,8 +139,8 @@ CollisionSide CollisionComponent::ComputeRelativePosition(const sf::Shape* _enti
 		}
 	}
 	return _maxSide;
-
-
+	
+	
 	//TEST 2
 
 	//CollisionSide _sideCollided = COLLIDE_NONE;

@@ -174,6 +174,12 @@ static void Fade(Type* _value, const unsigned int _alpha)
 }
 
 template <typename Type>
+static void FadeOutlineColor(Type* _value, const unsigned int _alpha)
+{
+	_value->setOutlineColor(sf::Color(0, 0, 0, _alpha));
+}
+
+template <typename Type>
 static void MultiFade(std::vector<Type*> _values, const unsigned int _alpha)
 {
 	for (auto _value : _values)
@@ -199,7 +205,7 @@ static void ModifyIntBetweenChevrons(const int _value, Text* _text) {
 	if (_startBracketPos != string::npos && _endBracketPos != string::npos && _endBracketPos > _startBracketPos) {
 		string _valueBetweenBrackets = _textCopy.substr(_startBracketPos + 1, _endBracketPos - _startBracketPos - 1);
 		
-		int  _valueChanged = std::stoi(_valueBetweenBrackets);
+		int _valueChanged = std::stoi(_valueBetweenBrackets);
 		_valueChanged = _value;
 
 		_textCopy.replace(_startBracketPos + 1, _endBracketPos - _startBracketPos - 1, to_string(_valueChanged));
