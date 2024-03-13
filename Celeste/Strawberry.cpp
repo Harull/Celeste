@@ -2,6 +2,7 @@
 #include"Game.h"
 #include"Player.h"
 #include "SoundManager.h"
+#include "Macro.h"
 
 Strawberry::Strawberry(const Vector2f& _position, const Vector2f& _size, Grid* _owner, const string& _path)
 	:Tile(ENTITY_STRAWBERRY, _position, _size, _path, _owner)

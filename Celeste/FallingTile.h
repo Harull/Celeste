@@ -3,6 +3,7 @@
 class FallingTile:public Tile
 {
 	bool use;
+	int index;
 	bool isComplete;
 	Vector2f startPosition;
 

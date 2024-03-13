@@ -37,6 +37,7 @@ class Entity : public IManageable<string>
 protected:
 	Texture texture;
 	vector<Component*> components;
+	Vector2f originalPosition;
 	Shape* shape;
 	EntityType type;
 	function<void(int _collisionSide, int _collisionSideBinary)>collisionReaction;
@@ -55,6 +56,10 @@ public:
 		return nullptr;
 	}
 	
+	Vector2f GetOriginalPosition()const {
+		return originalPosition;
+	}
+
 	Vector2f GetPosition()const
 	{
 		return shape->getPosition();

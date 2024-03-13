@@ -21,7 +21,7 @@ public:
 		Vector2f _direction = _move->GetDirectionByPositions(currentDestination);
 		_move->SetDirection(_direction * 8.0f); 
 	}
-	void AddDestination(Vector2f _destination)
+	void AddDestination(const Vector2f& _destination)
 	{
 		destination.push_back(_destination);
 	}

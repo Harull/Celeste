@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include <Random>
+#include "Tile.h"
+
 
 using namespace std;
 using namespace sf;
@@ -144,7 +146,7 @@ T* GetRandomItemInVector(std::vector<T*>& _vectorConcerned)
 template<typename T>
 T GetRandomItemInVector(std::vector<T>& _vectorConcerned)
 {
-	if (_vectorConcerned.empty()) return T ();
+	if (_vectorConcerned.empty()) return T();
 	const int _arraySize = static_cast<int> (_vectorConcerned.size());
 	return _vectorConcerned[RandomMaxMin(_arraySize - 1)];
 }
@@ -204,7 +206,7 @@ static void ModifyIntBetweenChevrons(const int _value, Text* _text) {
 
 	if (_startBracketPos != string::npos && _endBracketPos != string::npos && _endBracketPos > _startBracketPos) {
 		string _valueBetweenBrackets = _textCopy.substr(_startBracketPos + 1, _endBracketPos - _startBracketPos - 1);
-		
+
 		int _valueChanged = std::stoi(_valueBetweenBrackets);
 		_valueChanged = _value;
 
@@ -215,19 +217,39 @@ static void ModifyIntBetweenChevrons(const int _value, Text* _text) {
 }
 
 
+static void ShakeShape(Shape* _shape) {
+
+
+
+	float _shakeMagnitude = 5.0f;
+	Vector2f _originalPosition = _shape->getPosition();
+
+	float _offsetX = (rand() % static_cast<int>(2 * _shakeMagnitude)) - _shakeMagnitude;
+	float _offsetY = (rand() % static_cast<int>(2 * _shakeMagnitude)) - _shakeMagnitude;
+
+	_shape->setPosition(_originalPosition.x + _offsetX, _originalPosition.y + _offsetY);
+
+}
+
 template <typename T>
-static void ShakeBlocks(vector<T*> _shapes) {
-	vector<Vector2f> _origin;
-	for (auto _shape : _shapes) {
-		_origin.push_back(_shape->GetShape()->getPosition());
+static void ShakeTiles(vector<T*> _tiles) {
+
+
+
+	float _shakeMagnitude = 5.0f;
+	vector<Vector2f> _originalPosition;
+	for (auto _tile : _tiles) {
+		_originalPosition.push_back(_tile->GetShape()->getPosition());
 	}
-	for (auto _shape : _shapes) {
-		_shape->GetShape()->setPosition(Vector2f(_origin[RandomMaxMin(_origin.size() - 1)].x + RandomMaxMin(10, -10), _origin[RandomMaxMin(_origin.size() - 1)].y + RandomMaxMin(10, -10)));
-	}
+
+	float _offsetX = (rand() % static_cast<int>(2 * _shakeMagnitude)) - _shakeMagnitude;
+	float _offsetY = (rand() % static_cast<int>(2 * _shakeMagnitude)) - _shakeMagnitude;
+
 	int _i = 0;
-	for (auto _shape : _shapes) {
-		_shape->GetShape()->setPosition(_origin[_i]);
-		_i++;
+	for (auto _tile : _tiles) {
+		_tile->GetShape()->setPosition(_originalPosition[_i].x + _offsetX, _originalPosition[_i].y + _offsetY);
 	}
+
+
 
 }

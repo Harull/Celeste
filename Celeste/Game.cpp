@@ -14,6 +14,7 @@
 #include "TimerManager.h"
 #include"TextureManager.h"
 #include"Portal.h"
+#include "Macro.h"
 
 #include "MenuSoundBoard.h"
 

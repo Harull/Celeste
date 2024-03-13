@@ -31,6 +31,7 @@ void FallingTile::GetHit(int _collisionSide, int _collisionSideBinary, const boo
 			for (auto _tile : _vector)
 			{
 				_tile->GetHit(_collisionSide, _collisionSideBinary, false);
+				_tile->SetIsShake(true);
 			}
 		}
 	}
@@ -59,6 +60,19 @@ void FallingTile::Update()
 			MarkHasComplete();
 
 			auto _vector = this->GetStackOfTypeArround<FallingTile>();
+
+			if (GetIsShake())
+			{
+				index++;
+				if (index % 2 == 0) {
+					shape->setPosition(GetOriginalPosition());
+				}
+				else
+				{
+					ShakeTiles(_vector);
+				}
+			}
+
 			for (auto _tile : _vector)
 			{
 				_tile->MarkHasComplete();
@@ -98,7 +112,7 @@ void FallingTile::CarryCharacter()
 
 void FallingTile::Reset()
 {
-	shape->setPosition(startPosition);
+	shape->setPosition(GetOriginalPosition());
 	use = false;
 	components.clear();
 	isComplete = false;
