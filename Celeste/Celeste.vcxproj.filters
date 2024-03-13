@@ -189,12 +189,6 @@
     <ClCompile Include="Tile.cpp">
       <Filter>Source Files\Entities\Tiles</Filter>
     </ClCompile>
-    <ClCompile Include="Trap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Spike.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EventReaction.cpp">
       <Filter>Source Files\Manager\InputManager</Filter>
     </ClCompile>
@@ -282,9 +276,6 @@
     <ClCompile Include="Snowflake.cpp">
       <Filter>Source Files\Snow</Filter>
     </ClCompile>
-    <ClCompile Include="Dialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MenuOption.cpp">
       <Filter>Source Files\Menu</Filter>
     </ClCompile>
@@ -345,6 +336,18 @@
     <ClCompile Include="Portal.cpp">
       <Filter>Source Files\Entities\Character\Portal</Filter>
     </ClCompile>
+    <ClCompile Include="Spike.cpp">
+      <Filter>Source Files\Entities\Tiles\Trap\Spike</Filter>
+    </ClCompile>
+    <ClCompile Include="Trap.cpp">
+      <Filter>Source Files\Entities\Tiles\Trap</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingLogo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -382,12 +385,6 @@
     </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>Source Files\Entities\Tiles</Filter>
-    </ClInclude>
-    <ClInclude Include="Trap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Spike.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EventReaction.h">
       <Filter>Source Files\Manager\InputManager</Filter>
@@ -482,9 +479,6 @@
     <ClInclude Include="Snowflake.h">
       <Filter>Source Files\Snow</Filter>
     </ClInclude>
-    <ClInclude Include="Dialog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LevelSelectorMenu.h">
       <Filter>Source Files\Menu</Filter>
     </ClInclude>
@@ -547,6 +541,18 @@
     </ClInclude>
     <ClInclude Include="MenuEndLevel.h">
       <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Spike.h">
+      <Filter>Source Files\Entities\Tiles\Trap\Spike</Filter>
+    </ClInclude>
+    <ClInclude Include="Trap.h">
+      <Filter>Source Files\Entities\Tiles\Trap</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog.h">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingLogo.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -15,7 +15,7 @@
 #include"TextureManager.h"
 #include"Portal.h"
 #include "Macro.h"
-
+#include"LoadingLogo.h"
 #include "MenuSoundBoard.h"
 
 
@@ -84,13 +84,18 @@ void Game::InitMap(const int _value)
 	map->Init(_value);
 	InitInput();
 	Camera::GetInstance().Update(true);
-	new Timer("Loading", [this]() {}, seconds(5));
+
+	new Timer("Loading", [this]() {}, seconds(15));
+	Vector2f _logoPosition = Vector2f(window.getSize().x * 0.95, window.getSize().y * 0.9);
+	LoadingLogo* _loadingImage = new  LoadingLogo(_logoPosition);
+
 	while (TimerManager::GetInstance().GetApproximately("Loading"))
 	{
 		TimerManager::GetInstance().Update();
+		_loadingImage->Update();
 		UpdateWindow(true);
 	}
-
+	_loadingImage->SetToRemove(true);
 	Update();
 }
 
@@ -130,7 +135,7 @@ void Game::InitWindow()
 	const int _xWindowSize = 1920, _yWindowSize = 1080;
 	window.create(VideoMode(_xWindowSize, _yWindowSize), "Celeste", Style::Fullscreen);
 
-	Camera::GetInstance().Init({ 0,0 }, { 1920, 1080 - 24 }); // -24 c'est - la moitié d'un bloc
+	Camera::GetInstance().Init({ 0,0 }, { 1920, 1080 - 24 }); // -24 c'est - la moitiï¿½ d'un bloc
 	stopwatch->Init();
 }
 
@@ -179,6 +184,8 @@ void Game::UpdateWindow(bool _loading)
 	{
 
 		window.clear();
+		Sprite* _sprite =EntityManager::GetInstance().GetApproximately("LoadingLogo")->GetComponent<AnimationComponent>()->GetCurrentAnimation()->GetSprite();
+		window.draw(*_sprite);
 		window.draw(*loadingScreen);
 		window.display();
 		return;

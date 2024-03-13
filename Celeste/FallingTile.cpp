@@ -100,7 +100,6 @@ void FallingTile::CarryCharacter()
 				if (MovementComponent* _chMvCp = Game::GetInstance().GetPlayer()->GetCharacter()->GetComponent<MovementComponent>())
 				{
 					sf::Vector2f _dirWithVelocity = _thisMvCp->GetDirection() * _thisMvCp->GetVelocity();
-					std::cout << _dirWithVelocity.x << " | " << _dirWithVelocity.y << std::endl;
 					_chMvCp->Move({ 0, 4.5f / 2.5f });
 				}
 			}
