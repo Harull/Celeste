@@ -221,7 +221,7 @@ static void ShakeShape(Shape* _shape) {
 
 
 
-	float _shakeMagnitude = 5.0f;
+	float _shakeMagnitude = 3.0f;
 	Vector2f _originalPosition = _shape->getPosition();
 
 	float _offsetX = (rand() % static_cast<int>(2 * _shakeMagnitude)) - _shakeMagnitude;
@@ -231,25 +231,3 @@ static void ShakeShape(Shape* _shape) {
 
 }
 
-template <typename T>
-static void ShakeTiles(vector<T*> _tiles) {
-
-
-
-	float _shakeMagnitude = 5.0f;
-	vector<Vector2f> _originalPosition;
-	for (auto _tile : _tiles) {
-		_originalPosition.push_back(_tile->GetShape()->getPosition());
-	}
-
-	float _offsetX = (rand() % static_cast<int>(2 * _shakeMagnitude)) - _shakeMagnitude;
-	float _offsetY = (rand() % static_cast<int>(2 * _shakeMagnitude)) - _shakeMagnitude;
-
-	int _i = 0;
-	for (auto _tile : _tiles) {
-		_tile->GetShape()->setPosition(_originalPosition[_i].x + _offsetX, _originalPosition[_i].y + _offsetY);
-	}
-
-
-
-}
