@@ -118,10 +118,8 @@ CollisionSide CollisionComponent::ComputeRelativePosition(const sf::Shape* _enti
 	const int initialCollisionSideBinary)
 {
 	const float _marginOfError = 48.f;
-
 	sf::FloatRect _entityGlobalBounds = _entityShape->getGlobalBounds();
 	const sf::FloatRect& _tileGlobalBounds = _tileShape->getGlobalBounds();
-
 	float _overlapLeft = _tileGlobalBounds.left + _tileGlobalBounds.width - _entityGlobalBounds.left;
 	_overlapLeft += _marginOfError;
 	float _overlapRight = _entityGlobalBounds.left + _entityGlobalBounds.width - _tileGlobalBounds.left;
@@ -141,8 +139,8 @@ CollisionSide CollisionComponent::ComputeRelativePosition(const sf::Shape* _enti
 		}
 	}
 	return _maxSide;
-
-
+	
+	
 	//TEST 2
 
 	//CollisionSide _sideCollided = COLLIDE_NONE;

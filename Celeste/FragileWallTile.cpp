@@ -27,9 +27,5 @@ void FragileWallTile::GetHit(int _collisionSideBinary, int _collisionTypeBinary)
 
 }
 
-void FragileWallTile::Reset()
-{
-	isTangible = true;
-	TextureManager::GetInstance().Load(shape, "Assets/Snow2.png");
-}
+
 

@@ -65,7 +65,7 @@ void Portal::Teleport()
 {
 	new Timer("Teleport player", [this]() {
 
-		shape->setPosition({ destination.x + shape->getGlobalBounds().getSize().x / 8.f,destination.y });
+		shape->setPosition({ destination.x + 10 ,destination.y + 4});
 
 		Character* _player = Game::GetInstance().GetPlayer()->GetCharacter();
 		_player->GetShape()->setPosition(destination);

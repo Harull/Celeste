@@ -42,3 +42,17 @@ void FragileTile::GetHit(int _collisionSide, int _collisionSideBinary, const boo
 		}, seconds(0.8f));
 
 }
+
+void FragileTile::Reset()
+{
+	isTangible = true;
+	TextureManager::GetInstance().Load(shape, PATH_FRAGILE_TILE);
+	if (Timer* _timerDestroy = TimerManager::GetInstance().GetApproximately("TimerDestroy" + id))
+	{
+		_timerDestroy->SetToRemove(true);
+	}if (Timer* _timerDestroy = TimerManager::GetInstance().GetApproximately("TimerRespawn" + id))
+	{
+		_timerDestroy->SetToRemove(true);
+	}
+}
+

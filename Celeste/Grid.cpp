@@ -152,7 +152,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			}
 			else if (_char == 'w')
 			{
-				_path = "Assets/Snow2.png";
+				_path = "";
 				_type = ENTITY_TILE;
 				_tile = new FragileWallTile(_type, Vector2f(_posX, _posY), tileSize, _path, this);
 			}
@@ -171,13 +171,12 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			}
 			else if (_char == 't')
 			{
-				_path = "Assets/Snow1.png";
-				_type = ENTITY_TILE;
+				_path = "";
+				_type = ENTITY_FALLING_TILE;
 				_tile = new FallingTile(_type, Vector2f(_posX, _posY), tileSize, _path, this);
 			}
 			else if (_char == 'd')
 			{
-				
 				_positionsmouv.push_back(Vector2f(_posX, _posY));
 				
 				_tile = nullptr;
@@ -234,8 +233,17 @@ void Grid::ResetAllMarks()
 void Grid::ChangeTexture() {
 	for (int _i = 0; _i < gridForLoad.size(); ++_i) {
 		for (int _j = 0; _j < gridForLoad[_i].size(); ++_j) {
-			if (gridForLoad[_i][_j] == '1') {
-				FinalMap(_i, _j);
+			if (gridForLoad[_i][_j] == '1' ) {
+				FinalMap(_i, _j, '1');
+			}
+			else if (gridForLoad[_i][_j] == 't')
+			{
+				FinalMap(_i, _j, 't');
+				tiles[_i][_j]->GetShape()->setFillColor(sf::Color::Blue);
+			}
+			else if (gridForLoad[_i][_j] == 'w')
+			{
+				FinalMap(_i, _j, 'w');
 			}
 			
 		}
@@ -243,34 +251,34 @@ void Grid::ChangeTexture() {
 }
 
 
-void Grid::FinalMap(int _i, int _j) {
+void Grid::FinalMap(const int _i, const int _j, const char _char) {
 
 	bool _isEmptyTop;
 	if (_i - 1 < 0) _isEmptyTop = false;
 	else
 	{
-		_isEmptyTop = (gridForLoad[_i - 1][_j] != '1');
+		_isEmptyTop = (gridForLoad[_i - 1][_j] != _char);
 	}
 
 	bool _isEmptyDown;
 	if (_i + 1 > gridForLoad.size() - 1) _isEmptyDown = false;
 	else
 	{
-		_isEmptyDown = (gridForLoad[_i + 1][_j] != '1');
+		_isEmptyDown = (gridForLoad[_i + 1][_j] != _char);
 	}
 
 	bool _isEmptyLeft;
 	if (_j - 1 < 0) _isEmptyLeft = false;
 	else
 	{
-		_isEmptyLeft = (gridForLoad[_i][_j - 1] != '1');
+		_isEmptyLeft = (gridForLoad[_i][_j - 1] != _char);
 	}
 
 	bool _isEmptyRight;
 	if (_j + 1 > gridForLoad[_i].size() - 1) _isEmptyRight = false;
 	else
 	{
-		_isEmptyRight = (gridForLoad[_i][_j + 1] != '1');
+		_isEmptyRight = (gridForLoad[_i][_j + 1] != _char);
 	}
 
 	if (_isEmptyDown && _isEmptyTop && _isEmptyLeft && _isEmptyRight) {
