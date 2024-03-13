@@ -1,23 +1,23 @@
-Maps\Level4\background4-2.png
-11111111111111111111111111111111       1
-111111            11                   1
-111                                c   1
-11                                     1
-11            22        2  2           1
-11       1111111111111111111111111111111
-11                                   111
-11                                     1 
-11                                     1
-111       2222    22       222         1
-1111111111111111111111111111111        1
-11               111111                1
-11                111                  1
-11                11                   1
-11      3         11                   1
-11                1               tt1  1
-11                                     1
-11                                     1
-11                                     1
-11                                     1
-11      F                  2222222222221
-1111111111111111111111111111111111111111
+Maps\Level4\background4.jpg
+   www                                 1
+   wwwxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1
+   www     xx     xx      xx     xxx   1
+   www     x       x       x      x    1
+   www     x       x       x      x    1
+d  www             x              x    1
+   www             3                   1
+   www                                 1
+   www                                 1
+   www                                 1
+   www                                 1
+   www                                 1
+   www                                 1
+   www                                 1
+   www                                 1
+   www                                 1
+   www                             m   1
+   www                                 1
+   wwwx                                1
+   wwwxxxxxxxxxxxxxxxxxxxxxxxx     xxxxx
+   wwwxx11     11x11     11xII     IIx 1
+   wwwxx         x         x I     I x 1

@@ -1,23 +1,23 @@
-Maps\Level1\Background.png
-1111111111111111111111111111111111111111
-                                       1
-                                       1
-                                       1
-                                       1
-                                       1
-                                       1
-                                       1
-                                       1
-                                       1
-                                       1
-                                       1
-                                       1
-                                       1
-                                       1
-                                       1
-                                       1
-                                       1
-                                       1
-                                       1
-                                       1
-1111111111111111111111111111111111111111
+Maps\Level4\background4.jpg
+2222   x         IxIIIIIIIIxxI     IxxII
+IIII2  x          x  IIIIIIIx2     2xIII
+2222   x          x     IIIIx2     2xII 
+2      x          x  3   IIIx2     2xI  
+2      x          x       IIx2     2xI  
+2      x       sssxsss     Ix2     2x   
+2  ssssxssss               Ix2     2x   
+2                           x2     2x   
+I                           x2     2x   
+I                                       
+Isss                                    
+2                                       
+2                                       
+2                           x2     2x   
+2                           x2     2x   
+2              d            x2     2x   
+2                           x2     2x   
+2                           x2     2x   
+2                           x2     2x   
+2                    m      x2     2x   
+2                           x2     2x   
+2                           x      xxxxI
