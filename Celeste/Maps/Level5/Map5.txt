@@ -3,8 +3,8 @@ IIIIIIIIxxxxxxxxxxxxIIIIIxIIxxxxxxxxxxxx
 IIIII              IIIxxxxxxx           
 xxIII              IIIIIxIII            
 xxI                  I  xI              
-xI                                     I
-I                                      2
+xI                                      
+I                                      I
                                        2
              t                         2
              t             d           2
@@ -15,9 +15,9 @@ I                                      2
              t                         2
  c           t                         2
                                        2
-IIIIII                                 2
-   IIxII                     22        2
-    IxII                    2II        2
-     xI                  222III22      2
+                                       2
+IIIIII                       22        2
+   IIxII                    2II        2
+    IxII                 222III22      2
      xI                  IIIIxxII      2
      xI                22IIxxxxII      2
