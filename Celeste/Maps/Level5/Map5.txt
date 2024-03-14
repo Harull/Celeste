@@ -14,7 +14,7 @@ I                                      I
              t      m                  2
              t                         2
  c           t                         2
-                                       2
+ c                                     2
                                        2
 IIIIII                       22        2
    IIxII                    2II        2
