@@ -86,6 +86,10 @@
 			AnimationData("EnterInPortal", Vector2f(10.f, 540.f), Vector2f(31.f, 40.f), _readDirection, ANIM_DIR_IN_PORTAL, false, 9, _speedA * 2.f,ANIM_DIR_INVICIBLE),
 			AnimationData("OutofPortal", Vector2f(13.f, 589.f), Vector2f(27.f, 40.f), _readDirection, ANIM_DIR_OUT_PORTAL, false, 9,_speedA * 2.f),
 
+			AnimationData("TauntUP", Vector2f(11.f, 634.f), Vector2f(31.f, 43.f), _readDirection, ANIM_TAUNT_UP, _toRepeat, 8, _speedA),
+			AnimationData("TauntDOWN", Vector2f(12.f, 685.f), Vector2f(27.5f, 43.f), _readDirection, ANIM_TAUNT_DOWN, _toRepeat, 16,_speedA),
+			AnimationData("TauntLEFT", Vector2f(13.f, 731.f), Vector2f(25.9f, 42.f), _readDirection, ANIM_TAUNT_LEFT, _toRepeat, 8,_speedA),
+			AnimationData("TauntRIGHT", Vector2f(12.f, 779.f), Vector2f(23.f, 42.f), _readDirection, ANIM_TAUNT_RIGHT, _toRepeat, 4,_speedA),
 
 			AnimationData("None", Vector2f(12.f, 203), _sizeA, _readDirection, ANIM_DIR_NONE, _toRepeat, 1, _speedA * 2.f),
 			AnimationData("invisible",{0.f,0.f},{0.f,00.f},READ_RIGHT,ANIM_DIR_INVICIBLE,_toRepeat,1,0.1f),
@@ -399,15 +403,83 @@
 		return true;
 	}
 
-	bool Character::Goofy(const Event& _event)
+	bool Character::GoofyUP(const Event& _event)
 	{
 		sf::Keyboard::Key _goofyTime = sf::Keyboard::P;
+		sf::Joystick::Axis _axisy = sf::Joystick::PovY;
 
-		if (_event.type == sf::Event::KeyPressed && _event.key.code != _goofyTime)return false;
+		float _axisypositionFle = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY);
+		int _ydirectionFle = (_axisypositionFle <= -DEAD_ZONE) ? -1 : _axisypositionFle >= DEAD_ZONE ? 1 : 0;
 
-		new Timer("Taunt", [this]() {GetComponent<MovementComponent>()->SetCanMove(true); }, seconds(2));
+
+		if (_event.type == sf::Event::JoystickMoved && _event.key.code != _axisy && _ydirectionFle != -1 || _event.type == sf::Event::KeyPressed && _event.key.code != _goofyTime || isJumping == true)
+		{
+			return false;
+		}
+
+		new Timer("TauntUP", [this]() {GetComponent<MovementComponent>()->SetCanMove(true); }, seconds(2));
 		GetComponent<MovementComponent>()->SetCanMove(false);
-		GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_DASH_RIGHT);
+		GetComponent<AnimationComponent>()->SetDirection(ANIM_TAUNT_UP);
+
+		return false;
+	}
+
+	bool Character::GoofyDOWN(const Event& _event)
+	{
+		sf::Keyboard::Key _goofyTime = sf::Keyboard::O;
+		sf::Joystick::Axis _axisy = sf::Joystick::PovY;
+
+		float _axisypositionFle = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY);
+		int _ydirectionFle = (_axisypositionFle <= -DEAD_ZONE) ? -1 : _axisypositionFle >= DEAD_ZONE ? 1 : 0;
+
+		if (_event.type == sf::Event::JoystickMoved && _event.key.code != _axisy && _ydirectionFle != 1 || _event.type == sf::Event::KeyPressed && _event.key.code != _goofyTime || isJumping == true)
+		{
+			return false;
+		}
+
+		new Timer("TauntDOWN", [this]() {GetComponent<MovementComponent>()->SetCanMove(true); }, seconds(2));
+		GetComponent<MovementComponent>()->SetCanMove(false);
+		GetComponent<AnimationComponent>()->SetDirection(ANIM_TAUNT_DOWN);
+
+		return false;
+	}
+
+	bool Character::GoofyLEFT(const Event& _event)
+	{
+		sf::Keyboard::Key _goofyTime = sf::Keyboard::I;
+		sf::Joystick::Axis _axisx = sf::Joystick::PovX;
+
+		float _axisxpositionFle = sf::Joystick::getAxisPosition(0, sf::Joystick::PovX);
+		int _xdirectionFle = (_axisxpositionFle <= -DEAD_ZONE) ? -1 : _axisxpositionFle >= DEAD_ZONE ? 1 : 0;
+
+		if (_event.type == sf::Event::JoystickMoved && _event.key.code != _axisx && _xdirectionFle != 1 || _event.type == sf::Event::KeyPressed && _event.key.code != _goofyTime || isJumping == true)
+		{
+			return false;
+		}
+
+		new Timer("TauntLEFT", [this]() {GetComponent<MovementComponent>()->SetCanMove(true); }, seconds(2));
+		GetComponent<MovementComponent>()->SetCanMove(false);
+		GetComponent<AnimationComponent>()->SetDirection(ANIM_TAUNT_LEFT);
+
+		return false;
+	}
+
+	bool Character::GoofyRIGHT(const Event& _event)
+	{
+		sf::Keyboard::Key _goofyTime = sf::Keyboard::U;
+		sf::Joystick::Axis _axisx = sf::Joystick::PovX;
+
+		float _axisxpositionFle = sf::Joystick::getAxisPosition(0, sf::Joystick::PovX);
+		int _xdirectionFle = (_axisxpositionFle <= -DEAD_ZONE) ? -1 : _axisxpositionFle >= DEAD_ZONE ? 1 : 0;
+
+		if (_event.type == sf::Event::JoystickMoved && _event.key.code != _axisx && _xdirectionFle != -1 || _event.type == sf::Event::KeyPressed && _event.key.code != _goofyTime || isJumping == true)
+		{
+			return false;
+		}
+
+		new Timer("TauntRIGHT", [this]() {GetComponent<MovementComponent>()->SetCanMove(true); }, seconds(2));
+		GetComponent<MovementComponent>()->SetCanMove(false);
+		GetComponent<AnimationComponent>()->SetDirection(ANIM_TAUNT_RIGHT);
 
 		return false;
 	}
@@ -487,7 +559,6 @@
 
 	}
 
-
 	void Character::Respawn()
 	{
 		shape->setPosition(checkPoint.x, checkPoint.y - (shape->getGlobalBounds().getSize().y - TILE_SIZE.y) / 2);
@@ -504,5 +575,20 @@
 	new Timer("RespawmMovement" + id, [this]() {GetComponent<MovementComponent>()->SetCanMove(true); }, seconds(0.2f));
 	}
 
+	void Character::Taunt()
+	{
+	
+		Camera::GetInstance().Update(true);
+		isDead = false;
+		isJumping = false;
+		isClimbing = false;
+		isDashing = false;
+
+		EntityManager::GetInstance().Reset();
+		MovementComponent* _mv = GetComponent<MovementComponent>();
+		_mv->SetCanMove(false);
+		_mv->SetDirection({ 0.f,0.f });
+		new Timer("RespawmMovement" + id, [this]() {GetComponent<MovementComponent>()->SetCanMove(true); }, seconds(0.2f));
+	}
 	
 	
