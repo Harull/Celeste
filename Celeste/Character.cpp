@@ -119,8 +119,8 @@
 
 	bool Character::MovingLeftRight(const sf::Event& _event)
 	{
-		sf::Keyboard::Key _leftKey = sf::Keyboard::Q;
-		sf::Keyboard::Key _rightKey = sf::Keyboard::D;
+		sf::Keyboard::Key _leftKey = sf::Keyboard::Left;
+		sf::Keyboard::Key _rightKey = sf::Keyboard::Right;
 
 		if (_event.type != sf::Event::JoystickMoved)
 			if (_event.key.code != _leftKey && _event.key.code != _rightKey)return false;
@@ -151,7 +151,7 @@
 
 	bool Character::Jump(const sf::Event& _event)
 	{
-		sf::Keyboard::Key _jumpKey = sf::Keyboard::Space;
+		sf::Keyboard::Key _jumpKey = sf::Keyboard::C;
 		if (_event.type == sf::Event::JoystickButtonPressed && _event.joystickButton.button != 0)return false;
 		if (_event.type == sf::Event::KeyPressed && _event.key.code != _jumpKey)return false;
 		if (WallJump(_event)) return false;
@@ -190,7 +190,7 @@
 
 	bool Character::WallJump(const sf::Event& _event)
 	{
-		sf::Keyboard::Key _jumpKey = sf::Keyboard::Space;
+		sf::Keyboard::Key _jumpKey = sf::Keyboard::C;
 		if (_event.type == sf::Event::JoystickButtonPressed && _event.joystickButton.button != 0)return false;
 		if (_event.type == sf::Event::KeyPressed && _event.key.code != _jumpKey)return false;
 
@@ -292,7 +292,7 @@
 
 	bool Character::Dash(const sf::Event& _event)
 	{
-		sf::Keyboard::Key _dashKey = sf::Keyboard::C;
+		sf::Keyboard::Key _dashKey = sf::Keyboard::X;
 		if (_event.type == sf::Event::JoystickButtonPressed && _event.joystickButton.button != 2)return false;
 		if (_event.type == sf::Event::KeyPressed && _event.key.code != _dashKey)return false;
 
@@ -301,10 +301,10 @@
 		dashCount--;
 		currentDashTimerIndex = 0;
 
-		sf::Keyboard::Key _up = sf::Keyboard::Z;
-		sf::Keyboard::Key _left = sf::Keyboard::Q;
-		sf::Keyboard::Key _down = sf::Keyboard::S;
-		sf::Keyboard::Key _right = sf::Keyboard::D;
+		sf::Keyboard::Key _up = sf::Keyboard::Up;
+		sf::Keyboard::Key _left = sf::Keyboard::Left;
+		sf::Keyboard::Key _down = sf::Keyboard::Down;
+		sf::Keyboard::Key _right = sf::Keyboard::Right;
 
 		MovementComponent* _mvComponent = GetComponent<MovementComponent>();
 		sf::Vector2f _direction = _mvComponent->GetDirection();
@@ -354,8 +354,8 @@
 	bool Character::Climb(const sf::Event& _event)
 	{
 		sf::Keyboard::Key _climbKey = sf::Keyboard::V;
-		sf::Keyboard::Key _upKey = sf::Keyboard::Z;
-		sf::Keyboard::Key _downKey = sf::Keyboard::S;
+		sf::Keyboard::Key _upKey = sf::Keyboard::Up;
+		sf::Keyboard::Key _downKey = sf::Keyboard::Down;
 
 		if (_event.type == sf::Event::KeyPressed && _event.key.code != _climbKey && _event.key.code != _upKey && _event.key.code != _downKey)return false;
 

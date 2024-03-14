@@ -113,7 +113,7 @@ void MenuOption::Init()
 	float _x = static_cast<float>(texts[0]->text->getCharacterSize());
 	float _y = static_cast<float>(texts.size());
 
-	float _posY = (_w - _x * _y) / 2  - 50.f * _y + 100.f;
+	float _posY = (_w - _x * _y) / 2 - 50.f * _y + 100.f;
 	Vector2f _pos = Vector2f(_posX, _posY);
 	int _i = 0;
 	for (TextData* _text : texts) {
@@ -138,7 +138,7 @@ void MenuOption::UpdateSnow()
 	snow->update(dt);
 }
 
-void MenuOption::HandleGamepadClick(Event _event)
+void MenuOption::HandleGamepadClick(const Event _event)
 {
 	float _axisYPositionJoy = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
 	int _yDirectionJoy = (_axisYPositionJoy <= -DEAD_ZONE) ? -1 : _axisYPositionJoy >= DEAD_ZONE ? 1 : 0;
@@ -213,6 +213,36 @@ void MenuOption::HandleGamepadClick(Event _event)
 
 }
 
+void MenuOption::HandleKeyboardClick(const Event _event)
+{
+
+	if (_event.type == Event::KeyPressed) {
+
+		if (_event.key.code == Keyboard::Down) {
+			MoveUp();
+		}
+		else if (_event.key.code == Keyboard::Up) {
+			MoveDown();
+		}
+		if (currentText->canChangeValue) {
+
+			if (_event.key.code == Keyboard::Left) {
+				offsetVolume = -1;
+				currentText->onClick();
+			}
+			else if (_event.key.code == Keyboard::Right) {
+				offsetVolume = 1;
+				currentText->onClick();
+			}
+		}
+		if (_event.key.code == Keyboard::C) {
+			if (currentText->canChangeValue) return;
+			currentText->onClick();
+		}
+	}
+
+}
+
 void MenuOption::MoveUp()
 {
 	canClick = false;
@@ -257,6 +287,10 @@ void MenuOption::HandleEvents(RenderWindow& _window)
 		else if (_event.type == Event::JoystickButtonPressed || _event.type == Event::JoystickMoved)
 		{
 			HandleGamepadClick(_event);
+		}
+		else if (_event.type == Event::KeyPressed)
+		{
+			HandleKeyboardClick(_event);
 		}
 	}
 }
