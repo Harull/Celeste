@@ -87,7 +87,7 @@ void Game::InitMap(const int _value)
 
 
 
-	new Timer("LoadingPause", [this]() {}, seconds(7));
+	new Timer("LoadingPause", [this]() {}, seconds(4));
 	Vector2f _logoPosition = Vector2f(float(window.getSize().x * 0.95), float(window.getSize().y * 0.9));
 
 	LoadingLogo* _loadingImage = new  LoadingLogo(_logoPosition);
@@ -99,6 +99,8 @@ void Game::InitMap(const int _value)
 		UpdateWindow(true);
 	}
 	_loadingImage->SetToRemove(true);
+	string _path = "Map" + to_string(_value);
+	MusicManager::GetInstance().Play(_path + ".mp3");
 	Update();
 }
 
