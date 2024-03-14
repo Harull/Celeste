@@ -35,6 +35,7 @@ private:
 
 
     void HandleGamepadClick(Event _event);
+    void HandleKeyboardClick(const Event _event);
     void HandleEvents(RenderWindow& _window);
 	void ChangeVolumeMusic();
 	void ChangeVolume();

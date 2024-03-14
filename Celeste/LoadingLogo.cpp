@@ -10,5 +10,5 @@ LoadingLogo::LoadingLogo( const Vector2f _position):Entity(EntityData("LoadingLo
 
 		}, ANIM_DIR_APPEARS));
 
-	new Timer(id, [this]() {GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_DISAPPEARS); }, seconds(5.0f));
+	new Timer(id, [this]() {GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_DISAPPEARS); }, seconds(2.0f));
 }

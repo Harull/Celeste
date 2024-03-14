@@ -69,7 +69,7 @@ void FirstMenu::Init()
 	{
 		[]() { LevelSelectorMenu::GetInstance().Show(); },
 		[]() { MenuOption::GetInstance().Show(); } ,
-		[]() { Game::GetInstance().GetWindow().close(); } 
+		[]() { Game::GetInstance().GetWindow().close(); }
 	};
 
 	for (string _name : _names) {
@@ -100,46 +100,68 @@ void FirstMenu::Init()
 }
 
 
-void FirstMenu::HandleGamepadClick(Event _event)
+void FirstMenu::HandleGamepadClick(const Event _event)
 {
 
-		float _axisYPositionJoy = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
-		int _YDirectionJoy = (_axisYPositionJoy <= -DEAD_ZONE) ? -1 : _axisYPositionJoy >= DEAD_ZONE ? 1 : 0;
+	float _axisYPositionJoy = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+	int _YDirectionJoy = (_axisYPositionJoy <= -DEAD_ZONE) ? -1 : _axisYPositionJoy >= DEAD_ZONE ? 1 : 0;
 
-		float _axisypositionFle = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY);
-		int _ydirectionFle = (_axisypositionFle <= -DEAD_ZONE) ? -1 : _axisypositionFle >= DEAD_ZONE ? 1 : 0;
+	float _axisypositionFle = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY);
+	int _ydirectionFle = (_axisypositionFle <= -DEAD_ZONE) ? -1 : _axisypositionFle >= DEAD_ZONE ? 1 : 0;
 
-		if (_event.type == Event::JoystickMoved) {
+	if (_event.type == Event::JoystickMoved) {
 
-			if (canClick) {
-				if (_YDirectionJoy == 1) {
-					MoveUp();
+		if (canClick) {
+			if (_YDirectionJoy == 1) {
+				MoveUp();
 
-				}
-				else if (_YDirectionJoy == -1) {
-
-					MoveDown();
-				}
 			}
-			else if (_YDirectionJoy == 0) canClick = true;
-			if (canClick) {
+			else if (_YDirectionJoy == -1) {
 
-				if (_ydirectionFle == -1) {
-					MoveUp();
-				}
-				else if (_ydirectionFle == 1) {
-					MoveDown();
-				}
-				else if (_event.joystickButton.button == 0) canClick = false;
+				MoveDown();
 			}
 		}
-		if (_event.type == Event::JoystickButtonPressed) {
+		else if (_YDirectionJoy == 0) canClick = true;
+		if (canClick) {
 
-				if (_event.joystickButton.button == 0) {
-					currentText->onClick();
-				}
+			if (_ydirectionFle == -1) {
+				MoveUp();
+			}
+			else if (_ydirectionFle == 1) {
+				MoveDown();
+			}
+		}
+		else if (_event.joystickButton.button == 0) canClick = true;
+	}
+	if (_event.type == Event::JoystickButtonPressed) {
+
+		if (_event.joystickButton.button == 0) {
+			currentText->onClick();
+		}
+
+	}
+}
+
+
+void FirstMenu::HandleKeyboardClick(const Event _event)
+{
+
+	if (_event.type == Event::KeyPressed) {
+
+		if (_event.key.code == Keyboard::Down) {
+			MoveUp();
 
 		}
+		else if (_event.key.code == Keyboard::Up) {
+
+			MoveDown();
+		}
+
+		else if (_event.key.code == Keyboard::C) {
+			currentText->onClick();
+		}
+
+	}
 }
 
 void FirstMenu::MoveUp()
@@ -183,8 +205,11 @@ void FirstMenu::HandleEvents(RenderWindow& _window)
 		}
 		else if (_event.type == Event::JoystickButtonPressed || _event.type == Event::JoystickMoved)
 		{
-
 			HandleGamepadClick(_event);
+		}
+		else if (_event.type == Event::KeyPressed)
+		{
+			HandleKeyboardClick(_event);
 		}
 	}
 }
@@ -209,7 +234,7 @@ bool FirstMenu::Show()
 
 		for (Shape* _icon : icons) {
 			_window.draw(*_icon);
-		}                                                                                   
+		}
 		UpdateSnow();
 		snow->draw(_window);
 

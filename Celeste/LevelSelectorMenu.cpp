@@ -101,11 +101,39 @@ void LevelSelectorMenu::HandleGamepadClick(Event _event)
 			MenuOption::GetInstance().SetInGame(true);
 			Game::GetInstance().GetStopwatch()->Reset();
 			SoundManager::GetInstance().Play("SoundSelector.mp3");
-			string _path = "Map" + to_string(currentLevel+1);
-			MusicManager::GetInstance().Play(_path + ".mp3");
 			Game::GetInstance().SelectLevel(currentLevel + 1);
 		}
 		else if (_event.joystickButton.button == 1) {
+			FirstMenu::GetInstance().Show();
+		}
+	}
+}
+
+void LevelSelectorMenu::HandleKeyboardClick(const Event _event)
+{
+
+	if (!canClick) return;
+
+	if (_event.type == Event::KeyPressed) {
+
+		if (_event.key.code == Keyboard::Right) {
+			if (!MoveRight()) return;
+		}
+		else if (_event.key.code == Keyboard::Left) {
+
+			if (!MoveLeft()) return;
+		}
+
+		if (!canClick) return;
+		if (_event.key.code == Keyboard::C) {
+			MenuOption::GetInstance().SetInGame(true);
+			Game::GetInstance().GetStopwatch()->Reset();
+			SoundManager::GetInstance().Play("SoundSelector.mp3");
+			string _path = "Map" + to_string(currentLevel + 1);
+			MusicManager::GetInstance().Play(_path + ".mp3");
+			Game::GetInstance().SelectLevel(currentLevel + 1);
+		}
+		else if (_event.key.code == Keyboard::Escape) {
 			FirstMenu::GetInstance().Show();
 		}
 	}
@@ -152,6 +180,10 @@ void LevelSelectorMenu::HandleEvents(RenderWindow& _window)
 		else if (_event.type == Event::JoystickButtonPressed || _event.type == Event::JoystickMoved)
 		{
 			HandleGamepadClick(_event);
+		}
+		else if (_event.type == Event::KeyPressed)
+		{
+			HandleKeyboardClick(_event);
 		}
 	}
 }
