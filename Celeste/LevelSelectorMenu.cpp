@@ -101,8 +101,7 @@ void LevelSelectorMenu::HandleGamepadClick(Event _event)
 			MenuOption::GetInstance().SetInGame(true);
 			Game::GetInstance().GetStopwatch()->Reset();
 			SoundManager::GetInstance().Play("SoundSelector.mp3");
-			string _path = "Map" + to_string(currentLevel+1);
-			MusicManager::GetInstance().Play(_path + ".mp3");
+			
 			Game::GetInstance().SelectLevel(currentLevel + 1);
 		}
 		else if (_event.joystickButton.button == 1) {

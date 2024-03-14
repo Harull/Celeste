@@ -45,7 +45,7 @@ void Map::Init(const int _value)
 		_startPosition.y += _tempMaps[_i]->GetGrid()->GetTileSize().y * 22;
 		_tempMaps.clear();
 	}
-	Vector2f _spawn;
+	Vector2f _spawn= Vector2f(0.f,2000.f);
 	float _distance = TILE_SIZE.x * 5;
 	for (vector<SmallMap*> _maps : maps)
 	{
@@ -60,7 +60,7 @@ void Map::Init(const int _value)
 					if (_tile->GetType()==ENTITY_CHECKPOINT)
 					{
 						Vector2f _position = _tile->GetPosition();
-						if (_spawn== Vector2f() || (_position.x < _distance&&_position.y<_spawn.y))
+						if (_position.x < _distance&&_position.y<_spawn.y)
 						{
 							_spawn = _position;
 							
