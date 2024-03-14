@@ -9,12 +9,20 @@ FragileWallTile::FragileWallTile(const EntityType _type, const Vector2f& _positi
 	collisionReaction = [this](int _collisionSide, int _collisionSideBinary) {GetHit(_collisionSide, _collisionSideBinary); };
 }
 
-void FragileWallTile::GetHit(int _collisionSideBinary, int _collisionTypeBinary)
+void FragileWallTile::GetHit(int _collisionSideBinary, int _collisionTypeBinary, const bool _hitAllAround)
 {
 	if (isTangible == false)return;
 	if (_collisionTypeBinary != ENTITY_CHARACTER)return;
-	auto _vectorTest = GetStackOfTypeArround<FragileWallTile>();
 	owner->ResetAllMarks();
+
+	if (_hitAllAround)
+	{
+		auto _vector = this->GetStackOfTypeArround<FragileWallTile>();
+		for (auto _tile : _vector)
+		{
+			_tile->GetHit(_collisionSideBinary, _collisionTypeBinary, false);
+		}
+	}
 
 	Character* _currentChar = Game::GetInstance().GetPlayer()->GetCharacter();
 	if (_currentChar->GetIsDashing())

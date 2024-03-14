@@ -193,7 +193,6 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 				_tile = nullptr;
 				tilePositionsEmpty.push_back(Vector2f(_posX, _posY));
 			}
-
 			_tiles.push_back(_tile);
 			_indexRow++;
 
