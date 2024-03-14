@@ -110,6 +110,12 @@ void Game::InitInput()
 		return false;
 		});
 
+	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const Event& _event) {
+		if (_event.key.code == Keyboard::Escape) 
+			return MenuOption::GetInstance().Show();
+		return false;
+		});
+
 	EventReactionManager::BindNewInputReaction(sf::Event::JoystickButtonPressed, [&](const Event& _event) {
 		if (_event.joystickButton.button == 6)
 			return MenuSoundBoard::GetInstance().Show();

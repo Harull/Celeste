@@ -32,6 +32,8 @@ private:
 	void HandleEvents(RenderWindow& _window);
 	void HandleGamepadClick(Event _event);
 
+	void HandleKeyboardClick(const Event _event);
+
 	bool MoveRight();
 
 	bool MoveLeft();

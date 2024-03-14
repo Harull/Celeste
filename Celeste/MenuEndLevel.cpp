@@ -59,7 +59,7 @@ void MenuEndLevel::Init()
 
 }
 
-void MenuEndLevel::HandleGamepadClick(Event _event)
+void MenuEndLevel::HandleGamepadClick(const Event _event)
 {
 
 	if (!canClick) return;
@@ -85,6 +85,32 @@ void MenuEndLevel::HandleGamepadClick(Event _event)
 	}
 }
 
+void MenuEndLevel::HandleKeyboardClick(const Event _event)
+{
+
+	if (!canClick) return;
+
+	if (_event.type == Event::KeyPressed) {
+		if (_event.key.code == Keyboard::C) {
+
+			SoundManager::GetInstance().Play("SoundSelector.mp3");
+			index++;
+			if (index > maxIndex) {
+				index = 0;
+				text->text->setString(names[index]);
+				SetOriginAtMiddle(*text->text);
+				canClick = false;
+				names.pop_back();
+				MusicManager::GetInstance().Play("Celeste_OST.mp3");
+				LevelSelectorMenu::GetInstance().Show();
+			}
+
+			TransitionFill();
+
+		}
+	}
+}
+
 
 
 void MenuEndLevel::HandleEvents(RenderWindow& _window)
@@ -99,6 +125,10 @@ void MenuEndLevel::HandleEvents(RenderWindow& _window)
 		else if (_event.type == Event::JoystickButtonPressed || _event.type == Event::JoystickMoved)
 		{
 			HandleGamepadClick(_event);
+		}
+		else if (_event.type == Event::KeyPressed)
+		{
+			HandleKeyboardClick(_event);
 		}
 	}
 }

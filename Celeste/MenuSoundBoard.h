@@ -30,6 +30,7 @@ private:
 	bool canClick;
 
     void HandleGamepadClick(Event _event);
+	void HandleKeyboardClick(const Event _event);
     void HandleEvents(RenderWindow& _window);
 
     void AllWhite() {
