@@ -490,6 +490,11 @@
 
 	void Character::Respawn()
 	{
+		Game& _game = Game::GetInstance();
+		if (_game.GetSenseOfGravity() == GRAVITY_INVERTED)
+		{
+			_game.ToggleSenseOfGravity();
+		}
 		shape->setPosition(checkPoint);
 		Camera::GetInstance().Update(true);
 		isDead = false;

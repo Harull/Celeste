@@ -157,6 +157,9 @@
     <Filter Include="Source Files\Entities\Character\Portal">
       <UniqueIdentifier>{a008b091-46cd-4856-8573-d7b6bca497e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Entities\Tiles\GravityTile">
+      <UniqueIdentifier>{021e3f67-91fe-40c6-9f57-c2935c432a03}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -347,6 +350,9 @@
     </ClCompile>
     <ClCompile Include="LoadingLogo.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GravityTile.cpp">
+      <Filter>Source Files\Entities\Tiles\GravityTile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -553,6 +559,9 @@
     </ClInclude>
     <ClInclude Include="LoadingLogo.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityTile.h">
+      <Filter>Source Files\Entities\Tiles\GravityTile</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

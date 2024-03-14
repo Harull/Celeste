@@ -156,6 +156,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GemDash.cpp" />
     <ClCompile Include="GravityComponent.cpp" />
+    <ClCompile Include="GravityTile.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="LevelSelectorMenu.cpp" />
     <ClCompile Include="LoadingLogo.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GemDash.h" />
     <ClInclude Include="GravityComponent.h" />
+    <ClInclude Include="GravityTile.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="IManageable.h" />
     <ClInclude Include="IManager.h" />

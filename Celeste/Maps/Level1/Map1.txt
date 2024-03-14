@@ -6,7 +6,7 @@ Maps\Level1\Loic_le_raciste.png
 xxxxx                                  1
 11111                       m   3 333  1
 11111                                   
-11111                                   
+11111         G                         
 1x                          d           
 1x         III1t1111   11111111111111111
 1x      1     1                        1
