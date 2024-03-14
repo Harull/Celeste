@@ -15,6 +15,7 @@
 #include "TileEnd.h"
 #include"FallingTile.h"
 #include "Tile.h"
+#include"GravityTile.h"
 
 vector<Tile*> Grid::GetTilesMap()
 {
@@ -186,6 +187,12 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 				_positionsmouv.push_back(Vector2f(_posX, _posY));
 				
 				_tile = nullptr;
+			}
+			else if (_char == 'G')
+			{
+				_path = "";
+				_type = ENTITY_TILE;
+				_tile = new GravityTile(_type, Vector2f(_posX, _posY), tileSize, _path, this);
 			}
 
 			else

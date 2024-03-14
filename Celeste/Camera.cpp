@@ -47,6 +47,11 @@ void Camera::Update(bool _heroTeleport)
 
 	if (previousIndexes.x != _index.x)
 	{
+		Game& _game = Game::GetInstance();
+		if (_game.GetSenseOfGravity() == GRAVITY_INVERTED)
+		{
+			_game.ToggleSenseOfGravity();
+		}
 		const int _sign = _index.x - previousIndexes.x;
 
 		if (_jumpTimer)
@@ -69,6 +74,11 @@ void Camera::Update(bool _heroTeleport)
 	}
 	 if (previousIndexes.y != _index.y)
 	{
+		 Game& _game = Game::GetInstance();
+		 if (_game.GetSenseOfGravity() == GRAVITY_INVERTED)
+		 {
+			 _game.ToggleSenseOfGravity();
+		 }
 		const int _sign = _index.y - previousIndexes.y;
 		while (!IsNearlyEqual(getCenter().y, _index.y * getSize().y + getSize().y / 2.f))
 		{
