@@ -3,6 +3,7 @@
 #include "MapManager.h"
 #include "TextureManager.h"
 #include "Game.h"
+#include"Grid.h"
 
 Map::Map() : IManageable(S_APPEND("Map"))
 {
@@ -44,7 +45,32 @@ void Map::Init(const int _value)
 		_startPosition.y += _tempMaps[_i]->GetGrid()->GetTileSize().y * 22;
 		_tempMaps.clear();
 	}
-
-
+	Vector2f _spawn;
+	float _distance = TILE_SIZE.x * 5;
+	for (vector<SmallMap*> _maps : maps)
+	{
+		for (SmallMap* _map:_maps)
+		{
+			for (vector<Tile*> _tiles : _map->GetGrid()->GetTiles())
+			{
+				for (Tile* _tile : _tiles)
+				{
+					if (!_tile)continue;
+					
+					if (_tile->GetType()==ENTITY_CHECKPOINT)
+					{
+						Vector2f _position = _tile->GetPosition();
+						if (_spawn== Vector2f() || (_position.x < _distance&&_position.y<_spawn.y))
+						{
+							_spawn = _position;
+							
+						}
+						
+					}
+				}
+			}
+		}
+	}
+	Game::GetInstance().GetPlayer()->GetCharacter()->GetShape()->setPosition(_spawn);
 }
 
