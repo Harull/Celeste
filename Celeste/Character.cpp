@@ -24,7 +24,7 @@
 				new CollisionComponent(this) })
 	{
 		float _time = float(RandomMaxMin(60, 20));
-		new Timer("PortalAppears", [this]() {
+		/*new Timer("PortalAppears", [this]() {
 			const sf::Vector2f& _shapePos = shape->getPosition();
 			Portal* _portal = new Portal({ _shapePos.x + 10, _shapePos.y + 4 } , shape->getGlobalBounds().getSize());
 			GetComponent<MovementComponent>()->SetCanMove(false);
@@ -36,7 +36,7 @@
 			data.inPortal = true;
 			_portal->Teleport();
 
-			}, seconds(_time));
+			}, seconds(_time));*/
 
 		maxYVelocity = _maxYVelocity;
 		wallJumpDirection = 0;
@@ -490,7 +490,7 @@
 
 	void Character::Respawn()
 	{
-		shape->setPosition(checkPoint.x, checkPoint.y - (shape->getGlobalBounds().getSize().y - TILE_SIZE.y) / 2);
+		shape->setPosition(checkPoint);
 		Camera::GetInstance().Update(true);
 		isDead = false;
 		isJumping = false;
