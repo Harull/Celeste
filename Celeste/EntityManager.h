@@ -11,6 +11,8 @@ using namespace std;
 
 class EntityManager : public Singleton<EntityManager>, public IManager<string, Entity>
 {
+	std::vector<Entity*> updatables;
+
 public:
 	vector<Drawable*> GetDrawables() const
 	{
@@ -35,8 +37,6 @@ public:
 
 		return _drawables;
 	}
-
-
 	vector<Drawable*> GetDrawables(FloatRect _visibleArea) const
 	{
 		vector<Drawable*> _drawables;
@@ -63,6 +63,11 @@ public:
 
 		return _drawables;
 	}
+
+	std::vector<Entity*> GetUpdatables()const
+	{
+		return updatables;
+	}
 public:
 	void Update();
 	void Reset();
@@ -71,5 +76,8 @@ public:
 	vector<Entity*> GetAllEntites();
 	void StopAnimation();
 	
+	void ClearUpdatables();
+	void RetrieveAllUpdatables();
+
 };
 

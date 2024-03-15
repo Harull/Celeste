@@ -16,8 +16,8 @@ I I2     I2     xxxx2    2xxx2    2xxxxI
 I I2     I2     xIx2    2xIxIx2    2xIII
 I I2     I2     xIx2    2xIxIx2    2xIII
 I I2     I      xx2    2xIIxIIx2    2xII
-I I2     I     2xx2    xx22222xx    2xII
-I IIsssssI     2x2                   2xI
+I IIsssssI     2xx2    xx22222xx    2xII
+I        I     2x2                   2xI
 I        I  3  2x2                   2xI
-I        I      x2                g   2I
+IG       IG     x2                G   2I
 IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
