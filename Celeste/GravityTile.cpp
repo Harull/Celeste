@@ -13,4 +13,18 @@ void GravityTile::GetHit(int _collisionSide, int _collisionSideBinary)
 	if (_collisionSide != COLLIDE_UP || _collisionSideBinary != ENTITY_CHARACTER||use)return;
 	
 	Game::GetInstance().ToggleSenseOfGravity();
+	float _down = shape->getGlobalBounds().getSize().y/2;
+	Vector2f _position =shape->getPosition();
+	shape->setPosition(Vector2f(_position.x, _position.y + _down));
+	shape->scale(1.f, 0.5f);
+	use = true;
+}
+
+void GravityTile::Reset()
+{
+	float _down = shape->getGlobalBounds().getSize().y ;
+	Vector2f _position = shape->getPosition();
+	shape->setPosition(Vector2f(_position.x, _position.y - _down));
+	shape->scale(1.f, 2.f);
+	use = false;
 }
