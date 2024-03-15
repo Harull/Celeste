@@ -3,8 +3,8 @@ xxxxxxxxxxIIIIxxxxxxxxxxxxxxxxxxxx22222I
           IIII2      2I2               I
  c        IIII2      2I2 tt            I
  c        IIII2       I2 tt            I
-          III2        I2 tt    222tttttI
-IIIII     IIII     II I2       2II     I
+          III2        I2 tt     22tttttI
+IIIII     III2     II I2       2II     I
 IIII2     IIII     II I2     t 2II     I
 IIII2     IIII     2I I2     t 2II     I
 IIII2     IIII     2I I2       2II     I
