@@ -85,8 +85,6 @@ void Game::InitMap(const int _value)
 	InitInput();
 	Camera::GetInstance().Update(true);
 
-
-
 	new Timer("LoadingPause", [this]() {}, seconds(4));
 	Vector2f _logoPosition = Vector2f(float(window.getSize().x * 0.95), float(window.getSize().y * 0.9));
 
@@ -201,6 +199,11 @@ void Game::UpdateWindow(bool _loading)
 		window.display();
 		return;
 	}
+
+
+
+
+
 	window.clear(sf::Color::Black);
 	UpdateVisibleArea();
 	window.setView(Camera::GetInstance());
@@ -216,6 +219,7 @@ void Game::UpdateWindow(bool _loading)
 	window.draw(*stopwatch->text);
 
 	snow->draw(window);
+
 	window.display();
 }
 

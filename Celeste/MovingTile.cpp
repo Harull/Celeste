@@ -69,9 +69,10 @@ void MovingTile::YeetCharacter(const bool _fromPreviousLocation)
 
 	if (Timer* _currentYeetTimer = TimerManager::GetInstance().GetApproximately("YeetTimer"))
 	{
-		_currentYeetTimer->Reset();
+		_currentYeetTimer->Stop();
 	}
-	else if (MovementComponent* _chMvCp = Game::GetInstance().GetPlayer()->GetCharacter()->GetComponent<MovementComponent>())
+	
+	if (MovementComponent* _chMvCp = Game::GetInstance().GetPlayer()->GetCharacter()->GetComponent<MovementComponent>())
 	{
 		new Timer("YeetTimer", [&]() {
 

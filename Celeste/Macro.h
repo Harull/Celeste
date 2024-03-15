@@ -217,17 +217,26 @@ static void ModifyIntBetweenChevrons(const int _value, Text* _text) {
 }
 
 
-static void ShakeShape(Shape* _shape) {
-
-
+static std::pair<float, float> ShakeShape(Shape* _shape, const std::pair<float, float>& _pair = std::pair<float, float>()) {
 
 	float _shakeMagnitude = 3.0f;
 	Vector2f _originalPosition = _shape->getPosition();
+	std::pair<float, float> _offset;
 
-	float _offsetX = (rand() % static_cast<int>(2 * _shakeMagnitude)) - _shakeMagnitude;
-	float _offsetY = (rand() % static_cast<int>(2 * _shakeMagnitude)) - _shakeMagnitude;
+	if (_pair == std::pair<float, float>())
+	{
+		do
+		{
+			_offset.first = (rand() % static_cast<int>(2 * _shakeMagnitude)) - _shakeMagnitude;
+			_offset.second = (rand() % static_cast<int>(2 * _shakeMagnitude)) - _shakeMagnitude;
+		} while (_offset.first == 0.f && _offset.second == 0.f);
+	}
+	else
+	{
+		_offset = _pair;
+	}
 
-	_shape->setPosition(_originalPosition.x + _offsetX, _originalPosition.y + _offsetY);
-
+	_shape->setPosition(_originalPosition.x + _offset.first, _originalPosition.y + _offset.second);
+	return _offset;
 }
 

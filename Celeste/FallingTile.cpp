@@ -11,11 +11,10 @@ FallingTile::FallingTile(const EntityType _type, const Vector2f& _position, cons
 	Tile(_type, _position, _size, _path, _owner)
 {
 	use = false;
-	index = 0;
 	isComplete = false;
 	collisionReaction = [this](int _collisionSide, int _collisionSideBinary) {GetHit(_collisionSide, _collisionSideBinary); };
 	startPosition = _position;
-
+	hasShaken = false;
 }
 
 void FallingTile::GetHit(int _collisionSide, int _collisionSideBinary, const bool _hitAllAround)
@@ -51,17 +50,7 @@ void FallingTile::GetHit(int _collisionSide, int _collisionSideBinary, const boo
 
 void FallingTile::Update()
 {
-	if (GetIsShake())
-	{
-		index++;
-		if (index % 2 == 0) {
-			shape->setPosition(GetOriginalPosition());
-		}
-		else
-		{
-			ShakeShape(GetShape());
-		}
-	}
+	ShakeAllFallingTilesAround();
 	if (isComplete)return;
 	CarryCharacter();
 	Entity::Update();
@@ -69,10 +58,10 @@ void FallingTile::Update()
 	
 
 	sf::FloatRect _rect(Camera::GetInstance().getCenter() - Camera::GetInstance().getSize() / 2.0f, Camera::GetInstance().getSize());
-	/*if (!_rect.intersects(shape->getGlobalBounds())) {
+	if (!_rect.intersects(shape->getGlobalBounds())) {
 		components.clear();
 		return;
-	}*/
+	}
 
 	if (CollisionComponent* _collision = GetComponent<CollisionComponent>())
 	{
@@ -120,12 +109,44 @@ void FallingTile::CarryCharacter()
 
 }
 
+void FallingTile::ShakeAllFallingTilesAround()
+{
+	if (GetIsShake())
+	{
+		auto _vectorOfTiles = GetStackOfTypeArround<FallingTile>();
+		//Il faut qqn de dominant sinon comportement innatendu
+		if (hasShaken) {
+
+			shape->setPosition(GetOriginalPosition());
+			hasShaken = false;
+
+			for (auto _tileAround : _vectorOfTiles)
+			{
+				_tileAround->GetShape()->setPosition(_tileAround->GetOriginalPosition());
+				_tileAround->SetHasShaken(false);
+			}
+		}
+		else
+		{
+			std::pair<float, float> _shakeOffset = ShakeShape(GetShape());
+			hasShaken = true;
+
+			for (auto _tileAround : _vectorOfTiles)
+			{
+				ShakeShape(_tileAround->GetShape(), _shakeOffset);
+				_tileAround->SetHasShaken(true);
+				_tileAround->SetIsShake(false);
+			}
+		}
+	}
+}
+
 void FallingTile::Reset()
 {
 	SetIsShake(false);
+	hasShaken = false;
 	shape->setPosition(GetOriginalPosition());
 	use = false;
-	index = 0;
 	components.clear();
 	isComplete = false;
 	if (Timer* _timerDestroy = TimerManager::GetInstance().GetApproximately("TimerShakeFalling" + id))
