@@ -6,10 +6,10 @@
 class Snow {
 public:
     Snow() {};
-    Snow(int numFlakes, float minSpeed, float maxSpeed);
+    Snow(int _numFlakes, float _minSpeed, float _maxSpeed);
 
-    void update(float dt);
-    void draw(sf::RenderTarget& target);
+    void update(float _dt);
+    void draw(sf::RenderTarget& _target);
 
 private:
     std::vector<Snowflake> flakes;

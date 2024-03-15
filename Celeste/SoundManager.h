@@ -10,7 +10,7 @@ using namespace std;
 class SoundManager : public Singleton<SoundManager>, public IManager<string, SoundData>
 {
     vector<Sound*> sounds;
-	float volume;
+	float volume; 
 
 public:
     SoundManager();

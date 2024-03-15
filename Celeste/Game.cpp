@@ -28,7 +28,6 @@ Game::Game()
 	map = nullptr;
 	player = nullptr;
 	visibleArea = FloatRect();
-	snow = new Snow(100, 50, 100);
 	senseOfGravity = GRAVITY_NORMAL;
 	stopwatch = new Stopwatch();
 	loadingScreen = new RectangleShape({ 1920 ,1080 });
@@ -50,6 +49,7 @@ void Game::Launch()
 
 void Game::Start()
 {
+	snow = new Snow(100, 50, 100);
 	TextureManager::GetInstance().Load(loadingScreen, "Assets/Texture/Madeline.png");
 	InitWindow();
 	InitMenu();
