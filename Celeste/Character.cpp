@@ -554,7 +554,7 @@
 		isJumping = false;
 		isClimbing = false;
 		isDashing = false;
-	
+		dashCount = 1;
 		SoundManager::GetInstance().Play("death.wav");
 
 	}

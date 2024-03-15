@@ -22,6 +22,8 @@ void GravityTile::GetHit(int _collisionSide, int _collisionSideBinary)
 
 void GravityTile::Reset()
 {
+	if (shape->getGlobalBounds().getSize() == TILE_SIZE)return;
+	
 	float _down = shape->getGlobalBounds().getSize().y ;
 	Vector2f _position = shape->getPosition();
 	shape->setPosition(Vector2f(_position.x, _position.y - _down));
