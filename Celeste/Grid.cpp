@@ -89,7 +89,8 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 	int _indexRow = 0, _indexColumn = 0;
 	EntityType _type;
 	vector<Vector2f> _positionsmouv = vector<Vector2f>();
-	
+	sf::Vector2f _spikeSizeOffset(6.f, 6.f);
+	sf::Vector2f _spikePositionOffset(_spikeSizeOffset.x / 2.f, _spikeSizeOffset.y);
 
 	gridForLoad.erase(gridForLoad.begin());
 	for (const vector<char>& _vChar : gridForLoad) {
@@ -115,7 +116,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			{
 				_path = "Assets/SpikeTop.png";
 				_type = ENTITY_TILE;
-				_tile = new Spike(Vector2f(_posX, _posY), tileSize, _path, ENTITY_SPIKE, this);
+				_tile = new Spike(Vector2f(_posX , _posY) + _spikePositionOffset, tileSize - _spikeSizeOffset, _path, ENTITY_SPIKE, this);
 			}
 			else if (_char == '3')
 			{
@@ -224,7 +225,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 		}
 	}
 	ChangeTexture();
-	RotateAllSpikes();
+	RotateAllSpikes(_spikePositionOffset);
 }
 
 void Grid::ResetAllMarks()
@@ -357,7 +358,7 @@ void Grid::FinalMap(const int _i, const int _j, const char _char) {
 	}
 }
 
-void Grid::RotateSpike(Tile* _spikeTile,const std::pair<int, int> _index)
+void Grid::RotateSpike(Tile* _spikeTile,const std::pair<int, int> _index, const sf::Vector2f& _spikePositionOffset)
 {
 	enum SpikeState
 	{
@@ -426,17 +427,17 @@ void Grid::RotateSpike(Tile* _spikeTile,const std::pair<int, int> _index)
 	{
 	case FACING_TWD_RIGHT:
 		_spikeShape->rotate(90);
-		_spikeShape->setPosition(_spikeGbb.getPosition() + sf::Vector2f(_spikeGbb.width, 0));
+		_spikeShape->setPosition(_spikeGbb.getPosition() + sf::Vector2f(_spikeGbb.width - _spikePositionOffset.x, -_spikePositionOffset.y / 2.f));
 		break;
 	case FACING_TWD_LEFT:
 		_spikeShape->rotate(-90);
-		_spikeShape->setPosition(_spikeGbb.getPosition() + sf::Vector2f(0, _spikeGbb.height));
+		_spikeShape->setPosition(_spikeGbb.getPosition() + sf::Vector2f(_spikePositionOffset.x, _spikeGbb.height - _spikePositionOffset.y / 2.f));
 		break;
 	case FACING_TWD_SKY:
 		break;
 	case FACING_TWD_GROUND:
 		_spikeShape->rotate(180);
-		_spikeShape->setPosition(_spikeGbb.getPosition() + sf::Vector2f(_spikeGbb.width, _spikeGbb.height));
+		_spikeShape->setPosition(_spikeGbb.getPosition() + sf::Vector2f(_spikeGbb.width, _spikeGbb.height) - _spikePositionOffset);
 		break;
 	default:
 		break;
@@ -445,7 +446,7 @@ void Grid::RotateSpike(Tile* _spikeTile,const std::pair<int, int> _index)
 
 }
 
-void Grid::RotateAllSpikes()
+void Grid::RotateAllSpikes(const sf::Vector2f& _spikePositionOffset)
 {
 	int _y = 0, _x = 0;
 	for (auto _vector : tiles)
@@ -458,7 +459,7 @@ void Grid::RotateAllSpikes()
 				continue;
 			}
 
-			RotateSpike(_tile, { _y, _x });
+			RotateSpike(_tile, { _y, _x }, _spikePositionOffset);
 			_x++;
 		}
 		_y++;

@@ -54,8 +54,8 @@ public:
 	Grid(const Vector2i _tilesCount);
 	void ChangeTexture();
 	void FinalMap(const int _i, const  int _j, const char _char);
-	void RotateSpike(Tile* _spikeTile, const std::pair<int, int> _index);
-	void RotateAllSpikes();
+	void RotateSpike(Tile* _spikeTile, const std::pair<int, int> _index, const sf::Vector2f& _spikePositionOffset);
+	void RotateAllSpikes(const sf::Vector2f& _spikePositionOffset);
 	bool IsIndexValid(const std::pair<int, int> _index);
 
 public:
