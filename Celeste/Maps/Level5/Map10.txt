@@ -1,0 +1,23 @@
+Maps\Level4\background4.jpg
+I                                       
+I                       I               
+I                       xI       xIx    
+I                                 IIx   
+I          xxIIIxII                     
+I         IIIIIIIx                      
+I           xIIx                        
+I                              xII      
+I                            IIIIIx     
+I                               xx      
+I                                       
+I                                       
+I                                       
+I                                       
+I  c                                    
+I  c                                    
+I  c                IIIIIII             
+I  c    IIIIIII   IIIII                 
+I  c IIIIIIIII  IIIIIIII    IIIIIIII    
+Ic IIIIIIIIIII IIIIIIIIIII IIIIIIIIIIIII
+I IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+I IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII

@@ -166,6 +166,7 @@ void Game::Update()
 			return;
 
 		EntityManager::GetInstance().Update();
+
 		TimerManager::GetInstance().Update();
 		Camera::GetInstance().Update();
 		UpdateWindow();

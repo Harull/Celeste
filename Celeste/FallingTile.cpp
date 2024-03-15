@@ -54,7 +54,6 @@ void FallingTile::Update()
 	if (isComplete)return;
 	CarryCharacter();
 	Entity::Update();
-
 	
 
 	sf::FloatRect _rect(Camera::GetInstance().getCenter() - Camera::GetInstance().getSize() / 2.0f, Camera::GetInstance().getSize());

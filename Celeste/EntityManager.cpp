@@ -1,11 +1,14 @@
 #include "EntityManager.h"
 #include"MovingTile.h"
+
 void EntityManager::Update()
 {
-	for (auto _pair : allValues)
+	for (auto _entity : updatables)
 	{
-		_pair.second->Update();
+		if (_entity->ComputeIsOnScreen())
+			_entity->Update();
 	}
+	
 	/*for (Entity* _entity : GetAllValues())d
 	{
 		_entity->Update();
@@ -15,10 +18,10 @@ void EntityManager::Update()
 
 void EntityManager::Reset()
 {
-
 	for (auto _pair : allValues)
 	{
-		_pair.second->Reset();
+		if (_pair.second->ComputeIsOnScreen())
+			_pair.second->Reset();
 	}
 }
 
@@ -73,5 +76,20 @@ void EntityManager::StopAnimation()
 			_anim->Finish();
 		}
 
+	}
+}
+
+void EntityManager::ClearUpdatables()
+{
+	updatables.clear();
+}
+
+void EntityManager::RetrieveAllUpdatables()
+{
+	ClearUpdatables();
+	for (auto _entities : allValues)
+	{
+		if (_entities.second->GetIsUpdatable())
+			updatables.emplace_back(_entities.second);
 	}
 }

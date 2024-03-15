@@ -19,5 +19,5 @@ I2                                     I
 I2                 22222222     m     cI
 I22          222222IIIIIIII         c  I
 III222  22222IIIIIIII               c  I
-IIIIII22IIIIIIIII       g              I
+IIIIII22IIIIIIIII       G              I
 IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIsI

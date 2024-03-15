@@ -16,6 +16,7 @@
 #include"FallingTile.h"
 #include "Tile.h"
 #include"GravityTile.h"
+#include "EntityManager.h"
 
 vector<Tile*> Grid::GetTilesMap()
 {
@@ -121,17 +122,19 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			else if (_char == '3')
 			{
 				_tile = new Strawberry(Vector2f(_posX, _posY), tileSize, this);
-				/*_tiles.push_back(new Strawberry(Vector2f(_posX, _posY), tileSize));
-				_indexRow++;*/
-				//continue;
+				_tile->SetIsUpdatable(true);
 			}
 			else if (_char == '4')
 			{
 				_tile = new EasterEgg(Vector2f(_posX, _posY), tileSize, this);
+				_tile->SetIsUpdatable(true);
+
 			}
 			else if (_char == 'g')
 			{
 				_tile = new GemDash(Vector2f(_posX, _posY), tileSize, this);
+				_tile->SetIsUpdatable(true);
+
 			}
 			else if (_char == 'x')
 			{
@@ -156,6 +159,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 				_path = "Assets/FragileTile.png";
 				_type = ENTITY_TILE;
 				_tile = new FragileTile(_type, Vector2f(_posX, _posY), tileSize, _path, this);
+				_tile->SetIsUpdatable(true);
 			}
 			else if (_char == 'w')
 			{
@@ -174,6 +178,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 				_path = "Assets/MovingTile.png";
 				_type = ENTITY_TILE;
 				_tile = new MovingTile(_type, Vector2f(_posX, _posY), tileSize, _path, this);
+				_tile->SetIsUpdatable(true);
 
 			}
 			else if (_char == 't')
@@ -181,6 +186,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 				_path = "";
 				_type = ENTITY_FALLING_TILE;
 				_tile = new FallingTile(_type, Vector2f(_posX, _posY), tileSize, _path, this);
+				_tile->SetIsUpdatable(true);
 			}
 			else if (_char == 'd')
 			{
@@ -210,10 +216,8 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 	}
 	for (vector<Tile*> _tilesStocked : tiles)
 	{
-
 		for (Tile* _tileStocked : _tilesStocked)
 		{
-
 			if (MovingTile* _moveTile = dynamic_cast<MovingTile*>(_tileStocked))
 			{
 				for (Vector2f _destination : _positionsmouv)
@@ -226,6 +230,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 	}
 	ChangeTexture();
 	RotateAllSpikes(_spikePositionOffset);
+	EntityManager::GetInstance().RetrieveAllUpdatables();
 }
 
 void Grid::ResetAllMarks()
