@@ -64,7 +64,7 @@ vector<Shape*> Grid::GetShapesMap()
 Grid::Grid(const Vector2i _tilesCount)
 {
 	tilesCount = _tilesCount;
-	tileSize = Vector2f(50.0f, 50.0f);
+	tileSize = Vector2f(48.0f, 48.0f);
 	tiles = vector<vector<Tile*>>();
 	spawnPosition = Vector2f();
 	gridForLoad = vector<vector<char>>();
@@ -73,7 +73,6 @@ Grid::Grid(const Vector2i _tilesCount)
 
 void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 {
-	tileSize = Vector2f(48.0f, 48.0f);
 	const string _pathMap = "Maps/Level" + to_string(_level) + "/Map" + to_string(_value) + ".txt";
 	StreamManager::GetInstance().LoadSmallMap(gridForLoad, _pathMap);
 
@@ -167,7 +166,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			{
 				_path = "Assets/WoodPlank.png";
 				_type = ENTITY_TILE;
-				_tile = new OneDirectionTile(_type, Vector2f(_posX, _posY), Vector2f(50.0f, 30.0f), _path, this);
+				_tile = new OneDirectionTile(_type, Vector2f(_posX, _posY), Vector2f(48.0f, 30.0f), _path, this);
 			}
 			else if (_char == 'm')
 			{
