@@ -223,7 +223,7 @@ void LevelSelectorMenu::TransitionFill() {
 			TransitionUnFill();
 
 		}};
-	timer = new Timer("FadeTimer", _callback, sf::seconds(0.01f), true, true);
+	timer = new Timer("FadeTimer", _callback, sf::seconds(0.004f), true, true);
 }
 
 
@@ -240,5 +240,5 @@ void LevelSelectorMenu::TransitionUnFill()
 			timer2->Reset();
 			canClick = true;
 		}};
-	timer2 = new Timer("FadeTimer2", _callback2, sf::seconds(0.01f), true, true);
+	timer2 = new Timer("FadeTimer2", _callback2, sf::seconds(0.004f), true, true);
 }

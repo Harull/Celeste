@@ -1,0 +1,23 @@
+Maps\Level4\background4.jpg
+I II22222xIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+I I2     x222          xIIIxIIIx       I
+I I2  m               xIIIIxIIIIx     c 
+I I2            x2    2xxxxxxxxx2       
+I I2            x2    2xIIIxIIIx2    III
+I I2            xI2    2xIIxIIx2     2xx
+I I2            xII2    2xIxIx2    2xIIx
+I I2            xII 2    2IxI2    2xIIII
+I I2            xIII2    2IxI2    2xIIIx
+I I2            xxxx2    2xxx2    2xxxxI
+I I2  d         xIIII2    2x2    2xIIIII
+I I2     IffffffxIIII2    2x2    2xIIIII
+I I2     I      xIII2    2xxx2    2xIIII
+I I2     I2     xxxx2    2xxx2    2xxxxI
+I I2     I2     xII2    2xIxIx2    2xIII
+I I2     I2     xII2    2xIxIx2    2xIII
+I I2     I      xI2    2xIIxIIx2    2xII
+I I2     I     2xx2    xxxxxxxxx    2xII
+I IIsssssI     2x2        222        2xI
+I        I  3  2x2                   2xI
+I        I      x2                g   2I
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII

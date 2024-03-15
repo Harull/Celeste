@@ -64,7 +64,7 @@ vector<Shape*> Grid::GetShapesMap()
 Grid::Grid(const Vector2i _tilesCount)
 {
 	tilesCount = _tilesCount;
-	tileSize = Vector2f(50.0f, 50.0f);
+	tileSize = Vector2f(48.0f, 48.0f);
 	tiles = vector<vector<Tile*>>();
 	spawnPosition = Vector2f();
 	gridForLoad = vector<vector<char>>();
@@ -73,7 +73,6 @@ Grid::Grid(const Vector2i _tilesCount)
 
 void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 {
-	tileSize = Vector2f(48.0f, 48.0f);
 	const string _pathMap = "Maps/Level" + to_string(_level) + "/Map" + to_string(_value) + ".txt";
 	StreamManager::GetInstance().LoadSmallMap(gridForLoad, _pathMap);
 
@@ -116,7 +115,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			{
 				_path = "Assets/SpikeTop.png";
 				_type = ENTITY_TILE;
-				_tile = new Spike(Vector2f(_posX, _posY), tileSize, _path, ENTITY_TILE, this);
+				_tile = new Spike(Vector2f(_posX, _posY), tileSize, _path, ENTITY_SPIKE, this);
 			}
 			else if (_char == '3')
 			{
@@ -167,7 +166,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 			{
 				_path = "Assets/WoodPlank.png";
 				_type = ENTITY_TILE;
-				_tile = new OneDirectionTile(_type, Vector2f(_posX, _posY), tileSize, _path, this);
+				_tile = new OneDirectionTile(_type, Vector2f(_posX, _posY), Vector2f(48.0f, 30.0f), _path, this);
 			}
 			else if (_char == 'm')
 			{
@@ -225,6 +224,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 		}
 	}
 	ChangeTexture();
+	RotateAllSpikes();
 }
 
 void Grid::ResetAllMarks()
@@ -354,6 +354,115 @@ void Grid::FinalMap(const int _i, const int _j, const char _char) {
 	}
 	else {
 		TextureManager::GetInstance().Load(tiles[_i][_j]->GetShape(), "Assets/Snow/PleinBlock.png");
+	}
+}
+
+void Grid::RotateSpike(Tile* _spikeTile,const std::pair<int, int> _index)
+{
+	enum SpikeState
+	{
+		FACING_TWD_RIGHT,
+		FACING_TWD_LEFT,
+		FACING_TWD_SKY,
+		FACING_TWD_GROUND,
+	};
+
+	bool _isVertical = false;
+	SpikeState _currentState = FACING_TWD_SKY;
+	sf::Shape* _spikeShape = _spikeTile->GetShape();
+	sf::FloatRect _spikeGbb = _spikeShape->getGlobalBounds();
+
+	if ((IsIndexValid({_index.first - 1, _index.second}) && tiles[_index.first - 1][_index.second] && tiles[_index.first - 1][_index.second]->GetType() == ENTITY_SPIKE)
+		|| (IsIndexValid({ _index.first + 1, _index.second }) && tiles[_index.first + 1][_index.second] && tiles[_index.first + 1][_index.second]->GetType() == ENTITY_SPIKE))
+	{
+		_isVertical = true;
+	}
+
+	if (_isVertical)
+	{
+		if (IsIndexValid({ _index.first, _index.second - 1 }))
+		{
+			if (tiles[_index.first][_index.second - 1] && tiles[_index.first][_index.second - 1]->GetType() == ENTITY_TILE)
+				_currentState = FACING_TWD_RIGHT;
+		}
+		
+		else if (IsIndexValid({ _index.first, _index.second + 1 }))
+		{
+			if (tiles[_index.first][_index.second + 1] && tiles[_index.first][_index.second + 1]->GetType() == ENTITY_TILE)
+				_currentState = FACING_TWD_LEFT;
+		}
+
+		if (_currentState == FACING_TWD_SKY)
+		{
+			if (!IsIndexValid({ _index.first, _index.second - 1 }))
+				_currentState = FACING_TWD_RIGHT;
+			else
+				_currentState = FACING_TWD_LEFT;
+		}
+	}
+	else
+	{
+		if (IsIndexValid({ _index.first - 1, _index.second }))
+		{
+			if (tiles[_index.first - 1][_index.second] && tiles[_index.first - 1][_index.second]->GetType() == ENTITY_TILE)
+				_currentState = FACING_TWD_GROUND;
+		}
+		else if (IsIndexValid({ _index.first + 1, _index.second }))
+		{
+			if (tiles[_index.first + 1][_index.second] && tiles[_index.first + 1][_index.second]->GetType() == ENTITY_TILE)
+				_currentState = FACING_TWD_SKY;
+		}
+
+		if (_currentState == FACING_TWD_SKY)
+		{
+			if (!IsIndexValid({ _index.first - 1, _index.second }))
+				_currentState = FACING_TWD_GROUND;
+		}
+
+	}
+	
+
+	switch (_currentState)
+	{
+	case FACING_TWD_RIGHT:
+		_spikeShape->rotate(90);
+		_spikeShape->setPosition(_spikeGbb.getPosition() + sf::Vector2f(_spikeGbb.width, 0));
+		break;
+	case FACING_TWD_LEFT:
+		_spikeShape->rotate(-90);
+		_spikeShape->setPosition(_spikeGbb.getPosition() + sf::Vector2f(0, _spikeGbb.height));
+		break;
+	case FACING_TWD_SKY:
+		break;
+	case FACING_TWD_GROUND:
+		_spikeShape->rotate(180);
+		_spikeShape->setPosition(_spikeGbb.getPosition() + sf::Vector2f(_spikeGbb.width, _spikeGbb.height));
+		break;
+	default:
+		break;
+	}
+
+
+}
+
+void Grid::RotateAllSpikes()
+{
+	int _y = 0, _x = 0;
+	for (auto _vector : tiles)
+	{
+		for (auto _tile : _vector)
+		{
+			if (!_tile || (_tile->GetType() != ENTITY_SPIKE))
+			{
+				_x++;
+				continue;
+			}
+
+			RotateSpike(_tile, { _y, _x });
+			_x++;
+		}
+		_y++;
+		_x = 0;
 	}
 }
 
