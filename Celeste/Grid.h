@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
-
+#include"Entity.h"
 #include "StreamManager.h"
 
 using namespace std;
@@ -22,6 +22,7 @@ class Grid
 	vector<vector<char>> gridForLoad;
 	Vector2f spawnPosition;
 	vector<Vector2f> tilePositionsEmpty;
+	Entity* background;
 
 public:
 
@@ -31,7 +32,10 @@ public:
 	{
 		return tiles;
 	}
-
+	Entity* GetBackGround() 
+	{
+		return background;
+	}
 	vector<Drawable*> GetDrawablesMap();
 
 	vector<Shape*> GetShapesMap();

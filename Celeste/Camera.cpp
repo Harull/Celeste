@@ -5,7 +5,7 @@
 #include "TimerManager.h"
 #include "MovementComponent.h"
 #include"EntityManager.h"
-#include "MapManager.h"
+
 
 void Camera::Init(const Vector2f& _position, const Vector2f& _size)
 {
@@ -110,4 +110,36 @@ void Camera::Update(bool _heroTeleport)
 
 	
 	previousIndexes = _index;
+	UpdateMapAround(_currentMap);
+
+}
+
+void Camera::UpdateMapAround(const vector<vector<SmallMap*>>& _maps)
+{
+	vector<SmallMap*> _mapArround;
+
+	_mapArround.push_back(_maps[previousIndexes.y][previousIndexes.x]);
+	if (previousIndexes.x>=1)
+	{
+		_mapArround.push_back(_maps[previousIndexes.y][previousIndexes.x - 1]);
+
+	}
+	if (previousIndexes.x<=_maps[previousIndexes.y].size() - 2)
+	{
+		_mapArround.push_back(_maps[previousIndexes.y][previousIndexes.x+1]);
+
+	}
+	if (previousIndexes.y >= 1)
+	{
+		_mapArround.push_back(_maps[previousIndexes.y - 1][previousIndexes.x]);
+
+	}
+	int _max = _maps.size() - 2;
+	if (previousIndexes.y <= _max)
+	{
+		_mapArround.push_back(_maps[previousIndexes.y + 1][previousIndexes.x]);
+
+	}
+	
+	mapAround = _mapArround;
 }
