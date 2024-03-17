@@ -19,9 +19,10 @@
 
 	Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, const int _maxYVelocity, const bool _isVisible)
 		: Entity(EntityData("Character", ENTITY_CHARACTER, _position, _size),
+			true,
 			{ new MovementComponent(this, 2.5f, sf::Vector2f(0,0), true),
 				new GravityComponent(this, 4.5f),
-				new CollisionComponent(this) })
+				new CollisionComponent(this) } )
 	{
 		float _time = float(RandomMaxMin(60, 20));
 		/*new Timer("PortalAppears", [this]() {

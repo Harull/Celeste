@@ -51,6 +51,10 @@ static void SetOriginAtMiddle(sf::Sprite* _sprite)
 	_sprite->setOrigin(_sprite->getLocalBounds().getSize() / 2.f);
 }
 
+static sf::Vector2i operator/(const sf::Vector2i& _first, const sf::Vector2i& _second)
+{
+	return sf::Vector2i(_first.x / _second.x, _first.y / _second.y);
+}
 
 template<class Class>
 static vector<Class*> RetrieveAllAround(const Vector2f& _position, const int _tileAround)
