@@ -82,7 +82,7 @@ void Grid::InitMap(const int _level, const int _value, Vector2f _startPos)
 	for (const char& _char : gridForLoad[0]) {
 		_pathBack += _char;
 	}
-	new Entity({ S_APPEND("0Background"), ENTITY_NONE, sf::Vector2f(_startPos.x , _startPos.y + 48.f), Vector2f(tileSize.x * 40.0f, tileSize.y * 22.0f), _pathBack });
+	background = new Entity({ S_APPEND("0Background"), ENTITY_NONE, sf::Vector2f(_startPos.x , _startPos.y + 48.f), Vector2f(tileSize.x * 40.0f, tileSize.y * 22.0f), _pathBack });
 
 	string _path;
 	vector<Tile*> _tiles;

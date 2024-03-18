@@ -1,15 +1,17 @@
-	#include "Character.h"
-	#include "TextureManager.h"
-	#include "MovementComponent.h"
-	#include "GravityComponent.h"
-	#include "AnimationComponent.h"
-	#include "CollisionComponent.h"
-	#include "TimerManager.h"
-	#include "Portal.h"
-	#include "Game.h"
-	#include "EntityManager.h"
-	#include "SoundManager.h"
-	#include "Camera.h"
+
+#include "Character.h"
+#include "TextureManager.h"
+#include "MovementComponent.h"
+#include "GravityComponent.h"
+#include "AnimationComponent.h"
+#include "CollisionComponent.h"
+#include "TimerManager.h"
+#include"Portal.h"
+#include "Game.h"
+#include"EntityManager.h"
+#include "SoundManager.h"
+#include"Camera.h"
+#include"Grid.h"
 
 
 	#define CHARACTER_TEXTURE "Character/Slave.png"
@@ -17,23 +19,25 @@
 
 	Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, const int _maxYVelocity, const bool _isVisible)
 		: Entity(EntityData("Character", ENTITY_CHARACTER, _position, _size),
+			true,
 			{ new MovementComponent(this, 2.5f, sf::Vector2f(0,0), true),
 				new GravityComponent(this, 4.5f),
-				new CollisionComponent(this) })
+				new CollisionComponent(this) } )
 	{
-	/*	new Timer("PortalAppears", [this]() {
+		float _time = float(RandomMaxMin(60, 20));
+		/*new Timer("PortalAppears", [this]() {
 			const sf::Vector2f& _shapePos = shape->getPosition();
 			Portal* _portal = new Portal({ _shapePos.x + 10, _shapePos.y + 4 } , shape->getGlobalBounds().getSize());
 			GetComponent<MovementComponent>()->SetCanMove(false);
 
 			new Timer("AnimationPortal", [this]() {
-				SoundManager::GetInstance().Play("Assets/Songs/Sounds/Luigi173.wav", 5.0f);
+				SoundManager::GetInstance().Play("Luigi173.wav");
 				GetComponent<AnimationComponent>()->Refresh();
 				GetComponent<AnimationComponent>()->SetDirection(ANIM_DIR_IN_PORTAL); }, sf::seconds(1.f));
 			data.inPortal = true;
 			_portal->Teleport();
 
-			}, seconds(5))*/;
+			}, seconds(_time));*/
 
 		maxYVelocity = _maxYVelocity;
 		wallJumpDirection = 0;
@@ -83,6 +87,10 @@
 			AnimationData("EnterInPortal", Vector2f(10.f, 540.f), Vector2f(31.f, 40.f), _readDirection, ANIM_DIR_IN_PORTAL, false, 9, _speedA * 2.f,ANIM_DIR_INVICIBLE),
 			AnimationData("OutofPortal", Vector2f(13.f, 589.f), Vector2f(27.f, 40.f), _readDirection, ANIM_DIR_OUT_PORTAL, false, 9,_speedA * 2.f),
 
+			AnimationData("TauntUP", Vector2f(11.f, 634.f), Vector2f(31.f, 43.f), _readDirection, ANIM_TAUNT_UP, _toRepeat, 8, _speedA),
+			AnimationData("TauntDOWN", Vector2f(12.f, 685.f), Vector2f(27.5f, 43.f), _readDirection, ANIM_TAUNT_DOWN, _toRepeat, 16,_speedA),
+			AnimationData("TauntLEFT", Vector2f(13.f, 731.f), Vector2f(25.9f, 42.f), _readDirection, ANIM_TAUNT_LEFT, _toRepeat, 8,_speedA),
+			AnimationData("TauntRIGHT", Vector2f(12.f, 779.f), Vector2f(23.f, 42.f), _readDirection, ANIM_TAUNT_RIGHT, _toRepeat, 4,_speedA),
 
 			AnimationData("None", Vector2f(12.f, 203), _sizeA, _readDirection, ANIM_DIR_NONE, _toRepeat, 1, _speedA * 2.f),
 			AnimationData("invisible",{0.f,0.f},{0.f,00.f},READ_RIGHT,ANIM_DIR_INVICIBLE,_toRepeat,1,0.1f),
@@ -116,8 +124,8 @@
 
 	bool Character::MovingLeftRight(const sf::Event& _event)
 	{
-		sf::Keyboard::Key _leftKey = sf::Keyboard::Q;
-		sf::Keyboard::Key _rightKey = sf::Keyboard::D;
+		sf::Keyboard::Key _leftKey = sf::Keyboard::Left;
+		sf::Keyboard::Key _rightKey = sf::Keyboard::Right;
 
 		if (_event.type != sf::Event::JoystickMoved)
 			if (_event.key.code != _leftKey && _event.key.code != _rightKey)return false;
@@ -148,7 +156,7 @@
 
 	bool Character::Jump(const sf::Event& _event)
 	{
-		sf::Keyboard::Key _jumpKey = sf::Keyboard::Space;
+		sf::Keyboard::Key _jumpKey = sf::Keyboard::C;
 		if (_event.type == sf::Event::JoystickButtonPressed && _event.joystickButton.button != 0)return false;
 		if (_event.type == sf::Event::KeyPressed && _event.key.code != _jumpKey)return false;
 		if (WallJump(_event)) return false;
@@ -180,14 +188,14 @@
 			_mvComponent->Move({ 0.f, -currentYVelocity * static_cast<float>(Game::GetInstance().GetSenseOfGravity()) });
 			currentJumpTimerIndex++;
 			}, sf::seconds(0), true, true);
-		SoundManager::GetInstance().Play("Assets/Songs/Sounds/jump.wav");
+		SoundManager::GetInstance().Play("jump.wav");
 
 		return true;
 	}
 
 	bool Character::WallJump(const sf::Event& _event)
 	{
-		sf::Keyboard::Key _jumpKey = sf::Keyboard::Space;
+		sf::Keyboard::Key _jumpKey = sf::Keyboard::C;
 		if (_event.type == sf::Event::JoystickButtonPressed && _event.joystickButton.button != 0)return false;
 		if (_event.type == sf::Event::KeyPressed && _event.key.code != _jumpKey)return false;
 
@@ -289,7 +297,7 @@
 
 	bool Character::Dash(const sf::Event& _event)
 	{
-		sf::Keyboard::Key _dashKey = sf::Keyboard::C;
+		sf::Keyboard::Key _dashKey = sf::Keyboard::X;
 		if (_event.type == sf::Event::JoystickButtonPressed && _event.joystickButton.button != 2)return false;
 		if (_event.type == sf::Event::KeyPressed && _event.key.code != _dashKey)return false;
 
@@ -298,10 +306,10 @@
 		dashCount--;
 		currentDashTimerIndex = 0;
 
-		sf::Keyboard::Key _up = sf::Keyboard::Z;
-		sf::Keyboard::Key _left = sf::Keyboard::Q;
-		sf::Keyboard::Key _down = sf::Keyboard::S;
-		sf::Keyboard::Key _right = sf::Keyboard::D;
+		sf::Keyboard::Key _up = sf::Keyboard::Up;
+		sf::Keyboard::Key _left = sf::Keyboard::Left;
+		sf::Keyboard::Key _down = sf::Keyboard::Down;
+		sf::Keyboard::Key _right = sf::Keyboard::Right;
 
 		MovementComponent* _mvComponent = GetComponent<MovementComponent>();
 		sf::Vector2f _direction = _mvComponent->GetDirection();
@@ -342,7 +350,7 @@
 				}, sf::seconds(0), true, true);
 
 		}
-		SoundManager::GetInstance().Play("Assets/Songs/Sounds/dash_pink_left.wav");
+		SoundManager::GetInstance().Play("dash_pink_left.wav");
 
 
 		return true;
@@ -351,8 +359,8 @@
 	bool Character::Climb(const sf::Event& _event)
 	{
 		sf::Keyboard::Key _climbKey = sf::Keyboard::V;
-		sf::Keyboard::Key _upKey = sf::Keyboard::Z;
-		sf::Keyboard::Key _downKey = sf::Keyboard::S;
+		sf::Keyboard::Key _upKey = sf::Keyboard::Up;
+		sf::Keyboard::Key _downKey = sf::Keyboard::Down;
 
 		if (_event.type == sf::Event::KeyPressed && _event.key.code != _climbKey && _event.key.code != _upKey && _event.key.code != _downKey)return false;
 
@@ -394,6 +402,87 @@
 
 		_mvComponent->SetDirection(_newDirection);
 		return true;
+	}
+
+	bool Character::GoofyUP(const Event& _event)
+	{
+		sf::Keyboard::Key _goofyTime = sf::Keyboard::P;
+		sf::Joystick::Axis _axisy = sf::Joystick::PovY;
+
+		float _axisypositionFle = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY);
+		int _ydirectionFle = (_axisypositionFle <= -DEAD_ZONE) ? -1 : _axisypositionFle >= DEAD_ZONE ? 1 : 0;
+
+
+		if (_event.type == sf::Event::JoystickMoved && _event.key.code != _axisy && _ydirectionFle != -1 || _event.type == sf::Event::KeyPressed && _event.key.code != _goofyTime || isJumping == true)
+		{
+			return false;
+		}
+
+		new Timer("TauntUP", [this]() {GetComponent<MovementComponent>()->SetCanMove(true); }, seconds(2));
+		GetComponent<MovementComponent>()->SetCanMove(false);
+		GetComponent<AnimationComponent>()->SetDirection(ANIM_TAUNT_UP);
+
+		return false;
+	}
+
+	bool Character::GoofyDOWN(const Event& _event)
+	{
+		sf::Keyboard::Key _goofyTime = sf::Keyboard::O;
+		sf::Joystick::Axis _axisy = sf::Joystick::PovY;
+
+		float _axisypositionFle = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY);
+		int _ydirectionFle = (_axisypositionFle <= -DEAD_ZONE) ? -1 : _axisypositionFle >= DEAD_ZONE ? 1 : 0;
+
+		if (_event.type == sf::Event::JoystickMoved && _event.key.code != _axisy && _ydirectionFle != 1 || _event.type == sf::Event::KeyPressed && _event.key.code != _goofyTime || isJumping == true)
+		{
+			return false;
+		}
+
+		new Timer("TauntDOWN", [this]() {GetComponent<MovementComponent>()->SetCanMove(true); }, seconds(2));
+		GetComponent<MovementComponent>()->SetCanMove(false);
+		GetComponent<AnimationComponent>()->SetDirection(ANIM_TAUNT_DOWN);
+
+		return false;
+	}
+
+	bool Character::GoofyLEFT(const Event& _event)
+	{
+		sf::Keyboard::Key _goofyTime = sf::Keyboard::I;
+		sf::Joystick::Axis _axisx = sf::Joystick::PovX;
+
+		float _axisxpositionFle = sf::Joystick::getAxisPosition(0, sf::Joystick::PovX);
+		int _xdirectionFle = (_axisxpositionFle <= -DEAD_ZONE) ? -1 : _axisxpositionFle >= DEAD_ZONE ? 1 : 0;
+
+		if (_event.type == sf::Event::JoystickMoved && _event.key.code != _axisx && _xdirectionFle != 1 || _event.type == sf::Event::KeyPressed && _event.key.code != _goofyTime || isJumping == true)
+		{
+			return false;
+		}
+
+		new Timer("TauntLEFT", [this]() {GetComponent<MovementComponent>()->SetCanMove(true); }, seconds(2));
+		GetComponent<MovementComponent>()->SetCanMove(false);
+		GetComponent<AnimationComponent>()->SetDirection(ANIM_TAUNT_LEFT);
+
+		return false;
+	}
+
+	bool Character::GoofyRIGHT(const Event& _event)
+	{
+		sf::Keyboard::Key _goofyTime = sf::Keyboard::U;
+		sf::Joystick::Axis _axisx = sf::Joystick::PovX;
+
+		float _axisxpositionFle = sf::Joystick::getAxisPosition(0, sf::Joystick::PovX);
+		int _xdirectionFle = (_axisxpositionFle <= -DEAD_ZONE) ? -1 : _axisxpositionFle >= DEAD_ZONE ? 1 : 0;
+
+		if (_event.type == sf::Event::JoystickMoved && _event.key.code != _axisx && _xdirectionFle != -1 || _event.type == sf::Event::KeyPressed && _event.key.code != _goofyTime || isJumping == true)
+		{
+			return false;
+		}
+
+		new Timer("TauntRIGHT", [this]() {GetComponent<MovementComponent>()->SetCanMove(true); }, seconds(2));
+		GetComponent<MovementComponent>()->SetCanMove(false);
+		GetComponent<AnimationComponent>()->SetDirection(ANIM_TAUNT_RIGHT);
+
+		return false;
 	}
 
 	void Character::ResetJumpValues()
@@ -466,14 +555,46 @@
 		isJumping = false;
 		isClimbing = false;
 		isDashing = false;
-	
-		SoundManager::GetInstance().Play("Assets/Songs/Sounds/death.wav");
+		dashCount = 1;
+		SoundManager::GetInstance().Play("death.wav");
 
 	}
 
 	void Character::Respawn()
 	{
-		shape->setPosition(checkPoint.x,checkPoint.y-shape->getGlobalBounds().getSize().y/2);
+		Game& _game = Game::GetInstance();
+		if (_game.GetSenseOfGravity() == GRAVITY_INVERTED)
+		{
+			_game.ToggleSenseOfGravity();
+		}
+		shape->setPosition(checkPoint);
 		Camera::GetInstance().Update(true);
 		isDead = false;
+		isJumping = false;
+		isClimbing = false;
+		isDashing = false;
+
+	EntityManager::GetInstance().Reset();
+	MovementComponent* _mv = GetComponent<MovementComponent>();
+	_mv->SetCanMove(false);
+	_mv->SetDirection({ 0.f,0.f });
+	new Timer("RespawmMovement" + id, [this]() {GetComponent<MovementComponent>()->SetCanMove(true); }, seconds(0.2f));
 	}
+
+	void Character::Taunt()
+	{
+	
+		Camera::GetInstance().Update(true);
+		isDead = false;
+		isJumping = false;
+		isClimbing = false;
+		isDashing = false;
+
+		EntityManager::GetInstance().Reset();
+		MovementComponent* _mv = GetComponent<MovementComponent>();
+		_mv->SetCanMove(false);
+		_mv->SetDirection({ 0.f,0.f });
+		new Timer("RespawmMovement" + id, [this]() {GetComponent<MovementComponent>()->SetCanMove(true); }, seconds(0.2f));
+	}
+	
+	

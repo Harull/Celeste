@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
-
+#include"Entity.h"
 #include "StreamManager.h"
 
 using namespace std;
@@ -10,7 +10,7 @@ using namespace sf;
 
 #define PATH_LEVEL "Save/Map"
 #define PATH_VILLAGE_MAP "Save/village.txt"
-#define TILE_SIZE Vector2f(50.f,50.f)
+#define TILE_SIZE Vector2f(48.f,48.f)
 
 class Tile;
 
@@ -22,6 +22,7 @@ class Grid
 	vector<vector<char>> gridForLoad;
 	Vector2f spawnPosition;
 	vector<Vector2f> tilePositionsEmpty;
+	Entity* background;
 
 public:
 
@@ -31,7 +32,10 @@ public:
 	{
 		return tiles;
 	}
-
+	Entity* GetBackGround() 
+	{
+		return background;
+	}
 	vector<Drawable*> GetDrawablesMap();
 
 	vector<Shape*> GetShapesMap();
