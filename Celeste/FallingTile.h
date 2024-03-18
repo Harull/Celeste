@@ -1,12 +1,11 @@
 #pragma once
 #include"Tile.h"
-class FallingTile:public Tile
+class FallingTile : public Tile
 {
 	bool use;
 	bool isComplete;
 	Vector2f startPosition;
 	bool hasShaken;
-
 public:
 	FallingTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path, Grid* _owner);
 

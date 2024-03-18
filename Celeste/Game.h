@@ -34,7 +34,7 @@ struct Stopwatch {
 		text = new Text();
 		font = new Font();
 		chrono = Clock();
-
+		timeForPause = 0.f;
 	}
 
 	void Init() {

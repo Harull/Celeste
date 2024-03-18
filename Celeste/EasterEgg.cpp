@@ -13,6 +13,7 @@ EasterEgg::EasterEgg(const Vector2f& _position, const Vector2f& _size, Grid* _ow
 	collisionReaction = [this](int _collisionSide, int _collisionSideBinary) {GetHit(_collisionSideBinary); };
 	isTangible = false;
 	isUsed = false;
+	otherWindow = nullptr;
 }
 
 EasterEgg::~EasterEgg()

@@ -32,6 +32,11 @@ Game::Game()
 	stopwatch = new Stopwatch();
 	loadingScreen = new RectangleShape({ 1920 ,1080 });
 	loadingScreen->setPosition({ 0.f,0.f });
+	dt = 0.f;
+	menu = nullptr;
+	musicManager = nullptr;
+	snow = nullptr;
+
 }
 
 Game::~Game()
@@ -50,14 +55,14 @@ void Game::Launch()
 void Game::Start()
 {
 	snow = new Snow(100, 50, 100);
-	TextureManager::GetInstance().Load(loadingScreen, "Assets/Texture/Madeline.png");
+	TextureManager::GetInstance().Load(loadingScreen, "Assets/Texture/bg.jpg");
 	InitWindow();
 	InitMenu();
 	MusicManager::GetInstance().Play("Celeste_OST.mp3");
 	MusicManager::GetInstance().SetVolume(20.f);
 
 	FirstMenu::GetInstance().Show();
-	
+
 }
 
 void Game::InitMenu()
@@ -195,8 +200,8 @@ void Game::UpdateWindow(bool _loading)
 
 		window.clear();
 		Sprite* _sprite =EntityManager::GetInstance().GetApproximately("LoadingLogo")->GetComponent<AnimationComponent>()->GetCurrentAnimation()->GetSprite();
-		window.draw(*_sprite);
 		window.draw(*loadingScreen);
+		window.draw(*_sprite);
 		window.display();
 		return;
 	}

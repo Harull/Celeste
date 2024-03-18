@@ -38,7 +38,6 @@ CollisionInfos CollisionComponent::CheckCollision(const bool _isSpecificCheckOnW
 		if (Character* _hero = dynamic_cast<Character*>(owner))
 		{
 			if (_hero->IsDie())return CollisionInfos();
-
 		}
 		if (!_tile) continue;
 

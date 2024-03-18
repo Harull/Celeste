@@ -1,0 +1,23 @@
+Maps\Level5\CityBackground2.png
+1111111111xxxxxxxxxxxxxxxxxxxxxxxxxx1111
+ xxxxxxxx1x1x           d         xxx1x1
+      1111x1                        xxx1
+                                      x1
+       3                               1
+                                       1
+                        m              1
+                                       1
+                                       1
+                                       1
+                                       1
+                                       1
+                                       1
+                                       1
+                               ttt     1
+                               t ttt   1
+                               t ttt   1
+ c                     tt              1
+             tt       t tt             1
+11          ttt       t tt             1
+11111                 ttt              1
+1111111                                1

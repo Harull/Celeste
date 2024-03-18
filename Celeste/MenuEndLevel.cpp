@@ -17,6 +17,8 @@ MenuEndLevel::MenuEndLevel()
 	names = vector<string>();
 	font = nullptr;
 	timer = nullptr;
+	timer2 = nullptr;
+	timerSound = nullptr;
 	currentLevel = 0;
 	currentAlpha = 255.0f;
 	alphaFactor = 3.f;

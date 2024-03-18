@@ -54,17 +54,18 @@ void FallingTile::Update()
 	if (isComplete)return;
 	CarryCharacter();
 	Entity::Update();
-	
+	isTangible = true;
 
 	sf::FloatRect _rect(Camera::GetInstance().getCenter() - Camera::GetInstance().getSize() / 2.0f, Camera::GetInstance().getSize());
 	if (!_rect.intersects(shape->getGlobalBounds())) {
 		components.clear();
+		isTangible = false;
 		return;
 	}
 
 	if (CollisionComponent* _collision = GetComponent<CollisionComponent>())
 	{
-		CollisionInfos _info =_collision->CheckCollision();
+		CollisionInfos _info = _collision->CheckCollision();
 
 		if ((_info.collisionSideBinary & COLLIDE_LEFT) && (_info.entityTypeBinary & ENTITY_TILE) && _info.entityTypeBinary ^ ENTITY_FALLING_TILE)
 		{

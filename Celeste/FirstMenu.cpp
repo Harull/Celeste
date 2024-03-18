@@ -12,6 +12,7 @@ FirstMenu::FirstMenu()
 {
 
 	texts = vector<TextData*>();
+	dt = 0.f;
 
 	background = new Sprite();
 	font = new Font();
@@ -124,14 +125,16 @@ void FirstMenu::HandleGamepadClick(const Event _event)
 		else if (_YDirectionJoy == 0) canClick = true;
 		if (canClick) {
 
-			if (_ydirectionFle == -1) {
+			if (_ydirectionFle == -1) { //down
 				MoveUp();
+
 			}
-			else if (_ydirectionFle == 1) {
+			else if (_ydirectionFle == 1) { //up
+
 				MoveDown();
 			}
+			else if (_event.joystickButton.button == 0) canClick = true;
 		}
-		else if (_event.joystickButton.button == 0) canClick = true;
 	}
 	if (_event.type == Event::JoystickButtonPressed) {
 

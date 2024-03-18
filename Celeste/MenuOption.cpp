@@ -14,6 +14,7 @@ MenuOption::MenuOption()
 {
 	currentVolumeCount = 2;
 	currentVolumeCountMusic = 2;
+	canMoveJoystick = true;
 
 	background = new Sprite();
 	font = new Font();
@@ -30,7 +31,7 @@ MenuOption::MenuOption()
 
 	inGame = false;
 	snow = new Snow(100, 50, 100);
-
+	dt = 0.f;
 }
 
 MenuOption::~MenuOption()

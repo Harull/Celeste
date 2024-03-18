@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\Users\loicg\OneDrive\Documents\GitHub\SFML-2.6.1\include\SFML\Graphics\</FILEPATH>
+      <FILENAME>Glyph.hpp</FILENAME>
+      <LINE>49</LINE>
+      <COLUMN>4</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>La variable 'sf::Glyph::lsbDelta' n'est pas initialisée. Initialisez toujours une variable membre (type.6).</DESCRIPTION>
+    <FUNCTION>sf::Glyph::{ctor}</FUNCTION>
+    <DECORATED>??0Glyph@sf@@QEAA@XZ</DECORATED>
+    <FUNCLINE>49</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>sf::Glyph::lsbDelta</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\Users\loicg\OneDrive\Documents\GitHub\SFML-2.6.1\include\SFML\Graphics\</FILEPATH>
+      <FILENAME>Glyph.hpp</FILENAME>
+      <LINE>49</LINE>
+      <COLUMN>4</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>La variable 'sf::Glyph::rsbDelta' n'est pas initialisée. Initialisez toujours une variable membre (type.6).</DESCRIPTION>
+    <FUNCTION>sf::Glyph::{ctor}</FUNCTION>
+    <DECORATED>??0Glyph@sf@@QEAA@XZ</DECORATED>
+    <FUNCLINE>49</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>sf::Glyph::rsbDelta</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\Users\loicg\OneDrive\Documents\GitHub\Celeste\Celeste\</FILEPATH>
+      <FILENAME>StreamManager.h</FILENAME>
+      <LINE>56</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>6031</DEFECTCODE>
+    <DESCRIPTION>Valeur de retour ignorée : 'rename'.</DESCRIPTION>
+    <FUNCTION>StreamManager::SaveValue</FUNCTION>
+    <DECORATED>?SaveValue@StreamManager@@AEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0H@Z</DECORATED>
+    <FUNCLINE>15</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\Users\loicg\OneDrive\Documents\GitHub\Celeste\Celeste\</FILEPATH>
+      <FILENAME>Game.h</FILENAME>
+      <LINE>29</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>La variable 'Stopwatch::timeForPause' n'est pas initialisée. Initialisez toujours une variable membre (type.6).</DESCRIPTION>
+    <FUNCTION>Stopwatch::{ctor}</FUNCTION>
+    <DECORATED>??0Stopwatch@@QEAA@XZ</DECORATED>
+    <FUNCLINE>29</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Stopwatch::timeForPause</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\Users\loicg\OneDrive\Documents\GitHub\Celeste\Celeste\</FILEPATH>
+      <FILENAME>Grid.cpp</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>La variable 'Grid::background' n'est pas initialisée. Initialisez toujours une variable membre (type.6).</DESCRIPTION>
+    <FUNCTION>Grid::{ctor}</FUNCTION>
+    <DECORATED>??0Grid@@QEAA@V?$Vector2@H@sf@@@Z</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Grid::background</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\Users\loicg\OneDrive\Documents\GitHub\Celeste\Celeste\</FILEPATH>
+      <FILENAME>IManager.h</FILENAME>
+      <LINE>172</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>La variable 'IManager&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;,TextureData&gt;::selectedValue' n'est pas initialisée. Initialisez toujours une variable membre (type.6).</DESCRIPTION>
+    <FUNCTION>IManager&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;,TextureData&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$IManager@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VTextureData@@@@QEAA@XZ</DECORATED>
+    <FUNCLINE>172</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>IManager&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;,TextureData&gt;::selectedValue</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\Users\loicg\OneDrive\Documents\GitHub\Celeste\Celeste\</FILEPATH>
+      <FILENAME>IManager.h</FILENAME>
+      <LINE>172</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>La variable 'IManager&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;,TextureData&gt;::current' n'est pas initialisée. Initialisez toujours une variable membre (type.6).</DESCRIPTION>
+    <FUNCTION>IManager&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;,TextureData&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$IManager@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VTextureData@@@@QEAA@XZ</DECORATED>
+    <FUNCLINE>172</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>IManager&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;,TextureData&gt;::current</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\Users\loicg\OneDrive\Documents\GitHub\Celeste\Celeste\</FILEPATH>
+      <FILENAME>IManager.h</FILENAME>
+      <LINE>172</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>La variable 'IManager&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;,Entity&gt;::selectedValue' n'est pas initialisée. Initialisez toujours une variable membre (type.6).</DESCRIPTION>
+    <FUNCTION>IManager&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;,Entity&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$IManager@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VEntity@@@@QEAA@XZ</DECORATED>
+    <FUNCLINE>172</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>IManager&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;,Entity&gt;::selectedValue</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\Users\loicg\OneDrive\Documents\GitHub\Celeste\Celeste\</FILEPATH>
+      <FILENAME>IManager.h</FILENAME>
+      <LINE>172</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>La variable 'IManager&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;,Entity&gt;::current' n'est pas initialisée. Initialisez toujours une variable membre (type.6).</DESCRIPTION>
+    <FUNCTION>IManager&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;,Entity&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$IManager@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VEntity@@@@QEAA@XZ</DECORATED>
+    <FUNCLINE>172</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>IManager&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;,Entity&gt;::current</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

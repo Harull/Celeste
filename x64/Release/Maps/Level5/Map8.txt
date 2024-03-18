@@ -1,0 +1,23 @@
+Maps\Level4\background4.jpg
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+xxIIIxIII                   2222IIIIIIII
+                                2222IIII
+                                    222I
+III                                    I
+x            d                         I
+x222222222                             I
+IIIIIIIIII2                            I
+xxxxxxxxxII                            I
+IIII2    xx                            I
+II22                                   I
+I2    3                                I
+I2                                     I
+I2                                     I
+I2                                     I
+I2                                     I
+I2                                     I
+I2                 22222222     m     cI
+I22          222222IIIIIIII         c  I
+III222  22222IIIIIIII               c  I
+IIIIII22IIIIIIIII       G              I
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIsI

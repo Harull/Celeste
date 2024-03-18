@@ -134,7 +134,7 @@ void Camera::UpdateMapAround(const vector<vector<SmallMap*>>& _maps)
 		_mapArround.push_back(_maps[previousIndexes.y - 1][previousIndexes.x]);
 
 	}
-	int _max = _maps.size() - 2;
+	int _max = static_cast<int>(_maps.size()) - 2;
 	if (previousIndexes.y <= _max)
 	{
 		_mapArround.push_back(_maps[previousIndexes.y + 1][previousIndexes.x]);
