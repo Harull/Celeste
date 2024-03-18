@@ -156,8 +156,10 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GemDash.cpp" />
     <ClCompile Include="GravityComponent.cpp" />
+    <ClCompile Include="GravityTile.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="LevelSelectorMenu.cpp" />
+    <ClCompile Include="LoadingLogo.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapManager.cpp" />
@@ -214,10 +216,12 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GemDash.h" />
     <ClInclude Include="GravityComponent.h" />
+    <ClInclude Include="GravityTile.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="IManageable.h" />
     <ClInclude Include="IManager.h" />
     <ClInclude Include="LevelSelectorMenu.h" />
+    <ClInclude Include="LoadingLogo.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapManager.h" />

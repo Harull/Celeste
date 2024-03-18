@@ -14,10 +14,13 @@ void GravityComponent::Update()
 		if (_character->GetIsClimbing())
 			return;
 
+	ApplyGravity();
+}
+
+void GravityComponent::ApplyGravity(const bool _reverted)
+{
 	if (MovementComponent* _movementComp = owner->GetComponent<MovementComponent>())
 	{
-		sf::Vector2f _dir = _movementComp->GetDirection();
-		//std::cout << "Move Gravity" << std::endl;
-		_movementComp->Move({ 0, gravity * Game::GetInstance().GetSenseOfGravity()});
+		_movementComp->Move({ 0, gravity * Game::GetInstance().GetSenseOfGravity() * (_reverted ? -1 : 1)});
 	}
 }

@@ -4,7 +4,7 @@
 
 Player::Player()
 {
-	character = new Character({ 1920.f / 40.f * 1.25f, 1080.f / 22.5f * 2.5f}, { 200.f, 50.f }, 15, true);
+	character = new Character({ 1920.f / 40.f - 5.f, 1080.f / 22.5f * 2.f - 5.f}, { 200.f, 50.f }, 15, true);
 	InitInput();
 }
 
@@ -23,6 +23,19 @@ void Player::InitInput()
 	EventReactionManager::BindNewInputReaction(sf::Event::JoystickButtonPressed, [&](const sf::Event& _event) {return character->Jump(_event); });
 
 	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const sf::Event& _event) {return character->Dash(_event); });
+
+	EventReactionManager::BindNewInputReaction(sf::Event::JoystickMoved, [&](const sf::Event& _event) {return character->GoofyUP(_event); });
+	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const sf::Event& _event) {return character->GoofyUP(_event); });
+
+	EventReactionManager::BindNewInputReaction(sf::Event::JoystickMoved, [&](const sf::Event& _event) {return character->GoofyDOWN(_event); });
+	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const sf::Event& _event) {return character->GoofyDOWN(_event); });
+
+	EventReactionManager::BindNewInputReaction(sf::Event::JoystickMoved, [&](const sf::Event& _event) {return character->GoofyLEFT(_event); });
+	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const sf::Event& _event) {return character->GoofyLEFT(_event); });
+
+	EventReactionManager::BindNewInputReaction(sf::Event::JoystickMoved, [&](const sf::Event& _event) {return character->GoofyRIGHT(_event); });
+	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const sf::Event& _event) {return character->GoofyRIGHT(_event); });
+
 	EventReactionManager::BindNewInputReaction(sf::Event::JoystickButtonPressed, [&](const sf::Event& _event) {return character->Dash(_event); });
 }
 

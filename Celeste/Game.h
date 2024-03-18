@@ -6,8 +6,6 @@
 #include "Menu.h"
 #include "FirstMenu.h"
 #include "MusicManager.h"
-#include "Snow.h"
-#include "Macro.h"
 
 using namespace sf;
 
@@ -16,15 +14,92 @@ enum SenseOfGravity
 	GRAVITY_INVERTED = -1, GRAVITY_NORMAL = 1
 };
 
+struct Stopwatch {
+	int hours;
+	int minutes;
+	int secondes;
+	int millisecondes;
+	Text* text;
+	Font* font;
+	string stopwatchText;
+	Clock chrono;
+	float timeForPause;
+
+
+	Stopwatch() {
+		hours = 0;
+		minutes = 0;
+		secondes = 0;
+		millisecondes = 0;
+		text = new Text();
+		font = new Font();
+		chrono = Clock();
+
+	}
+
+	void Init() {
+		text->setPosition(Vector2f(10.0f, 0.0f));
+		text->setCharacterSize(40);
+		font = new Font();
+		if (!font->loadFromFile("Assets/Fonts/Renogare.otf"))
+		{
+			cerr << "ERROR - Font non charge" << endl;
+		}
+		text->setFont(*font);
+		text->setOutlineThickness(2.0f);
+	}
+
+	void Update() {
+
+		millisecondes = chrono.getElapsedTime().asMilliseconds();
+		if (millisecondes >= 1000) {
+			chrono.restart();
+			millisecondes = 0;
+			secondes++;
+			if (secondes == 60)
+			{
+				secondes = 0;
+				minutes++;
+			}
+			if (minutes == 60)
+			{
+				minutes = 0;
+				hours++;
+			}
+		}
+		stopwatchText = to_string(hours) + ":" + to_string(minutes) + ":" + to_string(secondes) + ":" + to_string(millisecondes);
+		text->setString(stopwatchText);
+	}
+
+	void Reset() {
+		chrono.restart();
+		hours = 0;
+		minutes = 0;
+		secondes = 0;
+		millisecondes = 0;
+		stopwatchText = to_string(hours) + ":" + to_string(minutes) + ":" + to_string(secondes) + ":" + to_string(millisecondes);
+		text->setString(stopwatchText);
+	}
+
+};
+
 class Game : public Singleton<Game>
 {
 	RenderWindow window;
 	Map* map;
 	Player* player;
 	FloatRect visibleArea;
+	RectangleShape* loadingScreen;
+
+	Menu* menu;
+	MusicManager* musicManager;
+
+	Stopwatch* stopwatch;
+
 
 	Snow* snow;
 	sf::Clock clock;
+
 	float dt;
 
 	SenseOfGravity senseOfGravity;
@@ -49,6 +124,10 @@ public:
 	{
 		return senseOfGravity;
 	}
+	Stopwatch* GetStopwatch() {
+		return stopwatch;
+	}
+
 	void ToggleSenseOfGravity()
 	{
 		senseOfGravity = static_cast<SenseOfGravity>(static_cast<int>(senseOfGravity) * -1);
@@ -66,7 +145,7 @@ public:
 
 public:
 	void Launch();
-	void UpdateWindow();
+	void UpdateWindow(bool _loading = false);
 	void SelectLevel(const int _value);
 	void Resume();
 

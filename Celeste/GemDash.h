@@ -8,9 +8,10 @@ class GemDash : public Tile
 	bool isUsed;
 
 public:
-	GemDash(const Vector2f& _position, const Vector2f& _size, const string& _path = "Assets/Gem.png");
+	GemDash(const Vector2f& _position, const Vector2f& _size, Grid* _owner,const string& _path = "Assets/Gem.png");
 
 public:
 	void GetHit(int _collisionSideBinary);
+	virtual void Reset()override;
 };
 

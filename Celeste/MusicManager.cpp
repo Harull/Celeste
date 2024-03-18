@@ -1,37 +1,44 @@
 #include "MusicManager.h"
 
+
+
 void MusicManager::Play(const string& _path)
 {
+	if (musicData)
+	{
+		musicData->stop();
+		delete musicData;
+		musicData = nullptr;
+	}
 
 	if (_path == "") return;
 
-	_musicData = Get(_path);
+	musicData = Get(_path);
 
-	if (!_musicData)
+	if (!musicData)
 	{
-		_musicData = new MusicData(_path);
-		if (!_musicData->openFromFile("Assets/Songs/" + _path))
+		musicData = new MusicData(_path);
+		if (!musicData->openFromFile("Assets/Songs/Musics/" + _path))
 		{
 			cerr << "Le son n'a pas été correctement chargée !" << endl;
 			return;
 		}
 	}
-	if (_musicData)
+	if (musicData)
 	{
-		_musicData->play();
-		_musicData->setVolume(100);
+		musicData->play();
+		musicData->setVolume(volume);
 	}
 }
 
 void MusicManager::IncreaseVolume()
 {
-	if (_musicData)
+	if (musicData)
 	{
-		float currentVolume = _musicData->getVolume();
-		if (currentVolume < 110)
+		if (volume < 110)
 		{
-			currentVolume += 10; 
-			_musicData->setVolume(currentVolume);
+			volume += 10;
+			musicData->setVolume(volume);
 		}
 
 	}
@@ -39,13 +46,12 @@ void MusicManager::IncreaseVolume()
 
 void MusicManager::DecreaseVolume()
 {
-	if (_musicData)
+	if (musicData)
 	{
-		float currentVolume = _musicData->getVolume();
-		if (currentVolume > 0)
+		if (volume > 0)
 		{
-			currentVolume -= 10; 
-			_musicData->setVolume(currentVolume);
+			volume -= 10;
+			musicData->setVolume(volume);
 		}
 
 	}
@@ -53,16 +59,19 @@ void MusicManager::DecreaseVolume()
 
 void MusicManager::MuteVolume()
 {
-	_musicData->setVolume(0);
+	volume = 0;
+	musicData->setVolume(volume);
 }
 
 void MusicManager::UnmuteVolume(const float _sound)
 {
-	_musicData->setVolume(_sound);
+	volume = _sound;
+	musicData->setVolume(volume);
 }
 
 void MusicManager::SetVolume(const float _volume)
 {
-	_musicData->setVolume(_volume);
+	volume = _volume;
+	musicData->setVolume(volume);
 }
 

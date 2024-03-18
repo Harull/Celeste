@@ -6,6 +6,7 @@
 #include "TimerManager.h"
 #include "MenuOption.h"
 #include "MusicManager.h"
+#include"SoundManager.h"
 
 #define DEAD_ZONE 50.0f
 
@@ -19,7 +20,7 @@ LevelSelectorMenu::LevelSelectorMenu()
 	currentAlpha = 255.0f;
 	alphaFactor = 3.f;
 	canClick = true;
-
+	snow = new Snow(100, 50, 100);
 	index = 0;
 	maxIndex = 0;
 }
@@ -30,6 +31,7 @@ LevelSelectorMenu::~LevelSelectorMenu()
 	delete font;
 	if (timer) timer->SetToRemove(true);
 	if (timer2) timer2->SetToRemove(true);
+	delete snow;
 
 }
 
@@ -52,6 +54,13 @@ void LevelSelectorMenu::Init(const int _levelCounts)
 	}
 
 	maxIndex = _levelCounts;
+}
+
+void LevelSelectorMenu::UpdateSnow()
+{
+	dt = 0.f;
+	dt = clock.restart().asSeconds();
+	snow->update(dt);
 }
 
 void LevelSelectorMenu::HandleGamepadClick(Event _event)
@@ -90,11 +99,41 @@ void LevelSelectorMenu::HandleGamepadClick(Event _event)
 	if (_event.type == Event::JoystickButtonPressed) {
 		if (_event.joystickButton.button == 0) {
 			MenuOption::GetInstance().SetInGame(true);
+			Game::GetInstance().GetStopwatch()->Reset();
+			SoundManager::GetInstance().Play("SoundSelector.mp3");
 			Game::GetInstance().SelectLevel(currentLevel + 1);
-			MusicManager::GetInstance().Play("Sounds/SoundSelector.mp3");
-
 		}
 		else if (_event.joystickButton.button == 1) {
+			FirstMenu::GetInstance().Show();
+		}
+	}
+}
+
+void LevelSelectorMenu::HandleKeyboardClick(const Event _event)
+{
+
+	if (!canClick) return;
+
+	if (_event.type == Event::KeyPressed) {
+
+		if (_event.key.code == Keyboard::Right) {
+			if (!MoveRight()) return;
+		}
+		else if (_event.key.code == Keyboard::Left) {
+
+			if (!MoveLeft()) return;
+		}
+
+		if (!canClick) return;
+		if (_event.key.code == Keyboard::C) {
+			MenuOption::GetInstance().SetInGame(true);
+			Game::GetInstance().GetStopwatch()->Reset();
+			SoundManager::GetInstance().Play("SoundSelector.mp3");
+			string _path = "Map" + to_string(currentLevel + 1);
+			MusicManager::GetInstance().Play(_path + ".mp3");
+			Game::GetInstance().SelectLevel(currentLevel + 1);
+		}
+		else if (_event.key.code == Keyboard::Escape) {
 			FirstMenu::GetInstance().Show();
 		}
 	}
@@ -142,6 +181,10 @@ void LevelSelectorMenu::HandleEvents(RenderWindow& _window)
 		{
 			HandleGamepadClick(_event);
 		}
+		else if (_event.type == Event::KeyPressed)
+		{
+			HandleKeyboardClick(_event);
+		}
 	}
 }
 
@@ -157,6 +200,8 @@ bool LevelSelectorMenu::Show()
 		_window.setView(_view);
 		_window.clear();
 		_window.draw(*background);
+		UpdateSnow();
+		snow->draw(_window);
 		_window.display();
 	}
 	return true;
@@ -168,6 +213,7 @@ void LevelSelectorMenu::TransitionFill() {
 
 		Fade(background, (unsigned int)currentAlpha);
 
+
 		currentAlpha -= alphaFactor;
 		if (currentAlpha <= 0 || currentAlpha >= 255)
 		{
@@ -177,7 +223,7 @@ void LevelSelectorMenu::TransitionFill() {
 			TransitionUnFill();
 
 		}};
-	timer = new Timer("FadeTimer", _callback, sf::seconds(0.01f), true, true);
+	timer = new Timer("FadeTimer", _callback, sf::seconds(0.004f), true, true);
 }
 
 
@@ -194,5 +240,5 @@ void LevelSelectorMenu::TransitionUnFill()
 			timer2->Reset();
 			canClick = true;
 		}};
-	timer2 = new Timer("FadeTimer2", _callback2, sf::seconds(0.01f), true, true);
+	timer2 = new Timer("FadeTimer2", _callback2, sf::seconds(0.004f), true, true);
 }

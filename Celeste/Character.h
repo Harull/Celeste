@@ -128,6 +128,10 @@ public:
 	bool Bonk(const int _collisionSideBinary);
 	bool Dash(const sf::Event& _event);
 	bool Climb(const sf::Event& _event);
+	bool GoofyUP(const Event& _event);
+	bool GoofyDOWN(const Event& _event);
+	bool GoofyLEFT(const Event& _event);
+	bool GoofyRIGHT(const Event& _event);
 	void ResetJumpValues();
 	void ResetDashValues();
 	void SetPosition(const sf::Vector2f& newPosition);
@@ -135,6 +139,7 @@ public:
 	void Dash();
 	void Die();
 	void Respawn();
+	void Taunt();
 
 };
 

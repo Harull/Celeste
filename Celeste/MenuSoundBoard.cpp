@@ -8,7 +8,7 @@
 
 #define DEAD_ZONE 50.0f
 
-#define PATH(name) "Assets/Songs/SoundBoard/" + string(name) + ".mp3"
+#define PATH(name) string(name) + ".mp3"
 
 
 
@@ -104,7 +104,7 @@ void MenuSoundBoard::Init()
 		_text->text->setOutlineThickness(3.0f);
 	}
 	size = static_cast<int>(texts.size());
-	index = static_cast<int>(textsToShow.size()) / 2; 
+	index = static_cast<int>(textsToShow.size()) / 2;
 	beginIndexToShow = 0;
 	endIndexToShow = maxValue;
 	currentText = textsToShow[index];
@@ -153,6 +153,28 @@ void MenuSoundBoard::HandleGamepadClick(Event _event)
 			SoundManager::GetInstance().Play(PATH(currentText->name));
 		}
 		if (_event.joystickButton.button == 1) {
+			MenuOption::GetInstance().Show();
+		}
+
+	}
+}
+
+void MenuSoundBoard::HandleKeyboardClick(const Event _event)
+{
+
+	if (_event.type == Event::KeyPressed) {
+
+
+		if (_event.key.code == Keyboard::Up) {
+			MoveUp();
+		}
+		else if (_event.key.code == Keyboard::Down) {
+			MoveDown();
+		}
+		else if (_event.key.code == Keyboard::C) {
+			SoundManager::GetInstance().Play(PATH(currentText->name));
+		}
+		else if (_event.key.code == Keyboard::Escape) {
 			MenuOption::GetInstance().Show();
 		}
 
@@ -235,6 +257,10 @@ void MenuSoundBoard::HandleEvents(RenderWindow& _window)
 		else if (_event.type == Event::JoystickButtonPressed || _event.type == Event::JoystickMoved)
 		{
 			HandleGamepadClick(_event);
+		}
+		else if (_event.type == Event::KeyPressed)
+		{
+			HandleKeyboardClick(_event);
 		}
 	}
 }

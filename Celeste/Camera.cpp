@@ -4,6 +4,7 @@
 #include "Game.h"
 #include "TimerManager.h"
 #include "MovementComponent.h"
+#include"EntityManager.h"
 #include "MapManager.h"
 
 void Camera::Init(const Vector2f& _position, const Vector2f& _size)
@@ -46,6 +47,11 @@ void Camera::Update(bool _heroTeleport)
 
 	if (previousIndexes.x != _index.x)
 	{
+		Game& _game = Game::GetInstance();
+		if (_game.GetSenseOfGravity() == GRAVITY_INVERTED)
+		{
+			_game.ToggleSenseOfGravity();
+		}
 		const int _sign = _index.x - previousIndexes.x;
 
 		if (_jumpTimer)
@@ -56,29 +62,36 @@ void Camera::Update(bool _heroTeleport)
 			if (!_heroTeleport)
 			{
 			_game.UpdateSnow();
-			_game.UpdateWindow();
+			_game.UpdateWindow(false);
 
 			}
 			move(_sign * 1.5f , 0);
 		}
+			EntityManager::GetInstance().Reset();
 
 		if (_jumpTimer)
 			_jumpTimer->Start();
 	}
 	 if (previousIndexes.y != _index.y)
 	{
+		 Game& _game = Game::GetInstance();
+		 if (_game.GetSenseOfGravity() == GRAVITY_INVERTED)
+		 {
+			 _game.ToggleSenseOfGravity();
+		 }
 		const int _sign = _index.y - previousIndexes.y;
 		while (!IsNearlyEqual(getCenter().y, _index.y * getSize().y + getSize().y / 2.f))
 		{
 			if (!_heroTeleport)
 			{
 				_game.UpdateSnow();
-				_game.UpdateWindow();
+				_game.UpdateWindow(false);
 
 			}
 			
 			move(0, _sign * 1.2f);
 		}
+			EntityManager::GetInstance().Reset();
 		if (_sign <= 0)
 		{
 			if (_jumpTimer)
@@ -95,5 +108,6 @@ void Camera::Update(bool _heroTeleport)
 		}
 	}
 
+	
 	previousIndexes = _index;
 }

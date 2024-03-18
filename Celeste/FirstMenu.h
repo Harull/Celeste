@@ -20,18 +20,23 @@ private:
 
     Sprite* background;
     Font* font;
-
+    Snow* snow;
+    Clock clock;
+    
+    float dt;
     int index;
 	int maxIndex;
     int hoveredIndex;
 
 	bool canClick;
 
-    void HandleGamepadClick(Event _event);
+    void HandleGamepadClick(const Event _event);
+    void HandleKeyboardClick(const Event _event);
     void HandleEvents(RenderWindow& _window);
 
 	void MoveDown();
-	void MoveUp();
+    void MoveUp();
+
 
 public:
 
@@ -39,6 +44,9 @@ public:
     ~FirstMenu();
 
     void Init();
+
     virtual bool Show() override;
+
+    void UpdateSnow();
 
 };

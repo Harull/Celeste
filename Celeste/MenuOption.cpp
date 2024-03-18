@@ -13,6 +13,7 @@
 MenuOption::MenuOption()
 {
 	currentVolumeCount = 2;
+	currentVolumeCountMusic = 2;
 
 	background = new Sprite();
 	font = new Font();
@@ -28,6 +29,7 @@ MenuOption::MenuOption()
 	offsetVolume = 0;
 
 	inGame = false;
+	snow = new Snow(100, 50, 100);
 
 }
 
@@ -61,7 +63,8 @@ void MenuOption::Init()
 	vector<string> _names =
 	{
 		"Resume",
-		"Volume",
+		"Volume Music",
+		"Volume Songs",
 		"SoundBoard",
 		"Retour Menu",
 	};
@@ -69,12 +72,14 @@ void MenuOption::Init()
 	vector<function<void()>> _functions =
 	{
 		[]() { Game::GetInstance().Resume(); } ,
+		[this]() { ChangeVolumeMusic(); },
 		[this]() { ChangeVolume(); },
 		[]() { MenuSoundBoard::GetInstance().Show(); } ,
 		[]() {
 			if (MenuOption::GetInstance().IsInGame()) {
 				MenuOption::GetInstance().SetInGame(false);
 				TimerManager::GetInstance().DeleteAll();
+				MusicManager::GetInstance().Play("Celeste_OST.mp3");
 				LevelSelectorMenu::GetInstance().Show();
 			}
 			else {
@@ -85,7 +90,7 @@ void MenuOption::Init()
 
 	for (string _name : _names) {
 		if (_name != "Resume") {
-			if (_name == "Volume") {
+			if (_name == "Volume Music" || _name == "Volume Songs") {
 				texts.push_back(new TextData(_name,
 					new Text(_name + "<" + to_string(currentVolumeCount) + ">", *font, 50), false, true));
 			}
@@ -103,8 +108,12 @@ void MenuOption::Init()
 
 	float _posX = (_windowSize.x - 500.0f) / 2;
 	float _sizeY = 50.0f;
-	float _posY = (_windowSize.y - _sizeY * texts.size()) / 2;
-	//float _posY = (_windowSize.y - 100 * texts.size() + texts.size() * texts[0]->text->getCharacterSize()) / 2;
+
+	float _w = static_cast<float>(_windowSize.y);
+	float _x = static_cast<float>(texts[0]->text->getCharacterSize());
+	float _y = static_cast<float>(texts.size());
+
+	float _posY = (_w - _x * _y) / 2 - 50.f * _y + 100.f;
 	Vector2f _pos = Vector2f(_posX, _posY);
 	int _i = 0;
 	for (TextData* _text : texts) {
@@ -122,7 +131,14 @@ void MenuOption::Init()
 
 }
 
-void MenuOption::HandleGamepadClick(Event _event)
+void MenuOption::UpdateSnow()
+{
+	dt = 0.f;
+	dt = clock.restart().asSeconds();
+	snow->update(dt);
+}
+
+void MenuOption::HandleGamepadClick(const Event _event)
 {
 	float _axisYPositionJoy = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
 	int _yDirectionJoy = (_axisYPositionJoy <= -DEAD_ZONE) ? -1 : _axisYPositionJoy >= DEAD_ZONE ? 1 : 0;
@@ -197,6 +213,36 @@ void MenuOption::HandleGamepadClick(Event _event)
 
 }
 
+void MenuOption::HandleKeyboardClick(const Event _event)
+{
+
+	if (_event.type == Event::KeyPressed) {
+
+		if (_event.key.code == Keyboard::Down) {
+			MoveUp();
+		}
+		else if (_event.key.code == Keyboard::Up) {
+			MoveDown();
+		}
+		if (currentText->canChangeValue) {
+
+			if (_event.key.code == Keyboard::Left) {
+				offsetVolume = -1;
+				currentText->onClick();
+			}
+			else if (_event.key.code == Keyboard::Right) {
+				offsetVolume = 1;
+				currentText->onClick();
+			}
+		}
+		if (_event.key.code == Keyboard::C) {
+			if (currentText->canChangeValue) return;
+			currentText->onClick();
+		}
+	}
+
+}
+
 void MenuOption::MoveUp()
 {
 	canClick = false;
@@ -206,7 +252,7 @@ void MenuOption::MoveUp()
 		index--;
 		return;
 	}
-	SoundManager::GetInstance().Play("Assets/Songs/Sounds/ui_main_roll_down.wav");
+	SoundManager::GetInstance().Play("ui_main_roll_down.wav");
 
 	currentText->text->setFillColor(sf::Color::White);
 	currentText = texts[index];
@@ -222,7 +268,7 @@ void MenuOption::MoveDown()
 		index++;
 		return;
 	}
-	SoundManager::GetInstance().Play("Assets/Songs/Sounds/ui_main_roll_down.wav");
+	SoundManager::GetInstance().Play("ui_main_roll_down.wav");
 
 	currentText->text->setFillColor(sf::Color::White);
 	currentText = texts[index];
@@ -242,6 +288,36 @@ void MenuOption::HandleEvents(RenderWindow& _window)
 		{
 			HandleGamepadClick(_event);
 		}
+		else if (_event.type == Event::KeyPressed)
+		{
+			HandleKeyboardClick(_event);
+		}
+	}
+}
+
+void MenuOption::ChangeVolumeMusic()
+{
+	currentVolumeCountMusic += offsetVolume;
+	if (currentVolumeCountMusic <= 0) {
+		currentVolumeCountMusic = 0;
+		ModifyIntBetweenChevrons(currentVolumeCountMusic, currentText->text);
+		MusicManager::GetInstance().MuteVolume();
+		return;
+	}
+	else if (currentVolumeCountMusic > 10) {
+		currentVolumeCountMusic = 10;
+		ModifyIntBetweenChevrons(currentVolumeCountMusic, currentText->text);
+		return;
+	}
+
+	if (offsetVolume == 0) return;
+	else if (offsetVolume == 1) {
+		MusicManager::GetInstance().IncreaseVolume();
+		ModifyIntBetweenChevrons(currentVolumeCountMusic, currentText->text);
+	}
+	else if (offsetVolume == -1) {
+		MusicManager::GetInstance().DecreaseVolume();
+		ModifyIntBetweenChevrons(currentVolumeCountMusic, currentText->text);
 	}
 }
 
@@ -251,7 +327,7 @@ void MenuOption::ChangeVolume()
 	if (currentVolumeCount <= 0) {
 		currentVolumeCount = 0;
 		ModifyIntBetweenChevrons(currentVolumeCount, currentText->text);
-		MusicManager::GetInstance().MuteVolume();
+		SoundManager::GetInstance().MuteVolume();
 		return;
 	}
 	else if (currentVolumeCount > 10) {
@@ -262,11 +338,11 @@ void MenuOption::ChangeVolume()
 
 	if (offsetVolume == 0) return;
 	else if (offsetVolume == 1) {
-		MusicManager::GetInstance().IncreaseVolume();
+		SoundManager::GetInstance().SetVolume(static_cast<float>(currentVolumeCount));
 		ModifyIntBetweenChevrons(currentVolumeCount, currentText->text);
 	}
 	else if (offsetVolume == -1) {
-		MusicManager::GetInstance().DecreaseVolume();
+		SoundManager::GetInstance().SetVolume(static_cast<float>(currentVolumeCount));
 		ModifyIntBetweenChevrons(currentVolumeCount, currentText->text);
 	}
 }
@@ -321,7 +397,8 @@ bool MenuOption::Show()
 			}
 		}
 
-
+		UpdateSnow();
+		snow->draw(_window);
 		_window.display();
 	}
 	return true;

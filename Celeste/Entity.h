@@ -37,10 +37,11 @@ class Entity : public IManageable<string>
 protected:
 	Texture texture;
 	vector<Component*> components;
+	Vector2f originalPosition;
 	Shape* shape;
 	EntityType type;
 	function<void(int _collisionSide, int _collisionSideBinary)>collisionReaction;
-	
+	bool isUpdatable;
 public:
 	template<typename T>
 	T* GetComponent() const
@@ -55,6 +56,10 @@ public:
 		return nullptr;
 	}
 	
+	Vector2f GetOriginalPosition()const {
+		return originalPosition;
+	}
+
 	Vector2f GetPosition()const
 	{
 		return shape->getPosition();
@@ -77,15 +82,23 @@ public:
 	{
 		return type;
 	}
-
+	void SetIsUpdatable(const bool _status)
+	{
+		isUpdatable = _status;
+	}
+	bool GetIsUpdatable()const
+	{
+		return isUpdatable;
+	}
 public:
-	Entity(const EntityData& _data, std::vector<Component*> _components = vector<Component*>());
+	Entity(const EntityData& _data, const bool _isUpdatable = false, std::vector<Component*> _components = vector<Component*>());
 	~Entity();
 
 private:
 	void Register();
-
 public:
 	virtual void Update();
+	virtual void Reset();
+	bool ComputeIsOnScreen();
 };
 

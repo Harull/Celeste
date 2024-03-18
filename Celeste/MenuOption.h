@@ -11,6 +11,7 @@ using namespace std;
 class MenuOption : public Menu, public Singleton<MenuOption>
 {
 private:
+    int currentVolumeCountMusic;
     int currentVolumeCount;
 
     vector<TextData*> texts;
@@ -20,6 +21,9 @@ private:
     int maxIndex;
 	int minIndex;
     int offsetVolume;
+    Snow* snow;
+    Clock clock;
+    float dt;
 
     bool canClick;
 	bool canMoveJoystick;
@@ -31,7 +35,9 @@ private:
 
 
     void HandleGamepadClick(Event _event);
+    void HandleKeyboardClick(const Event _event);
     void HandleEvents(RenderWindow& _window);
+	void ChangeVolumeMusic();
 	void ChangeVolume();
 
     void MoveDown();
@@ -57,6 +63,7 @@ public:
 	bool IsInGame() const { return inGame; }
 
     void Init();
+	void UpdateSnow();
     virtual bool Show() override;
 
 };

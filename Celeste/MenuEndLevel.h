@@ -20,7 +20,7 @@ private:
 	Timer* timerSound;
 	vector<string> names;
 
-
+	Shape* background;
 	Font* font;
 	string nextPath;
 	int currentLevel;
@@ -31,6 +31,8 @@ private:
 
 	void HandleEvents(RenderWindow& _window);
 	void HandleGamepadClick(Event _event);
+
+	void HandleKeyboardClick(const Event _event);
 
 	bool MoveRight();
 

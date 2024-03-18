@@ -9,6 +9,7 @@
 #include "LevelSelectorMenu.h"
 
 #define DEAD_ZONE 50.0f
+#define PATH(name) "Assets/Background/End/" + to_string(name) + ".png"
 
 MenuEndLevel::MenuEndLevel()
 {
@@ -20,6 +21,7 @@ MenuEndLevel::MenuEndLevel()
 	currentAlpha = 255.0f;
 	alphaFactor = 3.f;
 	canClick = false;
+	background = nullptr;
 
 	index = 0;
 	maxIndex = 0;
@@ -29,6 +31,7 @@ MenuEndLevel::~MenuEndLevel()
 {
 	delete text;
 	delete font;
+	delete background;
 	if (timer) timer->SetToRemove(true);
 	if (timer2) timer2->SetToRemove(true);
 	if (timerSound) timerSound->SetToRemove(true);
@@ -47,16 +50,16 @@ void MenuEndLevel::Init()
 
 	names = { "Bravo !", "Tu as fini !", "Mais tu es vraiment nul" };
 
-	maxIndex = static_cast<int>(names.size() - 1);
-
 	text = new TextData(names[index], new Text(names[index], *font, 55), false);
+	text->text->setOutlineThickness(3.0f);
 	SetOriginAtMiddle(*text->text);
 	text->text->setPosition(_windowSize.x / 2.0f, _windowSize.y / 2.0f);
-
+	background = new RectangleShape(Vector2f(1920.0f, 1080.0f));
+	TextureManager::GetInstance().Load(background, PATH(1));
 
 }
 
-void MenuEndLevel::HandleGamepadClick(Event _event)
+void MenuEndLevel::HandleGamepadClick(const Event _event)
 {
 
 	if (!canClick) return;
@@ -64,14 +67,42 @@ void MenuEndLevel::HandleGamepadClick(Event _event)
 	if (_event.type == Event::JoystickButtonPressed) {
 		if (_event.joystickButton.button == 0) {
 
-			SoundManager::GetInstance().Play("Assets/Songs/Sounds/SoundSelector.mp3", 5.0f);
+			SoundManager::GetInstance().Play("SoundSelector.mp3");
 			index++;
 			if (index > maxIndex) {
 				index = 0;
 				text->text->setString(names[index]);
 				SetOriginAtMiddle(*text->text);
 				canClick = false;
+				names.pop_back();
+				MusicManager::GetInstance().Play("Celeste_OST.mp3");
 				LevelSelectorMenu::GetInstance().Show(); 
+			}
+
+			TransitionFill();
+
+		}
+	}
+}
+
+void MenuEndLevel::HandleKeyboardClick(const Event _event)
+{
+
+	if (!canClick) return;
+
+	if (_event.type == Event::KeyPressed) {
+		if (_event.key.code == Keyboard::C) {
+
+			SoundManager::GetInstance().Play("SoundSelector.mp3");
+			index++;
+			if (index > maxIndex) {
+				index = 0;
+				text->text->setString(names[index]);
+				SetOriginAtMiddle(*text->text);
+				canClick = false;
+				names.pop_back();
+				MusicManager::GetInstance().Play("Celeste_OST.mp3");
+				LevelSelectorMenu::GetInstance().Show();
 			}
 
 			TransitionFill();
@@ -95,14 +126,22 @@ void MenuEndLevel::HandleEvents(RenderWindow& _window)
 		{
 			HandleGamepadClick(_event);
 		}
+		else if (_event.type == Event::KeyPressed)
+		{
+			HandleKeyboardClick(_event);
+		}
 	}
 }
 
 bool MenuEndLevel::Show()
 {
-	SoundManager::GetInstance().Play("Assets/Songs/Sounds/cassette_get.wav", 5.0f);
+	SoundManager::GetInstance().Play("cassette_get.wav");
 	timerSound = new Timer("CassetteTimer", [&]() { canClick = true; }, sf::seconds(2.f), true,false);
 	RenderWindow& _window = Game::GetInstance().GetWindow();
+	names.push_back(Game::GetInstance().GetStopwatch()->stopwatchText);
+	maxIndex = static_cast<int>(names.size() - 1);
+	TextureManager::GetInstance().Load(background, PATH(RandomMaxMin(7, 1)));
+
 	while (_window.isOpen())
 	{
 		TimerManager::GetInstance().Update();
@@ -111,6 +150,7 @@ bool MenuEndLevel::Show()
 		const View _view(FloatRect(Vector2f(0.0f, 0.0f), Vector2f(1920.0f, 1080.0f)));
 		_window.setView(_view);
 		_window.clear();
+		_window.draw(*background);
 		_window.draw(*text->text);
 
 		_window.display();
@@ -123,6 +163,8 @@ void MenuEndLevel::TransitionFill() {
 	const std::function<void()>& _callback = [&]() {
 
 		Fade(text->text, (unsigned int)currentAlpha);
+		FadeOutlineColor(text->text, (unsigned int)currentAlpha);
+	
 
 		currentAlpha -= alphaFactor;
 		if (currentAlpha <= 0 || currentAlpha >= 255)
@@ -143,6 +185,7 @@ void MenuEndLevel::TransitionUnFill()
 {
 	const std::function<void()>& _callback2 = [&]() {
 		Fade(text->text, (unsigned int)currentAlpha);
+		FadeOutlineColor(text->text, (unsigned int)currentAlpha);
 
 		currentAlpha += alphaFactor;
 		if (currentAlpha <= 0 || currentAlpha >= 255)

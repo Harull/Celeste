@@ -2,7 +2,7 @@
 #include "CollisionComponent.h"
 #include "TextureManager.h"
 
-OneDirectionTile::OneDirectionTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path) :Tile(_type, _position, _size, _path)
+OneDirectionTile::OneDirectionTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path, Grid* _owner) :Tile(_type, _position, _size, _path, _owner)
 {
     isTangible = true;
 

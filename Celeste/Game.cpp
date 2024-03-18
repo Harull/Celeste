@@ -11,9 +11,11 @@
 #include "MenuSoundBoard.h"
 #include "SoundManager.h"
 #include "MenuEndLevel.h"
-
+#include "TimerManager.h"
+#include"TextureManager.h"
 #include"Portal.h"
-
+#include "Macro.h"
+#include"LoadingLogo.h"
 #include "MenuSoundBoard.h"
 
 
@@ -26,14 +28,17 @@ Game::Game()
 	map = nullptr;
 	player = nullptr;
 	visibleArea = FloatRect();
-	snow = new Snow(100, 50, 100);
 	senseOfGravity = GRAVITY_NORMAL;
+	stopwatch = new Stopwatch();
+	loadingScreen = new RectangleShape({ 1920 ,1080 });
+	loadingScreen->setPosition({ 0.f,0.f });
 }
 
 Game::~Game()
 {
 	delete player;
 	delete snow;
+	delete stopwatch;
 }
 
 void Game::Launch()
@@ -44,6 +49,8 @@ void Game::Launch()
 
 void Game::Start()
 {
+	snow = new Snow(100, 50, 100);
+	TextureManager::GetInstance().Load(loadingScreen, "Assets/Texture/Madeline.png");
 	InitWindow();
 	InitMenu();
 	MusicManager::GetInstance().Play("Celeste_OST.mp3");
@@ -56,7 +63,7 @@ void Game::Start()
 void Game::InitMenu()
 {
 	FirstMenu::GetInstance().Init();
-	LevelSelectorMenu::GetInstance().Init(3);
+	LevelSelectorMenu::GetInstance().Init(6);
 	MenuOption::GetInstance().Init();
 	MenuSoundBoard::GetInstance().Init();
 	MenuEndLevel::GetInstance().Init();
@@ -64,19 +71,34 @@ void Game::InitMenu()
 }
 
 void Game::InitMap(const int _value)
-{
-	SoundManager::GetInstance().Play("Assets/Songs/Sounds/SoundSelector.mp3", 5.0f);
+{  
+	SoundManager::GetInstance().Play("SoundSelector.mp3");
 	MapManager::GetInstance().Clear();
 	EntityManager::GetInstance().Clear();
 	EventReactionManager::Clear();
 	
 	delete player;
 	player = new Player();
-
 	map = new Map();
 
 	map->Init(_value);
 	InitInput();
+	Camera::GetInstance().Update(true);
+
+	new Timer("LoadingPause", [this]() {}, seconds(4));
+	Vector2f _logoPosition = Vector2f(float(window.getSize().x * 0.95), float(window.getSize().y * 0.9));
+
+	LoadingLogo* _loadingImage = new  LoadingLogo(_logoPosition);
+
+	while (TimerManager::GetInstance().GetApproximately("LoadingPause"))
+	{
+		TimerManager::GetInstance().Update();
+		_loadingImage->Update();
+		UpdateWindow(true);
+	}
+	_loadingImage->SetToRemove(true);
+	string _path = "Map" + to_string(_value);
+	MusicManager::GetInstance().Play(_path + ".mp3");
 	Update();
 }
 
@@ -84,6 +106,12 @@ void Game::InitInput()
 {
 	EventReactionManager::BindNewInputReaction(sf::Event::JoystickButtonPressed, [&](const Event& _event) {
 		if (_event.joystickButton.button == 7)
+			return MenuOption::GetInstance().Show();
+		return false;
+		});
+
+	EventReactionManager::BindNewInputReaction(sf::Event::KeyPressed, [&](const Event& _event) {
+		if (_event.key.code == Keyboard::Escape) 
 			return MenuOption::GetInstance().Show();
 		return false;
 		});
@@ -116,7 +144,8 @@ void Game::InitWindow()
 	const int _xWindowSize = 1920, _yWindowSize = 1080;
 	window.create(VideoMode(_xWindowSize, _yWindowSize), "Celeste", Style::Fullscreen);
 
-	Camera::GetInstance().Init({ 0,0 }, { 1920, 1080 - 24 }); // -24 c'est - la moitié d'un bloc
+	Camera::GetInstance().Init({ 0,0 }, { 1920, 1080 - 24 }); // -24 c'est - la moitiï¿½ d'un bloc
+	stopwatch->Init();
 }
 
 
@@ -137,10 +166,12 @@ void Game::Update()
 			return;
 
 		EntityManager::GetInstance().Update();
+
 		TimerManager::GetInstance().Update();
 		Camera::GetInstance().Update();
 		UpdateWindow();
 		UpdateSnow();
+		stopwatch->Update();
 
 		FPS(144);
 		if (player->GetCharacter()->GetHasWon())
@@ -157,8 +188,23 @@ void Game::UpdateVisibleArea()
 	visibleArea = FloatRect(Camera::GetInstance().getCenter() - Camera::GetInstance().getSize() / 2.0f, Camera::GetInstance().getSize());
 }
 
-void Game::UpdateWindow()
+void Game::UpdateWindow(bool _loading)
 {
+	if (_loading)
+	{
+
+		window.clear();
+		Sprite* _sprite =EntityManager::GetInstance().GetApproximately("LoadingLogo")->GetComponent<AnimationComponent>()->GetCurrentAnimation()->GetSprite();
+		window.draw(*_sprite);
+		window.draw(*loadingScreen);
+		window.display();
+		return;
+	}
+
+
+
+
+
 	window.clear(sf::Color::Black);
 	UpdateVisibleArea();
 	window.setView(Camera::GetInstance());
@@ -170,7 +216,11 @@ void Game::UpdateWindow()
 	}
 
 	window.setView(window.getDefaultView());
+
+	window.draw(*stopwatch->text);
+
 	snow->draw(window);
+
 	window.display();
 }
 

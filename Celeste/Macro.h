@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include <Random>
+#include "Tile.h"
+
 
 using namespace std;
 using namespace sf;
@@ -49,6 +51,10 @@ static void SetOriginAtMiddle(sf::Sprite* _sprite)
 	_sprite->setOrigin(_sprite->getLocalBounds().getSize() / 2.f);
 }
 
+static sf::Vector2i operator/(const sf::Vector2i& _first, const sf::Vector2i& _second)
+{
+	return sf::Vector2i(_first.x / _second.x, _first.y / _second.y);
+}
 
 template<class Class>
 static vector<Class*> RetrieveAllAround(const Vector2f& _position, const int _tileAround)
@@ -144,7 +150,7 @@ T* GetRandomItemInVector(std::vector<T*>& _vectorConcerned)
 template<typename T>
 T GetRandomItemInVector(std::vector<T>& _vectorConcerned)
 {
-	if (_vectorConcerned.empty()) return T ();
+	if (_vectorConcerned.empty()) return T();
 	const int _arraySize = static_cast<int> (_vectorConcerned.size());
 	return _vectorConcerned[RandomMaxMin(_arraySize - 1)];
 }
@@ -174,6 +180,12 @@ static void Fade(Type* _value, const unsigned int _alpha)
 }
 
 template <typename Type>
+static void FadeOutlineColor(Type* _value, const unsigned int _alpha)
+{
+	_value->setOutlineColor(sf::Color(0, 0, 0, _alpha));
+}
+
+template <typename Type>
 static void MultiFade(std::vector<Type*> _values, const unsigned int _alpha)
 {
 	for (auto _value : _values)
@@ -198,13 +210,37 @@ static void ModifyIntBetweenChevrons(const int _value, Text* _text) {
 
 	if (_startBracketPos != string::npos && _endBracketPos != string::npos && _endBracketPos > _startBracketPos) {
 		string _valueBetweenBrackets = _textCopy.substr(_startBracketPos + 1, _endBracketPos - _startBracketPos - 1);
-		
-		int  _valueChanged = std::stoi(_valueBetweenBrackets);
+
+		int _valueChanged = std::stoi(_valueBetweenBrackets);
 		_valueChanged = _value;
 
 		_textCopy.replace(_startBracketPos + 1, _endBracketPos - _startBracketPos - 1, to_string(_valueChanged));
 
 		_text->setString(_textCopy);
 	}
+}
+
+
+static std::pair<float, float> ShakeShape(Shape* _shape, const std::pair<float, float>& _pair = std::pair<float, float>()) {
+
+	float _shakeMagnitude = 3.0f;
+	Vector2f _originalPosition = _shape->getPosition();
+	std::pair<float, float> _offset;
+
+	if (_pair == std::pair<float, float>())
+	{
+		do
+		{
+			_offset.first = (rand() % static_cast<int>(2 * _shakeMagnitude)) - _shakeMagnitude;
+			_offset.second = (rand() % static_cast<int>(2 * _shakeMagnitude)) - _shakeMagnitude;
+		} while (_offset.first == 0.f && _offset.second == 0.f);
+	}
+	else
+	{
+		_offset = _pair;
+	}
+
+	_shape->setPosition(_originalPosition.x + _offset.first, _originalPosition.y + _offset.second);
+	return _offset;
 }
 

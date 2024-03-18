@@ -1,0 +1,23 @@
+Maps\Level4\background4.jpg
+x   wwxx1111111x1111111x1111111x111111x1
+x   wwxxxx111xxxxx111xxxxx111xxxx111xxx1
+x   ww     xx     xx      xx     xxx   1
+x   ww     x       x       x      x    1
+x   ww     x       x       x      x    1
+x   ww             x              x    1
+x d ww             3                   1
+x   ww                                 1
+x   ww                                 1
+x   ww                                 1
+x   ww   c                             1
+x   ww   c                             1
+x   ww   c                             1
+x   ww   c                             1
+x   ww   c                             1
+x   ww   c                             1
+x   ww   c                         m   1
+x   ww   c                             1
+x   wwx                                1
+x   wwxxxxxxxxxxxxxxxxxxxxxxxx     xxxxx
+x   wwxx11     11x11     11xII     IIx 1
+x   wwxx         x         x I     I x 1

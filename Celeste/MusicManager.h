@@ -9,9 +9,12 @@ using namespace std;
 
 class MusicManager : public Singleton<MusicManager>, public IManager<string, MusicData>
 {
-	MusicData* _musicData;
+	MusicData* musicData;
+	float volume;
 
 public:
+
+
 	void Play(const string& _path);
 	void IncreaseVolume();
 	void DecreaseVolume();

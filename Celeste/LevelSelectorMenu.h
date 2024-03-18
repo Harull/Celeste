@@ -20,6 +20,10 @@ private:
 	Font* font;
 	string nextPath;
 	int currentLevel;
+	float dt;
+
+	Snow* snow;
+	Clock clock;
 
 	int index;
 	int maxIndex;
@@ -27,6 +31,8 @@ private:
 
 	void HandleEvents(RenderWindow& _window);
 	void HandleGamepadClick(Event _event);
+
+	void HandleKeyboardClick(const Event _event);
 
 	bool MoveRight();
 
@@ -43,6 +49,7 @@ public:
 
 
 	void Init(const int _levelCounts);
+	void UpdateSnow();
 	virtual bool Show() override;
 
 	};

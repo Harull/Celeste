@@ -78,7 +78,33 @@ void MovementComponent::UpdateAnimations()
 					_adirection = ANIM_DIR_JUMP_RIGHT;
 				
 				else
+					if (TimerManager::GetInstance().GetApproximately("AnimationWaiting"))
+					{
+						_adirection = ANIM_DIR_DASH_LEFT;
+					}
+					else if(TimerManager::GetInstance().GetApproximately("NONEACTION"))
+					{
+						_adirection = ANIM_DIR_NONE;
+					}
+					else
+					{
+
 					_adirection = ANIM_DIR_NONE;
+				new Timer("NONEACTION", [this]() {new Timer("AnimationWaiting", []() {}, seconds(10.f), true, true); }, seconds(5.f));
+					}
+						
+					
+			}
+			if (_adirection!= ANIM_DIR_NONE&&_adirection!= ANIM_DIR_DASH_LEFT)
+			{
+				if ( Timer* _animinoneTimer =TimerManager::GetInstance().GetApproximately("AnimationWaiting"))
+				{
+					_animinoneTimer->SetToRemove(true);
+				}
+				if (Timer* _noneActionTimer = TimerManager::GetInstance().GetApproximately("NONEACTION"))
+				{
+					_noneActionTimer->SetToRemove(true);
+				}
 			}
 			_anim->SetDirection(_adirection);
 		}
@@ -185,12 +211,12 @@ bool MovementComponent::TryToMove(Entity* _entity, const Vector2f& _direction, c
 Vector2f MovementComponent::GetDirectionByPositions(Vector2f _destination)
 {
 	
-		Vector2f _entityPos = owner->GetPosition();
-		if (IsNearlyEqual(_entityPos, _destination)) return Vector2f(0.0f, 0.0f);
+	Vector2f _entityPos = owner->GetPosition();
+	if (IsNearlyEqual(_entityPos, _destination)) return Vector2f(0.0f, 0.0f);
 
 		
-		Vector2f _direction = _destination - _entityPos;
-		Normalize(_direction);
+	Vector2f _direction = _destination - _entityPos;
+	Normalize(_direction);
 	
-		return _direction;
+	return _direction;
 }
