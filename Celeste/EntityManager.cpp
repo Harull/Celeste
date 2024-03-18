@@ -20,8 +20,7 @@ void EntityManager::Reset()
 {
 	for (auto _pair : allValues)
 	{
-		if (_pair.second->ComputeIsOnScreen())
-			_pair.second->Reset();
+		_pair.second->Reset();
 	}
 }
 

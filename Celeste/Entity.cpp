@@ -45,6 +45,7 @@ bool Entity::ComputeIsOnScreen()
 	sf::Vector2i _playerPosition(Game::GetInstance().GetPlayer()->GetCharacter()->GetPosition());
 	sf::Vector2i _cameraViewSize(Camera::GetInstance().getSize());
 	return (_playerPosition / _cameraViewSize == sf::Vector2i(shape->getPosition()) / _cameraViewSize);
+	return true;
 }
 
 void Entity::Update()

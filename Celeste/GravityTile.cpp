@@ -16,7 +16,7 @@ void GravityTile::GetHit(int _collisionSide, int _collisionSideBinary)
 	float _down = shape->getGlobalBounds().getSize().y/2;
 	Vector2f _position =shape->getPosition();
 	shape->setPosition(Vector2f(_position.x, _position.y + _down));
-	shape->scale(1.f, 0.5f);
+	shape->scale(1.f, 0.5f * Game::GetInstance().GetSenseOfGravity());
 	use = true;
 }
 

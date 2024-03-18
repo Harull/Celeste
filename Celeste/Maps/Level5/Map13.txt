@@ -1,5 +1,5 @@
 Maps\Level4\background4.jpg
-                                       I
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
     s                                  I
      ss   11 xI xI xx      xI xI xx    I
 ssssssss  11 xI xI II      xI xI II    I
@@ -16,7 +16,7 @@ ssssssss  11 xI xI II      xI xI II    I
                   c                    I
                   c                    I
                   c                    I
-                  c                    I
+                                       I
              IIIIIIII                  I
 III     IIIIIIIIIIIIIIIIIII         IIII
 IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
