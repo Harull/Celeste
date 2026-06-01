@@ -15,6 +15,9 @@ Developed over approximately two weeks by a team of students, the project focuse
 ## Features include 🧩
 - Horizontal movement
 - Jumping
+- Dashing
+- Wall climbing
+- Wall jumping 
 - Custom Collision System
 - Levels building (through .txt files with characters)
 
