@@ -30,7 +30,9 @@
 # Added from SFML's gitignore recommandations
 build
 out
+bin
 .cache
 .idea
 .vs
+.vs/
 .vscode

@@ -12,10 +12,7 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
-    "*.cpp"
-    "*.hpp"
-)
+file(GLOB_RECURSE SOURCES Celeste/*.cpp)
 
 add_executable(main ${SOURCES})
 

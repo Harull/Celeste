@@ -8,7 +8,7 @@
 
 int main()
 {
-	//Game::GetInstance().Launch();
+	Game::GetInstance().Launch();
 
 }
 
