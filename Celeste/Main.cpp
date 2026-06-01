@@ -1,11 +1,14 @@
 #include "SFML/Graphics.hpp"
 #include "Game.h"
-#include <Windows.h>
+
+//#define NOMINMAX
+//#define WIN32_LEAN_AND_MEAN
+//#include <Windows.h>
 
 
 int main()
 {
-	Game::GetInstance().Launch();
+	//Game::GetInstance().Launch();
 
 }
 

@@ -1,5 +1,5 @@
 #pragma once
-#include<SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include"Singleton.h"
 #include "MapManager.h"
 using namespace sf;

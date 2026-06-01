@@ -31,20 +31,21 @@ struct Stopwatch {
 		minutes = 0;
 		secondes = 0;
 		millisecondes = 0;
-		text = new Text();
+		text = nullptr;
 		font = new Font();
 		chrono = Clock();
 		timeForPause = 0.f;
 	}
 
 	void Init() {
-		text->setPosition(Vector2f(10.0f, 0.0f));
-		text->setCharacterSize(40);
-		font = new Font();
-		if (!font->loadFromFile("Assets/Fonts/Renogare.otf"))
+		if (!font->openFromFile("Assets/Fonts/Renogare.otf"))
 		{
 			cerr << "ERROR - Font non charge" << endl;
 		}
+		text = new sf::Text(*font);
+		text->setPosition(Vector2f(10.0f, 0.0f));
+		text->setCharacterSize(40);
+		font = new Font();
 		text->setFont(*font);
 		text->setOutlineThickness(2.0f);
 	}
@@ -135,7 +136,7 @@ public:
 		for (Animation* _anims : _vectorOfAnims)
 		{
 			sf::Sprite* _sprite = _anims->GetSprite();
-			_sprite->rotate(180);
+			_sprite->rotate(sf::Angle(sf::radians(180.f)));
 		}
 	}
 
