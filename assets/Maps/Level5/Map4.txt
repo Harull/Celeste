@@ -1,0 +1,23 @@
+..\..\..\..\assets\Maps\Level4\background4.jpg
+22222xxxxxxxxxxxxIxIIIIIIIIxxI     IxxII
+       x          x  IIIIIIIx2     2xIII
+II2    x          x     IIIIx2     2xII 
+III    x        3 x      IIIx2     2xI  
+2      x          x       IIx2     2xI  
+2      x       sssssss     Ix2     2x   
+2  sssssssss               Ix2     2x   
+2                           x2     2x   
+I  c                        x2     2x   
+I                                       
+Isss                                    
+2                                       
+2                                       
+2                                       
+2                           x2     2x   
+2              d            x2     2x   
+2                           x2     2x   
+2                           x2     2xIII
+2                           x2     2xIx 
+2                    m      x2     2xx  
+2                           x2     2x   
+2                           x      xxxxx
