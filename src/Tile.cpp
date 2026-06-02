@@ -1,6 +1,6 @@
-#include "../include/Tile.h"
-#include "../include/TextureManager.h"
-#include "../include/Macro.h"
+#include "Tile.h"
+#include "TextureManager.h"
+#include "Macro.h"
 
 
 

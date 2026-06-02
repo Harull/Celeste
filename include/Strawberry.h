@@ -6,7 +6,7 @@ class Strawberry : public Tile
 {
 	bool isUsed;
 public:
-	Strawberry(const Vector2f& _position, const Vector2f& _size, Grid* _owner, const string& _path = "../../../../assets/Fraise.png");
+	Strawberry(const Vector2f& _position, const Vector2f& _size, Grid* _owner, const string& _path = "assets/Fraise.png");
 
 public:
 	void GetHit(int _collisionSideBinary);

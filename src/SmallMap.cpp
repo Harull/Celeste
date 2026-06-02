@@ -1,4 +1,4 @@
-#include "../include/SmallMap.h"
+#include "SmallMap.h"
 
 
 SmallMap::SmallMap(const int _level, const int _value, Vector2f _startPos)

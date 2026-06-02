@@ -1,5 +1,5 @@
-#include "../include/FontData.h"
-#include "../include/FontManager.h"
+#include "FontData.h"
+#include "FontManager.h"
 
 FontData::FontData(const string& _path) : IManageable(_path)
 {

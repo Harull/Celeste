@@ -1,4 +1,4 @@
-..\..\..\..\assets\Maps\Level4\background4.jpg
+assets\Maps\Level4\background4.jpg
 x   wwxx1111111x1111111x1111111x111111x1
 x   wwxxxx111xxxxx111xxxxx111xxxx111xxx1
 x   ww     xx     xx      xx     xxx   1

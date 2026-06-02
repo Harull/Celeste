@@ -1,5 +1,5 @@
-#include "../include/Snow.h"
-#include "../include/Macro.h"
+#include "Snow.h"
+#include "Macro.h"
 
 Snow::Snow(int _numFlakes, float _minSpeed, float _maxSpeed) :
     flakes(_numFlakes)

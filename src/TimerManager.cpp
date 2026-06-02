@@ -1,4 +1,4 @@
-#include "../include/TimerManager.h"
+#include "TimerManager.h"
 
 TimerManager::TimerManager()
 {

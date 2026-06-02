@@ -1,10 +1,10 @@
-#include "../include/Spike.h"
-#include "../include/CollisionComponent.h"
-#include "../include/TextureManager.h"
-#include "../include/TimerManager.h"
-#include "../include/EntityManager.h"
+#include "Spike.h"
+#include "CollisionComponent.h"
+#include "TextureManager.h"
+#include "TimerManager.h"
+#include "EntityManager.h"
 
-#define PATH_FRAGILE_TILE "../../../../assets/Snow1.png"
+#define PATH_FRAGILE_TILE "assets/Snow1.png"
 
 
 Spike::Spike( const Vector2f& _position, const Vector2f& _size, const string& _path, const EntityType& _type, Grid* _owner)

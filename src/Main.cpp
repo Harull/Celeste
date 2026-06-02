@@ -1,5 +1,5 @@
 #include "SFML/Graphics.hpp"
-#include "../include/Game.h"
+#include "Game.h"
 
 //#define NOMINMAX
 //#define WIN32_LEAN_AND_MEAN

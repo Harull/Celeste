@@ -1,10 +1,10 @@
-#include "../include/MenuSoundBoard.h"
-#include "../include/Game.h"
-#include "../include/TextureManager.h"
-#include "../include/FontManager.h"
-#include "../include/Macro.h"
-#include "../include/SoundManager.h"
-#include "../include/MenuOption.h"
+#include "MenuSoundBoard.h"
+#include "Game.h"
+#include "TextureManager.h"
+#include "FontManager.h"
+#include "Macro.h"
+#include "SoundManager.h"
+#include "MenuOption.h"
 
 #define DEAD_ZONE 50.0f
 
@@ -52,10 +52,10 @@ void MenuSoundBoard::Init()
 
 	background = new RectangleShape(Vector2f(1920.0f, 1080.0f));
 
-	TextureManager::GetInstance().Load(background, "../../../../assets/Background/celeste_background.png");
+	TextureManager::GetInstance().Load(background, "assets/Background/celeste_background.png");
 
 	font = new Font();
-	if (!font->loadFromFile("../../../../assets/Fonts/Renogare.otf"))
+	if (!font->loadFromFile("assets/Fonts/Renogare.otf"))
 	{
 		cerr << "ERROR - Font non charge" << endl;
 	}

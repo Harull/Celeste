@@ -1,4 +1,4 @@
-..\..\..\..\assets\Maps\Level4\background4.jpg
+assets\Maps\Level4\background4.jpg
 1111111111111111111111111111111111111111
 1                1111111               1
 1   c             11111                1

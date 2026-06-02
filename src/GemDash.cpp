@@ -1,13 +1,13 @@
-#include "../include/GemDash.h"
-#include "../include/Game.h"
-#include "../include/Player.h"
-#include "../include/TextureManager.h"
-#include "../include/Game.h"
-#include "../include/SoundManager.h"
-#include "../include/TimerManager.h"
-#include "../include/Macro.h"
+#include "GemDash.h"
+#include "Game.h"
+#include "Player.h"
+#include "TextureManager.h"
+#include "Game.h"
+#include "SoundManager.h"
+#include "TimerManager.h"
+#include "Macro.h"
 
-#define PATH_GEM "../../../../assets/Gem.png"
+#define PATH_GEM "assets/Gem.png"
 
 
 GemDash::GemDash(const Vector2f& _position, const Vector2f& _size, Grid* _owner, const string& _path)

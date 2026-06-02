@@ -1,4 +1,4 @@
-#include "../include/FontManager.h"
+#include "FontManager.h"
 
 #include <iostream>
 

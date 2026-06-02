@@ -1,13 +1,13 @@
-#include "../include/Portal.h"
-#include "../include/AnimationComponent.h"
-#include "../include/Game.h"
-#include "../include/Macro.h"
-#include "../include/MovementComponent.h"
-#include "../include/Camera.h"
-#include "../include/SoundManager.h"
+#include "Portal.h"
+#include "AnimationComponent.h"
+#include "Game.h"
+#include "Macro.h"
+#include "MovementComponent.h"
+#include "Camera.h"
+#include "SoundManager.h"
 
 
-#define PATH_PORTAL "../../../../assets/portal.png"
+#define PATH_PORTAL "assets/portal.png"
 
 Portal::Portal(Vector2f _position, Vector2f _size) :Entity(EntityData("Portal", ENTITY_NONE, { _position.x - _size.x / 8.f,_position.y }, { _size.x * 2,_size.y }))
 {

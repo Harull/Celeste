@@ -1,4 +1,4 @@
-#include "../include/MusicManager.h"
+#include "MusicManager.h"
 
 void MusicManager::Play(const string& _path)
 {
@@ -16,7 +16,7 @@ void MusicManager::Play(const string& _path)
 	if (!musicData)
 	{
 		musicData = new MusicData(_path);
-		if (!musicData->openFromFile("../../../../assets/Songs/Musics/" + _path))
+		if (!musicData->openFromFile("assets/Songs/Musics/" + _path))
 		{
 			cerr << "Le son n'a pas été correctement chargée !" << endl;
 			return;

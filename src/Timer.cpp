@@ -1,6 +1,6 @@
-#include "../include/Timer.h"
-#include "../include/TimerManager.h"
-#include "../include/Macro.h"
+#include "Timer.h"
+#include "TimerManager.h"
+#include "Macro.h"
 
 Timer::Timer(const string& _id, const function<void()>& _callback, const Time& _time,
     const bool _startRunning, const bool _isLoop) : IManageable(_id + GetUniqueId())

@@ -1,4 +1,4 @@
-..\..\..\..\assets\Maps\Level1\Climb.png
+assets\Maps\Level1\Climb.png
                                         
                                         
                                         

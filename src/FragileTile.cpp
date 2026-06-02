@@ -1,12 +1,12 @@
-#include "../include/FragileTile.h"
-#include "../include/CollisionComponent.h"
-#include "../include/TimerManager.h"
-#include "../include/TextureManager.h"
-#include "../include/Macro.h"
-#include "../include/EntityManager.h"
+#include "FragileTile.h"
+#include "CollisionComponent.h"
+#include "TimerManager.h"
+#include "TextureManager.h"
+#include "Macro.h"
+#include "EntityManager.h"
 
 
-#define PATH_FRAGILE_TILE "../../../../assets/FragileTile.png"
+#define PATH_FRAGILE_TILE "assets/FragileTile.png"
 
 FragileTile::FragileTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path, Grid* _owner):Tile(_type,_position,_size,_path, _owner)
 {
@@ -36,7 +36,7 @@ void FragileTile::GetHit(int _collisionSide, int _collisionSideBinary, const boo
 	new Timer("TimerDestroy" + id,
 		[this]() {
 			SetIsShake(false);
-			TextureManager::GetInstance().Load(shape, "../../../../assets/FragileTile_erase.png");
+			TextureManager::GetInstance().Load(shape, "assets/FragileTile_erase.png");
 			isTangible = false;
 		new Timer("TimerRespawn" + id, [this]() {
 		

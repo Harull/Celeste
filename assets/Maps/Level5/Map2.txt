@@ -1,4 +1,4 @@
-..\..\..\..\assets\Maps\Level5\CityBackground2.png
+assets\Maps\Level5\CityBackground2.png
 1111111111xxxxxxxxxxxxxxxxxxxxxxxxxx1111
  xxxxxxxx1x1x           d         xxx1x1
       1111x1                        xxx1

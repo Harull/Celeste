@@ -1,12 +1,12 @@
-#include "../include/LevelSelectorMenu.h"
-#include "../include/Game.h"
-#include "../include/TextureManager.h"
-#include "../include/FontManager.h"
-#include "../include/Macro.h"
-#include "../include/TimerManager.h"
-#include "../include/MenuOption.h"
-#include "../include/MusicManager.h"
-#include "../include/SoundManager.h"
+#include "LevelSelectorMenu.h"
+#include "Game.h"
+#include "TextureManager.h"
+#include "FontManager.h"
+#include "Macro.h"
+#include "TimerManager.h"
+#include "MenuOption.h"
+#include "MusicManager.h"
+#include "SoundManager.h"
 
 #define DEAD_ZONE 50.0f
 
@@ -43,13 +43,13 @@ void LevelSelectorMenu::Init(const int _levelCounts)
 
 	for (int _i = 0; _i < _levelCounts; ++_i)
 	{
-		backgroundPath.push_back("../../../../assets/Background/game_selector_background" + std::to_string(_i + 1) + ".png");
+		backgroundPath.push_back("assets/Background/game_selector_background" + std::to_string(_i + 1) + ".png");
 	}
 
 	background = new RectangleShape(Vector2f(1920.0f, 1080.0f));
 	TextureManager::GetInstance().Load(background, backgroundPath[0]);
 	font = new Font();
-	if (!font->loadFromFile("../../../../assets/Fonts/Renogare.otf"))
+	if (!font->loadFromFile("assets/Fonts/Renogare.otf"))
 	{
 		cerr << "ERROR - Font non charge" << endl;
 	}

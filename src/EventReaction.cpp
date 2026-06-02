@@ -1,5 +1,5 @@
-#include "../include/EventReaction.h"
-#include "../include/EventReactionManager.h"
+#include "EventReaction.h"
+#include "EventReactionManager.h"
 
 
 EventReaction::EventReaction(const sf::Event::EventType& _eventType,

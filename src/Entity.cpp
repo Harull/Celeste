@@ -1,11 +1,11 @@
-#include "../include/Entity.h"
-#include "../include/EntityManager.h"
-#include "../include/TextureManager.h"
-#include "../include/TimerManager.h"
-#include "../include/Component.h"
-#include "../include/Game.h"
-#include "../include/Camera.h"
-#include "../include/Macro.h"
+#include "Entity.h"
+#include "EntityManager.h"
+#include "TextureManager.h"
+#include "TimerManager.h"
+#include "Component.h"
+#include "Game.h"
+#include "Camera.h"
+#include "Macro.h"
 
 Entity::Entity(const EntityData& _data, const bool _isUpdatable, std::vector<Component*> _components)
 	: IManageable(_data.name) 

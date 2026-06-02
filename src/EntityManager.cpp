@@ -1,5 +1,5 @@
-#include "../include/EntityManager.h"
-#include "../include/MovingTile.h"
+#include "EntityManager.h"
+#include "MovingTile.h"
 
 void EntityManager::Update()
 {

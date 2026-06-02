@@ -1,7 +1,7 @@
-#include "../include/GravityComponent.h"
-#include "../include/MovementComponent.h"
-#include "../include/Character.h"
-#include "../include/Game.h"
+#include "GravityComponent.h"
+#include "MovementComponent.h"
+#include "Character.h"
+#include "Game.h"
 
 GravityComponent::GravityComponent(Entity* _owner, const float _gravity) : Component(_owner)
 {

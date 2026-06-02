@@ -1,4 +1,4 @@
-..\..\..\..\assets\Maps\Level4\background4.jpg
+assets\Maps\Level4\background4.jpg
 xxxxxxxxxxIIIIxxxxxxxxxxxxxxxxxxxx22222I
           IIII2      2I2               I
  c        IIII2      2I2 tt            I

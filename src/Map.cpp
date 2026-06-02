@@ -1,9 +1,9 @@
-#include "../include/Map.h"
-#include "../include/Macro.h"
-#include "../include/MapManager.h"
-#include "../include/TextureManager.h"
-#include "../include/Game.h"
-#include "../include/Grid.h"
+#include "Map.h"
+#include "Macro.h"
+#include "MapManager.h"
+#include "TextureManager.h"
+#include "Game.h"
+#include "Grid.h"
 
 Map::Map() : IManageable(S_APPEND("Map"))
 {
@@ -25,7 +25,7 @@ void Map::Register()
 
 void Map::Init(const int _value)
 {
-	const string _path = "../../../../assets/Maps/Level" + to_string(_value) + "/Level" + to_string(_value);
+	const string _path = "assets/Maps/Level" + to_string(_value) + "/Level" + to_string(_value);
 	const string _pathSmallMap = _path + ".txt";
 	vector<vector<int>> _gridForLoad;
 	StreamManager::GetInstance().LoadMapLevel(_gridForLoad, _pathSmallMap);

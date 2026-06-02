@@ -1,15 +1,15 @@
-#include "../include/MenuEndLevel.h"
-#include "../include/Game.h"
-#include "../include/TextureManager.h"
-#include "../include/FontManager.h"
-#include "../include/Macro.h"
-#include "../include/TimerManager.h"
-#include "../include/MenuOption.h"
-#include "../include/SoundManager.h"
-#include "../include/LevelSelectorMenu.h"
+#include "MenuEndLevel.h"
+#include "Game.h"
+#include "TextureManager.h"
+#include "FontManager.h"
+#include "Macro.h"
+#include "TimerManager.h"
+#include "MenuOption.h"
+#include "SoundManager.h"
+#include "LevelSelectorMenu.h"
 
 #define DEAD_ZONE 50.0f
-#define PATH(name) "../../../../assets/Background/End/" + to_string(name) + ".png"
+#define PATH(name) "assets/Background/End/" + to_string(name) + ".png"
 
 MenuEndLevel::MenuEndLevel()
 {
@@ -45,7 +45,7 @@ void MenuEndLevel::Init()
 	Vector2u _windowSize = Game::GetInstance().GetWindowSize();
 
 	font = new Font();
-	if (!font->loadFromFile("../../../../assets/Fonts/Renogare.otf"))
+	if (!font->loadFromFile("assets/Fonts/Renogare.otf"))
 	{
 		cerr << "ERROR - Font non charge" << endl;
 	}

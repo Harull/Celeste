@@ -1,4 +1,4 @@
-..\..\..\..\assets\Maps\Level4\background4.jpg
+assets\Maps\Level4\background4.jpg
 IIIIIIIIIIIIIIIIII    IIIIIIIIIIIIIIIIII
 III2222IIIIIIIIIII    IIIIIIIIIIIIIIIIII
 III     IIIIIIIIII    I222I         IIII

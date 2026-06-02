@@ -1,4 +1,4 @@
-..\..\..\..\assets\Maps\Level3\Fin.png
+assets\Maps\Level3\Fin.png
 1111111111111111111111111111111111111111
 1                                      1
 1                                      1

@@ -1,6 +1,6 @@
-#include "../include/EasterEgg.h"
-#include "../include/Game.h"
-#include "../include/Player.h"
+#include "EasterEgg.h"
+#include "Game.h"
+#include "Player.h"
 
 EasterEgg::EasterEgg(const Vector2f& _position, const Vector2f& _size, Grid* _owner, const string& _path)
 	:Tile(ENTITY_STRAWBERRY, _position, _size, _path, _owner)

@@ -1,10 +1,10 @@
-#include "../include/FirstMenu.h"
-#include "../include/Game.h"
-#include "../include/TextureManager.h"
-#include "../include/FontManager.h"
-#include "../include/LevelSelectorMenu.h"
-#include "../include/MenuOption.h"
-#include "../include/SoundManager.h"
+#include "FirstMenu.h"
+#include "Game.h"
+#include "TextureManager.h"
+#include "FontManager.h"
+#include "LevelSelectorMenu.h"
+#include "MenuOption.h"
+#include "SoundManager.h"
 
 #define DEAD_ZONE 50.0f
 
@@ -51,20 +51,20 @@ void FirstMenu::Init()
 {
 	Vector2u _windowSize = Game::GetInstance().GetWindowSize();
 
-	TextureManager::GetInstance().Load(background, "../../../../assets/Background/celeste_background.png");
+	TextureManager::GetInstance().Load(background, "assets/Background/celeste_background.png");
 
 	background->setScale(
 		static_cast<float>(_windowSize.x) / background->getLocalBounds().width,
 		static_cast<float>(_windowSize.y) / background->getLocalBounds().height
 	);
 
-	if (!font->loadFromFile("../../../../assets/Fonts/Renogare.otf"))
+	if (!font->loadFromFile("assets/Fonts/Renogare.otf"))
 	{
 		cerr << "ERROR - Font non charge" << endl;
 	}
 
 	vector<string> _names = { "Play", "Options", "Exit" };
-	vector<string> _pathIcons = { "../../../../assets/Icons/Vide.png", "../../../../assets/Icons/Options.png", "../../../../assets/Icons/Retour.png" };
+	vector<string> _pathIcons = { "assets/Icons/Vide.png", "assets/Icons/Options.png", "assets/Icons/Retour.png" };
 
 	vector<function<void()>> _functions =
 	{

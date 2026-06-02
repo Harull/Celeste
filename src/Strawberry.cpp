@@ -1,8 +1,8 @@
-#include "../include/Strawberry.h"
-#include "../include/Game.h"
-#include "../include/Player.h"
-#include "../include/SoundManager.h"
-#include "../include/Macro.h"
+#include "Strawberry.h"
+#include "Game.h"
+#include "Player.h"
+#include "SoundManager.h"
+#include "Macro.h"
 
 Strawberry::Strawberry(const Vector2f& _position, const Vector2f& _size, Grid* _owner, const string& _path)
 	:Tile(ENTITY_STRAWBERRY, _position, _size, _path, _owner)

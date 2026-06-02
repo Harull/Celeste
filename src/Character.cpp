@@ -1,20 +1,20 @@
 
-#include "../include/Character.h"
-#include "../include/TextureManager.h"
-#include "../include/MovementComponent.h"
-#include "../include/GravityComponent.h"
-#include "../include/AnimationComponent.h"
-#include "../include/CollisionComponent.h"
-#include "../include/TimerManager.h"
-#include "../include/Portal.h"
-#include "../include/Game.h"
-#include "../include/EntityManager.h"
-#include "../include/SoundManager.h"
-#include "../include/Camera.h"
-#include "../include/Grid.h"
+#include "Character.h"
+#include "TextureManager.h"
+#include "MovementComponent.h"
+#include "GravityComponent.h"
+#include "AnimationComponent.h"
+#include "CollisionComponent.h"
+#include "TimerManager.h"
+#include "Portal.h"
+#include "Game.h"
+#include "EntityManager.h"
+#include "SoundManager.h"
+#include "Camera.h"
+#include "Grid.h"
 
 
-#define CHARACTER_TEXTURE "../../../../assets/Character/Slave.png"
+#define CHARACTER_TEXTURE "assets/Character/Slave.png"
 #define DEAD_ZONE 50.f
 
 Character::Character(const sf::Vector2f _size, const sf::Vector2f _position, const int _maxYVelocity, const bool _isVisible)

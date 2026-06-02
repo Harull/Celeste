@@ -1,4 +1,4 @@
-#include "../include/Snowflake.h"
+#include "Snowflake.h"
 
 Snowflake::Snowflake(sf::Vector2f _position, float _speed) :
     position(_position), speed(_speed)

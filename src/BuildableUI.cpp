@@ -1,6 +1,6 @@
-#include "../include/BuildableUI.h"
-#include "../include/Macro.h"
-#include "../include/UiManager.h"
+#include "BuildableUI.h"
+#include "Macro.h"
+#include "UiManager.h"
 
 //BuildableUI::BuildableUI(const string& _id, const Vector2f& _size, const Vector2f& _position, const string& _path, bool _start, bool _isLoop, bool _isInteractiveUi, const bool _isRepared)
 //	:UiData(to_string(BACKGROUND) + _id + GetUniqueId(), _size, _position, _path, function<void()>(), {ST_VILLAGE}, _start, _isLoop, _isInteractiveUi, VS_UNSCOPED)

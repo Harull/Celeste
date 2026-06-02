@@ -1,6 +1,6 @@
-#include "../include/OneDirectionTile.h"
-#include "../include/CollisionComponent.h"
-#include "../include/TextureManager.h"
+#include "OneDirectionTile.h"
+#include "CollisionComponent.h"
+#include "TextureManager.h"
 
 OneDirectionTile::OneDirectionTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path, Grid* _owner) :Tile(_type, _position, _size, _path, _owner)
 {

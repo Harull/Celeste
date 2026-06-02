@@ -1,10 +1,10 @@
-#include "../include/CollisionComponent.h"
-#include "../include/MapManager.h"
-#include "../include/Character.h"
-#include "../include/EntityManager.h"
-#include "../include/FragileTile.h"
-#include "../include/Game.h"
-#include "../include/FallingTile.h"
+#include "CollisionComponent.h"
+#include "MapManager.h"
+#include "Character.h"
+#include "EntityManager.h"
+#include "FragileTile.h"
+#include "Game.h"
+#include "FallingTile.h"
 
 
 CollisionInfos CollisionComponent::CheckCollision(const bool _isSpecificCheckOnWalls)

@@ -1,13 +1,13 @@
-#include "../include/MenuOption.h"
-#include "../include/Game.h"
-#include "../include/TextureManager.h"
-#include "../include/FontManager.h"
-#include "../include/TimerManager.h"
-#include "../include/LevelSelectorMenu.h"
-#include "../include/MenuSoundBoard.h"
-#include "../include/Macro.h"
-#include "../include/EntityManager.h"
-#include "../include/SoundManager.h"
+#include "MenuOption.h"
+#include "Game.h"
+#include "TextureManager.h"
+#include "FontManager.h"
+#include "TimerManager.h"
+#include "LevelSelectorMenu.h"
+#include "MenuSoundBoard.h"
+#include "Macro.h"
+#include "EntityManager.h"
+#include "SoundManager.h"
 #define DEAD_ZONE 50.0f
 
 MenuOption::MenuOption()
@@ -49,14 +49,14 @@ void MenuOption::Init()
 {
 	Vector2u _windowSize = Game::GetInstance().GetWindowSize();
 
-	TextureManager::GetInstance().Load(background, "../../../../assets/Background/celeste_background_dark.png");
+	TextureManager::GetInstance().Load(background, "assets/Background/celeste_background_dark.png");
 
 	background->setScale(
 		static_cast<float>(_windowSize.x) / background->getLocalBounds().width,
 		static_cast<float>(_windowSize.y) / background->getLocalBounds().height
 	);
 
-	if (!font->loadFromFile("../../../../assets/Fonts/Renogare.otf"))
+	if (!font->loadFromFile("assets/Fonts/Renogare.otf"))
 	{
 		cerr << "ERROR - Font non charge" << endl;
 	}

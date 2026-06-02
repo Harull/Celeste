@@ -1,7 +1,7 @@
-#include "../include/UiData.h"
-#include "../include/TextureManager.h"
-#include "../include/UiManager.h"
-#include "../include/Macro.h"
+#include "UiData.h"
+#include "TextureManager.h"
+#include "UiManager.h"
+#include "Macro.h"
 
 UiData::UiData(const string& _id, const Vector2f& _size, const Vector2f& _position, const string& _path, function<void()> _callback,
 	 bool _start, bool _isLoop, bool _isInteractiveUi)

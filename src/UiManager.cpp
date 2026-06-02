@@ -1,6 +1,6 @@
-#include "../include/UiManager.h"
-#include "../include/Game.h"
-#include "../include/BuildableUI.h"
+#include "UiManager.h"
+#include "Game.h"
+#include "BuildableUI.h"
 
 
 //void UiManager::Update()

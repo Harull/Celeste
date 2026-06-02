@@ -1,10 +1,10 @@
-#include "../include/TileEnd.h"
-#include "../include/EntityManager.h"
-#include "../include/LevelSelectorMenu.h"
-#include "../include/MenuOption.h"
-#include "../include/TimerManager.h"
-#include "../include/MenuEndLevel.h"
-#include "../include/SoundManager.h"
+#include "TileEnd.h"
+#include "EntityManager.h"
+#include "LevelSelectorMenu.h"
+#include "MenuOption.h"
+#include "TimerManager.h"
+#include "MenuEndLevel.h"
+#include "SoundManager.h"
 
 TileEnd::TileEnd(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path, Grid* _owner)
 	:Tile(_type, _position, _size, _path, _owner)
@@ -13,7 +13,7 @@ TileEnd::TileEnd(const EntityType _type, const Vector2f& _position, const Vector
 	shape->setFillColor(Color::Transparent);
 	isTangible = false;
 	components.push_back(new AnimationComponent(
-		this, "../../../../assets/Cassette.png",
+		this, "assets/Cassette.png",
 		{ AnimationData("IddleCassette", Vector2f(0.0f,0.0f), Vector2f(72.f, 52.0f), READ_RIGHT, ANIM_DIR_NONE, true, 32, 0.1f)},
 		ANIM_DIR_NONE
 	));

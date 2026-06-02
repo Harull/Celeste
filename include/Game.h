@@ -42,7 +42,7 @@ struct Stopwatch {
 		text->setPosition(Vector2f(10.0f, 0.0f));
 		text->setCharacterSize(40);
 		font = new Font();
-		if (!font->loadFromFile("../../../../assets/Fonts/Renogare.otf"))
+		if (!font->loadFromFile("assets/Fonts/Renogare.otf"))
 		{
 			cerr << "ERROR - Font non charge" << endl;
 		}

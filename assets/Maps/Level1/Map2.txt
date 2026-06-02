@@ -1,4 +1,4 @@
-..\..\..\..\assets\Maps\Level1\Jump.png
+assets\Maps\Level1\Jump.png
                                         
                                         
                                         

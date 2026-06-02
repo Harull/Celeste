@@ -1,5 +1,5 @@
-#include "../include/SoundData.h"
-#include "../include/SoundManager.h"
+#include "SoundData.h"
+#include "SoundManager.h"
 
 SoundData::SoundData(const string& _path) : IManageable(_path)
 {

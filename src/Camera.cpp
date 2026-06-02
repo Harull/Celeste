@@ -1,10 +1,10 @@
-#include "../include/Camera.h"
-#include "../include/Player.h"
-#include "../include/Macro.h"
-#include "../include/Game.h"
-#include "../include/TimerManager.h"
-#include "../include/MovementComponent.h"
-#include "../include/EntityManager.h"
+#include "Camera.h"
+#include "Player.h"
+#include "Macro.h"
+#include "Game.h"
+#include "TimerManager.h"
+#include "MovementComponent.h"
+#include "EntityManager.h"
 
 
 void Camera::Init(const Vector2f& _position, const Vector2f& _size)

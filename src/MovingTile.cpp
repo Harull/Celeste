@@ -1,8 +1,8 @@
-#include "../include/MovingTile.h"
-#include "../include/Game.h"
-#include "../include/MovementComponent.h"
-#include "../include/TimerManager.h"
-#include "../include/GravityComponent.h"
+#include "MovingTile.h"
+#include "Game.h"
+#include "MovementComponent.h"
+#include "TimerManager.h"
+#include "GravityComponent.h"
 
 MovingTile::MovingTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path, Grid* _owner):Tile(_type, _position, _size, _path, _owner)
 {

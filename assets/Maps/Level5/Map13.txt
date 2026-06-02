@@ -1,4 +1,4 @@
-..\..\..\..\assets\Maps\Level4\background4.jpg
+assets\Maps\Level4\background4.jpg
 IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
     s                                  I
      ss   11 xI xI xx      xI xI xx    I

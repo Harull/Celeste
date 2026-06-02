@@ -1,11 +1,11 @@
-#include "../include/FallingTile.h"
-#include "../include/GravityComponent.h"
-#include "../include/MovementComponent.h"
-#include "../include/CollisionComponent.h"
-#include "../include/Character.h"
-#include "../include/Game.h"
-#include "../include/Camera.h"
-#include "../include/TimerManager.h"
+#include "FallingTile.h"
+#include "GravityComponent.h"
+#include "MovementComponent.h"
+#include "CollisionComponent.h"
+#include "Character.h"
+#include "Game.h"
+#include "Camera.h"
+#include "TimerManager.h"
 
 FallingTile::FallingTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path, Grid* _owner):
 	Tile(_type, _position, _size, _path, _owner)

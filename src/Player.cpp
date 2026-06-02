@@ -1,6 +1,6 @@
-#include "../include/Player.h"
-#include "../include/MovementComponent.h"
-#include "../include/EventReactionManager.h"
+#include "Player.h"
+#include "MovementComponent.h"
+#include "EventReactionManager.h"
 
 Player::Player()
 {

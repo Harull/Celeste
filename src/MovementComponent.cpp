@@ -1,9 +1,9 @@
-#include "../include/MovementComponent.h"
-#include "../include/Game.h"
-#include "../include/EntityManager.h"
-#include "../include/TimerManager.h"
-#include "../include/Character.h"
-#include "../include/Macro.h"
+#include "MovementComponent.h"
+#include "Game.h"
+#include "EntityManager.h"
+#include "TimerManager.h"
+#include "Character.h"
+#include "Macro.h"
 
 
 MovementComponent::MovementComponent(Entity* _owner,bool _canMove,bool _freeMovement) : Component(_owner)

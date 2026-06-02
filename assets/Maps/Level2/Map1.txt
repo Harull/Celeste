@@ -1,4 +1,4 @@
-..\..\..\..\assets\Maps\Level2\Background.png
+assets\Maps\Level2\Background.png
 1111111111111111111111111111111111111111
 1111111111                             1
 1111111111            1111             1

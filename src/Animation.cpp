@@ -1,8 +1,8 @@
-#include "../include/Animation.h"
-#include "../include/AnimationComponent.h"
-#include "../include/Timer.h"
-#include "../include/Macro.h"
-#include "../include/Game.h"
+#include "Animation.h"
+#include "AnimationComponent.h"
+#include "Timer.h"
+#include "Macro.h"
+#include "Game.h"
 
 Animation::Animation(const string& _name, AnimationComponent* _owner, Sprite* _sprite,
 	const AnimationData& _data) : IManageable(_name)

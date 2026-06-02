@@ -1,4 +1,4 @@
-..\..\..\..\assets\Maps\Level3\JaimeBienbas.png
+assets\Maps\Level3\JaimeBienbas.png
 1                                      1
 1                                      1
 1                                      1

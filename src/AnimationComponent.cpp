@@ -1,6 +1,6 @@
-#include "../include/AnimationComponent.h"
+#include "AnimationComponent.h"
 #include <iostream>
-#include "../include/TextureManager.h"
+#include "TextureManager.h"
 
 AnimationComponent::AnimationComponent(Entity* _owner, const string& _path, const vector<AnimationData>& _animationsData,
 	const AnimationDirection& _direction) : Component(_owner)

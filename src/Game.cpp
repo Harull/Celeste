@@ -1,22 +1,22 @@
-#include "../include/Game.h"
-#include "../include/EventReactionManager.h"
-#include "../include/EntityManager.h"
-#include "../include/TimerManager.h"
-#include "../include/Camera.h"
-#include "../include/FirstMenu.h"
-#include "../include/LevelSelectorMenu.h"
-#include "../include/MenuOption.h"
-#include "../include/MapManager.h"
-#include "../include/AnimationComponent.h"
-#include "../include/MenuSoundBoard.h"
-#include "../include/SoundManager.h"
-#include "../include/MenuEndLevel.h"
-#include "../include/TimerManager.h"
-#include "../include/TextureManager.h"
-#include "../include/Portal.h"
-#include "../include/Macro.h"
-#include "../include/LoadingLogo.h"
-#include "../include/MenuSoundBoard.h"
+#include "Game.h"
+#include "EventReactionManager.h"
+#include "EntityManager.h"
+#include "TimerManager.h"
+#include "Camera.h"
+#include "FirstMenu.h"
+#include "LevelSelectorMenu.h"
+#include "MenuOption.h"
+#include "MapManager.h"
+#include "AnimationComponent.h"
+#include "MenuSoundBoard.h"
+#include "SoundManager.h"
+#include "MenuEndLevel.h"
+#include "TimerManager.h"
+#include "TextureManager.h"
+#include "Portal.h"
+#include "Macro.h"
+#include "LoadingLogo.h"
+#include "MenuSoundBoard.h"
 
 
 #define SCREEN_WIDTH 1280
@@ -55,7 +55,7 @@ void Game::Launch()
 void Game::Start()
 {
 	snow = new Snow(100, 50, 100);
-	TextureManager::GetInstance().Load(loadingScreen, "../../../../assets/Texture/bg.jpg");
+	TextureManager::GetInstance().Load(loadingScreen, "assets/Texture/bg.jpg");
 	InitWindow();
 	InitMenu();
 	MusicManager::GetInstance().Play("Celeste_OST.mp3");

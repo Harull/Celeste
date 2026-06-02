@@ -1,8 +1,8 @@
-#include "../include/FragileWallTile.h"
-#include "../include/CollisionComponent.h"
-#include "../include/TextureManager.h"
-#include "../include/Game.h"
-#include "../include/SoundManager.h"
+#include "FragileWallTile.h"
+#include "CollisionComponent.h"
+#include "TextureManager.h"
+#include "Game.h"
+#include "SoundManager.h"
 
 FragileWallTile::FragileWallTile(const EntityType _type, const Vector2f& _position, const Vector2f& _size, const string& _path, Grid* _owner) : Tile(_type, _position, _size, _path, _owner)
 {
@@ -31,7 +31,7 @@ void FragileWallTile::GetHit(int _collisionSideBinary, int _collisionTypeBinary,
 		SoundManager::GetInstance().Play("wallbreak_ice.wav");
 		_currentChar->Bonk(_collisionSideBinary);
 		isTangible = false;
-		TextureManager::GetInstance().Load(shape, "../../../../assets/Vide.png");
+		TextureManager::GetInstance().Load(shape, "assets/Vide.png");
 	}
 
 }

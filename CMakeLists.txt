@@ -13,12 +13,17 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-file(GLOB_RECURSE SOURCES_CPP src/*.cpp)
-file(GLOB_RECURSE SOURCES_H include/*.h)
+file(GLOB_RECURSE SOURCES_CPP CONFIGURE_DEPENDS src/*.cpp)
+file(GLOB_RECURSE SOURCES_H CONFIGURE_DEPENDS include/*.h)
 
 add_executable(Celeste 
 	${SOURCES_H}
 	${SOURCES_CPP}
+)
+
+target_include_directories(Celeste PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
 )
 
 target_link_libraries(Celeste PRIVATE sfml-graphics sfml-window sfml-audio)
