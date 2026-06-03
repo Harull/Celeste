@@ -1,7 +1,7 @@
 # Celeste Mechanics Recreation 🚠⛰
 
 ## Overview 📷
-This project is a recreation of the core gameplay mechanics found in the critically acclaimed platformer Celeste, developed as a programming exercise using C++ and SFML.
+This project is a recreation of the core gameplay mechanics found in the critically acclaimed platformer Celeste, developed as a programming exercise using C++ and SFML 2.6.1.
 The objective was not to recreate the entire game, but to reproduce the responsiveness, precision, and feel of Celeste's movement system while building everything from scratch in native C++.
 Developed over approximately two weeks by a team of students, the project focuses on player movement, collision handling, and advanced platforming mechanics.
 
