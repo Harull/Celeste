@@ -22,11 +22,11 @@ Developed over approximately two weeks by a team of students, the project focuse
 - Levels building (through .txt files with characters)
 
 ## Images 🖼
-![CableImpulse](/Images/cover.png)
-![CableImpulse](/Images/main_menu.png)
-![CableImpulse](/Images/climb.png)
-![CableImpulse](/Images/contextualImage.png)
-![CableImpulse](/Images/other_nice_level.png)
+![AntiGravityLuigi](/Images/cover.png)
+![MainMenu](/Images/main_menu.png)
+![Climbing](/Images/climb.png)
+![ContextualImage](/Images/contextualImage.png)
+![NiceLevel](/Images/other_nice_level.png)
 
 ## Authors 📝
 - [@Tranzate](https://github.com/Tranzate)
